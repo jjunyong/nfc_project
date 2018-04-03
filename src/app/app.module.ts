@@ -8,10 +8,12 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AuthData } from '../providers/auth-data';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { AngularFirestoreModule } from 'angularfire2/firestore'
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
 
@@ -34,7 +36,8 @@ export const config = {
 
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -46,7 +49,8 @@ export const config = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthData,
     Facebook,
-    GooglePlus
+    GooglePlus,
+    AngularFireDatabase
   ]
 })
 export class AppModule {}
