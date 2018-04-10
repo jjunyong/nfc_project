@@ -18,12 +18,12 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
 export const config = { 
-  apiKey: "AIzaSyDguP0NB-F-ogNoDM1J9XYhxyzhMOPqt4I",
-  authDomain: "template-6dc8c.firebaseapp.com",
-  databaseURL: "https://template-6dc8c.firebaseio.com",
-  projectId: "template-6dc8c",
-  storageBucket: "template-6dc8c.appspot.com",
-  messagingSenderId: "377019364393"
+  apiKey: "AIzaSyAvvRWBkF21p7_ol6OQsH2rst4UjfWZfJU",
+  authDomain: "prototype-afd2b.firebaseapp.com",
+  databaseURL: "https://prototype-afd2b.firebaseio.com",
+  projectId: "prototype-afd2b",
+  storageBucket: "prototype-afd2b.appspot.com",
+  messagingSenderId: "706026974631"
 };
 
 @NgModule({

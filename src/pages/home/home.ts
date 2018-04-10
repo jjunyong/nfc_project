@@ -12,7 +12,7 @@ import firebase from 'firebase'
 
 export class HomePage {
   viewType: string = "Menu";
-  category: any[] = [];
+  stock_card: any[] = [];
   items: any[] = [];
   
   
@@ -28,10 +28,10 @@ export class HomePage {
 
       var db = firebase.firestore();
 
-      db.collection('category').where("type","==","restaurant")
+      db.collection('stock_card').where("type","==","stock_card")
       .onSnapshot((snap)=>{
         snap.forEach((doc)=>{
-          this.category.push(doc.data());
+          this.stock_card.push(doc.data());
         })
       })
 
@@ -43,12 +43,16 @@ export class HomePage {
       })
   }
 
-  openList(categoryId){
-      this.navCtrl.push('List3Page',{categoryId:categoryId}); 
+  openLatest(){
+      this.navCtrl.push('LatestStockPage'); 
   }
 
-  goToDetail(itemId){
-      this.navCtrl.push('Detail3Page',{itemId:itemId}); 
+  openManage(){
+    this.navCtrl.push('StockManagePage')
   }
+
+  // goToDetail(itemId){
+  //     this.navCtrl.push('Detail3Page',{itemId:itemId}); 
+  // }
 
 }

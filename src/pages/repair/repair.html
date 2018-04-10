@@ -36,11 +36,11 @@
   
   <!--*********** Menu View  ***********-->
   <div *ngIf="viewType==='Menu'">
-  <ion-card tappable  class="card-list wave" *ngFor="let category of category" (click)="openList(category.$key)">
+  <ion-card tappable  class="card-list wave" *ngFor="let card of repair_card" (click)="openList(card.$key)">
         <!-- <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + category.imgBg+ ')'}"> -->
-          <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + category.imgBg+ ')'}">
-          <h2 class="card-list-title"> {{category.name}}</h2> 
-          <p class="card-list-description"> {{category.description}}</p>               
+          <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + card.imgBg+ ')'}">
+          <h2 class="card-list-title"> {{card.name}}</h2> 
+          <p class="card-list-description"> {{card.description}}</p>               
         </div>
   </ion-card>
   </div>

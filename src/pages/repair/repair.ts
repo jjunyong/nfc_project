@@ -12,7 +12,7 @@ import firebase from 'firebase'
 
 export class RepairPage {
   viewType: string = "Menu";
-  category: any[] = [];
+  repair_card: any[] = [];
   items: any[] = [];
   
   
@@ -28,10 +28,10 @@ export class RepairPage {
 
       var db = firebase.firestore();
 
-      db.collection('category').where("type","==","repair")
+      db.collection('repair_card').where("type","==","repair_card")
       .onSnapshot((snap)=>{
         snap.forEach((doc)=>{
-          this.category.push(doc.data());
+          this.repair_card.push(doc.data());
         })
       })
 
