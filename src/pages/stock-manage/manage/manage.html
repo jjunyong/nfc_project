@@ -1,0 +1,54 @@
+<!--
+  Generated template for the EnterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>새로운 아이템 추가</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-list>
+        
+          <ion-item>
+              <ion-label floating>제품명</ion-label>
+              <ion-input type="text" [(ngModel)]="name"></ion-input>
+            </ion-item>
+
+          <!-- <ion-item>
+              <ion-label>분류</ion-label>
+              <ion-select [(ngModel)]="classification" interface="action-sheet">
+                <ion-option value="officeSupplies">사무용품</ion-option>
+                <ion-option value="electronicProduct">전자제품</ion-option>
+                <ion-option value="tools">공구</ion-option>
+                <ion-option value="documents">서류</ion-option>
+              </ion-select>
+            </ion-item> -->
+        
+        <ion-item>
+          <ion-label floating>수량</ion-label>
+          <ion-input type="number" [(ngModel)]="quantity"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>위치 설정</ion-label>
+            <ion-select [(ngModel)]="location" interface="action-sheet">
+              <ion-option value="A">A</ion-option>
+              <ion-option value="B">B</ion-option>
+              <ion-option value="C">C</ion-option>
+              <ion-option value="D">D</ion-option>
+            </ion-select>
+          </ion-item>
+      </ion-list>
+
+      <button ion-button (click)="update()">확인</button>
+
+</ion-content>
+

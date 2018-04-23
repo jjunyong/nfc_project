@@ -19,7 +19,8 @@ export class MyApp {
     this.pages = [
       {title:'Home',component:'HomePage'},
       {title:'Main',component:"MainPage"},
-      {title:'Repair', component:"RepairPage"}
+      {title:'Repair', component:"RepairPage"},
+      {title:'app2', component:"Category2Page"}
     ];
   }
 

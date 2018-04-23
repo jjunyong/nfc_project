@@ -13,7 +13,7 @@ import { AuthData } from '../providers/auth-data';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
-import { AngularFireStorageModule } from 'angularfire2/storage';
+// import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
 
