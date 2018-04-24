@@ -43,12 +43,13 @@ export class RepairPage {
       })
   }
 
-  openList(categoryId){
-      this.navCtrl.push('List3Page',{categoryId:categoryId}); 
-  }
+  
+  openLog(){
+    this.navCtrl.push('MaintenanceLogPage'); 
+}
 
-  goToDetail(itemId){
-      this.navCtrl.push('Detail3Page',{itemId:itemId}); 
-  }
+openOnMaintenance(){
+  this.navCtrl.push('OnMaintenancePage')
+}
 
 }

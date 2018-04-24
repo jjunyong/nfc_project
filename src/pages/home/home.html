@@ -42,18 +42,20 @@
         <p class="card-list-description"> {{card.description}}</p>               
       </div>
 </ion-card> -->
-<ion-card tappable class="card-list-wave" (click)="openLatest()">
-    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + './assets/imgs/bg4.jpg'+ ')'}">
-        <h2 class="card-list-title">최근 입출고 item</h2>
-        <p class="card-list-description">Latest im-exported item</p>
-    </div>
-</ion-card>
+
 <ion-card tappable class="card-list-wave" (click)="openManage()">
     <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + './assets/imgs/main_bg.jpg'+ ')'}">
         <h2 class="card-list-title">입고 및 출고</h2>
         <p class="card-list-description">Do export and import!</p>
     </div>
 </ion-card>
+
+<ion-card tappable class="card-list-wave" (click)="openLog()">
+        <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + './assets/imgs/bg4.jpg'+ ')'}">
+            <h2 class="card-list-title">입출고 이력 검색</h2>
+            <p class="card-list-description">Checkout Logs of ex,import</p>
+        </div>
+    </ion-card>
 </div>
 
 <!--*********** Promotion View  ***********-->

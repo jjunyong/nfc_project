@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
-import { AngularFirestore } from 'angularfire2/firestore';
-import firebase from 'firebase'
-
+import { AngularFirestore } from 'angularfire2/firestore'
 
 @IonicPage()
 @Component({
@@ -25,26 +23,10 @@ export class HomePage {
         duration: 1000
       });
       loadingPopup.present();
-
-      var db = firebase.firestore();
-
-      db.collection('stock_card').where("type","==","stock_card")
-      .onSnapshot((snap)=>{
-        snap.forEach((doc)=>{
-          this.stock_card.push(doc.data());
-        })
-      })
-
-      db.collection('list').where("type","==","notice")
-      .onSnapshot((snap)=>{
-        snap.forEach((doc)=>{
-          this.items.push(doc.data());
-        })
-      })
   }
 
-  openLatest(){
-      this.navCtrl.push('LatestStockPage'); 
+  openLog(){
+      this.navCtrl.push('ChangeLogPage'); 
   }
 
   openManage(){

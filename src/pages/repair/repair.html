@@ -36,14 +36,21 @@
   
   <!--*********** Menu View  ***********-->
   <div *ngIf="viewType==='Menu'">
-  <ion-card tappable  class="card-list wave" *ngFor="let card of repair_card" (click)="openList(card.$key)">
-        <!-- <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + category.imgBg+ ')'}"> -->
-          <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + card.imgBg+ ')'}">
-          <h2 class="card-list-title"> {{card.name}}</h2> 
-          <p class="card-list-description"> {{card.description}}</p>               
-        </div>
-  </ion-card>
-  </div>
+
+
+<ion-card tappable class="card-list-wave" (click)="openLog()">
+    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + './assets/imgs/log.jpg'+ ')'}">
+        <h2 class="card-list-title">정비 이력</h2>
+        <p class="card-list-description">Checkout Repair History</p>
+    </div>
+</ion-card>
+<ion-card tappable class="card-list-wave" (click)="openOnMaintenance()">
+    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + './assets/imgs/repair.jpeg'+ ')'}">
+        <h2 class="card-list-title">정비 중인 아이템</h2>
+        <p class="card-list-description">Items on maintenance</p>
+    </div>
+</ion-card>
+</div>
   
   <!--*********** Promotion View  ***********-->
   <div *ngIf="viewType==='Notice'">
