@@ -13,4 +13,4 @@ import { IonicPageModule } from 'ionic-angular';
     HomePage
   ]
 })
-export class Category3PageModule {}
+export class HomePageModule {}

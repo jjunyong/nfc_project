@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -20,7 +21,8 @@ export class MyApp {
       {title:'Home',component:'HomePage'},
       {title:'Main',component:"MainPage"},
       {title:'Repair', component:"RepairPage"},
-      {title:'app2', component:"Category2Page"}
+      {title:'app2', component:"Category2Page"},
+      {title:'NFC', component:"NfcPage"}
     ];
   }
 

@@ -95,4 +95,5 @@
     <plugin name="cordova-universal-links-plugin" spec="^1.2.1" />
     <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
     <engine name="ios" spec="4.5.4" />
+    <plugin name="phonegap-nfc" spec="^0.7.1" />
 </widget>
