@@ -13,6 +13,8 @@ import { AuthData } from '../providers/auth-data';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
+import { NFC, Ndef} from '@ionic-native/nfc';
+
 // import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
@@ -38,6 +40,7 @@ export const config = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +53,9 @@ export const config = {
     AuthData,
     Facebook,
     GooglePlus,
-    AngularFireDatabase
+    AngularFireDatabase,
+    NFC,
+    Ndef
   ]
 })
 export class AppModule {}
