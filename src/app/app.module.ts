@@ -18,7 +18,6 @@ import { NFC, Ndef} from '@ionic-native/nfc';
 // import { AngularFireStorageModule } from 'angularfire2/storage';
 
 
-
 export const config = { 
   apiKey: "AIzaSyAvvRWBkF21p7_ol6OQsH2rst4UjfWZfJU",
   authDomain: "prototype-afd2b.firebaseapp.com",
@@ -45,7 +44,7 @@ export const config = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
-  ],
+  ],  
   providers: [
     StatusBar,
     SplashScreen,
