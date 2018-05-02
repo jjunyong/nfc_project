@@ -135,6 +135,10 @@ manage(){
 openNextPage(){
   this.navCtrl.push('ManagePage')
 }
+
+openDetail(){
+  this.navCtrl.push('ItemDetailPage')
+}
 }
 
 
