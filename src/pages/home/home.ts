@@ -43,6 +43,10 @@ export class HomePage {
     this.navCtrl.push('StockManagePage')
   }
 
+  locationManage(){
+    this.navCtrl.push('LocationManagePage')
+  }
+
   // goToDetail(itemId){
   //     this.navCtrl.push('Detail3Page',{itemId:itemId}); 
   // }

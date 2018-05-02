@@ -55,7 +55,15 @@
             <h2 class="card-list-title">입출고 이력 검색</h2>
             <p class="card-list-description">Checkout Logs of ex,import</p>
         </div>
-    </ion-card>
+</ion-card>
+
+<ion-card tappable class="card-list-wave" (click)="locationManage()">
+    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + './assets/imgs/main_bg.jpg'+ ')'}">
+        <h2 class="card-list-title">위치별 조회</h2>
+        <p class="card-list-description">Search by location</p>
+    </div>
+</ion-card>
+
 </div>
 
 <!--*********** Promotion View  ***********-->
