@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
-
+import { Observable } from 'rxjs/Observable';
+import firebase from 'firebase'
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -23,6 +24,15 @@ export class HomePage {
         duration: 1000
       });
       loadingPopup.present();
+
+      var db = firebase.firestore();
+      // this.items = this.DB.collection('post', ref=> ref.where('type','==','notice')).valueChanges();
+      db.collection('list').where("type","==","notice")
+      .onSnapshot((snap)=>{
+        snap.forEach((doc)=>{
+          this.items.push(doc.data());
+        })
+      })
   }
 
   openLog(){

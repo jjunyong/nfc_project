@@ -28,13 +28,6 @@ export class RepairPage {
 
       var db = firebase.firestore();
 
-      db.collection('repair_card').where("type","==","repair_card")
-      .onSnapshot((snap)=>{
-        snap.forEach((doc)=>{
-          this.repair_card.push(doc.data());
-        })
-      })
-
       db.collection('list').where("type","==","notice")
       .onSnapshot((snap)=>{
         snap.forEach((doc)=>{
