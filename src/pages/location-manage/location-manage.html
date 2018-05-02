@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+     제품 검색
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-item>
+        <ion-label color="primary">
+          위치별 검색</ion-label>
+        
+        <ion-select [(ngModel)]="location">
+          <ion-option value="A">A</ion-option>
+          <ion-option value="B">B</ion-option>
+          <ion-option value="C">C</ion-option>
+
+        </ion-select>
+     
+      </ion-item>
+ <ion-list>
+    <button ion-button (click)="goTo(location)"color="secondary" round outline color="blue">검색</button>
+  <button ion-item *ngFor="let item of items" (click)="choose(item)">
+    {{item}}
+  </button>
+ </ion-list>
+
+
+</ion-content>
