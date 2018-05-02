@@ -19,12 +19,12 @@ import { NFC, Ndef} from '@ionic-native/nfc';
 
 
 export const config = { 
-  apiKey: "AIzaSyAvvRWBkF21p7_ol6OQsH2rst4UjfWZfJU",
-  authDomain: "prototype-afd2b.firebaseapp.com",
-  databaseURL: "https://prototype-afd2b.firebaseio.com",
-  projectId: "prototype-afd2b",
-  storageBucket: "prototype-afd2b.appspot.com",
-  messagingSenderId: "706026974631"
+  apiKey: "AIzaSyBu8bxF678oClgMSV2O039fu0keVlYO50I",
+    authDomain: "nfcproject-ebfc6.firebaseapp.com",
+    databaseURL: "https://nfcproject-ebfc6.firebaseio.com",
+    projectId: "nfcproject-ebfc6",
+    storageBucket: "nfcproject-ebfc6.appspot.com",
+    messagingSenderId: "1083380389950"
 };
 
 @NgModule({
