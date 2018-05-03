@@ -3,6 +3,11 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { AngularFirestore } from 'angularfire2/firestore'
 import { Observable } from 'rxjs/Observable';
 import firebase from 'firebase'
+import { ActionSheetController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { ViewController } from 'ionic-angular';
+
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -17,7 +22,7 @@ export class HomePage {
   
 
   constructor(public navCtrl: NavController, public DB: AngularFirestore,public navParams: NavParams,
-    public loadingCtrl: LoadingController){
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController){
       let loadingPopup = this.loadingCtrl.create({
         spinner: 'crescent',
         content: '',
@@ -47,8 +52,30 @@ export class HomePage {
     this.navCtrl.push('LocationManagePage')
   }
 
-  // goToDetail(itemId){
-  //     this.navCtrl.push('Detail3Page',{itemId:itemId}); 
-  // }
+  manage(){  
+    let confirm = this.alertCtrl.create({
+      title: '알림',
+      message: '공지를 추가하시겠습니까?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.openNextPage()
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('cancel clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+}
+
+openNextPage(){
+  this.navCtrl.push('WritenoticePage')
+}
 
 }
