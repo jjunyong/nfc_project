@@ -8,7 +8,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { AuthData } from '../providers/auth-data';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -57,4 +58,4 @@ export const config = {
     Ndef
   ]
 })
-export class AppModule {}
+export class AppModule {} 

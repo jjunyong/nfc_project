@@ -1,0 +1,84 @@
+
+    <ion-header >
+        <ion-navbar transparent  [class.show-background]="showToolbar"  > 
+            <ion-title color="light" [hidden]="!showToolbar">Detail</ion-title>
+        </ion-navbar>
+    </ion-header>
+
+<ion-content  no-padding  class="content" (ionScroll)="onScroll($event)" [class.transition]="transition"  >
+
+  <!--*********** Image header  ***********-->
+  <div class="detail-header" [ngStyle]="{'background-image': 'url(' + './assets/imgs/bg11.jpg' + ')'}">
+                  <h2 class="detail-name "> aasff</h2>
+                  <div class="detail-price ">ssss</div>
+        <ion-fab  bottom right edge class="hello pop-in">
+            <button ion-fab *ngIf="!favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart-outline"></ion-icon></button>
+            <button ion-fab *ngIf="favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart"></ion-icon></button>
+        </ion-fab>
+  </div>
+
+  <!--***********  Description ***********-->
+  <ion-card>
+    <ion-card-header no-margin>
+      Description
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-4 no-padding text-left>
+            <h4>Name : </h4>
+            <h4>Location : </h4>
+        </ion-col>
+        <ion-col col-8 no-padding text-left>
+          <h4>GalaxyS9+</h4>
+          <h4>A</h4>
+            
+        </ion-col>
+      </ion-row>
+      
+      <div [innerHTML]="(item | async)?.description" ></div>
+
+    </ion-card-content>
+  </ion-card>
+  
+    <!--*********** Contact  ***********-->
+    <ion-card>
+        <div class="info">
+          <ion-list no-lines>
+            <ion-item >
+              <ion-icon name="ios-pin-outline" item-left  color="darkGray" ></ion-icon>
+                asdfasdf        
+            </ion-item>
+              <ion-item>
+                <ion-icon name="ios-call-outline" item-left  color="darkGray" ></ion-icon>
+                  asdfasdf
+            </ion-item>
+              <ion-item >
+              <ion-icon name="ios-globe-outline" item-left  color="darkGray" ></ion-icon>
+                asdfasdf 
+            </ion-item>
+            <ion-item >
+              <ion-icon name="ios-pricetag-outline" item-left  color="darkGray" ></ion-icon>
+                asdfasdf
+            </ion-item>
+          </ion-list>
+        </div>
+    </ion-card>
+  <!--     -->
+    
+
+      <!--***********  Thumbnail images ***********-->
+    <!-- <ion-card *ngIf="imgGallery?.length > 0 ">
+        <ion-card-header>
+          Photos
+        </ion-card-header>
+        <ion-grid>
+              <ion-row wrap color="gray">
+                <ion-col tappable col-4 *ngFor="let image of imgGallery  ,let i = index" >
+                <img class="expanded-image" [src]="image.url" (click)="openFullImage(i)"/>
+                </ion-col>
+              </ion-row>
+        </ion-grid>
+    </ion-card>
+ -->
+
+</ion-content>
