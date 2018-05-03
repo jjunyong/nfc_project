@@ -14,18 +14,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'item-detail.html',
 })
 
-
-
-
 export class ItemDetailPage {
-
   showToolbar:boolean = false;
   transition:boolean = false;
-  
 
+  code:any;
+  name :any;
+  location:any;
+  quantity:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef) {
+
+      this.code = this.navParams.get('code');
+      this.name = this.navParams.get('name');
+      this.location = this.navParams.get('location');
+      this.quantity = this.navParams.get('quantity');
   }
 
   ionViewDidLoad() {
