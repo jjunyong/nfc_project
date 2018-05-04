@@ -56,13 +56,16 @@
   <div *ngIf="viewType==='Notice'">
   
       <ion-list class="wave">
-          <ion-item tappable  *ngFor="let item of items " (click)="goToDetail(item.$key)">
+          <ion-item tappable  *ngFor="let item of items ">
               <!-- <ion-thumbnail item-left> -->
                   <!-- <img [src]="'url(' + item.imgSmall+ ')'"> -->
               <!-- </ion-thumbnail> -->
               <h2>{{item.title}}</h2>
               <p>{{item.description}}</p> 
           </ion-item>
+          <ion-fab right bottom>
+            <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+          </ion-fab>
       </ion-list>
       <!-- <ion-grid >
           <ion-row wrap>

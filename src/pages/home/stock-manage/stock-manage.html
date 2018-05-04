@@ -14,7 +14,7 @@
 <ion-content >
 
   <ion-list>
-    <ion-item *ngFor="let item of itemList">
+    <ion-item *ngFor="let item of itemList" (click)="openDetail(item)">
       <!-- <ion-avatar item-start>
         <img [src]="contact.img">
       </ion-avatar>   -->
