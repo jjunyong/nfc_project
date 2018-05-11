@@ -1,30 +1,31 @@
-<!-- 
+
     <ion-header >
         <ion-navbar transparent  [class.show-background]="showToolbar"  > 
             <ion-title color="light" [hidden]="!showToolbar">Detail</ion-title>
         </ion-navbar>
-    </ion-header> -->
-    <ion-header>
+    </ion-header>
+    <!-- <ion-header>
         <ion-navbar>
           <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
           </button>
           <ion-title></ion-title>
         </ion-navbar>
-      </ion-header>
+      </ion-header> -->
+      
 
 
 <ion-content  no-padding  class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
 
   <!--*********** Image header  ***********-->
-  <!-- <div class="detail-header" [ngStyle]="{'background-image': 'url(' + './assets/imgs/bg11.jpg' + ')'}">
-                  <h2 class="detail-name "> aasff</h2>
-                  <div class="detail-price ">ssss</div>
+  <div class="detail-header" [ngStyle]="{'background-image': 'url(' + './assets/imgs/bg11.jpg' + ')'}">
+                  <h2 class="detail-name ">{{name}}</h2>
+                  <div class="detail-price ">{{code}}</div>
         <ion-fab  bottom right edge class="hello pop-in">
             <button ion-fab *ngIf="!favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart-outline"></ion-icon></button>
             <button ion-fab *ngIf="favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart"></ion-icon></button>
         </ion-fab>
-  </div> -->
+  </div>
 
   <!--***********  Description ***********-->
   

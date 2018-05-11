@@ -38,7 +38,6 @@ export class ManagePage {
       location : this.location
     }).then(()=>{
 
-
       this.afs.collection("log").add({
         itemName : this.name,
         code : this.code,
