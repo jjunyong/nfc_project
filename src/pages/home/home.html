@@ -36,12 +36,6 @@
 
 <!--*********** Menu View  ***********-->
 <div *ngIf="viewType==='Menu'">
-<!-- <ion-card tappable  class="card-list wave" *ngFor="let card of stock_card" (click)="openList(card.$key)">
-      <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + card.imgBg+ ')'}">
-        <h2 class="card-list-title"> {{card.name}}</h2> 
-        <p class="card-list-description"> {{card.description}}</p>               
-      </div>
-</ion-card> -->
 
 <ion-card tappable class="card-list-wave" (click)="openManage()">
     <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + './assets/imgs/main_bg.jpg'+ ')'}">
@@ -68,12 +62,8 @@
 
 <!--*********** Promotion View  ***********-->
 <div *ngIf="viewType==='Notice'">
-
     <ion-list class="wave">
         <ion-item tappable  *ngFor="let item of items">
-            <!-- <ion-thumbnail item-left> -->
-                <!-- <img [src]="'url(' + item.imgSmall+ ')'"> -->
-            <!-- </ion-thumbnail> -->
             <h2>{{item.title}}</h2>
             <p>{{item.description}}</p> 
         </ion-item>
@@ -81,21 +71,6 @@
     
 <ion-fab right bottom>
         <button (click)="manage()" ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
-      </ion-fab>
-    <!-- <ion-grid >
-        <ion-row wrap>
-          <ion-col col-6  tappable  *ngFor="let item of items" (click)="goToDetail(item.$key)" color="gray">
-            
-            <ion-card class="card-grid wobble" >
-              
-              <div class="card-grid-bg" [ngStyle]="{'background-image': 'url(' + item.imgSmall+ ')'}">
-                <div class="bookmarkRibbon"></div>
-                  <h2 class="card-grid-title"> {{item.name}}</h2>                                
-              </div>
-              
-            </ion-card>
-          </ion-col>
-        </ion-row>
-    </ion-grid> -->
+</ion-fab>
 </div>
 </ion-content>

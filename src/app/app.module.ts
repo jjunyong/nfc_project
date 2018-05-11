@@ -15,9 +15,9 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { NFC, Ndef} from '@ionic-native/nfc';
+import { FireService } from './FireService';
 
 // import { AngularFireStorageModule } from 'angularfire2/storage';
-
 
 export const config = { 
   apiKey: "AIzaSyAvvRWBkF21p7_ol6OQsH2rst4UjfWZfJU",
@@ -35,12 +35,10 @@ export const config = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -55,7 +53,8 @@ export const config = {
     GooglePlus,
     AngularFireDatabase,
     NFC,
-    Ndef
+    Ndef,
+    FireService
   ]
 })
 export class AppModule {} 

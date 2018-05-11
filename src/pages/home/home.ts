@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
 import { Observable } from 'rxjs/Observable';
-import firebase from 'firebase'
 import { ActionSheetController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ViewController } from 'ionic-angular';
@@ -15,14 +14,16 @@ import { ViewController } from 'ionic-angular';
 })
 
 export class HomePage {
+
   viewType: string = "Menu";
   stock_card: any[] = [];
-  items: any[] = [];
+  items: any;
   
   
 
   constructor(public navCtrl: NavController, public DB: AngularFirestore,public navParams: NavParams,
-    public loadingCtrl: LoadingController, public alertCtrl: AlertController){
+    public loadingCtrl: LoadingController, public alertCtrl: AlertController,
+    public afs : AngularFirestore){
       let loadingPopup = this.loadingCtrl.create({
         spinner: 'crescent',
         content: '',
@@ -30,14 +31,10 @@ export class HomePage {
       });
       loadingPopup.present();
 
-      var db = firebase.firestore();
-      // this.items = this.DB.collection('post', ref=> ref.where('type','==','notice')).valueChanges();
-      db.collection('list').where("type","==","notice")
-      .onSnapshot((snap)=>{
-        snap.forEach((doc)=>{
-          this.items.push(doc.data());
-        })
-      })
+      afs.collection('list', ref => ref.where('type','==','notice')).valueChanges()
+        .subscribe(notice => this.items = notice)
+      
+      console.log(this.items)
   }
 
   openLog(){
