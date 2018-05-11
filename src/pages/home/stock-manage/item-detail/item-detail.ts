@@ -20,7 +20,7 @@ export class ItemDetailPage {
 
   code:any;
   name :any;
-  location:any;
+  location:string;
   quantity:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -47,6 +47,11 @@ export class ItemDetailPage {
        // this.headerImgSize = '100%'
     }
     this.ref.detectChanges();
-}
+  }
+
+  modify(){
+
+  }
+
 
 }
