@@ -2,17 +2,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import firebase from 'firebase';
+import {AngularFireModule} from 'angularfire2'
 import { Platform } from 'ionic-angular';
-
-
 //***********  Facebook **************/
 import { Facebook } from '@ionic-native/facebook';
-
 //***********  Google plus **************/
 import { GooglePlus } from '@ionic-native/google-plus';
-
-
 import { AuthData } from '../../../providers/auth-data';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 
 @IonicPage()
@@ -25,7 +23,7 @@ export class LoginPage {
   public backgroundImage: any = "./assets/imgs/bg1.jpg";
 //   public imgLogo: any = "./assets/imgs/medium_150.70391061453px_1202562_easyicon.net.png";
 
-  constructor(public navCtrl: NavController, public authData: AuthData, public fb: FormBuilder, public alertCtrl: AlertController,public loadingCtrl: LoadingController,private facebook: Facebook,
+  constructor(private fire:AngularFireAuth, public navCtrl: NavController, public authData: AuthData, public fb: FormBuilder, public alertCtrl: AlertController,public loadingCtrl: LoadingController,private facebook: Facebook,
     private googleplus: GooglePlus,
     private platform: Platform,) {
       let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;

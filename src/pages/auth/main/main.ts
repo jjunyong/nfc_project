@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 import { Platform } from 'ionic-angular';
 //***********  Facebook **************/
-import { Facebook } from '@ionic-native/facebook';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 //***********  Google plus **************/
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -22,11 +22,14 @@ import { AuthData } from '../../../providers/auth-data';
   templateUrl: 'main.html'
 })
 export class MainPage {
+
+
+  userData=null;
   public loginForm: any;
   public backgroundImage: any = "./assets/imgs/main_bg.jpg";
   public imgLogo: any = "./assets/imgs/ionic.png";
 
-  constructor(public navCtrl: NavController, public authData: AuthData, private platform: Platform, public fb: FormBuilder, public alertCtrl: AlertController,public loadingCtrl: LoadingController,private facebook: Facebook,private googleplus: GooglePlus) {
+  constructor(private fire:AngularFireAuth, public navCtrl: NavController, public authData: AuthData, private platform: Platform, public fb: FormBuilder, public alertCtrl: AlertController,public loadingCtrl: LoadingController,private facebook: Facebook,private googleplus: GooglePlus) {
       let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
       this.loginForm = fb.group({
             email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
@@ -34,6 +37,25 @@ export class MainPage {
       });
   }
 
+  loginWithFacebook(){
+    this.fire.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    .then(res=>{
+      console.log(res);
+    })
+  }
+  logoutOfFacebook(){
+    this.fire.auth.signOut();
+    console.log("signout");
+  }
+
+
+  loginWithFB(){
+    this.facebook.login(['email', 'public_profile']).then((response: FacebookLoginResponse)=>{
+      this.facebook.api('me?fields=id, name, email, first_name, picture.width(720).height(720).as(picture_large)', []).then(profile=>{
+        this.userData={email:profile['email'], first_name:profile["first_name"], picture:profile['picture_large']['data']['url'], nusername:profile['name']};
+      })
+    })
+  }
 
   facebookLogin(){
     let loadingPopup = this.loadingCtrl.create({
