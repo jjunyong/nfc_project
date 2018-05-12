@@ -38,30 +38,31 @@
 
         <div class="info">
           <ion-list no-lines>
-              <ion-item (click)="modify()">
-                  <ion-icon name="cube" item-left  color="darkGray" ></ion-icon>
+            <ion-item (click)="modify()">
+                <ion-icon name="cube" item-left  color="darkGray" ></ion-icon>
                   Name : {{name}}
                 </ion-item>
-            <ion-item >
-              <ion-icon name="ios-pin-outline" item-left  color="darkGray" ></ion-icon>
-              Location : {{location}}
+                
+            <ion-item>
+                <ion-icon name="pin" item-left  color="darkGray" ></ion-icon>
+                <ion-label strong>Location : </ion-label>
+                  <ion-select [(ngModel)]="location">
+                    <ion-option value="a">A</ion-option>
+                    <ion-option value="b">B</ion-option>
+                    <ion-option value="c">C</ion-option>
+                    <ion-option value="d">D</ion-option>
+                  </ion-select>
+             </ion-item>
+
+            <ion-item>
+                <ion-icon name="stats" item-left  color="darkGray" ></ion-icon>
+                <ion-label>Quantity :</ion-label> 
+                <ion-input type="number" [(ngModel)]="quantity">{{quantity}}</ion-input>
             </ion-item>
             <ion-item >
-                <ion-icon name="stats" item-left  color="darkGray" ></ion-icon>
-                Quantity : {{quantity}}
-              </ion-item>
-              <ion-item >
                   <ion-icon name="finger-print" item-left  color="darkGray" ></ion-icon>
                   Code : {{code}}
-                </ion-item>
-              <!-- <ion-item>
-                <ion-icon name="ios-call-outline" item-left  color="darkGray" ></ion-icon>
-                  asdfasdf
-            </ion-item> -->
-              <!-- <ion-item >
-              <ion-icon name="ios-globe-outline" item-left  color="darkGray" ></ion-icon>
-                asdfasdf 
-            </ion-item> -->
+            </ion-item>
             <ion-item >
               <ion-icon name="ios-pricetag-outline" item-left  color="darkGray" ></ion-icon>
                 Classification : 
