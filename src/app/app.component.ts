@@ -18,9 +18,9 @@ export class MyApp {
     
     this.initializeApp();
     this.pages = [
-      {title:'Home',component:'HomePage'},
-      {title:'Main',component:"MainPage"},
-      {title:'Repair', component:"RepairPage"},
+      {title:'재고관리',component:'HomePage'},
+      {title:'Login',component:"MainPage"},
+      {title:'정비', component:"RepairPage"},
       {title:'app1', component:"Category1Page"},
       {title:'NFC', component:"NfcPage"}
     ];

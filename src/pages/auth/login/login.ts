@@ -20,7 +20,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class LoginPage {
   public loginForm: any;
-  public backgroundImage: any = "./assets/imgs/bg1.jpg";
+  public backgroundImage: any = "https://firebasestorage.googleapis.com/v0/b/prototype-afd2b.appspot.com/o/bg1.jpg?alt=media&token=3244d9a3-9411-419a-bd8e-203d84e36d5b";
 //   public imgLogo: any = "./assets/imgs/medium_150.70391061453px_1202562_easyicon.net.png";
 
   constructor(private fire:AngularFireAuth, public navCtrl: NavController, public authData: AuthData, public fb: FormBuilder, public alertCtrl: AlertController,public loadingCtrl: LoadingController,private facebook: Facebook,

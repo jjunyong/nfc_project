@@ -35,4 +35,12 @@ export class FireService{
     toast.present();
   }
 
+  getItems(){
+    return this.afs.collection('item').valueChanges();
+  }
+
+  getLogs(){
+    return this.afs.collection('repair_log').valueChanges();
+  }
+
 }

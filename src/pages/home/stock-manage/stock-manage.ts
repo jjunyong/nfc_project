@@ -53,29 +53,6 @@ export class StockManagePage {
     
 
     console.log(this.loadedItemList)
-
-    // this.itemList
-    //   .subscribe( (value) =>{
-    //     this.itemList = value;
-    //     this.loadedItemList = value;
-    //   })
-      
-    // var db = firebase.firestore();
-    // this.itemList = [];
-    // db.collection("item").onSnapshot((snap)=>{
-    //   snap.forEach((doc)=>{
-    //     this.itemList.push(doc.data());
-    //   })
-    // })
-
-    // this.contact = afDB.list('/contact');
-    // this.contact.subscribe(contact => {
-    //       this.contactArray = contact;
-    //       this.contactList = this.contactArray; // for ngFor loop 
-    //       this.loadedContactList = this.contactArray; 
-    //       loadingPopup.dismiss()
-    // })
-          
 }
 
 ionViewWillEnter(){
@@ -107,7 +84,6 @@ getItems(searchbar) {
   });
 
   console.log(q, this.itemList.length);
-
 }
 
 manage(){  

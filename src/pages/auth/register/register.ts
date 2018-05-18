@@ -12,7 +12,7 @@ import { AuthData } from '../../../providers/auth-data';
 })
 export class RegisterPage {
   public registerForm;
-  public backgroundImage: any = "./assets/imgs/bg2.jpg";
+  public backgroundImage: any = "https://firebasestorage.googleapis.com/v0/b/prototype-afd2b.appspot.com/o/bg2.jpg?alt=media&token=da1285e8-91c4-48bf-bb8e-99bd9ead5fdc";
 
   constructor(public nav: NavController, public authData: AuthData, public fb: FormBuilder, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
     

@@ -11,7 +11,7 @@ import { AuthData } from '../../../providers/auth-data';
 })
 export class ForgotPage {
   public resetPasswordForm;
-  public backgroundImage: any = "./assets/imgs/bg3.jpg"; 
+  public backgroundImage: any = "https://firebasestorage.googleapis.com/v0/b/prototype-afd2b.appspot.com/o/bg3.jpg?alt=media&token=c6b8fce8-064f-4501-8339-fbef26340903"; 
 
   constructor(public authData: AuthData, public fb: FormBuilder, public nav: NavController, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
 

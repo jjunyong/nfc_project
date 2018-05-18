@@ -26,8 +26,8 @@ export class MainPage {
 
   userData=null;
   public loginForm: any;
-  public backgroundImage: any = "./assets/imgs/main_bg.jpg";
-  public imgLogo: any = "./assets/imgs/ionic.png";
+  public backgroundImage: any = "https://firebasestorage.googleapis.com/v0/b/prototype-afd2b.appspot.com/o/main_bg.jpg?alt=media&token=1a63d6b5-8e2a-45fc-b5c7-2a2cc0619e45";
+  public imgLogo: any = "https://firebasestorage.googleapis.com/v0/b/prototype-afd2b.appspot.com/o/ionic.png?alt=media&token=95c6b0c6-8a42-47a5-ab90-bd8951e8407c";
 
   constructor(private fire:AngularFireAuth, public navCtrl: NavController, public authData: AuthData, private platform: Platform, public fb: FormBuilder, public alertCtrl: AlertController,public loadingCtrl: LoadingController,private facebook: Facebook,private googleplus: GooglePlus) {
       let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
