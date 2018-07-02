@@ -9,6 +9,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { Observable } from 'rxjs/Observable';
 import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 
+
 interface Item{
   location: string;
   name: string;
@@ -29,6 +30,13 @@ export class StockManagePage {
   itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
+
+  new_code:any;
+  new_name :string;
+  new_location:string;
+  new_quantity:any;
+
+  
 
   constructor( public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -121,6 +129,18 @@ openDetail(item){
     quantity : item.quantity
   })
 }
+
+upDate(){
+  
+  //console.log(this.navCtrl.pop(name));
+  console.log("임시버튼");
+}
+
+
+
+
+
+
 }
 
 
