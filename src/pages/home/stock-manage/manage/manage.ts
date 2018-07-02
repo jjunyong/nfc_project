@@ -18,10 +18,11 @@ class Item{
 })
 export class ManagePage {
 
-  item : Item
+  item = new Item();
   name
   location
   quantity
+
 
   constructor(public afs:AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
               private toast: ToastController,
