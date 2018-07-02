@@ -34,13 +34,14 @@
     <ion-card>
         <ion-card-header padding>
             <strong>Item Info</strong> 
+            <div text-right><button ion-button color="blue" clear (click)="confirm()">confirm</button></div>
         </ion-card-header>
 
         <div class="info">
           <ion-list no-lines>
             <ion-item (click)="modify()">
                 <ion-icon name="cube" item-left  color="darkGray" ></ion-icon>
-                  Name : {{name}}
+                  <ion-input type="text" [(ngModel)]="name">Name : {{name}}</ion-input>
                 </ion-item>
                 
             <ion-item>

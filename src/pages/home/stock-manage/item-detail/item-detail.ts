@@ -19,7 +19,7 @@ export class ItemDetailPage {
   transition:boolean = false;
 
   code:any;
-  name :any;
+  name :string;
   location:string;
   quantity:any;
 
@@ -53,5 +53,15 @@ export class ItemDetailPage {
 
   }
 
+  confirm(){
+    console.log("confirm");
+    console.log(this.name, this.location, this.quantity);
+    this.navCtrl.push('StockManagePage',{
+      code : this.code,
+      name : this.name,
+      location : this.location,
+      quantity : this.quantity
+    })
+  }
 
 }
