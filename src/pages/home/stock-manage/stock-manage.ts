@@ -13,6 +13,7 @@ interface Item{
   location: string;
   name: string;
   quantity : number;
+  code : string;
 }
 
 
