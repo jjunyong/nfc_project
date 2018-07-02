@@ -2,14 +2,16 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { FireService } from '../../../app/FireService';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
-/**
- * Generated class for the MaintenanceLogPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
+
+interface RepairItem{
+  model: string;
+  name: string;
+  repairman : string;
+  code : string;
+}
  
 @IonicPage()
 @Component({
@@ -18,6 +20,9 @@ import { FireService } from '../../../app/FireService';
 })
 
 export class MaintenanceLogPage { 
+
+  private itemsCollection: AngularFirestoreCollection<RepairItem>; 
+
   itemList : any=[]; 
   itemArray : any = [];
   loadedItemList:  any=[]; 
@@ -26,7 +31,8 @@ export class MaintenanceLogPage {
 
   constructor( public loadingCtrl: LoadingController,
     public navCtrl: NavController,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    public alertCtrl: AlertController
   ) {
 
     let loadingPopup = this.loadingCtrl.create({
@@ -35,9 +41,11 @@ export class MaintenanceLogPage {
     });
     loadingPopup.present();
 
-    this.afs.collection('item',ref => ref.where('isRepairable', '==', true)).valueChanges()
-      .subscribe((item)=>{
-        this.itemArray = item;
+    this.itemsCollection = afs.collection<RepairItem>('RepairItem');
+    this.items= this.itemsCollection.valueChanges();
+
+   this.items.subscribe((RepairItem)=>{
+        this.itemArray = RepairItem;
         this.itemList = this.itemArray;
         this.loadedItemList = this.itemArray;
         loadingPopup.dismiss();
@@ -48,7 +56,7 @@ export class MaintenanceLogPage {
 }
 
 ionViewWillEnter(){
-  console.log('ionViewEnteredStockMangePage')
+  console.log('ionViewEnteredRepairPage')
 }
 
 initializeItems(){
@@ -67,8 +75,8 @@ getItems(searchbar) {
     return;
   }
   this.itemList = this.itemList.filter((v) => {
-    if(v.name && q) {
-      if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+    if(v.model && q) {
+      if (v.model.toLowerCase().indexOf(q.toLowerCase()) > -1) {
         return true;
       }
       return false;
@@ -78,9 +86,41 @@ getItems(searchbar) {
   console.log(q, this.itemList.length);
   }
 
-  openLog(item){
-    this.navCtrl.push('LogDetailPage')
+
+
+manage(){  
+  let confirm = this.alertCtrl.create({
+    title: '새로운 정비 아이템을 추가하겠습니까?',
+    message: '새로운 정비 아이템을 추가하려면 Yes를 클릭하세요',
+    buttons: [
+      {
+        text: 'Yes',
+        handler: () => {
+          this.openAdd()
+        }
+      },
+      {
+        text: 'Cancel',
+        handler: () => {
+          console.log('cancel clicked');
+        }
+      }
+    ]
+  });
+  confirm.present();
+}
+
+
+  openAdd(){
+    this.navCtrl.push('AddrepairPage')
   }
 
-
+  openDetail(item){
+    this.navCtrl.push('RepairitemdetailPage',{
+        model : item.model,
+        code: item.code,
+        name: item.name,
+        repairman: item.repairman
+    })
+  }
 }

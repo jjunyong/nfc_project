@@ -9,6 +9,30 @@ export class FireService{
   constructor(public afs : AngularFirestore, public toast : ToastController){
   }
 
+  RepairAdd(RepairItem){
+    this.afs.collection('RepairItem').doc(`${RepairItem.code}`).set({
+        name : RepairItem.name,
+        model : RepairItem.model,
+        repairman : RepairItem.repairman,
+        code : RepairItem.code
+    })
+
+    this.afs.collection("repairlog").doc(`${RepairItem.code}`).set({
+        itemName : RepairItem.name,
+        code : RepairItem.code,
+        type : "add",
+        model : RepairItem.model,
+        repairman : RepairItem.repairman, 
+        timestamp : new Date()
+      })
+    
+    let toast = this.toast.create({
+            message: "succesfully added",
+            duration: 2000,
+            position: "bottom"
+    });
+    toast.present();
+  }
 
   itemAdd(item){
     this.afs.collection('item').add({

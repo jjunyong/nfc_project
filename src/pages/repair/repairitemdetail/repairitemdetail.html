@@ -1,0 +1,96 @@
+
+    <ion-header >
+      <ion-navbar transparent  [class.show-background]="showToolbar"  > 
+          <ion-title color="light" [hidden]="!showToolbar">Detail</ion-title>
+      </ion-navbar>
+  </ion-header>
+  <!-- <ion-header>
+      <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title></ion-title>
+      </ion-navbar>
+    </ion-header> -->
+    
+
+
+<ion-content  no-padding  class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
+
+<!--*********** Image header  ***********-->
+<div class="detail-header" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-afd2b.appspot.com/o/main_bg.jpg?alt=media&token=1a63d6b5-8e2a-45fc-b5c7-2a2cc0619e45' + ')'}">
+                <h2 class="detail-name ">{{name}}</h2>
+                <div class="detail-price ">{{code}}</div>
+      <!-- <ion-fab  bottom right edge class="hello pop-in">
+          <button ion-fab *ngIf="!favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart-outline"></ion-icon></button>
+          <button ion-fab *ngIf="favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart"></ion-icon></button>
+      </ion-fab> -->
+</div>
+
+<!--***********  Description ***********-->
+
+
+  <!--*********** Contact  ***********-->
+  <ion-card>
+      <ion-card-header padding>
+          <strong>Item Info</strong> 
+      </ion-card-header>
+
+      <div class="info">
+        <ion-list no-lines>
+          <ion-item (click)="modify()">
+              <ion-icon name="cube" item-left  color="darkGray" ></ion-icon>
+                Model : {{model}}
+              </ion-item>
+
+
+          <ion-item>
+              <ion-icon name="barcode" item-left  color="darkGray" ></ion-icon>
+                Name : {{name}}
+              </ion-item>
+          <ion-item >
+                <ion-icon name="finger-print" item-left  color="darkGray" ></ion-icon>
+                Code : {{code}}
+          </ion-item>
+          <ion-item >
+            <ion-icon name="ios-pricetag-outline" item-left  color="darkGray" ></ion-icon>
+              정비담당 : {{repairman}}
+          </ion-item>
+        </ion-list>
+      </div>
+  </ion-card>
+
+  <ion-card>
+      <ion-card-header padding>
+          <strong>정비/점검 내역
+          </strong> 
+      </ion-card-header>
+      
+      <ion-card-content>
+        <p>정비 시작일: <br>
+        정비 종료일: </p>
+      </ion-card-content>
+      <ion-card-content>
+        <p>압연기 모터 교체  (날짜)<p>
+        압연기 볼트 교체 (날짜)
+        </p>
+      </ion-card-content>
+    </ion-card>
+  
+
+    <!--***********  Thumbnail images ***********-->
+  <!-- <ion-card *ngIf="imgGallery?.length > 0 ">
+      <ion-card-header>
+        Photos
+      </ion-card-header>
+      <ion-grid>
+            <ion-row wrap color="gray">
+              <ion-col tappable col-4 *ngFor="let image of imgGallery  ,let i = index" >
+              <img class="expanded-image" [src]="image.url" (click)="openFullImage(i)"/>
+              </ion-col>
+            </ion-row>
+      </ion-grid>
+  </ion-card>
+-->
+
+</ion-content>

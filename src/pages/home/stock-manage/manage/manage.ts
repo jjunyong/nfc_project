@@ -18,7 +18,7 @@ class Item{
 })
 export class ManagePage {
 
-  item = new Item();
+  item = new Item()
   name
   location
   quantity
