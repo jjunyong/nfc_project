@@ -3,7 +3,7 @@ page-timeline {
         //  border-left: 2px solid dashed
             border-left-style: solid; 
             border-left-width: 2px;
-            border-left-color: color($colors, ios-blue);
+            border-left-color: blue;
             padding-left: 10px;
             margin-left: 10px;
         }
@@ -11,7 +11,7 @@ page-timeline {
             padding: 10px 25px 15px 0px;
         }
         .highlight{
-            color:color($colors, ios-blue);
+            color:blue;
         }
         /*Optional*/
         .bar-stable {
@@ -41,7 +41,7 @@ page-timeline {
             top: 0;
             bottom: 0;
             width: 2px;
-            background: color($colors, ios-blue);
+            background: blue;
             left: 44px;
             margin-left: -10px;
             z-index: 1;

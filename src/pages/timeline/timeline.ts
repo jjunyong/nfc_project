@@ -1,9 +1,13 @@
 import { Component  } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController,LoadingController } from 'ionic-angular';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { IonicPage, NavController, NavParams, ModalController,LoadingController, AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map'; // you might need to import this, or not depends on your setup
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 
-
+interface RepairItemLog{
+  title: string,
+  writer: string,
+  description: string;
+}
 
 @IonicPage()
 @Component({
@@ -11,24 +15,46 @@ import 'rxjs/add/operator/map'; // you might need to import this, or not depends
   templateUrl: 'timeline.html'
 })
 export class TimelinePage {
-  timeline: FirebaseListObservable<any[]>;
+
+  private itemsCollection: AngularFirestoreCollection<RepairItemLog>; 
+
+
+  timeline: AngularFirestoreDocument<any[]>;
   feedView: string = "activity";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController ,public modalCtrl: ModalController, public afDB: AngularFireDatabase) {
-      let loadingPopup = this.loadingCtrl.create({
-        spinner: 'crescent',
-        content: ''
+
+  itemList : any=[]; 
+  itemArray : any = [];
+  loadedItemList:  any=[]; 
+  items : any = [];
+
+
+  constructor( public loadingCtrl: LoadingController,
+    public navCtrl: NavController,
+    private afs: AngularFirestore,
+    public alertCtrl: AlertController
+  ) {
+
+    let loadingPopup = this.loadingCtrl.create({
+      spinner: 'crescent', // icon style //
+      content: '',
+    });
+    loadingPopup.present();
+
+    this.itemsCollection = afs.collection<RepairItemLog>('RepairItem');
+    this.items= this.itemsCollection.valueChanges();
+
+   this.items.subscribe((RepairItem)=>{
+        this.itemArray = RepairItem;
+        this.itemList = this.itemArray;
+        this.loadedItemList = this.itemArray;
+        loadingPopup.dismiss();
       });
-      loadingPopup.present();
-      this.timeline = <FirebaseListObservable<any[]>> afDB.list('/timeline').map((timeline) => {
-          return timeline.map((timeline) => {
-              timeline.lists =   afDB.list('/timeline/'+timeline.$key+'/lists')  
-              loadingPopup.dismiss().catch(() => console.log('ERROR CATCH: LoadingController dismiss'));
-              return timeline            
-          })        
-      })
-  }
+    
 
+    console.log(this.loadedItemList)
 
+    }
 
+    
 }
