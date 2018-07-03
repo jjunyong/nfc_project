@@ -10,7 +10,7 @@ import { HomePage } from '../pages/home/home';
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = 'MainPage';
+  rootPage:any = 'TesthomepagePage';
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar,
