@@ -55,12 +55,13 @@ export class ItemDetailPage {
 
   confirm(){
     console.log("confirm");
-    console.log(this.name, this.location, this.quantity);
+    console.log(this.name, this.location, this.quantity, this.code);
     this.navCtrl.push('StockManagePage',{
       code : this.code,
       name : this.name,
       location : this.location,
-      quantity : this.quantity
+      quantity : this.quantity, 
+      status : true
     })
   }
 

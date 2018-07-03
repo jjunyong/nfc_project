@@ -25,7 +25,7 @@ interface Item{
 })
 export class StockManagePage {
 
-  private itemsCollection: AngularFirestoreCollection<Item>; 
+  public itemsCollection: AngularFirestoreCollection<Item>; 
   itemList : any=[]; 
   itemArray : any = [];
   loadedItemList:  any=[]; 
@@ -41,8 +41,11 @@ export class StockManagePage {
   constructor( public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    public navParams : NavParams
   ) {
+
+    
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
@@ -134,6 +137,16 @@ upDate(){
   
   //console.log(this.navCtrl.pop(name));
   console.log("임시버튼");
+  if(this.navParams.get('status')){
+    console.log("success");
+    console.log(this.navParams.get('name'))
+    console.log(this.navParams.get('code'))
+    console.log(this.itemList.code)
+    if(this.itemArray.code==this.navParams.get('code')){
+      console.log("찐")
+    }
+  }
+  
 }
 
 
