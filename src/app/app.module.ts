@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
@@ -20,12 +19,12 @@ import { FireService } from './FireService';
 // import { AngularFireStorageModule } from 'angularfire2/storage';
 
 export const config = { 
-  apiKey: "AIzaSyAvvRWBkF21p7_ol6OQsH2rst4UjfWZfJU",
-  authDomain: "prototype-afd2b.firebaseapp.com",
-  databaseURL: "https://prototype-afd2b.firebaseio.com",
-  projectId: "prototype-afd2b",
-  storageBucket: "prototype-afd2b.appspot.com",
-  messagingSenderId: "706026974631"
+  apiKey: "AIzaSyACcRwZawea9vXAI0cNz0xsjbHRqP5XTlY",
+    authDomain: "prototype-d68e4.firebaseapp.com",
+    databaseURL: "https://prototype-d68e4.firebaseio.com",
+    projectId: "prototype-d68e4",
+    storageBucket: "prototype-d68e4.appspot.com",
+    messagingSenderId: "498739217733"
 };
 
 @NgModule({

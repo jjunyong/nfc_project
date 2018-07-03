@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
-import { Observable } from 'rxjs/Observable';
-import { ActionSheetController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { ViewController } from 'ionic-angular';
 
 
 @IonicPage()

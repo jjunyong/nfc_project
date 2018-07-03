@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
 import { FireService } from '../../../app/FireService';
-import { create } from 'domain';
 
 
 class RepairItem{
