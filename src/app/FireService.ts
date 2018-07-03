@@ -1,5 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { IonicPage, ToastController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
 
 
@@ -7,6 +7,23 @@ import { AngularFirestore } from 'angularfire2/firestore'
 export class FireService{
 
   constructor(public afs : AngularFirestore, public toast : ToastController){
+  }
+
+
+  LogAdd(RepairLog){
+    console.log(RepairLog.code)
+    this.afs.collection('RepairItem').doc(`${RepairLog.code}`).collection('repair').add({
+        title : RepairLog.title,
+        writer: RepairLog.writer,
+        description: RepairLog.description
+    })
+
+    let toast = this.toast.create({
+            message: "succesfully added",
+            duration: 2000,
+            position: "bottom"
+    });
+    toast.present();
   }
 
   RepairAdd(RepairItem){

@@ -64,20 +64,29 @@
       <ion-card-header padding>
           <strong>정비/점검 내역
           </strong> 
+          <button ion-right-button icon-end (click)="add()" >
+              내역 추가
+              <ion-icon name="add"></ion-icon>
+            </button>
       </ion-card-header>
       
       <ion-card-content>
-        <p>정비 시작일: <br>
-        정비 종료일: </p>
-      </ion-card-content>
-      <ion-card-content>
-        <p>압연기 모터 교체  (날짜)<p>
-        압연기 볼트 교체 (날짜)
-        </p>
+          <ion-item>
+              <ion-label>정비 시작일: </ion-label>
+              <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label>정비 종료일: </ion-label>
+                <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
+          </ion-item>
+
+          <ion-item *ngFor="let item of itemList" (click)="addlog(item)">
+              <h2>{{item.title}}</h2>
+              <p>{{item.timestamp}}</p> 
+          </ion-item>
       </ion-card-content>
     </ion-card>
   
-
     <!--***********  Thumbnail images ***********-->
   <!-- <ion-card *ngIf="imgGallery?.length > 0 ">
       <ion-card-header>

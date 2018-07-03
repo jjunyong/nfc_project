@@ -2,12 +2,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ItemDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -18,6 +12,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class RepairitemdetailPage {
 
+  itemList : any=[]; 
+  itemArray : any = [];
+  loadedItemList:  any=[]; 
+  items : any = [];
+
+
   showToolbar:boolean = false;
   transition:boolean = false;
 
@@ -25,6 +25,10 @@ export class RepairitemdetailPage {
   name:string;
   model:string;
   repairman:string;
+
+  startDate = new Date().toISOString();
+  finDate = new Date().toISOString();
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef) {
@@ -52,9 +56,19 @@ export class RepairitemdetailPage {
     this.ref.detectChanges();
   }
 
+  add(){
+    this.navCtrl.push('AddlogPage',{
+      code : this.code
+    })
+  }
+  
   modify(){
 
   }
 
+  addlog(item)
+  {
+
+  }
 
 }
