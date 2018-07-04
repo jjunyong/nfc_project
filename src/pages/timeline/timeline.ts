@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController,LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map'; // you might need to import this, or not depends on your setup
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 
@@ -27,13 +27,17 @@ export class TimelinePage {
   itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
+  code : string;
 
 
   constructor( public loadingCtrl: LoadingController,
     public navCtrl: NavController,
-    private afs: AngularFirestore,
-    public alertCtrl: AlertController
+    public afs: AngularFirestore,
+    public alertCtrl: AlertController,
+    public navParams: NavParams
   ) {
+
+    this.code = this.navParams.get('code');
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
@@ -41,8 +45,10 @@ export class TimelinePage {
     });
     loadingPopup.present();
 
-    this.itemsCollection = afs.collection<RepairItemLog>('RepairItem');
-    this.items= this.itemsCollection.valueChanges();
+    this.itemsCollection = afs.collection('RepairItem').doc(this.code).collection('Log')
+    this.items= this.itemsCollection.valueChanges()
+    
+
 
    this.items.subscribe((RepairItem)=>{
         this.itemArray = RepairItem;

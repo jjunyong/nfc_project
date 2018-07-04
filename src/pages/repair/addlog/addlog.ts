@@ -27,7 +27,6 @@ export class AddlogPage {
  
 
   constructor(public afs:AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
-    private toast: ToastController,
   public fireService : FireService) {
 
     this.code = this.navParams.get('code');

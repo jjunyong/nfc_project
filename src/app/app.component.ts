@@ -3,8 +3,6 @@ import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -22,7 +20,8 @@ export class MyApp {
       {title:'Login',component:"MainPage"},
       {title:'정비', component:"RepairPage"},
       {title:'app1', component:"Category1Page"},
-      {title:'NFC', component:"NfcPage"}
+      {title:'NFC', component:"NfcPage"},
+      {title:'Timeline',component:'TimelinePage'}
     ];
   }
 

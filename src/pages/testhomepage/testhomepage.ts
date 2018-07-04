@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NFC } from '@ionic-native/nfc';
 
 /**
  * Generated class for the TesthomepagePage page.
@@ -15,11 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TesthomepagePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  payload : string;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TesthomepagePage');
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private nfc: NFC) {
 
+    this.nfc.addMimeTypeListener('jjun/read',()=>{
+      console.log('nfc attached')
+    }, (err) => {
+      console.log('error attaching ndef listener', err);
+    }).subscribe((event) => {
+
+      this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
+      alert(this.payload);
+      // this.navCtrl.push('LocationManagePage')
+    });
+  }
 }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { FireService } from '../../../app/FireService';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 
@@ -31,7 +30,7 @@ export class MaintenanceLogPage {
 
   constructor( public loadingCtrl: LoadingController,
     public navCtrl: NavController,
-    private afs: AngularFirestore,
+    public afs: AngularFirestore,
     public alertCtrl: AlertController
   ) {
 

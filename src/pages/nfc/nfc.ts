@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { NavController, ToastController, Platform } from 'ionic-angular';
 import { NFC, Ndef} from '@ionic-native/nfc';
-import { IonicPage, NavParams, LoadingController, ViewController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 
 @IonicPage()
 @Component({

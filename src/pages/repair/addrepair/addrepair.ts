@@ -26,7 +26,6 @@ export class AddrepairPage {
 
 
   constructor(public afs:AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
-    private toast: ToastController,
   public fireService : FireService) {
 }
 
