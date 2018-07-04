@@ -27,13 +27,17 @@ export class TimelinePage {
   itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
+  code : string;
 
 
   constructor( public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     private afs: AngularFirestore,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public navParams: NavParams
   ) {
+
+    this.code = this.navParams.get('code');
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
@@ -41,8 +45,10 @@ export class TimelinePage {
     });
     loadingPopup.present();
 
-    this.itemsCollection = afs.collection<RepairItemLog>('RepairItem');
-    this.items= this.itemsCollection.valueChanges();
+    this.itemsCollection = afs.collection('RepairItem').doc(this.code).collection('Log')
+    this.items= this.itemsCollection.valueChanges()
+    
+
 
    this.items.subscribe((RepairItem)=>{
         this.itemArray = RepairItem;

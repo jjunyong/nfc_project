@@ -57,7 +57,7 @@ export class RepairitemdetailPage {
   }
 
   add(){
-    this.navCtrl.push('AddlogPage',{
+    this.navCtrl.push('TimelinePage',{
       code : this.code
     })
   }
