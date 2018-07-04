@@ -15,40 +15,48 @@
 
 <ion-content padding>
 
-    <ion-list>
-        
-          <ion-item>
-              <ion-label floating>제품명</ion-label>
-              <ion-input type="text" [(ngModel)]="name"></ion-input>
-            </ion-item>
+  <ion-list>
 
-          <!-- <ion-item>
-              <ion-label>분류</ion-label>
-              <ion-select [(ngModel)]="classification" interface="action-sheet">
-                <ion-option value="officeSupplies">사무용품</ion-option>
-                <ion-option value="electronicProduct">전자제품</ion-option>
-                <ion-option value="tools">공구</ion-option>
-                <ion-option value="documents">서류</ion-option>
-              </ion-select>
-            </ion-item> -->
-        
-        <ion-item>
-          <ion-label floating>수량</ion-label>
-          <ion-input type="number" [(ngModel)]="quantity"></ion-input>
-        </ion-item>
+    <ion-item>
+      <ion-label floating>제품 모델</ion-label>
+      <ion-input type="text" [(ngModel)]="model"></ion-input>
+    </ion-item>
 
-        <ion-item>
-            <ion-label>위치 설정</ion-label>
-            <ion-select [(ngModel)]="location" interface="action-sheet">
-              <ion-option value="A">A</ion-option>
-              <ion-option value="B">B</ion-option>
-              <ion-option value="C">C</ion-option>
-              <ion-option value="D">D</ion-option>
-            </ion-select>
-          </ion-item>
-      </ion-list>
+    <ion-item>
+      <ion-label floating>수량</ion-label>
+      <ion-input type="number" [(ngModel)]="quantity"></ion-input>
+    </ion-item>
 
-      <button ion-button (click)="update()">확인</button>
+    <ion-item>
+      <ion-label floating>Serial Number</ion-label>
+      <ion-input type="text" [(ngModel)]="serialNum"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>위치(대분류)</ion-label>
+      <ion-select [(ngModel)]="location1">
+        <ion-option value="A">A</ion-option>
+        <ion-option value="B">B</ion-option>
+        <ion-option value="C">C</ion-option>
+        <ion-option value="D">D</ion-option>
+        <ion-option value="E">E</ion-option>
+        <ion-option value="F">F</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>위치(소분류)</ion-label>
+      <ion-select [(ngModel)]="location2">
+        <ion-option value="1">1</ion-option>
+        <ion-option value="2">2</ion-option>
+        <ion-option value="3">3</ion-option>
+        <ion-option value="4">4</ion-option>
+        <ion-option value="5">5</ion-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  <button ion-button (click)="add()">확인</button>
 
 </ion-content>
-

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { NFC } from '@ionic-native/nfc';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { auth } from 'firebase';
 
 /**
  * Generated class for the TesthomepagePage page.
@@ -16,10 +18,24 @@ import { NFC } from '@ionic-native/nfc';
 })
 export class TesthomepagePage {
 
+  public backgroundImage: any = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/login.jpg?alt=media&token=86151782-4372-4ec3-84e7-c2ef76b4a663";
+
   payload : string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private nfc: NFC) {
+  constructor(public afAuth : AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC) {
 
+    // this.nfc.addMimeTypeListener('jjun/read',()=>{
+    //   console.log('nfc attached')
+    // }, (err) => {
+    //   console.log('error attaching ndef listener', err);
+    // }).subscribe((event) => {
+
+    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);      alert(this.payload);
+    //   // this.navCtrl.push('LocationManagePage')
+    // });
+  }
+
+<<<<<<< Updated upstream
     // this.nfc.addMimeTypeListener('jjun/read',()=>{
     //   console.log('nfc attached')
     // }, (err) => {
@@ -30,5 +46,17 @@ export class TesthomepagePage {
     //   alert(this.payload);
     //   // this.navCtrl.push('LocationManagePage')
     // });
+=======
+  googleLogin() {
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+  }
+
+  loginWithEmail(){
+    this.navCtrl.push('LoginPage');
+  }
+
+  createAccount(){
+    this.navCtrl.push('RegisterPage');
+>>>>>>> Stashed changes
   }
 }

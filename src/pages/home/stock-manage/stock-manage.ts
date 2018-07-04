@@ -5,15 +5,14 @@ import { IonicPage, NavController, NavParams, LoadingController, ViewController 
 
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { FireService } from '../../../../src/app/FireService'
+import { FireService } from '../../../../src/providers/FireService'
 class Item{
   location: string;
-  name: string;
+  model: string;
   quantity : number;
-  code : string;
+  serialNum : string;
   id : string;
 }
-
 
 @IonicPage()
 @Component({
@@ -123,8 +122,8 @@ openNextPage(){
 
 openDetail(item){
   this.navCtrl.push('ItemDetailPage',{
-    code : item.code,
-    name : item.name,
+    serialNum : item.serialNum,
+    model : item.model,
     location : item.location,
     quantity : item.quantity,
     id : item.id
@@ -151,10 +150,10 @@ upDate(){
          // this.new_item.quantity= this.navParams.get('quantity');
          // this.fireService.modifyItems(this.new_item  );
          // this.navCtrl.pop()
-         this.item.name=this.navParams.get('name');
+         this.item.model=this.navParams.get('model');
          this.item.location=this.navParams.get('location');
          this.item.quantity=this.navParams.get('quantity');
-         this.item.code=this.navParams.get('code');
+         this.item.serialNum=this.navParams.get('serialNum');
          this.item.id=this.navParams.get('id');
          
          console.log("modify");

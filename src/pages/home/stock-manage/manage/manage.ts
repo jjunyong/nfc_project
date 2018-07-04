@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
-import { FireService } from '../../../../app/FireService';
-// import { Item } from '../../../../app/item'
+import { FireService } from '../../../../providers/FireService';
 
-class Item{
-  name : string;
+class Item {
+  model : string;
   quantity: number;
   location: string;
-  code : string;
+  serialNum : string;
 }
 
 @IonicPage()
@@ -19,9 +18,12 @@ class Item{
 export class ManagePage {
 
   item = new Item()
-  name
-  location
-  quantity
+  serialNum : string;
+  model : string;
+  location1 : string;
+  location2 : string;
+  quantity : number;
+
 
 
   constructor(public afs:AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
@@ -33,11 +35,11 @@ export class ManagePage {
     console.log('ionViewDidLoad ManagePage');
   }
 
-  update(){
-    this.item.code = Math.random().toString(36).substring(7)
-    this.item.name = this.name;
-    this.item.location = this.location;
-    this.item.quantity = this. quantity;
+  add(){
+    this.item.serialNum = this.serialNum;
+    this.item.model = this.model;
+    this.item.location = this.location1+"-"+this.location2;
+    this.item.quantity = this.quantity;
 
     this.fireService.itemAdd(this.item)
     this.navCtrl.pop()

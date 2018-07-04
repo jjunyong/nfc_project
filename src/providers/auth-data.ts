@@ -9,11 +9,12 @@ import { Facebook } from '@ionic-native/facebook';
 
 //***********  Google plus **************/
 import { GooglePlus } from '@ionic-native/google-plus';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable()
 export class AuthData {
   userData: any;
-  constructor(public afAuth: AngularFireAuth, public platform: Platform,private facebook: Facebook,private googleplus: GooglePlus) {
+  constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public platform: Platform,private facebook: Facebook,private googleplus: GooglePlus) {
   }
 
 
@@ -87,7 +88,7 @@ signInWithGoogle(): Promise<any> {
   
   registerUser(name: string, email: string, password: string,phone: number): Promise<any> {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((newUser) => {
-      firebase.database().ref('/userProfile').child(newUser.uid).set({
+      this.afs.collection('users').doc(newUser.uid).set({
           email: email,
           name: name,
           phone: phone

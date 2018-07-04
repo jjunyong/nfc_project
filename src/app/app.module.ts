@@ -14,8 +14,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { NFC, Ndef} from '@ionic-native/nfc';
-import { FireService } from './FireService';
-import { IcecreamserviceProvider } from '../providers/icecreamservice/icecreamservice';
+import { FireService } from '../providers/FireService';
 
 // import { AngularFireStorageModule } from 'angularfire2/storage';
 
@@ -54,8 +53,7 @@ export const config = {
     AngularFireDatabase,
     NFC,
     Ndef,
-    FireService,
-    IcecreamserviceProvider
+    FireService
   ]
 })
 export class AppModule {} 

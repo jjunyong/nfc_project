@@ -18,8 +18,8 @@ export class ItemDetailPage {
   showToolbar:boolean = false;
   transition:boolean = false;
 
-  code:any;
-  name :string;
+  serialNum:any;
+  model :string;
   location:string;
   quantity:any;
   id : string;
@@ -27,8 +27,8 @@ export class ItemDetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef) {
 
-      this.code = this.navParams.get('code');
-      this.name = this.navParams.get('name');
+      this.serialNum = this.navParams.get('serialNum');
+      this.model = this.navParams.get('model');
       this.location = this.navParams.get('location');
       this.quantity = this.navParams.get('quantity');
       this.id=this.navParams.get('id');
@@ -57,10 +57,9 @@ export class ItemDetailPage {
 
   confirm(){
     console.log("confirm");
-    console.log(this.name, this.location, this.quantity, this.code);
     this.navCtrl.push('StockManagePage',{
-      code : this.code,
-      name : this.name,
+      serialNum : this.serialNum,
+      model : this.model,
       location : this.location,
       quantity : this.quantity, 
       id : this.id,
