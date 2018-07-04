@@ -52,11 +52,14 @@ export class FireService{
   }
 
   itemAdd(item){
-    this.afs.collection('item').add({
+    const doc_id = this.afs.createId();
+
+    this.afs.collection('item').doc(doc_id).set({
         name : item.name,
         quantity : item.quantity,
         location : item.location,
-        code : item.code
+        code : item.code,
+        id : doc_id
     })
 
     this.afs.collection("log").add({
@@ -74,6 +77,17 @@ export class FireService{
             position: "bottom"
     });
     toast.present();
+  }
+
+  modifyItems(new_item){
+    this.afs.collection('item').doc(new_item.id).update({
+      name : new_item.name,
+      code : new_item.code,
+      location : new_item.location,
+      quantity : new_item.quantity
+
+    })
+
   }
 
   getItems(){

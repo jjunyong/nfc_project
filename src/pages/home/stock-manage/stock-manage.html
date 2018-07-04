@@ -4,9 +4,9 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Stock Manage</ion-title>
+    <div text-right><button (click)="upDate()">임시 update</button></div>
   </ion-navbar>
-  <div text-right><button (click)="upDate()">UPDATE 임시버튼</button></div>
-  <ion-toolbar color="deeporange">
+   <ion-toolbar color="deeporange">
       <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>

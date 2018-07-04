@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { AngularFirestore } from 'angularfire2/firestore'
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
-
 @IonicPage()
 @Component({
   selector: 'page-home',

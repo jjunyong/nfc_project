@@ -22,6 +22,7 @@ export class ItemDetailPage {
   name :string;
   location:string;
   quantity:any;
+  id : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef) {
@@ -30,6 +31,7 @@ export class ItemDetailPage {
       this.name = this.navParams.get('name');
       this.location = this.navParams.get('location');
       this.quantity = this.navParams.get('quantity');
+      this.id=this.navParams.get('id');
   }
 
   ionViewDidLoad() {
@@ -61,8 +63,11 @@ export class ItemDetailPage {
       name : this.name,
       location : this.location,
       quantity : this.quantity, 
+      id : this.id,
       status : true
     })
+
+
   }
 
 }
