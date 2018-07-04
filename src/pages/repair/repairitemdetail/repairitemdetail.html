@@ -66,8 +66,8 @@
           </strong> 
           <button ion-right-button icon-end (click)="add()" >
               내역 추가
-              <ion-icon name="add"></ion-icon>
-            </button>
+              <ion-icon name="add" color="darkGray"></ion-icon>
+          </button>
             <button ion-right-button icon-end (click)="timeline()" >
                 타임 라인
                 <ion-icon name="list"></ion-icon>
@@ -84,7 +84,7 @@
                 <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
           </ion-item>
 
-          <ion-item *ngFor="let item of itemList" (click)="addlog(item)">
+          <ion-item *ngFor="let item of itemList" (click)="addtime(item)">
               <h2>{{item.title}}</h2>
               <p>{{item.timestamp}}</p> 
           </ion-item>

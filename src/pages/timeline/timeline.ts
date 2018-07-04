@@ -1,7 +1,7 @@
 import { Component  } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map'; // you might need to import this, or not depends on your setup
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 interface RepairItemLog{
   title: string,
@@ -9,6 +9,8 @@ interface RepairItemLog{
   description: string;
   timestamp: Date;
 }
+
+
 
 @IonicPage()
 @Component({
@@ -20,6 +22,8 @@ export class TimelinePage {
   private itemsCollection: AngularFirestoreCollection<RepairItemLog>; 
 
 
+
+  //timeline: AngularFirestoreDocument<any[]>;
   feedView: string = "activity";
 
 
@@ -42,6 +46,7 @@ export class TimelinePage {
     console.log(this.id);
     console.log();
 
+
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
       content: '',
@@ -52,17 +57,19 @@ export class TimelinePage {
     this.items= this.itemsCollection.valueChanges()
 
 
-   this.items.subscribe((repairinfo)=>{
-        this.itemArray = repairinfo;
+   this.items.subscribe((RepairItemLog)=>{
+        this.itemArray = RepairItemLog;
         this.itemList = this.itemArray;
         this.loadedItemList = this.itemArray;
         loadingPopup.dismiss();
       });
-    
+
+
 
     console.log(this.loadedItemList)
 
     }
+
 
     
 }

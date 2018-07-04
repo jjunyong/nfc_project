@@ -3,7 +3,7 @@ page-timeline {
         //  border-left: 2px solid dashed
             border-left-style: solid; 
             border-left-width: 2px;
-            border-left-color: blue;
+            border-left-color: darkblue;
             padding-left: 10px;
             margin-left: 10px;
         }
@@ -11,7 +11,7 @@ page-timeline {
             padding: 10px 25px 15px 0px;
         }
         .highlight{
-            color:blue;
+            color:darkblue;
         }
         /*Optional*/
         .bar-stable {
@@ -41,7 +41,7 @@ page-timeline {
             top: 0;
             bottom: 0;
             width: 2px;
-            background: blue;
+            background: darkblue;
             left: 44px;
             margin-left: -10px;
             z-index: 1;
@@ -70,12 +70,14 @@ page-timeline {
 
         .timeline .timeline-item {
             margin-left: 35px;
+            font-family: "나눔바른고딕";
             border-bottom: 1px solid #ccc;
             padding-bottom: 8px;
         }
 
         .timeline .timeline-stats {
             position: relative;
+            font-family: "나눔바른고딕";
             font-size: 12px;
             color: #7F8C8D;
         }

@@ -15,7 +15,9 @@ export class FireService{
     this.afs.collection('RepairItem').doc(`${RepairLog.id}`).collection('repair').add({
         title : RepairLog.title,
         writer: RepairLog.writer,
-        description: RepairLog.description
+        description: RepairLog.description,
+        timestamp : new Date()
+
     })
 
     let toast = this.toast.create({

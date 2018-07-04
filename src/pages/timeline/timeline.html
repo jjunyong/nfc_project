@@ -25,14 +25,15 @@
 
  <ion-list>
   <ion-item-group>
-          <ul class="timeline">
-              <li *ngFor="let item of itemList">
+       <ul class="timeline">
+          <li *ngFor="let item of itemList ">
               <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/default_image.jpg?alt=media&token=6e8d4469-6873-4161-b017-6181ed4d1c7f" alt="" class="timeline-thumb pop-in">
                 <div class="timeline-item">
-                  <h3><p>{{item.title}}</p></h3>
-                  <h3><p>{{item.timestamp | date: 'fullDate'}}</p></h3>
-                  <h3><p>{{item.writer}}</p></h3>
-                  <h3>{{item.description}}</h3>
+                  <h5>{{item.title}}</h5>
+                  <p>{{item.timestamp | date: 'fullDate'}}</p>
+                  <p>{{item.writer}}</p>
+                  <p>{{item.description}}</p>
+               <!--   <img data-src="{{images}}" class="imageTimeline">-->
                 </div>
               </li>
           </ul>

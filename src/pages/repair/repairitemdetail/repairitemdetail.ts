@@ -1,4 +1,3 @@
-
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -60,21 +59,20 @@ export class RepairitemdetailPage {
     this.navCtrl.push('AddlogPage',{
       id : this.id
     })
+  }  
+  
+  timeline(){
+    this.navCtrl.push('TimelinePage',{
+      id : this.id
+    })
   }
 
-  timeline(){
-    this.navCtrl.push('TimelinePage'),{
-      id : this.id
-    }
-    console.log(this.id)
-    console.log('타임라인 페이지 넘어가는 지점')
-  }
   
   modify(){
 
   }
 
-  addlog(item)
+  addtime(item)
   {
 
   }
