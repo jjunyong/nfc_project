@@ -1,13 +1,11 @@
 
 import firebase from 'firebase';
-import { ActionSheetController, IonicPage } from 'ionic-angular';
+import {IonicPage } from 'ionic-angular';
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
+import { NavController, LoadingController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { initializeApp } from 'firebase/app';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
-import { FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { AngularFirestore,  AngularFirestoreCollection } from 'angularfire2/firestore';
+
 
 
 interface Item{

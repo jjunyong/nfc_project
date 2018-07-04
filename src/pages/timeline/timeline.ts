@@ -1,5 +1,5 @@
 import { Component  } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController,LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import 'rxjs/add/operator/map'; // you might need to import this, or not depends on your setup
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 
@@ -32,7 +32,7 @@ export class TimelinePage {
 
   constructor( public loadingCtrl: LoadingController,
     public navCtrl: NavController,
-    private afs: AngularFirestore,
+    public afs: AngularFirestore,
     public alertCtrl: AlertController,
     public navParams: NavParams
   ) {
