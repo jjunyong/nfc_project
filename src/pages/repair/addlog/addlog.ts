@@ -8,7 +8,7 @@ class RepairLog{
   title: string
   writer: string
   description: string
-  code: string
+  id: string
 }
 
 @IonicPage()
@@ -22,14 +22,14 @@ export class AddlogPage {
   title : string
   writer : string
   description : string
-  code : string
+  id : string
   
  
 
   constructor(public afs:AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
   public fireService : FireService) {
 
-    this.code = this.navParams.get('code');
+    this.id = this.navParams.get('id');
 }
 
   ionViewDidLoad() {
@@ -41,7 +41,7 @@ export class AddlogPage {
     this.RepairLog.title = this.title;
     this.RepairLog.writer = this.writer;
     this.RepairLog.description = this.description;
-    this.RepairLog.code = this.code;
+    this.RepairLog.id = this.id;
     
 
     this.fireService.LogAdd(this.RepairLog)

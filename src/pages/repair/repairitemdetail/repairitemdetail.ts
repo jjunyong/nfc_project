@@ -21,8 +21,8 @@ export class RepairitemdetailPage {
   showToolbar:boolean = false;
   transition:boolean = false;
 
-  code: string;
-  name:string;
+  id: string;
+  serialNum:string;
   model:string;
   repairman:string;
 
@@ -33,8 +33,8 @@ export class RepairitemdetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef) {
 
-      this.code = this.navParams.get('code');
-      this.name = this.navParams.get('name');
+      this.id = this.navParams.get('id');
+      this.serialNum = this.navParams.get('serialNum');
       this.model = this.navParams.get('model');
       this.repairman = this.navParams.get('repairman');
   }
@@ -57,9 +57,17 @@ export class RepairitemdetailPage {
   }
 
   add(){
-    this.navCtrl.push('TimelinePage',{
-      code : this.code
+    this.navCtrl.push('AddlogPage',{
+      id : this.id
     })
+  }
+
+  timeline(){
+    this.navCtrl.push('TimelinePage'),{
+      id : this.id
+    }
+    console.log(this.id)
+    console.log('타임라인 페이지 넘어가는 지점')
   }
   
   modify(){

@@ -20,15 +20,15 @@ export class TesthomepagePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private nfc: NFC) {
 
-    this.nfc.addMimeTypeListener('jjun/read',()=>{
-      console.log('nfc attached')
-    }, (err) => {
-      console.log('error attaching ndef listener', err);
-    }).subscribe((event) => {
+    // this.nfc.addMimeTypeListener('jjun/read',()=>{
+    //   console.log('nfc attached')
+    // }, (err) => {
+    //   console.log('error attaching ndef listener', err);
+    // }).subscribe((event) => {
 
-      this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
-      alert(this.payload);
-      // this.navCtrl.push('LocationManagePage')
-    });
+    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
+    //   alert(this.payload);
+    //   // this.navCtrl.push('LocationManagePage')
+    // });
   }
 }

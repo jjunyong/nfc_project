@@ -7,6 +7,7 @@ interface RepairItemLog{
   title: string,
   writer: string,
   description: string;
+  timestamp: Date;
 }
 
 @IonicPage()
@@ -19,7 +20,6 @@ export class TimelinePage {
   private itemsCollection: AngularFirestoreCollection<RepairItemLog>; 
 
 
-  timeline: AngularFirestoreDocument<any[]>;
   feedView: string = "activity";
 
 
@@ -27,7 +27,7 @@ export class TimelinePage {
   itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
-  code : string;
+  id : string;
 
 
   constructor( public loadingCtrl: LoadingController,
@@ -37,7 +37,10 @@ export class TimelinePage {
     public navParams: NavParams
   ) {
 
-    this.code = this.navParams.get('code');
+    this.id = this.navParams.get('id');
+
+    console.log(this.id);
+    console.log();
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
@@ -45,13 +48,12 @@ export class TimelinePage {
     });
     loadingPopup.present();
 
-    this.itemsCollection = afs.collection('RepairItem').doc(this.code).collection('Log')
+    this.itemsCollection = afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair')
     this.items= this.itemsCollection.valueChanges()
-    
 
 
-   this.items.subscribe((RepairItem)=>{
-        this.itemArray = RepairItem;
+   this.items.subscribe((repairinfo)=>{
+        this.itemArray = repairinfo;
         this.itemList = this.itemArray;
         this.loadedItemList = this.itemArray;
         loadingPopup.dismiss();

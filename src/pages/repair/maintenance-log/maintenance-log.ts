@@ -7,9 +7,9 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 
 interface RepairItem{
   model: string;
-  name: string;
+  serialNum: string;
   repairman : string;
-  code : string;
+  id : string;
 }
  
 @IonicPage()
@@ -117,8 +117,8 @@ manage(){
   openDetail(item){
     this.navCtrl.push('RepairitemdetailPage',{
         model : item.model,
-        code: item.code,
-        name: item.name,
+        id: item.id,
+        serialNum: item.serialNum,
         repairman: item.repairman
     })
   }

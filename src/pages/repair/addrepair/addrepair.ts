@@ -5,10 +5,10 @@ import { FireService } from '../../../app/FireService';
 
 
 class RepairItem{
-  name : string;
+  serialNum : string;
   model: string;
   repairman: string;
-  code : string;
+  id : string;
 }
 
 
@@ -20,7 +20,7 @@ class RepairItem{
 export class AddrepairPage {
 
   RepairItem = new RepairItem()
-  name
+  serialNum
   model
   repairman
 
@@ -34,10 +34,10 @@ export class AddrepairPage {
   }
 
   update(){
-    this.RepairItem.code = this.afs.createId();
+    this.RepairItem.id = this.afs.createId();
     this.RepairItem.model = this.model;
     this.RepairItem.repairman = this.repairman;
-    this.RepairItem.name = this.name;
+    this.RepairItem.serialNum = this.serialNum;
 
     this.fireService.RepairAdd(this.RepairItem)
     this.navCtrl.pop()

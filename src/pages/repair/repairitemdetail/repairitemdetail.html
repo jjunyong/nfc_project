@@ -20,7 +20,7 @@
 <!--*********** Image header  ***********-->
 <div class="detail-header" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-afd2b.appspot.com/o/main_bg.jpg?alt=media&token=1a63d6b5-8e2a-45fc-b5c7-2a2cc0619e45' + ')'}">
                 <h2 class="detail-name ">{{name}}</h2>
-                <div class="detail-price ">{{code}}</div>
+                <div class="detail-price ">{{id}}</div>
       <!-- <ion-fab  bottom right edge class="hello pop-in">
           <button ion-fab *ngIf="!favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart-outline"></ion-icon></button>
           <button ion-fab *ngIf="favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart"></ion-icon></button>
@@ -46,11 +46,11 @@
 
           <ion-item>
               <ion-icon name="barcode" item-left  color="darkGray" ></ion-icon>
-                Name : {{name}}
+                Serial Number : {{serialNum}}
               </ion-item>
           <ion-item >
                 <ion-icon name="finger-print" item-left  color="darkGray" ></ion-icon>
-                Code : {{code}}
+                id : {{id}}
           </ion-item>
           <ion-item >
             <ion-icon name="ios-pricetag-outline" item-left  color="darkGray" ></ion-icon>
@@ -68,6 +68,10 @@
               내역 추가
               <ion-icon name="add"></ion-icon>
             </button>
+            <button ion-right-button icon-end (click)="timeline()" >
+                타임 라인
+                <ion-icon name="list"></ion-icon>
+              </button>
       </ion-card-header>
       
       <ion-card-content>

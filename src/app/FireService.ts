@@ -11,8 +11,8 @@ export class FireService{
 
 
   LogAdd(RepairLog){
-    console.log(RepairLog.code)
-    this.afs.collection('RepairItem').doc(`${RepairLog.code}`).collection('repair').add({
+    console.log(RepairLog.id)
+    this.afs.collection('RepairItem').doc(`${RepairLog.id}`).collection('repair').add({
         title : RepairLog.title,
         writer: RepairLog.writer,
         description: RepairLog.description
@@ -27,16 +27,16 @@ export class FireService{
   }
 
   RepairAdd(RepairItem){
-    this.afs.collection('RepairItem').doc(`${RepairItem.code}`).set({
-        name : RepairItem.name,
+    this.afs.collection('RepairItem').doc(`${RepairItem.id}`).set({
+        serialNum : RepairItem.serialNum,
         model : RepairItem.model,
         repairman : RepairItem.repairman,
-        code : RepairItem.code
+        id : RepairItem.id
     })
 
-    this.afs.collection("repairlog").doc(`${RepairItem.code}`).set({
-        itemName : RepairItem.name,
-        code : RepairItem.code,
+    this.afs.collection("repairlog").doc(`${RepairItem.id}`).set({
+        serialNum : RepairItem.serialNum,
+        id : RepairItem.id,
         type : "add",
         model : RepairItem.model,
         repairman : RepairItem.repairman, 

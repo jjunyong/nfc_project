@@ -25,25 +25,14 @@
 
  <ion-list>
   <ion-item-group>
-  <!--    <div stlye="timelineBg" *ngFor="let timeline of timeline  | async" >-->
-          <!--***********  item divider  ***********-->
-        <!--  <ion-item-divider sticky>  *ngFor GroupTitle for feeds 
-            <ion-label>
-              <h2>{{timeline.date | date: 'fullDate'}}</h2>
-            </ion-label>
-          </ion-item-divider>-->
-
           <ul class="timeline">
-              <li   *ngFor="let item of  itemList ">
-               <!-- <img src="{{list.profileImage}}" alt="" class="timeline-thumb pop-in">-->
+              <li *ngFor="let item of itemList">
+              <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/default_image.jpg?alt=media&token=6e8d4469-6873-4161-b017-6181ed4d1c7f" alt="" class="timeline-thumb pop-in">
                 <div class="timeline-item">
-                  <p><strong>Updated Profile Picture</strong></p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, error.....</p>
-               <!--   <img data-src="{{list.images}}" class="imageTimeline">-->
-                  <div class="timeline-stats">
-                    <ion-icon name="heart"></ion-icon> 2,450
-                    <span class="pos-absolute-right"><ion-icon name="clock"></ion-icon> 2 mins ago</span>
-                  </div>
+                  <h3><p>{{item.title}}</p></h3>
+                  <h3><p>{{item.timestamp | date: 'fullDate'}}</p></h3>
+                  <h3><p>{{item.writer}}</p></h3>
+                  <h3>{{item.description}}</h3>
                 </div>
               </li>
           </ul>
@@ -51,7 +40,7 @@
 </ion-list>
 
 <ion-fab right bottom>
-  <button ion-fab color="amber"><ion-icon name="md-calendar"></ion-icon></button>
+  <button ion-fab color="gray"><ion-icon name="md-calendar"></ion-icon></button>
 </ion-fab>
 
 </ion-content>
