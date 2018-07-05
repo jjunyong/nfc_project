@@ -7,7 +7,8 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { FireService } from '../../../../src/providers/FireService'
 class Item{
-  location: string;
+  location1: any;
+  location2: any;
   model: string;
   quantity : number;
   serialNum : string;
@@ -22,11 +23,7 @@ class Item{
 export class StockManagePage {
   item = new Item()
 
-  new_item= new Item()
-
-  
-
-
+  new_item;
 
   public itemsCollection: AngularFirestoreCollection<Item>; 
   itemList : any=[]; 
@@ -124,7 +121,8 @@ openDetail(item){
   this.navCtrl.push('ItemDetailPage',{
     serialNum : item.serialNum,
     model : item.model,
-    location : item.location,
+    location1 : item.location1,
+    location2 : item.location2,
     quantity : item.quantity,
     id : item.id
   })
@@ -135,7 +133,7 @@ upDate(){
  console.log("임시버튼");
  if(this.navParams.get('status')){
    for(let upDate of this.itemArray){
-     if(upDate.code==this.navParams.get('code')){
+     if(upDate.serialNum==this.navParams.get('serialNum')){
          // this.navCtrl.push('ChangeLogPage',{
          //   changed_name : upDate.name,
          //   changed_code : upDate.code,
@@ -151,7 +149,8 @@ upDate(){
          // this.fireService.modifyItems(this.new_item  );
          // this.navCtrl.pop()
          this.item.model=this.navParams.get('model');
-         this.item.location=this.navParams.get('location');
+         this.item.location1=this.navParams.get('location1');
+         this.item.location2=this.navParams.get('location2');
          this.item.quantity=this.navParams.get('quantity');
          this.item.serialNum=this.navParams.get('serialNum');
          this.item.id=this.navParams.get('id');

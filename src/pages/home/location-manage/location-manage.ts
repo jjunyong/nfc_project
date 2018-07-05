@@ -9,8 +9,10 @@ import { AngularFirestore,  AngularFirestoreCollection } from 'angularfire2/fire
 
 
 interface Item{
-  location: string;
-  name: string;
+  location1: any;
+  location2: any;
+  model: string;
+  serialNum : string;
   quantity : number;
 }
 
@@ -32,7 +34,7 @@ export class LocationManagePage {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     private afs: AngularFirestore
-  ) {
+  ){
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
@@ -86,7 +88,8 @@ export class LocationManagePage {
       this.navCtrl.push('ItemDetailPage',{
         code : item.code,
         name : item.name,
-        location : item.location,
+        location1 : item.location1,
+        locatoin2 : item.location2,
         quantity : item.quantity
       })
     }

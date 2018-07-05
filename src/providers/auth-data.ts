@@ -10,11 +10,37 @@ import { Facebook } from '@ionic-native/facebook';
 //***********  Google plus **************/
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthData {
   userData: any;
-  constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public platform: Platform,private facebook: Facebook,private googleplus: GooglePlus) {
+  public user : Observable<firebase.User>
+  public userDetails : firebase.User = null;
+
+  constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public platform: Platform,private facebook: Facebook,private googleplus: GooglePlus) 
+  {
+
+    this.user = this.afAuth.authState;
+
+    this.user.subscribe(
+      (user) => {
+        if (user) {
+          this.userDetails = user;
+          console.log(this.userDetails);
+        } else {
+          this.userDetails = null;
+        }
+      }
+    );
+  }
+
+  isLoggedIn() {
+    if (this.userDetails == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 

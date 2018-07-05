@@ -20,7 +20,8 @@ export class ItemDetailPage {
 
   serialNum:any;
   model :string;
-  location:string;
+  location1: any;
+  location2: any;
   quantity:any;
   id : string;
 
@@ -29,7 +30,8 @@ export class ItemDetailPage {
 
       this.serialNum = this.navParams.get('serialNum');
       this.model = this.navParams.get('model');
-      this.location = this.navParams.get('location');
+      this.location1 = this.navParams.get('location1');
+      this.location2 = this.navParams.get('location2');
       this.quantity = this.navParams.get('quantity');
       this.id=this.navParams.get('id');
   }
@@ -60,7 +62,8 @@ export class ItemDetailPage {
     this.navCtrl.push('StockManagePage',{
       serialNum : this.serialNum,
       model : this.model,
-      location : this.location,
+      location1 : this.location1,
+      location2 : this.location2,
       quantity : this.quantity, 
       id : this.id,
       status : true

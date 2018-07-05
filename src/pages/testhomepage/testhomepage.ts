@@ -33,20 +33,10 @@ export class TesthomepagePage {
     //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);      alert(this.payload);
     //   // this.navCtrl.push('LocationManagePage')
     // });
+
+    console.log(this.afAuth.authState);
   }
 
-<<<<<<< Updated upstream
-    // this.nfc.addMimeTypeListener('jjun/read',()=>{
-    //   console.log('nfc attached')
-    // }, (err) => {
-    //   console.log('error attaching ndef listener', err);
-    // }).subscribe((event) => {
-
-    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
-    //   alert(this.payload);
-    //   // this.navCtrl.push('LocationManagePage')
-    // });
-=======
   googleLogin() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
@@ -57,6 +47,5 @@ export class TesthomepagePage {
 
   createAccount(){
     this.navCtrl.push('RegisterPage');
->>>>>>> Stashed changes
   }
 }

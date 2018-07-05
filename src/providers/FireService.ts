@@ -58,7 +58,8 @@ export class FireService{
     this.afs.collection('item').doc(doc_id).set({
         model : item.model,
         quantity : item.quantity,
-        location : item.location,
+        location1 : item.location1,
+        location2 : item.location2, 
         serialNum : item.serialNum,
         id : doc_id
     })
@@ -68,7 +69,8 @@ export class FireService{
         itemSerialNum : item.serialNum,
         type : "add",
         itemQuantity : item.quantity,
-        itemLocation : item.location, 
+        itemLocation1 : item.location1, 
+        itemLocation2 : item.location2,
         timestamp : new Date()
       })
     
@@ -84,7 +86,8 @@ export class FireService{
     this.afs.collection('item').doc(new_item.id).update({
       name : new_item.name,
       code : new_item.code,
-      location : new_item.location,
+      location1 : new_item.location1,
+      location2 : new_item.location2,
       quantity : new_item.quantity
 
     })
