@@ -27,7 +27,7 @@ export class HomePage {
       });
       loadingPopup.present();
 
-      afs.collection('list', ref => ref.where('type','==','notice')).valueChanges()
+      afs.collection('notice').valueChanges()
         .subscribe(notice => this.items = notice)
       
       console.log(this.items)
@@ -69,6 +69,13 @@ export class HomePage {
 
 openNextPage(){
   this.navCtrl.push('WritenoticePage')
+}
+openNoticeDetailPage(item){
+  this.navCtrl.push('NoticeDetailPage',{
+    
+    content : item.content
+
+  });
 }
 
 }

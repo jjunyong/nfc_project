@@ -16,12 +16,12 @@ export class MyApp {
     
     this.initializeApp();
     this.pages = [
+      {title:'로그인',component:"MainPage"},
       {title:'재고관리',component:'HomePage'},
-      {title:'Login',component:"MainPage"},
-      {title:'정비', component:"RepairPage"},
-      {title:'app1', component:"Category1Page"},
-      {title:'NFC', component:"NfcPage"},
-      {title:'Timeline',component:'TimelinePage'}
+      {title:'정비관리', component:"RepairPage"},
+      // {title:'app1', component:"Category1Page"},
+      // {title:'NFC', component:"NfcPage"},
+      // {title:'Timeline',component:'TimelinePage'}
     ];
   }
 

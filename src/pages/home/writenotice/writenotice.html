@@ -15,12 +15,18 @@
 
 <ion-content padding>
   <ion-item>
-    <ion-input placeholder="제목" clearInput></ion-input>
+    <ion-input placeholder="제목" [(ngModel)]="title" clearInput></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-textarea placeholder="내용을 입력하세요"></ion-textarea>
+    <ion-input placeholder="작성자" [(ngModel)]="writer" clearInput></ion-input>
   </ion-item>
+
+  <ion-item>
+    <ion-textarea placeholder="내용을 입력하세요" [(ngModel)]="content"></ion-textarea>
+  </ion-item>
+
+  <button ion-button (click)="confirm()" color="grey">확인</button>
 </ion-content>
 
 

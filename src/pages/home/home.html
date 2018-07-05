@@ -63,9 +63,9 @@
 <!--*********** Promotion View  ***********-->
 <div *ngIf="viewType==='Notice'">
     <ion-list class="wave">
-        <ion-item tappable  *ngFor="let item of items">
+        <ion-item tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
             <h2>{{item.title}}</h2>
-            <p>{{item.description}}</p> 
+            <p>{{item.writer}}, {{item.timestamp | date}}</p>
         </ion-item>
     </ion-list>
     
