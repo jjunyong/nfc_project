@@ -128,8 +128,6 @@ openDetail(item){
   })
 }
 
-  
- 
 }
 
 

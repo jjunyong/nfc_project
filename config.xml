@@ -84,4 +84,5 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="phonegap-nfc" spec="^0.7.3" />
     <engine name="android" spec="7.0.0" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>

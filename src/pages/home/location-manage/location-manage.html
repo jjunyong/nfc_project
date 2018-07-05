@@ -1,14 +1,14 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="grey-blue">
     <ion-title>
      제품 검색
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-item>
-        <ion-label color="primary">
+<ion-content>
+    <ion-item color="grey-blue"> 
+        <ion-label color="light">
           위치별 검색</ion-label>
         
         <ion-select (ionChange)="goTo1(location1)" [(ngModel)]="location1">
@@ -38,7 +38,7 @@
       <h2> <strong>{{ item.model }}</strong> </h2>
       <h3> Location : {{ item.location1 }}-{{item.location2}}</h3>
       <h3> Quantity : {{ item.quantity }}</h3>
-    </ion-item>   
+    </ion-item> 
   </ion-list>
 
 
