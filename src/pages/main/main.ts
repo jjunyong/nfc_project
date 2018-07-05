@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage,NavController,NavParams } from 'ionic-angular';
 import { NFC } from '@ionic-native/nfc';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase';
+import { AuthData } from '../../providers/auth-data';
 
 /**
- * Generated class for the TesthomepagePage page.
+ * Generated class for the MainPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,16 +14,17 @@ import { auth } from 'firebase';
 
 @IonicPage()
 @Component({
-  selector: 'page-testhomepage',
-  templateUrl: 'testhomepage.html',
+  selector: 'page-main',
+  templateUrl: 'main.html',
 })
-export class TesthomepagePage {
+export class MainPage {
 
   public backgroundImage: any = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/login.jpg?alt=media&token=86151782-4372-4ec3-84e7-c2ef76b4a663";
 
   payload : string;
 
-  constructor(public afAuth : AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC) {
+  constructor(public afAuth : AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC,
+  public authData : AuthData) {
 
     // this.nfc.addMimeTypeListener('jjun/read',()=>{
     //   console.log('nfc attached')
@@ -34,7 +36,7 @@ export class TesthomepagePage {
     //   // this.navCtrl.push('LocationManagePage')
     // });
 
-    console.log(this.afAuth.authState);
+    console.log(this.authData.isLoggedIn());
   }
 
   googleLogin() {
@@ -48,4 +50,17 @@ export class TesthomepagePage {
   createAccount(){
     this.navCtrl.push('RegisterPage');
   }
+
+  logout(){
+    this.afAuth.auth.signOut().then(()=>{
+  //   let toast = this.toast.create({
+  //     message: "로그아웃 되었습니다!",
+  //     duration: 1000,
+  //     position: "bottom"
+  //   });
+  //   toast.present();
+  })
+  }
+
+  
 }

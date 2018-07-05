@@ -61,6 +61,7 @@ login(){
 createAccount(){
   this.navCtrl.push('RegisterPage');
 }
+
 presentAlert(title) {
   let alert = this.alertCtrl.create({
     title: title,
