@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFirestore } from 'angularfire2/firestore'
 
 /**
  * Generated class for the ItemDetailPage page.
@@ -26,7 +27,7 @@ export class ItemDetailPage {
   id : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public ref: ChangeDetectorRef) {
+    public ref: ChangeDetectorRef,public afs : AngularFirestore) {
 
       this.serialNum = this.navParams.get('serialNum');
       this.model = this.navParams.get('model');
@@ -59,6 +60,16 @@ export class ItemDetailPage {
 
   confirm(){
     console.log("confirm");
+    //this.afs.collection('item').ref.get()
+
+    this.afs.collection('item').doc(this.id).update({
+      model : this.model,
+      serialNum : this.serialNum,
+      location1 : this.location1,
+      location2 : this.location2,
+      quantity : this.quantity
+
+    })
     this.navCtrl.push('StockManagePage',{
       serialNum : this.serialNum,
       model : this.model,
