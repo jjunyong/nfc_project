@@ -59,17 +59,22 @@ export class ItemDetailPage {
   }
 
   confirm(){
-    console.log("confirm");
-    //this.afs.collection('item').ref.get()
-
     this.afs.collection('item').doc(this.id).update({
       model : this.model,
       serialNum : this.serialNum,
       location1 : this.location1,
       location2 : this.location2,
-      quantity : this.quantity
-
+      quantity : this.quantity,
+      timestamp : new Date()
     })
+    // this.afs.collection('loc').doc(this.model).update({
+    //   itemmodel : this.model,
+    //   itemserialNum : this.serialNum,
+    //   itemlocation1 : this.location1,
+    //   itemlocation2 : this.location2,
+    //   itemquantity : this.quantity,
+    //   timestamp : new Date()
+    // })
     this.navCtrl.push('StockManagePage',{
       serialNum : this.serialNum,
       model : this.model,

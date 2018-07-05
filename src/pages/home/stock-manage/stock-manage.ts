@@ -128,45 +128,6 @@ openDetail(item){
   })
 }
 
-upDate(){
-  //console.log(this.navCtrl.pop(name));
- console.log("임시버튼");
- if(this.navParams.get('status')){
-   for(let upDate of this.itemArray){
-     if(upDate.serialNum==this.navParams.get('serialNum')){
-         // this.navCtrl.push('ChangeLogPage',{
-         //   changed_name : upDate.name,
-         //   changed_code : upDate.code,
-         //   changed_location : upDate.location,
-         //   changed_quantity : upDate.quantity
-         // })
-         console.log("임시")
-
-         // this.new_item.code= this.navParams.get('code')
-         // this.new_item.name= this.navParams.get('name');
-         // this.new_item.location= this.navParams.get('location');
-         // this.new_item.quantity= this.navParams.get('quantity');
-         // this.fireService.modifyItems(this.new_item  );
-         // this.navCtrl.pop()
-         this.item.model=this.navParams.get('model');
-         this.item.location1=this.navParams.get('location1');
-         this.item.location2=this.navParams.get('location2');
-         this.item.quantity=this.navParams.get('quantity');
-         this.item.serialNum=this.navParams.get('serialNum');
-         this.item.id=this.navParams.get('id');
-         
-         console.log("modify");
-         console.log(this.item.id)
-         this.fireService.modifyItems(this.item);
-         this.navCtrl.pop()
-         // upDate.name=this.navParams.get('name')
-         // upDate.location=this.navParams.get('location')
-         // upDate.quantity=this.navParams.get('quantity')
-     }
-   }
-  }
-}
-  
   
  
 }

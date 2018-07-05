@@ -10,6 +10,8 @@ export class FireService{
   }
 
 
+
+
   LogAdd(RepairLog){
     console.log(RepairLog.id)
     this.afs.collection('RepairItem').doc(`${RepairLog.id}`).collection('repair').add({
@@ -62,7 +64,8 @@ export class FireService{
         location1 : item.location1,
         location2 : item.location2,
         code : item.code,
-        id : doc_id
+        id : doc_id,
+        tiemstamp : new Date()
     })
 
     this.afs.collection("log").add({
@@ -90,7 +93,7 @@ export class FireService{
       location1 : new_item.location1,
       location2 : new_item.location2,
       quantity : new_item.quantity
-
+      
     })
 
   }
