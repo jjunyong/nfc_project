@@ -18,9 +18,8 @@ export class AuthData {
   public user : Observable<firebase.User>
   public userDetails : firebase.User = null;
 
-  constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public platform: Platform,private facebook: Facebook,private googleplus: GooglePlus) 
+  constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public platform: Platform,private facebook: Facebook,private googleplus: GooglePlus)
   {
-
     this.user = this.afAuth.authState;
 
     this.user.subscribe(

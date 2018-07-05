@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { EMAIL_VALIDATOR } from '@angular/forms/src/directives/validators';
+import { AuthData } from '../providers/auth-data';
 
 @Component({
   templateUrl: 'app.html'
@@ -10,9 +13,15 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = 'MainPage';
   pages: Array<{title: string, component: any}>;
+  authUser : any;
 
   constructor(public platform: Platform, public statusBar: StatusBar,
-     public splashScreen: SplashScreen) {
+     public splashScreen: SplashScreen, public afAuth : AngularFireAuth,
+    public auth : AuthData) {
+
+        this.afAuth.authState.subscribe((auth)=>{
+          this.authUser = auth.email
+        })
     
     this.initializeApp();
     this.pages = [

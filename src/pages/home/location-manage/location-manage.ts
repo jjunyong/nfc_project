@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AngularFirestore,  AngularFirestoreCollection } from 'angularfire2/firestore';
+import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 
 
@@ -31,12 +32,17 @@ export class LocationManagePage {
   items : any = [];
   location: string;
   itemgetList : any=[];
+  payload : any;
 
   constructor( public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    public navParams : NavParams
   ){
+
+    this.payload = this.navParams.get('payload')
+    // alert(this.payload)
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //

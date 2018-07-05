@@ -1,11 +1,11 @@
 
 <ion-header>
-    <ion-navbar color="primary">
+    <ion-navbar color="grey-blue">
         <button ion-button menuToggle color="light">
             <ion-icon name="menu"></ion-icon>
         </button>
   
-        <ion-title color="light">Repair</ion-title>
+        <ion-title color="light">정비관리</ion-title>
         <ion-buttons start hideWhen="ios">
             <button ion-button icon-only color="light">
                 <ion-icon name="notifications"></ion-icon>
@@ -19,8 +19,8 @@
     </ion-navbar>
   
   <!--*********** Toolbar with segment ***********-->
-  <ion-toolbar no-border-top color="green">
-       <ion-segment  [(ngModel)]="viewType" color="yellow">
+  <ion-toolbar no-border-top color="grey-blue">
+       <ion-segment  [(ngModel)]="viewType" color="light">
       <ion-segment-button value="Menu">
         Menu
       </ion-segment-button>
@@ -64,7 +64,7 @@
               <p>{{item.description}}</p> 
           </ion-item>
           <ion-fab right bottom>
-            <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+            <button ion-fab color="grey-blue"><ion-icon name="add"></ion-icon></button>
           </ion-fab>
       </ion-list>
       <!-- <ion-grid >

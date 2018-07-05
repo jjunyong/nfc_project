@@ -32,11 +32,13 @@ export class MainPage {
     //   console.log('error attaching ndef listener', err);
     // }).subscribe((event) => {
 
-    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);      alert(this.payload);
-    //   // this.navCtrl.push('LocationManagePage')
+    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
+    //   this.navCtrl.push('LocationManagePage', {
+    //     payload : this.payload
+    //   })
     // });
 
-    console.log(this.authData.isLoggedIn());
+    // console.log(this.authData.isLoggedIn());
   }
 
   googleLogin() {
