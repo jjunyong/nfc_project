@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
 import { FireService } from '../../../providers/FireService';
 
@@ -28,13 +28,17 @@ export class AddlogPage {
  
 
   constructor(public afs:AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
-  public fireService : FireService) {
+  public fireService : FireService, private viewCtrl: ViewController) {
 
     this.id = this.navParams.get('id');
 }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddrepairPage');
+  }
+
+  cancel(){
+    this.viewCtrl.dismiss()
   }
 
   save(){

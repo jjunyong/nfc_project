@@ -36,12 +36,9 @@ export class MainPage {
     //   // this.navCtrl.push('LocationManagePage')
     // });
 
-<<<<<<< Updated upstream:src/pages/main/main.ts
     console.log(this.authData.isLoggedIn());
   }
 
-=======
->>>>>>> Stashed changes:src/pages/testhomepage/testhomepage.ts
   googleLogin() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
