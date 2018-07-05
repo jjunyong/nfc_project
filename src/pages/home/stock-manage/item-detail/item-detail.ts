@@ -68,8 +68,6 @@ export class ItemDetailPage {
       id : this.id,
       status : true
     })
-
-
   }
 
 }

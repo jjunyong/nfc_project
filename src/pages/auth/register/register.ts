@@ -58,7 +58,7 @@ export class RegisterPage {
           this.registerForm.value.phone)
       .then(() => {
           loadingPopup.dismiss();
-          this.navCtrl.setRoot('TesthomepagePage');
+          this.navCtrl.setRoot('MainPage');
       }, (error) => { 
          var errorMessage: string = error.message;
           loadingPopup.dismiss();
