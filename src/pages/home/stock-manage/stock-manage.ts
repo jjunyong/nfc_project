@@ -80,8 +80,8 @@ getItems(searchbar) {
     return;
   }
   this.itemList = this.itemList.filter((v) => {
-    if(v.name && q) {
-      if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+    if(v.model && q) {
+      if (v.model.toLowerCase().indexOf(q.toLowerCase()) > -1) {
         return true;
       }
       return false;
