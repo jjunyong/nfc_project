@@ -9,6 +9,7 @@ class RepairLog{
   writer: string
   description: string
   id: string
+  timestamp: Date
 }
 
 @IonicPage()

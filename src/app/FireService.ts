@@ -16,7 +16,7 @@ export class FireService{
         title : RepairLog.title,
         writer: RepairLog.writer,
         description: RepairLog.description,
-        timestamp : new Date()
+        timestamp: new Date()
 
     })
 

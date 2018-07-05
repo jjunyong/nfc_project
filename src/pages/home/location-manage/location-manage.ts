@@ -29,6 +29,8 @@ export class LocationManagePage {
   itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
+  location: string;
+  itemgetList : any=[];
 
   constructor( public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -61,7 +63,9 @@ export class LocationManagePage {
     this.itemList = this.loadedItemList;
   }
   
-   goTo(table: string) {
+
+
+  goTo1(table1: string) {
 
     this.initializeItems();
 
@@ -69,8 +73,8 @@ export class LocationManagePage {
       const itemRef = firestore.collection("item");
     
       var lists : Array <any>=[];
-     
-      itemRef.where("location", '==' , table)
+
+      itemRef.where("location1", '==' , table1)
       .get()
       .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
@@ -80,9 +84,22 @@ export class LocationManagePage {
   
       this.itemList = lists;
 
-      console.log(this.itemList);
-      
     }
+
+
+    goTo2(table2: string) {
+
+  
+      // this.itemList = this.itemList.filter(this.itemList.location2 => this.itemList.location2 === table2)
+      this.itemList = this.itemList.filter((eachItem)=>{
+        if(eachItem.location2===table2)
+          return true;
+        else  
+          return false;
+      })
+    
+    }
+  
 
     openDetail(item){
       this.navCtrl.push('ItemDetailPage',{

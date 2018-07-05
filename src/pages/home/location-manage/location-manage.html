@@ -11,11 +11,21 @@
         <ion-label color="primary">
           위치별 검색</ion-label>
         
-        <ion-select (ionChange)="goTo(location)" [(ngModel)]="location">
+        <ion-select (ionChange)="goTo1(location1)" [(ngModel)]="location1">
           <ion-option value="A">A</ion-option>
           <ion-option value="B">B</ion-option>
           <ion-option value="C">C</ion-option>
+          <ion-option value="D">D</ion-option>
+          <ion-option value="E">E</ion-option>
+          <ion-option value="F">F</ion-option>
+        </ion-select>
 
+       <ion-select (ionChange)="goTo2(location2)" [(ngModel)]="location2">
+          <ion-option value="1">1</ion-option>
+          <ion-option value="2">2</ion-option>
+          <ion-option value="3">3</ion-option>
+          <ion-option value="4">4</ion-option>
+          <ion-option value="5">5</ion-option>
         </ion-select>
      
       </ion-item>
@@ -25,8 +35,8 @@
       <!-- <ion-avatar item-start>
         <img [src]="contact.img">
       </ion-avatar>   -->
-      <h2> <strong>{{ item.name }}</strong> </h2>
-      <h3> Location : {{ item.location }}</h3>
+      <h2> <strong>{{ item.model }}</strong> </h2>
+      <h3> Location : {{ item.location1 }}-{{item.location2}}</h3>
       <h3> Quantity : {{ item.quantity }}</h3>
     </ion-item>   
   </ion-list>
