@@ -15,6 +15,7 @@ import { AngularFirestore } from 'angularfire2/firestore'
   templateUrl: 'item-detail.html',
 })
 
+
 export class ItemDetailPage {
   showToolbar:boolean = false;
   transition:boolean = false;
@@ -26,18 +27,41 @@ export class ItemDetailPage {
   quantity:any;
   id : string;
 
+  public pre_serialNum:any;
+  public pre_model :any;
+  public pre_location1 : any;
+  public pre_location2 : any;
+  public pre_quantity : any;
+  public pre_id: any;
+  public changed_quantity : any;
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef,public afs : AngularFirestore) {
-
       this.serialNum = this.navParams.get('serialNum');
       this.model = this.navParams.get('model');
       this.location1 = this.navParams.get('location1');
       this.location2 = this.navParams.get('location2');
       this.quantity = this.navParams.get('quantity');
       this.id=this.navParams.get('id');
+      //console.log("done")
+      this.pre_quantity=this.quantity
+      this.pre_id=this.id
+      this.pre_location1=this.location1
+      this.pre_location2=this.location2
+      this.pre_model=this.model
+      this.pre_serialNum=this.serialNum
+
+     // console.log(this.pre_quantity)
+
+      
+      
   }
 
+
+
   ionViewDidLoad() {
+    
     console.log('ionViewDidLoad ItemDetailPage');
   }
 
@@ -59,6 +83,10 @@ export class ItemDetailPage {
   }
 
   confirm(){
+    console.log("testing")
+    console.log(this.pre_quantity, this.quantity)
+    console.log("testing end")
+
     this.afs.collection('item').doc(this.id).update({
       model : this.model,
       serialNum : this.serialNum,
@@ -67,16 +95,48 @@ export class ItemDetailPage {
       quantity : this.quantity,
       timestamp : new Date()
     })
+
+    this.changed_quantity=this.quantity-this.pre_quantity
+    if((this.pre_location1!=this.location1)&&(this.pre_location2!=this.location2)){
+      this.afs.collection("location_changed").add({
+        model : this.model,
+        serialNum : this.serialNum,
+        type : "location_changed",
+        quantity : this.quantity,
+        location1 : this.location1, 
+        location2 : this.location2,
+        timestamp : new Date(),
+        import_quantity : this.changed_quantity
+      })}
     
-      this.afs.collection("log").add({
-        itemModel : this.model,
-        itemSerialNum : this.serialNum,
-        type : "modified",
-        itemQuantity : this.quantity,
-        itemLocation1 : this.location1, 
-        itemLocation2 : this.location2,
-        timestamp : new Date()
+
+
+    if(this.changed_quantity>0){
+    this.afs.collection("import").add({
+      model : this.model,
+      serialNum : this.serialNum,
+      type : "import",
+      quantity : this.quantity,
+      location1 : this.location1, 
+      location2 : this.location2,
+      timestamp : new Date(),
+      import_quantity : this.changed_quantity
+
+    })}
+    else{
+    this.afs.collection("export").add({
+        model : this.model,
+        serialNum : this.serialNum,
+        type : "export",
+        quantity : this.quantity,
+        location1 : this.location1, 
+        location2 : this.location2,
+        timestamp : new Date(),
+        export_quantity : this.changed_quantity
     })
+  }
+
+    
     
     this.navCtrl.push('StockManagePage',{
       serialNum : this.serialNum,

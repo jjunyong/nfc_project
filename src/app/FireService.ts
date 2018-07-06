@@ -59,19 +59,39 @@ export class FireService{
     const doc_id = this.afs.createId();
 
     this.afs.collection('item').doc(doc_id).set({
-        name : item.name,
+        model : item.model,
         quantity : item.quantity,
         location1 : item.location1,
         location2 : item.location2,
-        code : item.code,
+        serialNum : item.serialNum,
         id : doc_id,
         tiemstamp : new Date()
     })
 
     this.afs.collection("log").add({
-        itemName : item.name,
-        code : item.code,
+        model : item.model,
+        serialNum : item.serialNum,
         type : "add",
+        quantity : item.quantity,
+        location1 : item.location1, 
+        location2 : item.location2,
+        timestamp : new Date()
+    })
+
+    this.afs.collection("import").add({
+      model : item.model,
+      serialNum : item.serialNum,
+      type : "import",
+      quantity : item.quantity,
+      location1 : item.location1, 
+      location2 : item.location2,
+      timestamp : new Date()
+    })
+
+    this.afs.collection("export").add({
+        model : item.model,
+        serialNum : item.serialNum,
+        type : "export",
         quantity : item.quantity,
         location1 : item.location1, 
         location2 : item.location2,
