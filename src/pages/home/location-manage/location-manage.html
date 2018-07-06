@@ -20,7 +20,7 @@
           <ion-option value="F">F</ion-option>
         </ion-select>
 
-       <ion-select (ionChange)="goTo2(location2)" [(ngModel)]="location2">
+       <ion-select (ionChange)="goTo2(location2)" *ngIf="location1" [(ngModel)]="location2">
           <ion-option value="1">1</ion-option>
           <ion-option value="2">2</ion-option>
           <ion-option value="3">3</ion-option>

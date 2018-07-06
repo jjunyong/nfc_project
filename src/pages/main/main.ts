@@ -37,10 +37,7 @@ export class MainPage {
     //     payload : this.payload
     //   })
     // });
-
-    // console.log(this.authData.isLoggedIn());
   }
-
   googleLogin() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }

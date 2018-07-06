@@ -73,11 +73,15 @@
       </ion-card-header>
   
       <ion-card-content>
+          <ion-item>
+              <ion-label>정비 종료</ion-label>
+              <ion-toggle checked="false" [(ngModel)]="fin"></ion-toggle>
+            </ion-item>
             <ion-item>
                     <ion-label>정비 시작일: </ion-label>
                     <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
                 </ion-item>
-                <ion-item>
+                <ion-item *ngIf="fin">
                     <ion-label>정비 종료일: </ion-label>
                       <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
                 </ion-item>

@@ -44,6 +44,8 @@ export class LocationManagePage {
     this.payload = this.navParams.get('payload')
     // alert(this.payload)
 
+
+
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
       content: '',
@@ -73,6 +75,7 @@ export class LocationManagePage {
 
   goTo1(table1: string) {
 
+ 
     this.initializeItems();
 
       let firestore = firebase.firestore();
