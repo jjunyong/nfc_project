@@ -11,7 +11,6 @@ export class FireService{
 
 
 
-
   LogAdd(RepairLog){
     console.log(RepairLog.id)
     this.afs.collection('RepairItem').doc(`${RepairLog.id}`).collection('repair').add({
@@ -35,7 +34,8 @@ export class FireService{
         serialNum : RepairItem.serialNum,
         model : RepairItem.model,
         repairman : RepairItem.repairman,
-        id : RepairItem.id
+        id : RepairItem.id,
+        Image: "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/login.jpg?alt=media&token=86151782-4372-4ec3-84e7-c2ef76b4a663"
     })
 
     this.afs.collection("repairlog").doc(`${RepairItem.id}`).set({

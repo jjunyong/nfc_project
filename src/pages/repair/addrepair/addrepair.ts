@@ -9,6 +9,7 @@ class RepairItem{
   model: string;
   repairman: string;
   id : string;
+  Image: string;
 }
 
 

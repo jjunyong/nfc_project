@@ -46,6 +46,7 @@ export class MainPage {
     //     }
     //   })
 
+<<<<<<< Updated upstream
       // authData.isLoggedIn
       
       // if (authData.isLoggedIn()) {
@@ -57,6 +58,19 @@ export class MainPage {
       // else{
       //   alert("로그인이 필요합니다.");
       // }
+=======
+    //   // authData.isLoggedIn
+      
+    //   // if (authData.isLoggedIn()) {
+    //   //   alert("로그인 되었습니다")
+    //   //   this.navCtrl.push('LocationManagePage', {
+    //   //     payload: this.payload
+    //   //   })
+    //   // }
+    //   // else{
+    //   //   alert("로그인이 필요합니다.");
+    //   // }
+>>>>>>> Stashed changes
 
     // });
 

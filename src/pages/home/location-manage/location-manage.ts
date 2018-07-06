@@ -29,13 +29,19 @@ export class LocationManagePage {
   itemList : any=[]; 
   itemArray : any = [];
   loadedItemList:  any=[]; 
+
+  itemList1 : any=[];
+  itemList2 : any=[]; 
+  itemArray2 : any = [];
+
+
   items : any = [];
+  location: string;
   itemgetList : any=[];
   payload : any;
 
-  parsed_payload : any = [];
-  location1:string;
-  location2:string;
+  location1: string;
+  location2: string;
 
   constructor( public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -45,10 +51,6 @@ export class LocationManagePage {
   ){
 
     this.payload = this.navParams.get('payload')
-    this.parsed_payload = this.payload.split("-");
-    this.location1 = this.parsed_payload[0];
-    this.location2 = this.parsed_payload[1];
-    // alert(this.parsed_payload[0]+'?'+this.parsed_payload[1])
     // alert(this.payload)
 
 
@@ -56,6 +58,7 @@ export class LocationManagePage {
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
       content: '',
+      duration: 1000
     });
     loadingPopup.present();
 
@@ -72,44 +75,40 @@ export class LocationManagePage {
 
     console.log(this.loadedItemList)
 
+  
   }
-  
-  initializeItems(){
-    this.itemList = this.loadedItemList;
-  }
-  
+
+intersect() {
+    var setA = new Set(this.itemList1);
+    var setB = new Set(this.itemList2);
+    this.itemList = new Set([setA].filter(x => setB.has(x)));
+    console.log(this.itemList.location1);
+    return this.itemList;
+
+}
 
 
-  goTo1(table1: string) {
+  goTo1(location1: string) {
 
- 
-    this.initializeItems();
-
-      let firestore = firebase.firestore();
-      const itemRef = firestore.collection("item");
-    
-      var lists : Array <any>=[];
-
-      itemRef.where("location1", '==' , table1)
-      .get()
-      .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            lists.push(doc.data());    
-          })
-      });
-  
-      this.itemList = lists;
+    this.itemList = this.itemList.filter((eachItem)=>{
+      if(eachItem.location1===location1){
+        this.itemList1 = this.itemList;
+        return true;
+      }
+      else  
+        return false;
+    })
 
     }
 
 
-    goTo2(table2: string) {
+    goTo2(location2: string) {
 
-  
-      // this.itemList = this.itemList.filter(this.itemList.location2 => this.itemList.location2 === table2)
-      this.itemList = this.itemList.filter((eachItem)=>{
-        if(eachItem.location2===table2)
+      this.itemList = this.loadedItemList.filter((eachItem)=>{
+        if(eachItem.location2===location2){
+          this.itemList2 = this.itemList;
           return true;
+        }
         else  
           return false;
       })
