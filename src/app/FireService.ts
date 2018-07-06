@@ -76,7 +76,7 @@ export class FireService{
         location1 : item.location1, 
         location2 : item.location2,
         timestamp : new Date()
-      })
+    })
     
     let toast = this.toast.create({
             message: "succesfully added",
@@ -86,17 +86,7 @@ export class FireService{
     toast.present();
   }
 
-  modifyItems(new_item){
-    this.afs.collection('item').doc(new_item.id).update({
-      name : new_item.name,
-      code : new_item.code,
-      location1 : new_item.location1,
-      location2 : new_item.location2,
-      quantity : new_item.quantity
-      
-    })
 
-  }
 
   getItems(){
     return this.afs.collection('item').valueChanges();

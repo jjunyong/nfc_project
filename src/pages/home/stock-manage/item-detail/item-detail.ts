@@ -67,14 +67,17 @@ export class ItemDetailPage {
       quantity : this.quantity,
       timestamp : new Date()
     })
-    // this.afs.collection('loc').doc(this.model).update({
-    //   itemmodel : this.model,
-    //   itemserialNum : this.serialNum,
-    //   itemlocation1 : this.location1,
-    //   itemlocation2 : this.location2,
-    //   itemquantity : this.quantity,
-    //   timestamp : new Date()
-    // })
+    
+      this.afs.collection("log").add({
+        itemModel : this.model,
+        itemSerialNum : this.serialNum,
+        type : "modified",
+        itemQuantity : this.quantity,
+        itemLocation1 : this.location1, 
+        itemLocation2 : this.location2,
+        timestamp : new Date()
+    })
+    
     this.navCtrl.push('StockManagePage',{
       serialNum : this.serialNum,
       model : this.model,

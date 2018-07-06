@@ -31,9 +31,10 @@
 </ion-card>
 <ion-list>
     <ion-item *ngFor="let item of itemList" (click)="openDetail(item)">
-      <h2> <strong>{{ item.model }}</strong> </h2>
-      <h3> Location : {{ item.location1 }}-{{ item.location2 }}</h3>
-      <h3> Quantity : {{ item.quantity }}</h3>
+      <h2> <strong>{{ item.itemModel }}</strong> </h2>
+      <h3> Location : {{ item.itemLocation1 }}-{{ item.itemLocation2 }}</h3>
+      <h3> Quantity : {{ item.itemQuantity }}</h3>
+      <h3> Type : {{item.type}}</h3>
     </ion-item>   
 </ion-list>
 
