@@ -30,9 +30,12 @@ export class LocationManagePage {
   itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
-  location: string;
   itemgetList : any=[];
   payload : any;
+
+  parsed_payload : any = [];
+  location1:string;
+  location2:string;
 
   constructor( public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -42,6 +45,10 @@ export class LocationManagePage {
   ){
 
     this.payload = this.navParams.get('payload')
+    this.parsed_payload = this.payload.split("-");
+    this.location1 = this.parsed_payload[0];
+    this.location2 = this.parsed_payload[1];
+    // alert(this.parsed_payload[0]+'?'+this.parsed_payload[1])
     // alert(this.payload)
 
 
