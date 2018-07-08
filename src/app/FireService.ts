@@ -65,7 +65,8 @@ export class FireService{
         location2 : item.location2,
         serialNum : item.serialNum,
         id : doc_id,
-        tiemstamp : new Date()
+        timestamp : new Date(),
+
     })
 
     this.afs.collection("log").add({
@@ -85,7 +86,7 @@ export class FireService{
       quantity : item.quantity,
       location1 : item.location1, 
       location2 : item.location2,
-      timestamp : new Date()
+      timestamp : new Date(), 
     })
 
     this.afs.collection("export").add({
@@ -96,6 +97,7 @@ export class FireService{
         location1 : item.location1, 
         location2 : item.location2,
         timestamp : new Date()
+
     })
     
     let toast = this.toast.create({

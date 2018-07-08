@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable'
 import { map } from 'rxjs/operators'
 import { ItemDetailPage } from '../stock-manage/item-detail/item-detail';
 import { LoginPage } from '../../auth/login/login';
+import { timestamp } from 'rxjs/operators/timestamp';
 /**
  * Generated class for the ChangeLogPage page.
  *
@@ -31,28 +32,31 @@ export class ChangeLogPage {
 
   startDate = new Date().toISOString();
   finDate = new Date().toISOString();
+
   public itemsCollection: AngularFirestoreCollection<Log>; 
+ // public items_Imported_Collection : AngularFirestoreCollection<import>;
 
 
   itemList : any=[]; 
   itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
+  itemTemp : any = [];
+  changed_type : any;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private afs: AngularFirestore,
     public fireService : FireService) {
+      this.itemsCollection = this.afs.collection<Log>('log');
+      this.items= this.itemsCollection.valueChanges();
+      
+      this.items.subscribe((item)=>{
+        this.itemArray = item;
+        this.itemList = this.itemArray;
+        this.loadedItemList = this.itemArray;
+        //loadingPopup.dismiss();
+      })
     
-      this.itemsCollection = afs.collection<Log>('log');
-    this.items= this.itemsCollection.valueChanges();
-    
-    this.items.subscribe((item)=>{
-      this.itemArray = item;
-      this.itemList = this.itemArray;
-      this.loadedItemList = this.itemArray;
-      //loadingPopup.dismiss();
-    })
-
   }
 
   ionViewDidLoad() {
@@ -62,8 +66,53 @@ export class ChangeLogPage {
   SerchTime(){
     console.log(this.startDate);
     console.log(this.finDate);
-    console.log(this.itemArray);
+    //console.log(this.itemArray);
+    console.log(this.changed_type);
+    //console.log("serious")
+    //console.log(this.itemList.length);
+    if(this.changed_type=="import"){
+      
+    this.itemsCollection = this.afs.collection<Log>('import', ref => ref.where('quantity', '<', '200'));
+     //this.itemsCollection=this.afs.collection<Log>('import');
+
+      this.items= this.itemsCollection.valueChanges();
+        
+        this.items.subscribe((item)=>{
+          console.log(this.items)
+          this.itemArray = item;
+          this.itemList = this.itemArray;
+          this.loadedItemList = this.itemArray;
+          //loadingPopup.dismiss();
+        })
+        //console.log("length", this.itemArray.length)
+    }
+      if(this.changed_type=="export"){
+        this.itemsCollection = this.afs.collection<Log>('export')
+        this.items= this.itemsCollection.valueChanges();
+        this.items.subscribe((item)=>{
+          this.itemArray = item;
+          this.itemList = this.itemArray;
+          this.loadedItemList = this.itemArray;
+          //loadingPopup.dismiss();
+        })
+      }
+
+      if(this.changed_type=="location_changed"){
+        this.itemsCollection = this.afs.collection<Log>('location_changed');
+        this.items= this.itemsCollection.valueChanges();
+       
+        this.items.subscribe((item)=>{
+          this.itemArray = item;
+          this.itemList = this.itemArray;
+          this.loadedItemList = this.itemArray;
+          //loadingPopup.dismiss();
+        })
+      }
+
+
   }
+
+
 
   openDetail(item){
     this.navCtrl.push('ItemDetailPage',{

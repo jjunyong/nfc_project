@@ -95,9 +95,10 @@ export class ItemDetailPage {
       quantity : this.quantity,
       timestamp : new Date()
     })
-
+    
     this.changed_quantity=this.quantity-this.pre_quantity
-    if((this.pre_location1!=this.location1)&&(this.pre_location2!=this.location2)){
+    if((this.pre_location1!=this.location1)||(this.pre_location2!=this.location2)){
+      const doc_id = this.afs.createId();
       this.afs.collection("location_changed").add({
         model : this.model,
         serialNum : this.serialNum,
@@ -106,12 +107,29 @@ export class ItemDetailPage {
         location1 : this.location1, 
         location2 : this.location2,
         timestamp : new Date(),
-        import_quantity : this.changed_quantity
-      })}
+        import_quantity : this.changed_quantity,
+        id : doc_id
+      })
+
+      this.afs.collection("log").add({
+        model : this.model,
+        serialNum : this.serialNum,
+        type : "location_changed",
+        quantity : this.quantity,
+        location1 : this.location1, 
+        location2 : this.location2,
+        timestamp : new Date(),
+        import_quantity : this.changed_quantity,
+        id : doc_id
+      })
+    
+    }
+      
     
 
 
     if(this.changed_quantity>0){
+      const doc_id = this.afs.createId();
     this.afs.collection("import").add({
       model : this.model,
       serialNum : this.serialNum,
@@ -120,10 +138,26 @@ export class ItemDetailPage {
       location1 : this.location1, 
       location2 : this.location2,
       timestamp : new Date(),
-      import_quantity : this.changed_quantity
+      import_quantity : this.changed_quantity,
+      id : doc_id
 
-    })}
+    })
+    this.afs.collection("log").add({
+      model : this.model,
+      serialNum : this.serialNum,
+      type : "import",
+      quantity : this.quantity,
+      location1 : this.location1, 
+      location2 : this.location2,
+      timestamp : new Date(),
+      import_quantity : this.changed_quantity,
+      id : doc_id
+    })
+  
+  
+  }
     else{
+      const doc_id = this.afs.createId();
     this.afs.collection("export").add({
         model : this.model,
         serialNum : this.serialNum,
@@ -132,7 +166,19 @@ export class ItemDetailPage {
         location1 : this.location1, 
         location2 : this.location2,
         timestamp : new Date(),
-        export_quantity : this.changed_quantity
+        export_quantity : this.changed_quantity,
+        id : doc_id
+    })
+    this.afs.collection("log").add({
+      model : this.model,
+      serialNum : this.serialNum,
+      type : "export",
+      quantity : this.quantity,
+      location1 : this.location1, 
+      location2 : this.location2,
+      timestamp : new Date(),
+      import_quantity : this.changed_quantity,
+      id : doc_id
     })
   }
 
