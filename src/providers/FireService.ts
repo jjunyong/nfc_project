@@ -27,16 +27,17 @@ export class FireService{
   }
 
   RepairAdd(RepairItem){
-    this.afs.collection('RepairItem').doc(`${RepairItem.code}`).set({
-        name : RepairItem.name,
+    this.afs.collection('RepairItem').doc(`${RepairItem.id}`).set({
+        id : RepairItem.id,
         model : RepairItem.model,
         repairman : RepairItem.repairman,
-        code : RepairItem.code
+        serialNum : RepairItem.serialNum
+ 
     })
 
-    this.afs.collection("repairlog").doc(`${RepairItem.code}`).set({
-        itemName : RepairItem.name,
-        code : RepairItem.code,
+    this.afs.collection("repairlog").doc(`${RepairItem.id}`).set({
+        serialNum : RepairItem.serialNum,
+        id : RepairItem.id,
         type : "add",
         model : RepairItem.model,
         repairman : RepairItem.repairman, 
