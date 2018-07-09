@@ -10,6 +10,7 @@ interface RepairItem{
   serialNum: string;
   repairman : string;
   id : string;
+  isToggled : boolean;
 }
  
 @IonicPage()
@@ -119,7 +120,8 @@ manage(){
         model : item.model,
         id: item.id,
         serialNum: item.serialNum,
-        repairman: item.repairman
+        repairman: item.repairman,
+        isToggled: item.isToggled
     })
   }
 }

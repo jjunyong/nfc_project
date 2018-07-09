@@ -5,8 +5,9 @@ import { RepairitemdetailPageModule } from './repairitemdetail.module';
 
 
 class RepairItem{
-  finDate: string;
+  finDate: Date;
   id: string;
+  isToggled: boolean;
 }
 
 @IonicPage()
@@ -35,7 +36,9 @@ export class RepairitemdetailPage {
   repairman:string;
 
   startDate = new Date().toISOString();
-  finDate : string;
+  finDate : string
+
+  public isToggled: boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -45,6 +48,10 @@ export class RepairitemdetailPage {
       this.serialNum = this.navParams.get('serialNum');
       this.model = this.navParams.get('model');
       this.repairman = this.navParams.get('repairman');
+      this.isToggled = this.navParams.get('isToggled');
+
+      this.isToggled = false;
+
   }
 
   ionViewDidLoad() {
@@ -77,9 +84,13 @@ export class RepairitemdetailPage {
   }
 
   repairfin(){
-    this.RepairItem.finDate = new Date().toISOString();
-    this.fireService.RepairAdd(this.RepairItem)
-    this.navCtrl.pop()
+
+    this.isToggled = !this.isToggled
+    this.RepairItem.isToggled = this.isToggled
+    this.RepairItem.finDate = new Date()
+    this.finDate = this.RepairItem.finDate.toISOString();
+    this.RepairItem.id = this.id
+    this.fireService.finAdd(this.RepairItem)
   }
 
   modify(){

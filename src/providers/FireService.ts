@@ -10,6 +10,15 @@ export class FireService{
   }
 
 
+  finAdd(RepairItem){
+    this.afs.collection('RepairItem').doc(`${RepairItem.id}`).update({
+      finDate : RepairItem.finDate,
+      isToggled : RepairItem.isToggled
+  })
+
+}
+
+
   LogAdd(RepairLog){
     console.log(RepairLog.code)
     this.afs.collection('RepairItem').doc(`${RepairLog.code}`).collection('repair').add({
@@ -33,7 +42,8 @@ export class FireService{
         repairman : RepairItem.repairman,
         serialNum : RepairItem.serialNum,
         startDate : new Date(),
-        finDate : RepairItem.finDate
+        finDate : RepairItem.finDate,
+        isToggled: false
     })
 
     let toast = this.toast.create({
