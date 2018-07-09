@@ -69,37 +69,7 @@ export class FireService{
 
     })
 
-    this.afs.collection("log").add({
-        model : item.model,
-        serialNum : item.serialNum,
-        type : "add",
-        quantity : item.quantity,
-        location1 : item.location1, 
-        location2 : item.location2,
-        timestamp : new Date()
-    })
 
-    this.afs.collection("import").add({
-      model : item.model,
-      serialNum : item.serialNum,
-      type : "import",
-      quantity : item.quantity,
-      location1 : item.location1, 
-      location2 : item.location2,
-      timestamp : new Date(), 
-    })
-
-    this.afs.collection("export").add({
-        model : item.model,
-        serialNum : item.serialNum,
-        type : "export",
-        quantity : item.quantity,
-        location1 : item.location1, 
-        location2 : item.location2,
-        timestamp : new Date()
-
-    })
-    
     let toast = this.toast.create({
             message: "succesfully added",
             duration: 2000,

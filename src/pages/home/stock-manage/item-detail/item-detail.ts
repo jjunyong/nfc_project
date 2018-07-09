@@ -83,10 +83,6 @@ export class ItemDetailPage {
   }
 
   confirm(){
-    console.log("testing")
-    console.log(this.pre_quantity, this.quantity)
-    console.log("testing end")
-
     this.afs.collection('item').doc(this.id).update({
       model : this.model,
       serialNum : this.serialNum,
@@ -97,94 +93,51 @@ export class ItemDetailPage {
     })
     
     this.changed_quantity=this.quantity-this.pre_quantity
+    
+    console.log(this.changed_quantity)
     if((this.pre_location1!=this.location1)||(this.pre_location2!=this.location2)){
       const doc_id = this.afs.createId();
-      this.afs.collection("location_changed").add({
-        model : this.model,
-        serialNum : this.serialNum,
-        type : "location_changed",
-        quantity : this.quantity,
-        location1 : this.location1, 
-        location2 : this.location2,
-        timestamp : new Date(),
-        import_quantity : this.changed_quantity,
-        id : doc_id
-      })
-
       this.afs.collection("log").add({
-        model : this.model,
-        serialNum : this.serialNum,
-        type : "location_changed",
-        quantity : this.quantity,
-        location1 : this.location1, 
-        location2 : this.location2,
-        timestamp : new Date(),
-        import_quantity : this.changed_quantity,
-        id : doc_id
+          model : this.model,
+          serialNum : this.serialNum,
+          type : "location_changed",
+          quantity : this.quantity,
+          location1 : this.location1, 
+          location2 : this.location2,
+          timestamp : new Date(),
+          changed_quantity : this.changed_quantity,
+        
       })
-    
     }
       
+      if(this.changed_quantity>0){
+        this.afs.collection("log").add({
+          model : this.model,
+          serialNum : this.serialNum,
+          type : "import",
+          quantity : this.quantity,
+          location1 : this.location1, 
+          location2 : this.location2,
+          timestamp : new Date(),
+          changed_quantity : this.changed_quantity,
+          
+        })
+      }
     
-
-
-    if(this.changed_quantity>0){
-      const doc_id = this.afs.createId();
-    this.afs.collection("import").add({
-      model : this.model,
-      serialNum : this.serialNum,
-      type : "import",
-      quantity : this.quantity,
-      location1 : this.location1, 
-      location2 : this.location2,
-      timestamp : new Date(),
-      import_quantity : this.changed_quantity,
-      id : doc_id
-
-    })
-    this.afs.collection("log").add({
-      model : this.model,
-      serialNum : this.serialNum,
-      type : "import",
-      quantity : this.quantity,
-      location1 : this.location1, 
-      location2 : this.location2,
-      timestamp : new Date(),
-      import_quantity : this.changed_quantity,
-      id : doc_id
-    })
-  
-  
-  }
-    else{
-      const doc_id = this.afs.createId();
-    this.afs.collection("export").add({
-        model : this.model,
-        serialNum : this.serialNum,
-        type : "export",
-        quantity : this.quantity,
-        location1 : this.location1, 
-        location2 : this.location2,
-        timestamp : new Date(),
-        export_quantity : this.changed_quantity,
-        id : doc_id
-    })
-    this.afs.collection("log").add({
-      model : this.model,
-      serialNum : this.serialNum,
-      type : "export",
-      quantity : this.quantity,
-      location1 : this.location1, 
-      location2 : this.location2,
-      timestamp : new Date(),
-      import_quantity : this.changed_quantity,
-      id : doc_id
-    })
-  }
-
-    
-    
-    this.navCtrl.push('StockManagePage',{
+      if(this.changed_quantity<0){
+        this.afs.collection("log").add({
+          model : this.model,
+          serialNum : this.serialNum,
+          type : "export",
+          quantity : this.quantity,
+          location1 : this.location1, 
+          location2 : this.location2,
+          timestamp : new Date(),
+          changed_quantity : this.changed_quantity,
+         
+        })
+      }   
+      this.navCtrl.push('StockManagePage',{
       serialNum : this.serialNum,
       model : this.model,
       location1 : this.location1,
@@ -194,5 +147,5 @@ export class ItemDetailPage {
       status : true
     })
   }
-
 }
+

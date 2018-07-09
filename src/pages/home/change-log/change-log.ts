@@ -34,6 +34,7 @@ export class ChangeLogPage {
   finDate = new Date().toISOString();
 
   public itemsCollection: AngularFirestoreCollection<Log>; 
+  public itemsCollection_2 : AngularFirestoreCollection<Log>;
  // public items_Imported_Collection : AngularFirestoreCollection<import>;
 
 
@@ -47,16 +48,7 @@ export class ChangeLogPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private afs: AngularFirestore,
     public fireService : FireService) {
-      this.itemsCollection = this.afs.collection<Log>('log');
-      this.items= this.itemsCollection.valueChanges();
-      
-      this.items.subscribe((item)=>{
-        this.itemArray = item;
-        this.itemList = this.itemArray;
-        this.loadedItemList = this.itemArray;
-        //loadingPopup.dismiss();
-      })
-    
+     
   }
 
   ionViewDidLoad() {
@@ -70,43 +62,44 @@ export class ChangeLogPage {
     console.log(this.changed_type);
     //console.log("serious")
     //console.log(this.itemList.length);
+    this.startDate=new Date().toISOString();
+    this.finDate=new Date().toISOString();
     if(this.changed_type=="import"){
       
-    this.itemsCollection = this.afs.collection<Log>('import', ref => ref.where('quantity', '<', '200'));
-     //this.itemsCollection=this.afs.collection<Log>('import');
-
-      this.items= this.itemsCollection.valueChanges();
-        
-        this.items.subscribe((item)=>{
+    this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import'));
+    
+    this.items= this.itemsCollection.valueChanges();
+    this.items.subscribe((item)=>{
           console.log(this.items)
           this.itemArray = item;
           this.itemList = this.itemArray;
           this.loadedItemList = this.itemArray;
           //loadingPopup.dismiss();
-        })
-        //console.log("length", this.itemArray.length)
+    })
     }
       if(this.changed_type=="export"){
-        this.itemsCollection = this.afs.collection<Log>('export')
+        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export'));
+  
         this.items= this.itemsCollection.valueChanges();
         this.items.subscribe((item)=>{
-          this.itemArray = item;
-          this.itemList = this.itemArray;
-          this.loadedItemList = this.itemArray;
-          //loadingPopup.dismiss();
+              console.log(this.items)
+              this.itemArray = item;
+              this.itemList = this.itemArray;
+              this.loadedItemList = this.itemArray;
+              //loadingPopup.dismiss();
         })
       }
 
       if(this.changed_type=="location_changed"){
-        this.itemsCollection = this.afs.collection<Log>('location_changed');
-        this.items= this.itemsCollection.valueChanges();
-       
-        this.items.subscribe((item)=>{
+        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed'));
+    this.items= this.itemsCollection.valueChanges();
+    this.items.subscribe((item)=>{
+          console.log(this.items)
           this.itemArray = item;
           this.itemList = this.itemArray;
           this.loadedItemList = this.itemArray;
           //loadingPopup.dismiss();
-        })
+    })
       }
 
 
