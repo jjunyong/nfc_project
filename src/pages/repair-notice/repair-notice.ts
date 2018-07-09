@@ -28,3 +28,4 @@ constructor(public navCtrl: NavController, public afs:AngularFirestore, public n
   }
 
 }
+
