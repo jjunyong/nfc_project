@@ -31,19 +31,11 @@ export class FireService{
         id : RepairItem.id,
         model : RepairItem.model,
         repairman : RepairItem.repairman,
-        serialNum : RepairItem.serialNum
- 
+        serialNum : RepairItem.serialNum,
+        startDate : new Date(),
+        finDate : RepairItem.finDate
     })
 
-    this.afs.collection("repairlog").doc(`${RepairItem.id}`).set({
-        serialNum : RepairItem.serialNum,
-        id : RepairItem.id,
-        type : "add",
-        model : RepairItem.model,
-        repairman : RepairItem.repairman, 
-        timestamp : new Date()
-      })
-    
     let toast = this.toast.create({
             message: "succesfully added",
             duration: 2000,

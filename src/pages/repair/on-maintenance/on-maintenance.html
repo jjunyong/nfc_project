@@ -10,14 +10,13 @@
 <ion-content padding>
       <ion-row>
         <ion-col col-6 col-md-4 col-xl-3  *ngFor="let item of itemList" >
-            <ion-card>
+            <ion-card (click)="openDetail(item)">
                 <img src="{{item.Image}}"/>
                 <ion-card-content>
                   <ion-card-title>
                     {{item.model}}
                     </ion-card-title>
                    <h5>{{item.serialNum}}</h5>
-                   
                    <h6>{{item.repairMan}}</h6>
                 </ion-card-content>
               </ion-card>

@@ -58,6 +58,18 @@ export class OnMaintenancePage {
     
   }
 
+  openDetail(item){
+    this.navCtrl.push('RepairitemdetailPage',{
+      model : item.model,
+      id: item.id,
+      serialNum: item.serialNum,
+      repairman: item.repairman,
+    })
+
+  }
+  
+  
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad OnMaintenancePage');
   }
