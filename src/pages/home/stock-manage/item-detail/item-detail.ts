@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
+import { NumberFormatStyle } from '@angular/common/src/i18n/locale_data_api';
 
 /**
  * Generated class for the ItemDetailPage page.
@@ -24,14 +25,14 @@ export class ItemDetailPage {
   model :string;
   location1: any;
   location2: any;
-  quantity:any;
+  quantity : number;
   id : string;
 
   public pre_serialNum:any;
   public pre_model :any;
   public pre_location1 : any;
   public pre_location2 : any;
-  public pre_quantity : any;
+  public pre_quantity : number;
   public pre_id: any;
   public changed_quantity : any;
 
