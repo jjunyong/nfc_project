@@ -35,10 +35,9 @@ export class RepairitemdetailPage {
   model:string;
   repairman:string;
 
-  startDate = new Date().toISOString();
+  startDate : string;
   finDate : string
-
-  public isToggled: boolean;
+  isToggled: boolean;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -49,8 +48,8 @@ export class RepairitemdetailPage {
       this.model = this.navParams.get('model');
       this.repairman = this.navParams.get('repairman');
       this.isToggled = this.navParams.get('isToggled');
-
-      this.isToggled = false;
+      this.finDate = this.navParams.get('finDate');
+      this.startDate = this.navParams.get('startDate').toISOString();
 
   }
 
@@ -83,7 +82,7 @@ export class RepairitemdetailPage {
     })
   }
 
-  repairfin(){
+repairfin(){
 
     this.isToggled = !this.isToggled
     this.RepairItem.isToggled = this.isToggled
@@ -91,6 +90,7 @@ export class RepairitemdetailPage {
     this.finDate = this.RepairItem.finDate.toISOString();
     this.RepairItem.id = this.id
     this.fireService.finAdd(this.RepairItem)
+    console.log(this.finDate)
   }
 
   modify(){

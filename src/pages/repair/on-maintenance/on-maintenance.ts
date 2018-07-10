@@ -46,14 +46,21 @@ export class OnMaintenancePage {
 
    this.items.subscribe((RepairItem)=>{
         this.itemArray = RepairItem;
-        this.itemList = this.itemArray;
+        this.itemList = this.itemArray.filter((eachItem)=>{
+          if(eachItem.isToggled===true){
+            return true;
+          }
+          else  
+            return false;
+        })
+
         this.loadedItemList = this.itemArray;
         loadingPopup.dismiss();
       });
 
 
 
-    console.log(this.loadedItemList)
+    console.log("현재 진행중ㅇ이 ㄴ아이템")
 
     
   }

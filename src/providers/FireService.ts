@@ -42,9 +42,9 @@ export class FireService{
         repairman : RepairItem.repairman,
         serialNum : RepairItem.serialNum,
         startDate : new Date(),
-        finDate : RepairItem.finDate,
+        Image: "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/login.jpg?alt=media&token=86151782-4372-4ec3-84e7-c2ef76b4a663",
         isToggled: false
-    })
+        })
 
     let toast = this.toast.create({
             message: "succesfully added",
