@@ -6,10 +6,12 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>새로운 아이템 추가</ion-title>
-  </ion-navbar>
-
+    <ion-navbar  color="grey-blue" >
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>새로운 아이템 추가</ion-title>
+          </ion-navbar>
 </ion-header>
 
 
@@ -57,6 +59,6 @@
 
   </ion-list>
 
-  <button ion-button (click)="add()">확인</button>
+  <button ion-button (click)="add()" full color="grey-blue">확인</button>
 
 </ion-content>

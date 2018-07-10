@@ -29,48 +29,17 @@ class Log{
   selector: 'page-change-log',
   templateUrl: 'change-log.html',
 })
-export class ChangeLogPage {
-  
-  // items$ : Observable<Item[]>;
-  // typeFilter$ : BehaviorSubject<string|null>;
-  // timeFilter$ : BehaviorSubject<string|null>;
-  
-  // this.typeFilter$ = new BehaviorSubject(null);
-  //   this.timeFilter$ = new BehaviorSubject(null);
-  //   this.items$ = combineLatest(
-  //     this.typeFilter$,
-  //     this.timeFilter$
-  //   ).pipe(
-  //     switchMap(([type, time])=>
-  //     afs.collection('log', ref=>{
-  //       let query : firebase.firestore.CollectionReference | firebase.firebase.Query = ref;
-  //       if (type) {query = query.where('type', '==', 'import')};
-  //       if (time) {query = query.where('quantity', '>', '1000')};
-  //       return query;
-  //     }).valueChanges()
-  //   )
-  //   )
-
-  // filterByType( type : string|null){
-  //   this.typeFilter$.next(type)
-  // }
-
-  // filterByTime( time : string|null){
-  //   this.timeFilter$.next(time);
-  // }
+export class ChangeLogPage {  
   
   startDate : Date
   finDate : Date
 
   public itemsCollection: AngularFirestoreCollection<Log>; 
-  public itemsCollection_2 : AngularFirestoreCollection<Log>;
- // public items_Imported_Collection : AngularFirestoreCollection<import>;
-
-
+  items : any = [];
   itemList : any=[]; 
   itemArray : any = [];
   loadedItemList:  any=[]; 
-  items : any = [];
+  
   items_2 : any = [];
   itemTemp : any = [];
   changed_type : any;
@@ -92,27 +61,17 @@ export class ChangeLogPage {
     //console.log(this.itemList.length);
 
     
-    this.startDate=new Date();
-    this.finDate=new Date()
+    this.startDate=new Date(this.startDate);
+    this.finDate=new Date(this.finDate)
+    this.finDate.setHours(23);
+    this.finDate.setMinutes(59);
+    this.finDate.setSeconds(59);
 
     console.log(this.startDate);
     console.log(this.finDate);
     if(this.changed_type=="import"){
-      
-    this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import').where('timestamp', '<=', this.finDate));
-    //this.itemsCollection_2 = this.afs.collection<Log>('log', ref => ref.where('quantity', '==', '500'));
-    //this.itemsCollection_2 =this.afs.collection<Log>('log', ref => ref.where('timestamp', '>=', 'startDate'))
-    //filterByTime(this.itemsCollection);
-    //filterByType(this.itemsCollection);
-    
+    this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
     this.items= this.itemsCollection.valueChanges();
-    
-    console.log("testing",this.items)
-   // this.items_2=this.itemsCollection_2.valueChanges();
-   
-    // const combinedList = combineLatest<any[]>(this.items, this.items_2).pipe(
-    //   map(arr => arr.reduce((acc, cur) => acc.concat(cur))),
-    // )
     this.items.subscribe((item)=>{
           console.log(this.items)
           this.itemArray = item;
@@ -122,7 +81,7 @@ export class ChangeLogPage {
     })
     }
       if(this.changed_type=="export"){
-        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export'));
+        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
         
         this.items= this.itemsCollection.valueChanges();
         this.items.subscribe((item)=>{
@@ -135,9 +94,10 @@ export class ChangeLogPage {
       }
 
       if(this.changed_type=="location_changed"){
-        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed'));
-    this.items= this.itemsCollection.valueChanges();
-    this.items.subscribe((item)=>{
+      this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+      
+        this.items= this.itemsCollection.valueChanges();
+      this.items.subscribe((item)=>{
           console.log(this.items)
           this.itemArray = item;
           this.itemList = this.itemArray;
