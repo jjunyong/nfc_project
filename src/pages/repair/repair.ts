@@ -19,13 +19,7 @@ export class RepairPage {
 
   constructor(public navCtrl: NavController, public DB: AngularFirestore,public navParams: NavParams,
     public loadingCtrl: LoadingController){
-      let loadingPopup = this.loadingCtrl.create({
-        spinner: 'crescent',
-        content: '',
-        duration: 1000
-      });
-      loadingPopup.present();
-
+    
       var db = firebase.firestore();
 
       db.collection('list').where("type","==","notice")

@@ -16,6 +16,7 @@ export class HomePage {
   viewType: string = "Menu";
   stock_card: any[] = [];
   items: any;
+  login;
   
   
 
@@ -23,15 +24,17 @@ export class HomePage {
     public loadingCtrl: LoadingController, public alertCtrl: AlertController,
     public afs : AngularFirestore, public afAuth : AngularFireAuth, public auth: AuthData){
 
-    if(auth.isLoggedIn())
-      console.log(afAuth.auth.currentUser.email)
+      this.afAuth.authState.subscribe((user)=>{
+        if(user){
+          this.login = true;
+        }
+        else{
+          this.login = false;
+        }
+      })
 
-      let loadingPopup = this.loadingCtrl.create({
-        spinner: 'crescent',
-        content: '',
-        duration: 1000
-      });
-      loadingPopup.present();
+    if(this.login)
+      console.log(afAuth.auth.currentUser.email)
 
       afs.collection('notice').valueChanges()
         .subscribe(notice => this.items = notice)

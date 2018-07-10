@@ -15,6 +15,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { NFC, Ndef} from '@ionic-native/nfc';
 import { FireService } from '../providers/FireService';
+import { AuthorizationPage } from './authorization/authorization';
 
 // import { AngularFireStorageModule } from 'angularfire2/storage';
 
@@ -29,7 +30,8 @@ export const config = {
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    AuthorizationPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ export const config = {
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    AuthorizationPage
   ],  
   providers: [
     StatusBar,

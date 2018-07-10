@@ -38,6 +38,7 @@ $colors: (
   secondary:  #32db64,
   red:     #f53d3d,
   light:      #f4f4f4,
+  white: #ffffff,
   dark:       #222,
   ios-blue : #488aff,
   grey-blue : #5277b2,
@@ -92,3 +93,6 @@ indigo: #327eff
 
 @import "roboto";
 @import "noto-sans";
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);

@@ -22,9 +22,18 @@ export class MainPage {
   public backgroundImage: any = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/login.jpg?alt=media&token=86151782-4372-4ec3-84e7-c2ef76b4a663";
 
   payload: string;
+  login: boolean;
 
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC,
     public authData: AuthData) {
+      this.afAuth.authState.subscribe((user)=>{
+        if(user){
+          this.login = true;
+        }
+        else{
+          this.login = false;
+        }
+      })
 
     // this.nfc.addMimeTypeListener('jjun/read', () => {
     //   console.log('nfc attached')
@@ -32,30 +41,18 @@ export class MainPage {
     //   console.log('error attaching ndef listener', err);
     // }).subscribe((event) => {
 
-    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
+    //   // this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
 
-    //   this.afAuth.authState.subscribe((user)=>{
-    //     if(user==null){
-    //       alert("로그인이 필요합니다.");
-    //     }
-    //     else{
-    //       // alert("로그인 되었습니다")
-    //       this.navCtrl.push('LocationManagePage', {
-    //         payload: this.payload
-    //       })
-    //     }
-    //   })
-
-    //   // authData.isLoggedIn
-      
-    //   // if (authData.isLoggedIn()) {
-    //   //   alert("로그인 되었습니다")
-    //   //   this.navCtrl.push('LocationManagePage', {
-    //   //     payload: this.payload
-    //   //   })
-    //   // }
-    //   // else{
-    //   //   alert("로그인이 필요합니다.");
+    //   // this.afAuth.authState.subscribe((user)=>{
+    //   //   if(user==null){
+    //   //     alert("로그인이 필요합니다.");
+    //   //   }
+    //   //   else{
+    //   //     // alert("로그인 되었습니다")
+    //   //     this.navCtrl.push('LocationManagePage', {
+    //   //       payload: this.payload
+    //   //     })
+    //   //   }
     //   // }
 
     // });
@@ -63,7 +60,10 @@ export class MainPage {
     // console.log(this.authData.isLoggedIn());
   }
   googleLogin() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.authData.googleLogin().then(()=>{
+      this.navCtrl.setRoot('HomePage');
+    });
   }
 
   loginWithEmail() {
@@ -80,3 +80,4 @@ export class MainPage {
 
 
 }
+
