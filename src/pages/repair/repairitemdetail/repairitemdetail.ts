@@ -49,7 +49,10 @@ export class RepairitemdetailPage {
       this.repairman = this.navParams.get('repairman');
       this.isToggled = this.navParams.get('isToggled');
       this.finDate = this.navParams.get('finDate');
-      this.startDate = this.navParams.get('startDate').toISOString();
+      this.startDate = this.navParams.get('startDate');
+
+      console.log(this.isToggled)
+      console.log("처음에 토글값 들어올때")
 
   }
 
@@ -85,6 +88,7 @@ export class RepairitemdetailPage {
 repairfin(){
 
     this.isToggled = !this.isToggled
+    console.log("여기서 토글값 변화되어야 합니다")
     this.RepairItem.isToggled = this.isToggled
     this.RepairItem.finDate = new Date()
     this.finDate = this.RepairItem.finDate.toISOString();

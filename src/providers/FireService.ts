@@ -10,13 +10,15 @@ export class FireService{
   }
 
 
-  finAdd(RepairItem){
+finAdd(RepairItem){
     this.afs.collection('RepairItem').doc(`${RepairItem.id}`).update({
       finDate : RepairItem.finDate,
       isToggled : RepairItem.isToggled
-  })
 
-}
+  })
+  console.log(RepairItem.isToggled)
+  console.log("추가할때 트루로 바뀌는지")
+  }
 
 
   LogAdd(RepairLog){

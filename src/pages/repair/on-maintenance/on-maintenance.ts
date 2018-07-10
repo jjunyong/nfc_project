@@ -60,8 +60,6 @@ export class OnMaintenancePage {
 
 
 
-    console.log("현재 진행중ㅇ이 ㄴ아이템")
-
     
   }
 

@@ -75,7 +75,7 @@
       <ion-card-content>
           <ion-item>
               <ion-label>정비 종료</ion-label>
-              <ion-toggle checked="{{isToggled}}" [(ngModel)]="isToggled" (ngModelChange)="repairfin()" >
+              <ion-toggle (ionChange)="repairfin()" checked="{{isToggled}}" [(ngModel)]="isToggled"  >
               </ion-toggle>
             </ion-item>
             <ion-item>
