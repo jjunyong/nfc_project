@@ -8,7 +8,7 @@
 
 <ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   <div class="login-container">
-    <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/ionic.png?alt=media&token=b56ebc2e-8fe9-46c8-b523-52a7e44db932" />
+    <!-- <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/ionic.png?alt=media&token=b56ebc2e-8fe9-46c8-b523-52a7e44db932" /> -->
     <!--*********** Form ***********-->
 
     <form [formGroup]="registerForm" (submit)="registerUser()" novalidate>
@@ -44,7 +44,7 @@
         <p *ngIf="!registerForm.controls.password.valid  &&
         registerForm.controls.password.dirty">*Password needs more than 6 characters.</p>
       </ion-item>
-        <button ion-button full type="submit" mode="ios" color="blue2">
+        <button ion-button full type="submit" mode="ios" color="grey-blue">
             Create an Account
         </button>
     </form>

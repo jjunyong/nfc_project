@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, ToastController, AlertController, PopoverController } from 'ionic-angular';
+import { Platform, Nav, ToastController, AlertController, PopoverController, ModalController, ViewController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -8,6 +8,8 @@ import { AuthData } from '../providers/auth-data';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AuthorizationPage } from './authorization/authorization';
 import { subscribeOn } from 'rxjs/operator/subscribeOn';
+ 
+
 
 @Component({
   selector: 'ion-app',
@@ -20,18 +22,18 @@ export class MyApp {
   authUser: any;
   testCheckboxOpen: boolean;
   testCheckboxResult;
-  requests : any;
-  login : boolean;
+  requests: any;
+  login: boolean;
 
   private masterEmail: string = "21300649@handong.edu";
   public masterSwitch: boolean = false;
-  
+
 
   constructor(public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public afAuth: AngularFireAuth,
-    public auth: AuthData, public toast: ToastController, public alerCtrl: AlertController,
-    public afs: AngularFirestore, public popoverCtrl: PopoverController,
-   ) {
+    public auth: AuthData, public toast: ToastController, public alertCtrl: AlertController,
+    public afs: AngularFirestore, public popoverCtrl: PopoverController, public modalCtrl: ModalController
+  ) {
 
 
     this.afAuth.authState.subscribe((auth) => {
@@ -42,13 +44,13 @@ export class MyApp {
       }
     })
 
-    
+
     this.afAuth.authState.subscribe((auth) => {
 
-      if(auth!=null){
+      if (auth != null) {
         this.login = true;
       }
-      else{
+      else {
         this.login = false;
       }
     })
@@ -76,7 +78,17 @@ export class MyApp {
   }
 
   openPage(page) {
-    this.nav.setRoot(page.component);
+    if (this.login) {
+      this.nav.setRoot(page.component);
+    }
+    else {
+      this.showAlert();
+    }
+  }
+
+  DologIn(){
+    let modal = this.modalCtrl.create(LoginSelectPage);
+    modal.present();
   }
 
   logout() {
@@ -91,8 +103,8 @@ export class MyApp {
   }
 
   requestAuthorization() {
-    let alert = this.alerCtrl.create();
-    alert.setTitle('원하는 권한을 신청하세요')
+    let alert = this.alertCtrl.create();
+    alert.setTitle('원하는 권한을 신청하세요');
     alert.addInput({
       type: 'checkbox',
       label: 'admin',
@@ -116,9 +128,9 @@ export class MyApp {
         this.testCheckboxResult = data;
         this.afs.collection('request').doc(user_id).set({
           uid: user_id,
-          role : {
-            admin : data[0]=='admin'?true:false,
-            editor : data[1]=='editor'?true:false
+          role: {
+            admin: data[0] == 'admin' ? true : false,
+            editor: data[1] == 'editor' ? true : false
           }
         }).then(() => {
           let toast = this.toast.create({
@@ -135,19 +147,57 @@ export class MyApp {
     })
   }
 
-  approveAuthorization(){
+  approveAuthorization() {
     this.nav.push(AuthorizationPage);
   }
 
-  openStock(){
+  openStock() {
+    if(this.login){
     this.nav.setRoot('HomePage');
+    }
+    else{
+      this.showAlert();
+    }
   }
 
-  openRepair(){
+  openRepair() {
+    if(this.login){
     this.nav.setRoot('RepairPage');
+    }
+    else{
+      this.showAlert();
+    }
   }
-  openMain(){
+  openMain() {
+    if(this.login){
     this.nav.setRoot('MainPage');
+    }
+    else{
+      this.showAlert();
+    }
+  }
+
+  showAlert() {
+    const alert = this.alertCtrl.create({
+      title: '로그인이 필요한 서비스입니다',
+      subTitle: 'Get started을 눌러 지금 바로 가입하세요!',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }
 
+
+@Component({
+  selector: 'page-login-select',
+  templateUrl: 'login-select.html'
+})
+export class LoginSelectPage{
+
+  constructor(public viewCtrl:ViewController){
+  }
+
+  dismiss(){   //자기 자신을 끄게 해야 한다. ViewController를 이용하여
+    this.viewCtrl.dismiss();
+  }
+}

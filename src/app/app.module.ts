@@ -16,6 +16,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { NFC, Ndef} from '@ionic-native/nfc';
 import { FireService } from '../providers/FireService';
 import { AuthorizationPage } from './authorization/authorization';
+import { LoginSelectPage } from './app.component'
 
 // import { AngularFireStorageModule } from 'angularfire2/storage';
 
@@ -31,7 +32,8 @@ export const config = {
 @NgModule({
   declarations: [
     MyApp,
-    AuthorizationPage
+    AuthorizationPage,
+    LoginSelectPage,
   ],
   imports: [
     BrowserModule,
@@ -40,11 +42,13 @@ export const config = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AuthorizationPage
+    AuthorizationPage,
+    LoginSelectPage,
   ],  
   providers: [
     StatusBar,

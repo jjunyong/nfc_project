@@ -1,31 +1,30 @@
-
 <style>
   @media screen and (max-width: 600px) {
-    .menu{
-    display:block;
+    .menu {
+      display: block;
+    }
+    .topNav {
+      display: none;
+
+    }
   }
-  .topNav{
-    display:none;
-    
-  }
-}
-  
 </style>
 <ion-header no-border>
-    <ion-toolbar color="grey-blue">
-        <button class="topNav" ion-button clear color="white" (click)="openMain()">
-          <ion-icon name="home"></ion-icon>
-        </button>
-        <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openStock()">재고관리</button>
-        <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openRepair()">정비관리</button>
-        <button *ngIf="login" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="logout()">로그아웃</button>
-        <!-- <button ion-button menuToggle>
+  <ion-toolbar color="grey-blue">
+    <button class="topNav" ion-button clear color="white" (click)="openMain()">
+      <ion-icon name="home"></ion-icon>
+    </button>
+    <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openStock()">재고관리</button>
+    <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openRepair()">정비관리</button>
+    <button *ngIf="!login" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="DologIn()">로그인</button>
+    <button *ngIf="login" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="logout()">로그아웃</button>
+    <!-- <button ion-button menuToggle>
           <ion-icon class="menu_icon" name="menu"></ion-icon>
         </button> -->
-        <button class="menu" ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-    </ion-toolbar>
+    <button class="menu" ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-toolbar>
   <!-- <ion-navbar transparent>
     <button *ngIf="login" ion-button menuToggle>
       <ion-icon name="menu" color="light"></ion-icon>
@@ -54,6 +53,13 @@
       </ion-row>
     </div>
     <ion-list no-lines>
+      <button menuClose ion-item detail-none (click)="openMain()">
+        <ion-icon name="home"></ion-icon>
+        Home
+      </button>
+      <button *ngIf="!login" menuClose ion-item detail-none (click)="DologIn()">
+        로그인
+      </button>
       <button menuClose ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
         <!--<ion-icon [name]="p.icon" item-left></ion-icon>-->
         {{p.title}}
@@ -61,7 +67,7 @@
       <button *ngIf="login" menuClose ion-item detail-none (click)="logout()">
         로그아웃
       </button>
-      <button *ngIf="!masterSwitch" menuClose ion-item detail-none (click)="requestAuthorization()">
+      <button *ngIf="!masterSwitch && login" menuClose ion-item detail-none (click)="requestAuthorization()">
         사용자 권한신청
       </button>
       <button *ngIf="masterSwitch" menuClose ion-item detail-none (click)="approveAuthorization()">
@@ -70,6 +76,6 @@
     </ion-list>
   </ion-content>
 </ion-menu>
-      
-      <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-      <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
