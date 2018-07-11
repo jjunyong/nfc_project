@@ -11,7 +11,6 @@ class Item{
   location2: any;
   model: string;
   quantity : number;
-  serialNum : string;
   id : string;
 }
 
@@ -72,7 +71,7 @@ getItems(searchbar) {
   // Reset items back to all of the items
   this.initializeItems();
 
-  console.log(this.itemList)
+  //console.log(this.itemList)
   // set q to the value of the searchbar
   var q = searchbar.srcElement.value;
   // if the value is an empty string don't filter the items
@@ -82,13 +81,14 @@ getItems(searchbar) {
   this.itemList = this.itemList.filter((v) => {
     if(v.model && q) {
       if (v.model.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+       
         return true;
       }
       return false;
     }
   });
 
-  console.log(q, this.itemList.length);
+ // console.log(q, this.itemList.length);
 }
 
 manage(){  

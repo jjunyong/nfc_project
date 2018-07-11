@@ -29,10 +29,7 @@
       <ion-input type="number" [(ngModel)]="quantity"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label floating>Serial Number</ion-label>
-      <ion-input type="text" [(ngModel)]="serialNum"></ion-input>
-    </ion-item>
+  
 
     <ion-item>
       <ion-label>위치(대분류)</ion-label>
@@ -57,8 +54,15 @@
       </ion-select>
     </ion-item>
 
+
+    <ion-item *ngFor="let item of itemList" (click)="openDetail(item)">
+      <!-- <ion-avatar item-start>
+        <img [src]="contact.img">
+      </ion-avatar>   -->
+      <h2> <strong>{{ item.model }}</strong> </h2>
+    </ion-item>
   </ion-list>
 
-  <button ion-button (click)="add()" full color="grey-blue">확인</button>
+  <button ion-button (click)="add($event)" full color="grey-blue">확인</button>
 
 </ion-content>

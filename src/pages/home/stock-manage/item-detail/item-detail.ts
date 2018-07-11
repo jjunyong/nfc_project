@@ -1,14 +1,9 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
 import { NumberFormatStyle } from '@angular/common/src/i18n/locale_data_api';
 
-/**
- * Generated class for the ItemDetailPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -21,14 +16,12 @@ export class ItemDetailPage {
   showToolbar:boolean = false;
   transition:boolean = false;
 
-  serialNum:any;
   model :string;
   location1: any;
   location2: any;
   quantity : number;
   id : string;
 
-  public pre_serialNum:any;
   public pre_model :any;
   public pre_location1 : any;
   public pre_location2 : any;
@@ -38,25 +31,20 @@ export class ItemDetailPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public ref: ChangeDetectorRef,public afs : AngularFirestore) {
-      this.serialNum = this.navParams.get('serialNum');
+    public ref: ChangeDetectorRef,public afs : AngularFirestore, public alertCtrl: AlertController,) {
+
+
       this.model = this.navParams.get('model');
       this.location1 = this.navParams.get('location1');
       this.location2 = this.navParams.get('location2');
       this.quantity = this.navParams.get('quantity');
       this.id=this.navParams.get('id');
-      //console.log("done")
+
       this.pre_quantity=this.quantity
       this.pre_id=this.id
       this.pre_location1=this.location1
       this.pre_location2=this.location2
       this.pre_model=this.model
-      this.pre_serialNum=this.serialNum
-
-     // console.log(this.pre_quantity)
-
-      
-      
   }
 
 
@@ -86,7 +74,6 @@ export class ItemDetailPage {
   confirm(){
     this.afs.collection('item').doc(this.id).update({
       model : this.model,
-      serialNum : this.serialNum,
       location1 : this.location1,
       location2 : this.location2,
       quantity : this.quantity,
@@ -100,7 +87,6 @@ export class ItemDetailPage {
       const doc_id = this.afs.createId();
       this.afs.collection("log").add({
           model : this.model,
-          serialNum : this.serialNum,
           type : "location_changed",
           quantity : this.quantity,
           location1 : this.location1, 
@@ -114,7 +100,6 @@ export class ItemDetailPage {
       if(this.changed_quantity>0){
         this.afs.collection("log").add({
           model : this.model,
-          serialNum : this.serialNum,
           type : "import",
           quantity : this.quantity,
           location1 : this.location1, 
@@ -128,7 +113,6 @@ export class ItemDetailPage {
       if(this.changed_quantity<0){
         this.afs.collection("log").add({
           model : this.model,
-          serialNum : this.serialNum,
           type : "export",
           quantity : this.quantity,
           location1 : this.location1, 
@@ -139,7 +123,6 @@ export class ItemDetailPage {
         })
       }   
       this.navCtrl.push('StockManagePage',{
-      serialNum : this.serialNum,
       model : this.model,
       location1 : this.location1,
       location2 : this.location2,
@@ -148,5 +131,35 @@ export class ItemDetailPage {
       status : true
     })
   }
+
+
+  delete(){
+  
+    let confirm = this.alertCtrl.create({
+      title: '정말로 아이템을 삭제하시겠습니까?',
+      message: '아이템을 삭제하시려면 Yes를 클릭하세요',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.afs.collection('item').doc(this.id).delete().then(function() {
+              console.log("성공적으로 삭제되었습니다.");
+              this.navCtrl.pop()
+          }).catch(function(error) {
+              console.error("삭제에 실패하였습니다. ", error);
+          });
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('cancel clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+   
 }
 
+}

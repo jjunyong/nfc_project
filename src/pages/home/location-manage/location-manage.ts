@@ -13,7 +13,6 @@ interface Item{
   location1: any;
   location2: any;
   model: string;
-  serialNum : string;
   quantity : number;
 }
 

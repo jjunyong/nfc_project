@@ -19,7 +19,6 @@ class Log{
   location2: any;
   model: string;
   quantity : number;
-  SerialNum : string;
   type : string;
   timestamp : string;
 }

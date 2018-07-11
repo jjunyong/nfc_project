@@ -63,7 +63,6 @@ export class FireService{
         quantity : item.quantity,
         location1 : item.location1,
         location2 : item.location2,
-        serialNum : item.serialNum,
         id : doc_id,
         timestamp : new Date(),
 
