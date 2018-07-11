@@ -16,8 +16,7 @@ finAdd(RepairItem){
       isToggled : RepairItem.isToggled
 
   })
-  console.log(RepairItem.isToggled)
-  console.log("추가할때 트루로 바뀌는지")
+
   }
 
 
@@ -65,13 +64,11 @@ finAdd(RepairItem){
         quantity : item.quantity,
         location1 : item.location1,
         location2 : item.location2, 
-        serialNum : item.serialNum,
         id : doc_id
     })
 
     this.afs.collection("log").add({
         itemModel : item.model,
-        itemSerialNum : item.serialNum,
         type : "add",
         itemQuantity : item.quantity,
         itemLocation1 : item.location1, 

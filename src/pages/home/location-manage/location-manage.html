@@ -11,7 +11,7 @@
         <ion-label color="light">
           위치별 검색</ion-label>
         
-        <ion-select (ionChange)="goTo1(location1)" [(ngModel)]="location1">
+        <ion-select (ionChange)="goTo1()" [(ngModel)]="location1">
           <ion-option value="A">A</ion-option>
           <ion-option value="B">B</ion-option>
           <ion-option value="C">C</ion-option>
@@ -19,8 +19,8 @@
           <ion-option value="E">E</ion-option>
           <ion-option value="F">F</ion-option>
         </ion-select>
-
-       <ion-select (ionChange)="goTo2(location2)" *ngIf="location1" [(ngModel)]="location2">
+        <p></p>
+       <ion-select (ionChange)="goTo2()"  [(ngModel)]="location2">
           <ion-option value="1">1</ion-option>
           <ion-option value="2">2</ion-option>
           <ion-option value="3">3</ion-option>

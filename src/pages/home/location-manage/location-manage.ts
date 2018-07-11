@@ -72,47 +72,51 @@ export class LocationManagePage {
     })
     
 
-    console.log(this.loadedItemList)
+    this.location1 = "null";
+    this.location2 = "null";
 
   
   }
 
-intersect() {
-    var setA = new Set(this.itemList1);
-    var setB = new Set(this.itemList2);
-    this.itemList = new Set([setA].filter(x => setB.has(x)));
-    console.log(this.itemList.location1);
-    return this.itemList;
 
-}
+  goTo1() {
 
+    if(this.location2==="null"){
+    this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1))
+    } //location2 옵션 변경시 바뀌게 하는 조건
+    else{
+      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1).where('location2','==',this.location2))
+    }  
 
-  goTo1(location1: string) {
+    this.items= this.itemsCollection.valueChanges();
+     this.items.subscribe((item)=>{
+      console.log(this.items)
+      this.itemArray = item;
+      this.itemList = this.itemArray;
+      this.loadedItemList = this.itemArray;
 
-    this.itemList = this.itemList.filter((eachItem)=>{
-      if(eachItem.location1===location1){
-        this.itemList1 = this.itemList;
-        return true;
-      }
-      else  
-        return false;
     })
+  }
 
-    }
 
-
-    goTo2(location2: string) {
-
-      this.itemList = this.loadedItemList.filter((eachItem)=>{
-        if(eachItem.location2===location2){
-          this.itemList2 = this.itemList;
-          return true;
-        }
-        else  
-          return false;
-      })
+    goTo2() {
+      if(this.location1==="null"){
+        this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location2', '==', this.location2))
+        } //location2 옵션 변경시 바뀌게 하는 조건
+        else{
+          this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1).where('location2','==',this.location2))
+        }  
     
-    }
+        this.items= this.itemsCollection.valueChanges();
+         this.items.subscribe((item)=>{
+          console.log(this.items)
+          this.itemArray = item;
+          this.itemList = this.itemArray;
+          this.loadedItemList = this.itemArray;
+    
+        })
+  }
+    
   
 
     openDetail(item){
@@ -120,7 +124,7 @@ intersect() {
         code : item.code,
         name : item.name,
         location1 : item.location1,
-        locatoin2 : item.location2,
+        location2 : item.location2,
         quantity : item.quantity
       })
     }

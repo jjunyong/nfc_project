@@ -37,6 +37,7 @@
         <strong>Item Info</strong>
         <div text-right>
           <button ion-button color="blue" clear (click)="confirm($event, item)">confirm</button>
+          <ion-icon name="trash" bottom color="grey-blue" clear (click)="delete()"></ion-icon>
         </div>
       </ion-card-header>
   
@@ -73,9 +74,9 @@
       </ion-card-header>
   
       <ion-card-content>
-          <ion-item>
-              <ion-label>정비 종료</ion-label>
-              <ion-toggle (ionChange)="repairfin()" checked="{{isToggled}}" [(ngModel)]="isToggled"  >
+          <ion-item *ngIf="startDate"> 
+              <ion-label >정비 종료</ion-label>
+              <ion-toggle (ionChange)="repairfin()" checked="{{isToggled}}" [(ngModel)]="isToggled">
               </ion-toggle>
             </ion-item>
             <ion-item>
