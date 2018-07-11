@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, ToastController, AlertController, PopoverController, ModalController, ViewController} from 'ionic-angular';
+import { Platform, Nav, ToastController, AlertController, PopoverController, ModalController, ViewController, NavController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -8,6 +8,7 @@ import { AuthData } from '../providers/auth-data';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AuthorizationPage } from './authorization/authorization';
 import { subscribeOn } from 'rxjs/operator/subscribeOn';
+import { GlobalVars } from '../providers/global';
  
 
 
@@ -24,18 +25,21 @@ export class MyApp {
   testCheckboxResult;
   requests: any;
   login: boolean;
+  // show : boolean;
 
   private masterEmail: string = "21300649@handong.edu";
   public masterSwitch: boolean = false;
 
 
+
   constructor(public platform: Platform, public statusBar: StatusBar,
     public splashScreen: SplashScreen, public afAuth: AngularFireAuth,
     public auth: AuthData, public toast: ToastController, public alertCtrl: AlertController,
-    public afs: AngularFirestore, public popoverCtrl: PopoverController, public modalCtrl: ModalController
+    public afs: AngularFirestore, public popoverCtrl: PopoverController, public modalCtrl: ModalController,
+    // public global : GlobalVars
   ) {
 
-
+    // this.global.currentMessage.subscribe(message => this.show = message)
     this.afAuth.authState.subscribe((auth) => {
       console.log(auth.email)
       this.authUser = auth.email
@@ -169,12 +173,7 @@ export class MyApp {
     }
   }
   openMain() {
-    if(this.login){
     this.nav.setRoot('MainPage');
-    }
-    else{
-      this.showAlert();
-    }
   }
 
   showAlert() {
@@ -194,10 +193,24 @@ export class MyApp {
 })
 export class LoginSelectPage{
 
-  constructor(public viewCtrl:ViewController){
+  public backgroundImage : any = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%80.jpg?alt=media&token=9e7f9e83-b6e6-4ea3-abd5-dfb2b8d7e5a4";
+
+  constructor(public authData : AuthData, public navCtrl : NavController, public viewCtrl:ViewController){
   }
 
   dismiss(){   //자기 자신을 끄게 해야 한다. ViewController를 이용하여
     this.viewCtrl.dismiss();
+  }
+  
+
+  googleLogin() {
+    // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.authData.googleLogin().then(()=>{
+      this.navCtrl.setRoot('HomePage');
+    });
+  }
+
+  loginWithEmail() {
+    this.navCtrl.push('LoginPage');
   }
 }

@@ -4,6 +4,7 @@ import { NFC } from '@ionic-native/nfc';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase';
 import { AuthData } from '../../providers/auth-data';
+import { GlobalVars } from '../../providers/global';
 
 /**
  * Generated class for the MainPage page.
@@ -26,6 +27,7 @@ export class MainPage {
 
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC,
     public authData: AuthData) {
+
       this.afAuth.authState.subscribe((user)=>{
         if(user){
           this.login = true;
@@ -58,16 +60,6 @@ export class MainPage {
     // });
 
     // console.log(this.authData.isLoggedIn());
-  }
-  googleLogin() {
-    // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-    this.authData.googleLogin().then(()=>{
-      this.navCtrl.setRoot('HomePage');
-    });
-  }
-
-  loginWithEmail() {
-    this.navCtrl.push('LoginPage');
   }
 
   createAccount() {

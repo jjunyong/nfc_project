@@ -4,6 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore'
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthData } from '../../providers/auth-data';
+import { GlobalVars } from '../../providers/global';
 
 @IonicPage()
 @Component({
@@ -17,12 +18,17 @@ export class HomePage {
   stock_card: any[] = [];
   items: any;
   login;
+  // show
   
   
 
   constructor(public navCtrl: NavController, public DB: AngularFirestore,public navParams: NavParams,
     public loadingCtrl: LoadingController, public alertCtrl: AlertController,
-    public afs : AngularFirestore, public afAuth : AngularFireAuth, public auth: AuthData){
+    public afs : AngularFirestore, public afAuth : AngularFireAuth, public auth: AuthData,
+  public global : GlobalVars){
+
+    // this.global.currentMessage.subscribe(message => this.show = message)
+    // this.global.changeMessage(true)
 
       this.afAuth.authState.subscribe((user)=>{
         if(user){

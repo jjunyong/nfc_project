@@ -17,6 +17,7 @@ import { NFC, Ndef} from '@ionic-native/nfc';
 import { FireService } from '../providers/FireService';
 import { AuthorizationPage } from './authorization/authorization';
 import { LoginSelectPage } from './app.component'
+import { GlobalVars } from '../providers/global';
 
 // import { AngularFireStorageModule } from 'angularfire2/storage';
 
@@ -60,7 +61,8 @@ export const config = {
     AngularFireDatabase,
     NFC,
     Ndef,
-    FireService
+    FireService,
+    GlobalVars
   ]
 })
 export class AppModule {} 

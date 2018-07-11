@@ -6,6 +6,7 @@ import { IonicPage, NavController, NavParams, LoadingController, ViewController 
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { FireService } from '../../../../src/providers/FireService'
+import { GlobalVars } from '../../../providers/global';
 class Item{
   location1: any;
   location2: any;
@@ -36,8 +37,12 @@ export class StockManagePage {
     public navCtrl: NavController,
     private afs: AngularFirestore,
     public navParams : NavParams,
-    public fireService : FireService
+    public fireService : FireService,
+    public global : GlobalVars
   ) {
+
+    // this.global.currentMessage.subscribe(message => this.show = message)
+    this.global.changeMessage(false)
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //

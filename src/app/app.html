@@ -9,6 +9,7 @@
     }
   }
 </style>
+
 <ion-header no-border>
   <ion-toolbar color="grey-blue">
     <button class="topNav" ion-button clear color="white" (click)="openMain()">
@@ -76,6 +77,7 @@
     </ion-list>
   </ion-content>
 </ion-menu>
+
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
