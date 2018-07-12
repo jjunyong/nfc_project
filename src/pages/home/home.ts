@@ -29,6 +29,7 @@ export class HomePage {
 
     // this.global.currentMessage.subscribe(message => this.show = message)
     // this.global.changeMessage(true)
+    
 
       this.afAuth.authState.subscribe((user)=>{
         if(user){
@@ -46,6 +47,10 @@ export class HomePage {
         .subscribe(notice => this.items = notice)
       
       console.log(this.items)
+  }
+  
+  ionViewWillEnter(){
+    this.global.changeMessage(true);
   }
 
   openLog(){

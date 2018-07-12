@@ -8,6 +8,7 @@ import { ItemDetailPage } from '../stock-manage/item-detail/item-detail';
 import { LoginPage } from '../../auth/login/login';
 import { timestamp } from 'rxjs/operators/timestamp';
 import { HomePage } from '../home';
+import { GlobalVars } from '../../../providers/global';
 
  /**
  * Generated class for the ChangeLogPage page.
@@ -46,10 +47,24 @@ export class ChangeLogPage {
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private afs: AngularFirestore,
-    public fireService : FireService, private modalCtrl : ModalController) {
+    public fireService : FireService, private modalCtrl : ModalController,
+    public global : GlobalVars) {
+
       this.changed_type=this.navParams.get('changed_type')
     this.startDate = this.navParams.get('startDate')
     this.finDate = this.navParams.get('finDate')
+
+    // this.global.currentMessage.subscribe(message => this.show = message)
+    this.global.changeMessage(false)
+     
+  }
+
+
+  SerchTime(){
+    //console.log(this.itemArray);
+    console.log(this.changed_type);
+    //console.log("serious")
+    //console.log(this.itemList.length);
 
     
     if(this.changed_type=="import"){
@@ -94,13 +109,6 @@ export class ChangeLogPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangeLogPage');
-  }
-
-
-
-  SerchTime(){
-    //console.log(this.itemArray);
-    
   }
 
   Fill_in(){

@@ -15,10 +15,9 @@
 
 <ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   <div class="login-container">
-    <div margin-bottom >
-      <p>NFC - 편리한 재고 및 정비관리</p>
-      <!-- <p>NFC</p> -->
-      <!-- <img class="logo"  src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/ionic.png?alt=media&token=b56ebc2e-8fe9-46c8-b523-52a7e44db932" /> -->
+    <div class='text' padding margin-top margin-bottom >
+      <p class="title">Palm NFC</p>
+      <p class="subtitle">편리한 재고/정비 관리</p>
     </div>
     <!-- <div *ngIf="!login; else showLogin" margin-top >
         <button ion-button mode="ios" block margin-top  margin-bottom   (click)="googleLogin()" color="red"   icon-left> <ion-icon name="logo-google"></ion-icon>google login</button>  
@@ -28,7 +27,7 @@
       <button ion-button mode="ios" block margin-top margin-bottom color="grey" (click)="logout()">Logout</button> 
     </ng-template>
 
-    <button margin-top color="grey-blue" ion-button (click)="createAccount()">Click to Get Started</button>
+    <button margin-top color="grey-blue" ion-button (click)="createAccount()">Get Started!</button>
   </div>
 
   

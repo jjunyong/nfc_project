@@ -26,7 +26,9 @@ export class MainPage {
   login: boolean;
 
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC,
-    public authData: AuthData) {
+    public authData: AuthData, public global : GlobalVars) {
+
+      this.global.changeMessage(true);
 
       this.afAuth.authState.subscribe((user)=>{
         if(user){
@@ -43,23 +45,21 @@ export class MainPage {
     //   console.log('error attaching ndef listener', err);
     // }).subscribe((event) => {
 
-    //   // this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
+    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
 
-    //   // this.afAuth.authState.subscribe((user)=>{
-    //   //   if(user==null){
-    //   //     alert("로그인이 필요합니다.");
-    //   //   }
-    //   //   else{
-    //   //     // alert("로그인 되었습니다")
-    //   //     this.navCtrl.push('LocationManagePage', {
-    //   //       payload: this.payload
-    //   //     })
-    //   //   }
-    //   // }
+    //   this.afAuth.authState.subscribe((user)=>{
+    //     if(user==null){
+    //       alert("로그인이 필요합니다.");
+    //     }
+    //     else{
+    //       // alert("로그인 되었습니다")
+    //       this.navCtrl.push('LocationManagePage', {
+    //         payload: this.payload
+    //       })
+    //     }
+    //   })
 
     // });
-
-    // console.log(this.authData.isLoggedIn());
   }
 
   createAccount() {

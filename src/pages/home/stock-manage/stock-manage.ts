@@ -42,7 +42,8 @@ export class StockManagePage {
   ) {
 
     // this.global.currentMessage.subscribe(message => this.show = message)
-    this.global.changeMessage(false)
+    // this.global.changeMessage(false)
+    this.global.changeMessage(true);
 
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
@@ -66,6 +67,7 @@ export class StockManagePage {
 
 ionViewWillEnter(){
   console.log('ionViewEnteredStockMangePage')
+  this.global.changeMessage(true);
 }
 
 initializeItems(){

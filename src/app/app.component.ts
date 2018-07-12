@@ -25,7 +25,7 @@ export class MyApp {
   testCheckboxResult;
   requests: any;
   login: boolean;
-  // show : boolean;
+  show : boolean;
 
   private masterEmail: string = "21300649@handong.edu";
   public masterSwitch: boolean = false;
@@ -36,10 +36,11 @@ export class MyApp {
     public splashScreen: SplashScreen, public afAuth: AngularFireAuth,
     public auth: AuthData, public toast: ToastController, public alertCtrl: AlertController,
     public afs: AngularFirestore, public popoverCtrl: PopoverController, public modalCtrl: ModalController,
-    // public global : GlobalVars
+    public global : GlobalVars
   ) {
 
-    // this.global.currentMessage.subscribe(message => this.show = message)
+    this.global.currentMessage.subscribe(message => this.show = message)
+    
     this.afAuth.authState.subscribe((auth) => {
       console.log(auth.email)
       this.authUser = auth.email

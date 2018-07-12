@@ -1,7 +1,11 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
+// import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+
 import { NumberFormatStyle } from '@angular/common/src/i18n/locale_data_api';
+import { Observable } from 'rxjs';
+import { GlobalVars } from '../../../../providers/global';
 
 
 
@@ -30,9 +34,17 @@ export class ItemDetailPage {
   public changed_quantity: any;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public toast : ToastController,
-    public ref: ChangeDetectorRef, public afs: AngularFirestore, public alertCtrl: AlertController ) {
+  // task: AngularFireUploadTask;
+  // percentage: Observable<number>;
+  // snapshot: Observable<any>;
+  // image : string;
 
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public ref: ChangeDetectorRef, public afs: AngularFirestore, public alertCtrl: AlertController,
+    public toast : ToastController, public global : GlobalVars) {
+
+    this.global.changeMessage(false);
 
     this.model = this.navParams.get('model');
     this.location1 = this.navParams.get('location1');
@@ -45,7 +57,6 @@ export class ItemDetailPage {
     this.pre_location1 = this.location1
     this.pre_location2 = this.location2
     this.pre_model = this.model
-
   }
 
 
@@ -169,7 +180,29 @@ export class ItemDetailPage {
 
 
     confirm.present();
-
   }
+  
+//   startUpload(event: FileList){
+//     const file = event.item(0);
 
+//     if(file.type.split('/')[0] !== 'image'){
+//       console.error('Unsupported file type!');
+//       return;
+//     }
+
+//     const path = `item_images/${file.name}`;
+//     const customMetadata = { app : 'Capstone App'}
+
+//     this.task = this.storage.upload(path, file, { customMetadata});
+//     this.percentage = this.task.percentageChanges();
+//     this.snapshot = this.task.snapshotChanges();
+
+//     this.task.downloadURL()
+//       .subscribe(url=>{
+//         this.image = url;
+//       })
+//   }
+//   isActive(snapshot){
+//     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
+//  }
 }

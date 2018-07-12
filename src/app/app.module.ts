@@ -8,7 +8,7 @@ import { MyApp } from './app.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
-import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database-deprecated';
+// import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AuthData } from '../providers/auth-data';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -42,10 +42,9 @@ export const config = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
-    AngularFireDatabaseModule,
+    // AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
-    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,7 +60,6 @@ export const config = {
     AuthData,
     Facebook,
     GooglePlus,
-    AngularFireDatabase,
     NFC,
     Ndef,
     FireService,

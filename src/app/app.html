@@ -10,7 +10,7 @@
   }
 </style>
 
-<ion-header no-border>
+<ion-header *ngIf = "show" no-border>
   <ion-toolbar color="grey-blue">
     <button class="topNav" ion-button clear color="white" (click)="openMain()">
       <ion-icon name="home"></ion-icon>
@@ -68,12 +68,12 @@
       <button *ngIf="login" menuClose ion-item detail-none (click)="logout()">
         로그아웃
       </button>
-      <button *ngIf="!masterSwitch && login" menuClose ion-item detail-none (click)="requestAuthorization()">
+      <!-- <button *ngIf="!masterSwitch && login" menuClose ion-item detail-none (click)="requestAuthorization()">
         사용자 권한신청
-      </button>
-      <button *ngIf="masterSwitch" menuClose ion-item detail-none (click)="approveAuthorization()">
+      </button> -->
+      <!-- <button *ngIf="masterSwitch" menuClose ion-item detail-none (click)="approveAuthorization()">
         사용자 권한승인
-      </button>
+      </button> -->
     </ion-list>
   </ion-content>
 </ion-menu>

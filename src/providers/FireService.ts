@@ -21,8 +21,8 @@ finAdd(RepairItem){
 
 
   LogAdd(RepairLog){
-    console.log(RepairLog.code)
-    this.afs.collection('RepairItem').doc(`${RepairLog.code}`).collection('repair').add({
+    console.log(RepairLog.id)
+    this.afs.collection('RepairItem').doc(`${RepairLog.id}`).collection('repair').add({
         title : RepairLog.title,
         writer: RepairLog.writer,
         description: RepairLog.description
@@ -86,12 +86,10 @@ finAdd(RepairItem){
 
   modifyItems(new_item){
     this.afs.collection('item').doc(new_item.id).update({
-      name : new_item.name,
-      code : new_item.code,
+      model : new_item.model,
       location1 : new_item.location1,
       location2 : new_item.location2,
       quantity : new_item.quantity
-
     })
 
   }
