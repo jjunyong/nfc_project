@@ -67,7 +67,7 @@ export class StockManagePage {
 
 ionViewWillEnter(){
   console.log('ionViewEnteredStockMangePage')
-  this.global.changeMessage(true);
+  this.global.changeMessage(false);
 }
 
 initializeItems(){

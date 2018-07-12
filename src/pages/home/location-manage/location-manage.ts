@@ -6,6 +6,7 @@ import { NavController, LoadingController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AngularFirestore,  AngularFirestoreCollection } from 'angularfire2/firestore';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
+import { GlobalVars } from '../../../providers/global';
 
 
 
@@ -46,7 +47,8 @@ export class LocationManagePage {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     private afs: AngularFirestore,
-    public navParams : NavParams
+    public navParams : NavParams,
+    public global : GlobalVars
   ){
 
     this.payload = this.navParams.get('payload')
@@ -74,9 +76,12 @@ export class LocationManagePage {
 
     this.location1 = "null";
     this.location2 = "null";
-
-  
   }
+  
+ionViewWillEnter(){
+  // console.log('ionViewEnteredStockMangePage')
+  this.global.changeMessage(false);
+}
 
 
   goTo1() {

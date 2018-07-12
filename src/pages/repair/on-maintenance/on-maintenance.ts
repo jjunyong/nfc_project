@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore'
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { GlobalVars } from '../../../providers/global';
 
 interface RepairItem{
   model: string;
@@ -30,7 +31,8 @@ export class OnMaintenancePage {
   constructor(public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public afs: AngularFirestore,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+  public global : GlobalVars) {
 
     
     let loadingPopup = this.loadingCtrl.create({
@@ -61,6 +63,10 @@ export class OnMaintenancePage {
 
 
     
+  }
+  ionViewWillEnter(){
+    // console.log('ionViewEnteredStockMangePage')
+    this.global.changeMessage(false);
   }
 
   openDetail(item){

@@ -62,8 +62,8 @@ export class MainPage {
     // });
   }
 
-  createAccount() {
-    this.navCtrl.push('RegisterPage');
+  openLoginPage() {
+    this.navCtrl.push('LoginPage');
   }
 
   logout() {

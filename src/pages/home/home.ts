@@ -27,8 +27,10 @@ export class HomePage {
     public afs : AngularFirestore, public afAuth : AngularFireAuth, public auth: AuthData,
   public global : GlobalVars){
 
-    // this.global.currentMessage.subscribe(message => this.show = message)
+    // this.global.changeMessage(true);
+    this.global.currentMessage.subscribe(message => console.log(message))
     // this.global.changeMessage(true)
+    
     
 
       this.afAuth.authState.subscribe((user)=>{

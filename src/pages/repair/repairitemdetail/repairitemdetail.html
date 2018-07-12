@@ -1,98 +1,75 @@
-<ion-header>
-        <ion-navbar transparent [class.show-background]="showToolbar">
-          <ion-title color="light" [hidden]="!showToolbar">Repair Detail</ion-title>
-        </ion-navbar>
-      </ion-header>
-      <!-- <ion-header>
-              <ion-navbar>
-                <button ion-button menuToggle>
-                  <ion-icon name="menu"></ion-icon>
-                </button>
-                <ion-title></ion-title>
-              </ion-navbar>
-            </ion-header> -->
-      
-      
-      
-      <ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
-      
-        <!--*********** Image header  ***********-->
-        <div class="detail-header" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/login.jpg?alt=media&token=86151782-4372-4ec3-84e7-c2ef76b4a663' + ')'}">
-          <h2 class="detail-name ">{{model}}</h2>
-          <div class="detail-price ">{{serialNum}}</div>
-          <!-- <ion-fab  bottom right edge class="hello pop-in">
-                  <button ion-fab *ngIf="!favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart-outline"></ion-icon></button>
-                  <button ion-fab *ngIf="favorite"  color="amber" (click)="addToFav()"><ion-icon name="ios-heart"></ion-icon></button>
-              </ion-fab> -->
-        </div>
-      
-        <!--***********  Description ***********-->
-      
-      
-  
-  
-    <!--*********** Contact  ***********-->
-    <ion-card>
-      <ion-card-header padding>
-        <strong>Item Info</strong>
-        <div text-right>
-          <button ion-button color="blue" clear (click)="confirm($event, item)">confirm</button>
-          <ion-icon name="trash" bottom color="grey-blue" clear (click)="delete()"></ion-icon>
-        </div>
-      </ion-card-header>
-  
-      <div class="info">
-        <ion-list no-lines>
-         <ion-item>
-            <ion-icon name="cube" item-left color="darkGray"></ion-icon>
-           model : {{model}}
-          </ion-item>
-  
-          <ion-item>
-            <ion-icon name="finger-print" item-left color="darkGray"></ion-icon>
-            SerialNum : {{serialNum}}
-          </ion-item>
+<ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
 
-          <ion-item>
-            <ion-icon name="person" item-left color="darkGray"></ion-icon>
-            정비담당 : {{repairman}}
-          </ion-item>
-        </ion-list>
+
+  <!--***********  Description ***********-->
+  <!--*********** Contact  ***********-->
+  <ion-card>
+    <ion-card-header padding>
+      <strong>Item Info</strong>
+      <div text-right>
+        <button ion-button color="blue" clear (click)="confirm($event, item)">confirm</button>
+        <ion-icon name="trash" bottom color="grey-blue" clear (click)="delete()"></ion-icon>
       </div>
-    </ion-card>
-  
-    <ion-card>
-      <ion-card-header padding>
-            <ion-fab right bottom>
-                    <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
-                    <ion-fab-list side="left">
-                      <button ion-fab (click)="add()"><ion-icon name="add"></ion-icon></button>
-                      <button ion-fab (click)="timeline()"><ion-icon name="time"></ion-icon></button>
-                    </ion-fab-list>
-                  </ion-fab>
-        <strong>Description</strong>
-      </ion-card-header>
-  
-      <ion-card-content>
-          <ion-item *ngIf="startDate"> 
-              <ion-label >정비 종료</ion-label>
-              <ion-toggle (ionChange)="repairfin()" checked="{{isToggled}}" [(ngModel)]="isToggled">
-              </ion-toggle>
-            </ion-item>
-            <ion-item>
-                    <ion-label>정비 시작일: </ion-label>
-                    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
-                </ion-item>
-                <ion-item *ngIf="isToggled">
-                    <ion-label>정비 종료일: </ion-label>
-                      <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
-                </ion-item>
-      </ion-card-content>
-    </ion-card>
-  
-  
-    <!--***********  Thumbnail images ***********-->
-    <!-- <ion-card *ngIf="imgGallery?.length > 0 ">
+    </ion-card-header>
+
+    <div class="info">
+      <ion-list no-lines>
+        <ion-item>
+          <ion-icon name="cube" item-left color="darkGray"></ion-icon>
+          model : {{model}}
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="finger-print" item-left color="darkGray"></ion-icon>
+          SerialNum : {{serialNum}}
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="person" item-left color="darkGray"></ion-icon>
+          정비담당 : {{repairman}}
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header padding>
+      <ion-fab right bottom>
+        <button ion-fab color="light">
+          <ion-icon name="arrow-dropleft"></ion-icon>
+        </button>
+        <ion-fab-list side="left">
+          <button ion-fab (click)="add()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+          <button ion-fab (click)="timeline()">
+            <ion-icon name="time"></ion-icon>
+          </button>
+        </ion-fab-list>
+      </ion-fab>
+      <strong>Description</strong>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item *ngIf="startDate">
+        <ion-label>정비 종료</ion-label>
+        <ion-toggle (ionChange)="repairfin()" checked="{{isToggled}}" [(ngModel)]="isToggled">
+        </ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>정비 시작일: </ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="isToggled">
+        <ion-label>정비 종료일: </ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!--***********  Thumbnail images ***********-->
+  <!-- <ion-card *ngIf="imgGallery?.length > 0 ">
           <ion-card-header>
             Photos
           </ion-card-header>
@@ -105,5 +82,5 @@
           </ion-grid>
       </ion-card>
    -->
-  
-  </ion-content>
+
+</ion-content>

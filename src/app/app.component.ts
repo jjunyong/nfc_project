@@ -24,7 +24,7 @@ export class MyApp {
   testCheckboxOpen: boolean;
   testCheckboxResult;
   requests: any;
-  login: boolean;
+  loginOn: boolean;
   show : boolean;
 
   private masterEmail: string = "21300649@handong.edu";
@@ -53,10 +53,10 @@ export class MyApp {
     this.afAuth.authState.subscribe((auth) => {
 
       if (auth != null) {
-        this.login = true;
+        this.loginOn = true;
       }
       else {
-        this.login = false;
+        this.loginOn = false;
       }
     })
 
@@ -83,7 +83,7 @@ export class MyApp {
   }
 
   openPage(page) {
-    if (this.login) {
+    if (this.loginOn) {
       this.nav.setRoot(page.component);
     }
     else {
@@ -92,19 +92,22 @@ export class MyApp {
   }
 
   DologIn(){
-    let modal = this.modalCtrl.create(LoginSelectPage);
-    modal.present();
+    this.nav.push('LoginPage');
+    // let modal = this.modalCtrl.create(LoginSelectPage);
+    // modal.present();
   }
 
   logout() {
-    this.afAuth.auth.signOut();
-    let toast = this.toast.create({
-      message: "로그아웃 되었습니다",
-      duration: 2000,
-      position: "bottom"
+    this.afAuth.auth.signOut().then(()=>{
+      let toast = this.toast.create({
+        message: "로그아웃 되었습니다",
+        duration: 2000,
+        position: "bottom"
+      });
+      toast.present();
+      this.nav.setRoot('MainPage');
     });
-    toast.present();
-    this.nav.setRoot('MainPage');
+    
   }
 
   requestAuthorization() {
@@ -157,7 +160,7 @@ export class MyApp {
   }
 
   openStock() {
-    if(this.login){
+    if(this.loginOn){
     this.nav.setRoot('HomePage');
     }
     else{
@@ -166,7 +169,7 @@ export class MyApp {
   }
 
   openRepair() {
-    if(this.login){
+    if(this.loginOn){
     this.nav.setRoot('RepairPage');
     }
     else{
@@ -207,7 +210,7 @@ export class LoginSelectPage{
   googleLogin() {
     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
     this.authData.googleLogin().then(()=>{
-      this.navCtrl.setRoot('HomePage');
+      this.navCtrl.setRoot('MainPage');
     });
   }
 

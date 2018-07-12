@@ -18,7 +18,7 @@ import { AuthData } from '../../../providers/auth-data';
 export class LoginPage {
 
   public loginForm: any;
-  public backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/email-login.jpg?alt=media&token=bcc10b16-b26e-4c5d-88fb-56ee73d06ce5"
+  public backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802.jpg?alt=media&token=d3079014-9b17-4310-adc8-a20c3fb3b87b"
   // public imgLogo: any = "./assets/medium_150.70391061453px_1202562_easyicon.net.png";
 
   constructor(public navCtrl: NavController, public authData: AuthData, public fb: FormBuilder, public alertCtrl: AlertController,public loadingCtrl: LoadingController) {
@@ -57,9 +57,8 @@ login(){
 // forgot(){
 //   this.navCtrl.push('ForgotPage');
 // }
-
-createAccount(){
-  this.navCtrl.push('RegisterPage');
+serviceRequest(){
+  console.log('서비스 신청 하는거 구현해야됨')
 }
 
 presentAlert(title) {

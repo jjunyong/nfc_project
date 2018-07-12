@@ -8,7 +8,11 @@
 
 <ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   <div class="login-container">
-    <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/ionic.png?alt=media&token=b56ebc2e-8fe9-46c8-b523-52a7e44db932" />
+      <div class='text' padding margin-top margin-bottom >
+          <p class="title">Palm NFC</p>
+          <p class="subtitle">편리한 재고/정비 관리</p>
+        </div>
+    <!-- <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/ionic.png?alt=media&token=b56ebc2e-8fe9-46c8-b523-52a7e44db932" /> -->
     
     <!--*********** Form ***********-->
     <form [formGroup]="loginForm" (submit)="login()" novalidate>
@@ -35,8 +39,8 @@
         <button ion-button mode="ios" block type="submit" color="blue2">Log in</button>
 
         
-        <button ion-button type="button" mode="ios" block icon-left color="light" outline (click)="createAccount()" margin-top>
-            <ion-icon name="ios-create"></ion-icon> Create new account
+        <button ion-button type="button" mode="ios" block icon-left color="light" outline (click)="serviceRequest()" margin-top>
+            <ion-icon name="ios-create"></ion-icon>서비스 신청하기
         </button>
       </div>
     </form>
