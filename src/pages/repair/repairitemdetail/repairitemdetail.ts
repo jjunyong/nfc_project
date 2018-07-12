@@ -1,8 +1,8 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { FireService } from '../../../providers/FireService'
 import { RepairitemdetailPageModule } from './repairitemdetail.module';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 
@@ -10,6 +10,13 @@ class RepairItem{
   finDate: Date;
   id: string;
   isToggled: boolean;
+}
+
+interface RepairItemLog{
+  title: string,
+  writer: string,
+  description: string;
+  timestamp: Date;
 }
 
 @IonicPage()
@@ -20,6 +27,8 @@ class RepairItem{
 
 
 export class RepairitemdetailPage {
+
+  private itemsCollection: AngularFirestoreCollection<RepairItemLog>; 
 
   RepairItem = new RepairItem();
 
@@ -43,7 +52,8 @@ export class RepairitemdetailPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toast: ToastController,
-    public ref: ChangeDetectorRef,  public fireService : FireService, public afs: AngularFirestore, public alertCtrl: AlertController) {
+    public ref: ChangeDetectorRef,  public fireService : FireService, public afs: AngularFirestore, public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController,) {
 
       this.id = this.navParams.get('id');
       this.serialNum = this.navParams.get('serialNum');
@@ -52,6 +62,28 @@ export class RepairitemdetailPage {
       this.isToggled = this.navParams.get('isToggled');
       this.finDate = this.navParams.get('finDate');
       this.startDate = this.navParams.get('startDate');
+
+
+
+      let loadingPopup = this.loadingCtrl.create({
+        spinner: 'crescent', // icon style //
+        content: '',
+      });
+      loadingPopup.present();
+  
+
+      this.itemsCollection = afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref=>ref.orderBy('timestamp','desc').limit(2))
+      this.items= this.itemsCollection.valueChanges()
+  
+  
+     this.items.subscribe((RepairItemLog)=>{
+          this.itemArray = RepairItemLog;
+          this.itemList = this.itemArray;
+          this.loadedItemList = this.itemArray;
+          loadingPopup.dismiss();
+        });
+  
+
 
   }
 

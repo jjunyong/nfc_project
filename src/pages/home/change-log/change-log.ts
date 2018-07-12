@@ -50,7 +50,7 @@ export class ChangeLogPage {
     public fireService : FireService, private modalCtrl : ModalController,
     public global : GlobalVars) {
 
-      this.changed_type=this.navParams.get('changed_type')
+    this.changed_type=this.navParams.get('changed_type')
     this.startDate = this.navParams.get('startDate')
     this.finDate = this.navParams.get('finDate')
     
@@ -195,6 +195,7 @@ export class FillPage{
      
   }
   Send(){
+
     this.changed_type;
     this.startDate=new Date(this.startDate);
     this.finDate=new Date(this.finDate)

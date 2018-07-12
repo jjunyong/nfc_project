@@ -38,7 +38,8 @@ export class LocationManagePage {
   items : any = [];
   location: string;
   itemgetList : any=[];
-  payload : any;
+  payload : string;
+  seperate: any[];
 
   location1: string;
   location2: string;
@@ -51,7 +52,24 @@ export class LocationManagePage {
     public global : GlobalVars
   ){
 
-    this.payload = this.navParams.get('payload')
+    this.payload = "null";
+
+    //this.payload = this.navParams.get('payload')
+    
+    this.payload = "A-5";
+    
+    if(this.payload!==null){
+
+      this.seperate = this.payload.split('-');
+      this.location1 = this.seperate[0];
+      this.location2 = this.seperate[1];
+
+      console.log(this.location1);
+      console.log(this.location2);
+      
+      this.goTo2()
+
+    }
     // alert(this.payload)
 
 

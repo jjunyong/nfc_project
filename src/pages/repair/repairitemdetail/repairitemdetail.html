@@ -1,3 +1,12 @@
+
+<ion-header>
+  <ion-navbar color="grey-blue">
+    <ion-title>정비 상세 페이지</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
 <ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
 
 
@@ -68,19 +77,29 @@
   </ion-card>
 
 
-  <!--***********  Thumbnail images ***********-->
-  <!-- <ion-card *ngIf="imgGallery?.length > 0 ">
-          <ion-card-header>
-            Photos
-          </ion-card-header>
-          <ion-grid>
-                <ion-row wrap color="gray">
-                  <ion-col tappable col-4 *ngFor="let image of imgGallery  ,let i = index" >
-                  <img class="expanded-image" [src]="image.url" (click)="openFullImage(i)"/>
-                  </ion-col>
-                </ion-row>
-          </ion-grid>
-      </ion-card>
-   -->
+<ion-card-content>
+
+<ion-list>
+  <ion-item-group>
+       <ul class="timeline">
+          <li *ngFor="let item of itemList ">
+              <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/default_image.jpg?alt=media&token=6e8d4469-6873-4161-b017-6181ed4d1c7f" alt="" class="timeline-thumb pop-in">
+                <div class="timeline-item">
+                  <h6>{{item.title}}</h6>
+                  <p>{{item.writer}}</p>
+                  <p>{{item.description}}</p>
+                  <p>{{item.timestamp | date: 'fullDate'}}</p>
+                </div>
+              </li>
+          </ul>
+          <ion-col>
+            <button ion-button icon-center clear small>
+              <ion-icon name="arrow-dropdown" (click)="timeline()">더보기</ion-icon>
+            </button>
+          </ion-col>
+  </ion-item-group>
+</ion-list>
+
+</ion-card-content>
 
 </ion-content>

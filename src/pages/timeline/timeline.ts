@@ -53,7 +53,7 @@ export class TimelinePage {
     });
     loadingPopup.present();
 
-    this.itemsCollection = afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair')
+    this.itemsCollection = afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref=>ref.orderBy('timestamp','desc'))
     this.items= this.itemsCollection.valueChanges()
 
 

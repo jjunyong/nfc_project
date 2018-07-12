@@ -25,11 +25,15 @@ export class MainPage {
   payload: string;
   login: boolean;
 
+  
+
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC,
     public authData: AuthData, public global : GlobalVars) {
 
       this.global.changeMessage(true);
 
+    
+      
       this.afAuth.authState.subscribe((user)=>{
         if(user){
           this.login = true;
