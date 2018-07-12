@@ -32,6 +32,9 @@
         <ion-label stacked>Password</ion-label>
         <ion-input tappable formControlName="password" type="password" placeholder="Your password" [class.invalid]="!registerForm.controls.password.valid && registerForm.controls.password.dirty"></ion-input>
       </ion-item>
+   
+      
+      
 
       
       <ion-item class="error-message">
@@ -43,6 +46,9 @@
                 registerForm.controls.phone.dirty">*Please enter phone number.</p>
         <p *ngIf="!registerForm.controls.password.valid  &&
         registerForm.controls.password.dirty">*Password needs more than 6 characters.</p>
+        
+
+
       </ion-item>
         <button ion-button full type="submit" mode="ios" color="grey-blue">
             Create an Account

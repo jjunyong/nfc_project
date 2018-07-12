@@ -76,7 +76,7 @@ export class ManagePage {
   this.itemList = this.itemList.filter((v) => {
     if(v.model && q) {
       if (v.model.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-        console.log("correct")
+        //console.log("correct")
         this.overlap=true;
         return true;
       }

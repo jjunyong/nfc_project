@@ -18,6 +18,7 @@ import { FireService } from '../providers/FireService';
 import { AuthorizationPage } from './authorization/authorization';
 import { LoginSelectPage } from './app.component'
 import { GlobalVars } from '../providers/global';
+import { FillPage } from '../pages/home/change-log/change-log';
 
 // import { AngularFireStorageModule } from 'angularfire2/storage';
 
@@ -35,6 +36,7 @@ export const config = {
     MyApp,
     AuthorizationPage,
     LoginSelectPage,
+    FillPage
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ export const config = {
     MyApp,
     AuthorizationPage,
     LoginSelectPage,
+    FillPage
   ],  
   providers: [
     StatusBar,

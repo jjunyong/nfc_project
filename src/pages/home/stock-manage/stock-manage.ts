@@ -96,6 +96,7 @@ getItems(searchbar) {
  // console.log(q, this.itemList.length);
 }
 
+
 manage(){  
     let confirm = this.alertCtrl.create({
       title: '새로운 아이템을 추가하겠습니까?',
