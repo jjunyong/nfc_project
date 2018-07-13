@@ -1,11 +1,12 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
-// import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 
 import { NumberFormatStyle } from '@angular/common/src/i18n/locale_data_api';
 import { Observable } from 'rxjs';
 import { GlobalVars } from '../../../../providers/global';
+import { finalize } from 'rxjs/operators';
 
 
 
@@ -38,11 +39,12 @@ export class ItemDetailPage {
   // percentage: Observable<number>;
   // snapshot: Observable<any>;
   // image : string;
-
+  downloadURL
+  uploadPercent
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef, public afs: AngularFirestore, public alertCtrl: AlertController,
-    public toast : ToastController, public global : GlobalVars) {
+    public toast : ToastController, public global : GlobalVars, public storage: AngularFireStorage) {
 
     this.global.changeMessage(false);
 
@@ -181,28 +183,18 @@ export class ItemDetailPage {
 
     confirm.present();
   }
-  
-//   startUpload(event: FileList){
-//     const file = event.item(0);
 
-//     if(file.type.split('/')[0] !== 'image'){
-//       console.error('Unsupported file type!');
-//       return;
-//     }
-
-//     const path = `item_images/${file.name}`;
-//     const customMetadata = { app : 'Capstone App'}
-
-//     this.task = this.storage.upload(path, file, { customMetadata});
-//     this.percentage = this.task.percentageChanges();
-//     this.snapshot = this.task.snapshotChanges();
-
-//     this.task.downloadURL()
-//       .subscribe(url=>{
-//         this.image = url;
-//       })
-//   }
-//   isActive(snapshot){
-//     return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes
-//  }
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = `item_images/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    
+    this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+        finalize(() => this.downloadURL = fileRef.getDownloadURL() )
+     )
+    .subscribe()
+  }
 }

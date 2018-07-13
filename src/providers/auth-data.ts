@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { User } from '../form/user';
 import firebase from 'firebase'
 
@@ -108,21 +108,21 @@ export class AuthData {
   }
 
 
-  registerUser(name: string, email: string, password: string, phone: number): Promise<any> {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((newUser) => {
-      this.afs.collection('users').doc(newUser.uid).set({
-        uid : newUser.uid,
-        email: email,
-        name: name,
-        phone: phone,
-        roles : {
-          subscriber: true,
-          editor : false,
-          admin : false
-        }
-      });
-    });
-  }
+  // registerUser(name: string, email: string, password: string, phone: number): Promise<any> {
+  //   return this.afAuth.auth.createUserWithEmailAndPassword(email, password).then((newUser) => {
+  //     this.afs.collection('users').doc(newUser.uid).set({
+  //       uid : newUser.uid,
+  //       email: email,
+  //       name: name,
+  //       phone: phone,
+  //       roles : {
+  //         subscriber: true,
+  //         editor : false,
+  //         admin : false
+  //       }
+  //     });
+  //   });
+  // }
 
 
 

@@ -8,9 +8,8 @@ import { MyApp } from './app.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
-// import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AuthData } from '../providers/auth-data';
-import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { NFC, Ndef} from '@ionic-native/nfc';
@@ -20,7 +19,6 @@ import { LoginSelectPage } from './app.component'
 import { GlobalVars } from '../providers/global';
 import { FillPage } from '../pages/home/change-log/change-log';
 
-// import { AngularFireStorageModule } from 'angularfire2/storage';
 
 export const config = { 
   apiKey: "AIzaSyACcRwZawea9vXAI0cNz0xsjbHRqP5XTlY",
@@ -42,7 +40,7 @@ export const config = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
-    // AngularFireStorageModule,
+    AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
@@ -58,7 +56,6 @@ export const config = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthData,
-    Facebook,
     GooglePlus,
     NFC,
     Ndef,

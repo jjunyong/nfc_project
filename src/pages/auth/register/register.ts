@@ -38,35 +38,35 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
-  registerUser(){
-    console.log("call signopUser");
-    if (!this.registerForm.valid){
-      console.log(this.registerForm.value);
-      this.presentAlert("invalid form");
-    } else {
+  // registerUser(){
+  //   console.log("call signopUser");
+  //   if (!this.registerForm.valid){
+  //     console.log(this.registerForm.value);
+  //     this.presentAlert("invalid form");
+  //   } else {
 
-      let loadingPopup = this.loadingCtrl.create({
-        spinner: 'crescent', 
-        content: 'Creating..'
-      });
-      loadingPopup.present();
+  //     let loadingPopup = this.loadingCtrl.create({
+  //       spinner: 'crescent', 
+  //       content: 'Creating..'
+  //     });
+  //     loadingPopup.present();
 
-      this.authData.registerUser(
-          this.registerForm.value.profileName, 
-          this.registerForm.value.email, 
-          this.registerForm.value.password,
-          this.registerForm.value.phone)
-      .then(() => {
-          loadingPopup.dismiss();
-          this.navCtrl.setRoot('MainPage');
-      }, (error) => { 
-         var errorMessage: string = error.message;
-          loadingPopup.dismiss();
-          this.presentAlert(errorMessage);      
-      });
+  //     this.authData.registerUser(
+  //         this.registerForm.value.profileName, 
+  //         this.registerForm.value.email, 
+  //         this.registerForm.value.password,
+  //         this.registerForm.value.phone)
+  //     .then(() => {
+  //         loadingPopup.dismiss();
+  //         this.navCtrl.setRoot('MainPage');
+  //     }, (error) => { 
+  //        var errorMessage: string = error.message;
+  //         loadingPopup.dismiss();
+  //         this.presentAlert(errorMessage);      
+  //     });
 
-    }
-  }
+  //   }
+  // }
   presentAlert(title) {
     let alert = this.alertCtrl.create({
       title: title,

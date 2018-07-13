@@ -20,9 +20,6 @@
     
   </div>
 
-  <!--***********  Description ***********-->
-
-
   <!--*********** Contact  ***********-->
   <ion-card>
     <div class="info">
@@ -58,6 +55,11 @@
           <ion-label>Quantity :</ion-label>
           <ion-input type="number" [(ngModel)]="quantity">{{quantity}}</ion-input>
         </ion-item>
+        <ion-item>
+          <ion-icon name="finger-print" item-left color="darkGray"></ion-icon>
+          Model : {{model}}
+        </ion-item>
+
       </ion-list>
     </div>
     <div text-right>
@@ -66,4 +68,17 @@
       </div>
   </ion-card>
 
+  <ion-card>
+    <ion-card-header padding>
+      <strong>Description</strong>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>detail information of corresponding item...</p>
+    </ion-card-content>
+  </ion-card>
+
+  <input type="file" (change)="uploadFile($event)">
+  <div>{{ uploadPercent | async }}</div>
+  <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
 </ion-content>
