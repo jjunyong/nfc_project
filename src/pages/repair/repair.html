@@ -32,7 +32,7 @@
   
   </ion-header>
   
-  <ion-content no-padding>
+  <ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   
   <!--*********** Menu View  ***********-->
   <div *ngIf="viewType==='Menu'">
@@ -55,18 +55,16 @@
   <!--*********** Promotion View  ***********-->
   <div *ngIf="viewType==='Notice'">
   
-      <ion-list class="wave">
-          <ion-item tappable (click)="RepairNoticePage" *ngFor="let item of items ">
-              <!-- <ion-thumbnail item-left> -->
-                  <!-- <img [src]="'url(' + item.imgSmall+ ')'"> -->
-              <!-- </ion-thumbnail> -->
-              <h2>{{item.title}}</h2>
-              <p>{{item.description}}</p> 
-          </ion-item>
+      <ion-card class="wave">
+            <ion-item class="notices" tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
+                <h2><font color="white">{{item.title}}</font></h2>
+                <p><font color="light">{{item.writer}}, {{item.timestamp | date}}</font></p>
+            </ion-item>
+        </ion-card>
+
           <ion-fab right bottom>
-            <button ion-fab color="grey-blue"><ion-icon name="add"></ion-icon></button>
+            <button ion-fab color="grey-blue" (click)="manage()"><ion-icon name="add"></ion-icon></button>
           </ion-fab>
-      </ion-list>
       <!-- <ion-grid >
           <ion-row wrap>
             <ion-col col-6  tappable  *ngFor="let item of items" (click)="goToDetail(item.$key)" color="gray">

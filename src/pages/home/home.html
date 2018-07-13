@@ -34,7 +34,7 @@
 
 </ion-header>
 
-<ion-content no-padding>
+<ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
 
 <!--*********** Menu View  ***********-->
 <div *ngIf="viewType==='Menu'">
