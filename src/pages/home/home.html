@@ -39,26 +39,33 @@
 <!--*********** Menu View  ***********-->
 <div *ngIf="viewType==='Menu'">
 
-<ion-card tappable class="card-list-wave" (click)="openManage()">
-    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%9E%85%EC%B6%9C%EA%B3%A0.jpg?alt=media&token=d500967c-5cf6-4650-880b-18a73ffd31ea'+ ')'}">
-        <h2 class="card-list-title">입고 및 출고</h2>
-        <p class="card-list-description">Do export and import!</p>
-    </div>
-</ion-card>
+        <div class="card-background-page">
+                <ion-row>
+    <ion-col col-12 col-md-4>
+        <ion-card (click)="openManage()">
+          <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/black-and-white-close-up-equipment-210881.jpg?alt=media&token=cf62ebc3-2e4f-48da-b96e-336a1381521c" height="350"/>
+          <div class="card-title">입고 및 출고</div>
+          <div class="card-subtitle">Do export and import</div>
+        </ion-card>
+            </ion-col>
 
-<ion-card tappable class="card-list-wave" (click)="openLog()">
-        <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/stock_search.jpeg?alt=media&token=1c63956d-d22b-4627-bd13-14f1dda466dc'+ ')'}">
-            <h2 class="card-list-title">입출고 이력 검색</h2>
-            <p class="card-list-description">Checkout Logs of ex,import</p>
-        </div>
-</ion-card>
-
-<ion-card tappable class="card-list-wave" (click)="locationManage()">
-    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%9C%84%EC%B9%98%EB%B3%84%20%EC%A1%B0%ED%9A%8C.jpg?alt=media&token=f6742a67-27b8-44c1-9e3c-e68d6f8aefc3'+ ')'}">
-        <h2 class="card-list-title">위치별 조회</h2>
-        <p class="card-list-description">Search by location</p>
+    <ion-col col-12 col-md-4>
+                    <ion-card (click)="openLog()">
+                      <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/black-and-white-close-up-equipment-210881.jpg?alt=media&token=cf62ebc3-2e4f-48da-b96e-336a1381521c" height="350"/>
+                      <div class="card-title">입출고 이력 검색</div>
+                      <div class="card-subtitle">Checkout Logs of ex,import</div>
+                    </ion-card>
+                        </ion-col>
+            
+    <ion-col col-12 col-md->
+        <ion-card (click)="locationManage()">
+          <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/carpentry-close-up-equipment-220638.jpg?alt=media&token=c9cc9ef5-4e7b-47f8-9640-439f01b40d1e" height="350"/>
+          <div class="card-title">위치별 조회</div>
+          <div class="card-subtitle">Search by location</div>
+        </ion-card>
+        </ion-col>
+    </ion-row>
     </div>
-</ion-card>
 
 </div>
 
