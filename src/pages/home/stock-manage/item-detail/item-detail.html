@@ -1,33 +1,35 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar color="grey-blue" transparent [class.show-background]="showToolbar">
     <ion-title color="grey-blue" [hidden]="!showToolbar">Detail</ion-title>
   </ion-navbar>
+</ion-header> -->
+<ion-header>
+  <ion-navbar color="grey-blue">
+    <ion-title></ion-title>
+  </ion-navbar>
 </ion-header>
-<!-- <ion-header>
-        <ion-navbar>
-          <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-          </button>
-          <ion-title></ion-title>
-        </ion-navbar>
-      </ion-header> -->
 
-<ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
+<!-- <ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition"> -->
+<ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
 
   <!--*********** Image header  ***********-->
-  <div class="detail-header" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/login.jpg?alt=media&token=86151782-4372-4ec3-84e7-c2ef76b4a663' + ')'}">
-    <h2 class="detail-name ">{{model}}</h2>
-    
+  <!-- <div class="detail-header">
+    <h2 class="detail-name ">{{model}}</h2>  
+  </div> -->
+  <div class="title">
+    <h2 margin-left>
+      <font color="white">Model : {{model}}</font>
+    </h2>
   </div>
 
   <!--*********** Contact  ***********-->
-  <ion-card>
+  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
     <div class="info">
-      <ion-list no-lines>
+      <ion-list block no-lines>
 
-        <ion-item>
+        <ion-item class="item1">
           <ion-icon name="pin" item-left color="darkGray"></ion-icon>
-          <ion-label strong>Location1 : </ion-label>
+          <ion-label color="white" strong>Location1 : </ion-label>
           <ion-select [(ngModel)]="location1">
             <ion-option value="A">A</ion-option>
             <ion-option value="B">B</ion-option>
@@ -38,9 +40,9 @@
           </ion-select>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="item2">
           <ion-icon name="pin" item-left color="light"></ion-icon>
-          <ion-label strong>Location2 : </ion-label>
+          <ion-label color="white" strong>Location2 : </ion-label>
           <ion-select [(ngModel)]="location2">
             <ion-option value="1">1</ion-option>
             <ion-option value="2">2</ion-option>
@@ -50,35 +52,30 @@
           </ion-select>
         </ion-item>
 
-        <ion-item>
+        <ion-item class="item3">
           <ion-icon name="stats" item-left color="darkGray"></ion-icon>
-          <ion-label>Quantity :</ion-label>
+          <ion-label color="white">Quantity :</ion-label>
           <ion-input type="number" [(ngModel)]="quantity">{{quantity}}</ion-input>
         </ion-item>
-        <ion-item>
-          <ion-icon name="finger-print" item-left color="darkGray"></ion-icon>
-          Model : {{model}}
-        </ion-item>
-
       </ion-list>
     </div>
     <div text-right>
-        <button ion-button color="grey-blue" clear (click)="confirm($event, item)">Confirm</button>
-        <button ion-button color="grey-blue" clear (click)="delete()">Delete</button>
-      </div>
+      <button ion-button color="vague-blue" clear (click)="confirm($event, item)">Confirm</button>
+      <button ion-button color="vague-blue" clear (click)="delete()">Delete</button>
+    </div>
   </ion-card>
 
-  <ion-card>
-    <ion-card-header padding>
+  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
+    <ion-card-header padding color="vague-blue">
       <strong>Description</strong>
     </ion-card-header>
 
-    <ion-card-content>
+    <ion-card-content >
       <p>detail information of corresponding item...</p>
     </ion-card-content>
   </ion-card>
 
   <input type="file" (change)="uploadFile($event)">
   <div>{{ uploadPercent | async }}</div>
-  <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+  <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
 </ion-content>

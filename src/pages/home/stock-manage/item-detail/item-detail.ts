@@ -34,6 +34,8 @@ export class ItemDetailPage {
   public pre_id: any;
   public changed_quantity: any;
 
+  backgroundImage="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
+  cardImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%852.png?alt=media&token=78826653-cbd4-442d-9607-0b03983167b5"
 
   // task: AngularFireUploadTask;
   // percentage: Observable<number>;
@@ -196,5 +198,12 @@ export class ItemDetailPage {
         finalize(() => this.downloadURL = fileRef.getDownloadURL() )
      )
     .subscribe()
+
+     task.downloadURL()
+      .subscribe((url)=>{
+        this.afs.collection('item').doc(this.id).collection('images').add({
+          image_url : url
+        })
+      })
   }
 }
