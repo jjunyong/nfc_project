@@ -12,15 +12,20 @@
 
 
 <ion-content>
-
-     <ion-list>
-    <ion-item *ngFor="let item of itemList" (click)="openDetail(item)">
-     <h3> {{ item.model }}</h3>
-     <h3> {{ item.serialNum }}</h3>
-     
- 
-    </ion-item>
-  </ion-list>
+  <ion-row>
+    <ion-col col-12 col-md-4 col-xl-3  *ngFor="let item of itemList" >
+        <ion-card (click)="openDetail(item)">            
+            <img src="{{item.Image}}" height="200">
+            <ion-card-content>
+              <ion-card-title>
+                {{item.model}}
+                </ion-card-title>
+               <h5>설비번호: {{item.serialNum}}</h5>
+               <h6>정비담당: {{item.repairman}}</h6>
+            </ion-card-content>
+          </ion-card>
+    </ion-col>
+  </ion-row>
 
   <ion-fab right bottom>
     <button color="grey-blue" (click)="manage()" ion-fab><ion-icon name="add"></ion-icon></button>

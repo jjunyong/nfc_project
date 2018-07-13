@@ -178,4 +178,20 @@ repairfin(){
   }
 
 
+  more(){
+
+    this.itemsCollection = this.afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref=>ref.orderBy('timestamp','desc'))
+    this.items= this.itemsCollection.valueChanges()
+
+
+   this.items.subscribe((RepairItemLog)=>{
+        this.itemArray = RepairItemLog;
+        this.itemList = this.itemArray;
+        this.loadedItemList = this.itemArray;
+      });
+
+  
+  }
+
+
 }

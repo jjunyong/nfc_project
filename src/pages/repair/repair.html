@@ -33,23 +33,31 @@
   </ion-header>
   
   <ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+      <ion-grid>
   
   <!--*********** Menu View  ***********-->
   <div *ngIf="viewType==='Menu'">
 
-
-<ion-card tappable class="card-list-wave" (click)="openLog()">
-    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%A0%95%EB%B9%84%EC%9D%B4%EB%A0%A5.jpeg?alt=media&token=911e3ad6-448e-4124-9da2-6f9584591c6c'+ ')'}">
-        <h2 class="card-list-title">정비 이력</h2>
-        <p class="card-list-description">Checkout Repair History</p>
-    </div>
-</ion-card>
-<ion-card tappable class="card-list-wave" (click)="openOnMaintenance()">
-    <div class="card-list-bg" [ngStyle]="{'background-image': 'url(' + 'https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%A0%95%EB%B9%84%EC%A4%91%EC%9D%B8%EC%95%84%EC%9D%B4%ED%85%9C.png?alt=media&token=f2eff517-7698-42ac-a894-eb145e15fc5a'+ ')'}">
-        <h2 class="card-list-title">정비 중인 아이템</h2>
-        <p class="card-list-description">Items on maintenance</p>
-    </div>
-</ion-card>
+        <div class="card-background-page">
+                        <ion-row>
+                            <ion-col col-12 col-md-6>
+                <ion-card (click)="openLog()">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/black-and-white-close-up-equipment-210881.jpg?alt=media&token=cf62ebc3-2e4f-48da-b96e-336a1381521c" height="350"/>
+                  <div class="card-title">정비 이력</div>
+                  <div class="card-subtitle">Checkout Repair History</div>
+                </ion-card>
+                    </ion-col>
+        
+                    <ion-col col-12 col-md-6>
+                <ion-card (click)="openOnMaintenance()">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/carpentry-close-up-equipment-220638.jpg?alt=media&token=c9cc9ef5-4e7b-47f8-9640-439f01b40d1e" height="350"/>
+                  <div class="card-title">정비 중인 아이템</div>
+                  <div class="card-subtitle">Items on maintenance</div>
+                </ion-card>
+                </ion-col>
+                        </ion-row>
+            </div>
+        
 </div>
   
   <!--*********** Promotion View  ***********-->
@@ -81,5 +89,5 @@
           </ion-row>
       </ion-grid> -->
   </div>
-  
+</ion-grid>
   </ion-content>
