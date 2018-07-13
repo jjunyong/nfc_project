@@ -43,7 +43,7 @@ export class ChangeLogPage {
   
   items_2 : any = [];
   itemTemp : any = [];
-  changed_type : any;
+  changed_type : string;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private afs: AngularFirestore,
@@ -57,102 +57,57 @@ export class ChangeLogPage {
     // if(this.startDate==null){
     //   this.startDate.
     // }
-    
-    if((this.finDate==null)||(this.startDate==null)){
-      if(this.changed_type=="import"){
-        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
-        this.items= this.itemsCollection.valueChanges();
-        this.items.subscribe((item)=>{
-              console.log(this.items)
-              this.itemArray = item;
-              this.itemList = this.itemArray;
-              this.loadedItemList = this.itemArray;
-              //loadingPopup.dismiss();
-        })
-        }
-          if(this.changed_type=="export"){
-            this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export'));
-            
-            this.items= this.itemsCollection.valueChanges();
-            this.items.subscribe((item)=>{
-                  console.log(this.items)
-                  this.itemArray = item;
-                  this.itemList = this.itemArray;
-                  this.loadedItemList = this.itemArray;
-                  //loadingPopup.dismiss();
-            })
-          }
-    
-          if(this.changed_type=="location_changed"){
-          this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed'));
-          
-            this.items= this.itemsCollection.valueChanges();
-          this.items.subscribe((item)=>{
-              console.log(this.items)
-              this.itemArray = item;
-              this.itemList = this.itemArray;
-              this.loadedItemList = this.itemArray;
-              //loadingPopup.dismiss();
-        })
-          }
 
-    // this.global.currentMessage.subscribe(message => this.show = message)
-    this.global.changeMessage(false)
-     
   }
-
-
-    
+  getType(get){
+    console.log("input")
     
     if(this.changed_type=="import"){
-    this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import'));
-    this.items= this.itemsCollection.valueChanges();
-    this.items.subscribe((item)=>{
-          console.log(this.items)
-          this.itemArray = item;
-          this.itemList = this.itemArray;
-          this.loadedItemList = this.itemArray;
-          //loadingPopup.dismiss();
-    })
-    }
-      if(this.changed_type=="export"){
-        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
         
-        this.items= this.itemsCollection.valueChanges();
-        this.items.subscribe((item)=>{
-              console.log(this.items)
-              this.itemArray = item;
-              this.itemList = this.itemArray;
-              this.loadedItemList = this.itemArray;
-              //loadingPopup.dismiss();
-        })
-      }
-
-      if(this.changed_type=="location_changed"){
-      this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
-      
-        this.items= this.itemsCollection.valueChanges();
+      this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import'));
+      this.items= this.itemsCollection.valueChanges();
       this.items.subscribe((item)=>{
-          console.log(this.items)
-          this.itemArray = item;
-          this.itemList = this.itemArray;
-          this.loadedItemList = this.itemArray;
-          //loadingPopup.dismiss();
-    })
+            console.log(this.items)
+            this.itemArray = item;
+            this.itemList = this.itemArray;
+            this.loadedItemList = this.itemArray;
+            //loadingPopup.dismiss();
+      })
       }
+      if(this.changed_type=="export"){
+          this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export'));
+          this.items= this.itemsCollection.valueChanges();
+          this.items.subscribe((item)=>{
+                console.log(this.items)
+                this.itemArray = item;
+                this.itemList = this.itemArray;
+                this.loadedItemList = this.itemArray;
+                //loadingPopup.dismiss();
+          })
+        }
+  
+        if(this.changed_type=="location_changed"){
+          this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed'));
+          this.items= this.itemsCollection.valueChanges();
+          this.items.subscribe((item)=>{
+                console.log(this.items)
+                this.itemArray = item;
+                this.itemList = this.itemArray;
+                this.loadedItemList = this.itemArray;
+                //loadingPopup.dismiss();
+          })
+        }
 
-
-  }
-
-  ionViewDidLoad() {
+  }  
+ionViewDidLoad() {
     console.log('ionViewDidLoad ChangeLogPage');
   }
 
-  Fill_in(){
-    console.log("fill-in")
-    let modal = this.modalCtrl.create(FillPage);  //수정필요
-    modal.present();
-  }
+  // Fill_in(){
+  //   console.log("fill-in")
+  //   let modal = this.modalCtrl.create(FillPage);  //수정필요
+  //   modal.present();
+  // }
 
 
 
@@ -167,8 +122,80 @@ export class ChangeLogPage {
     })
   }
   
+  SearchTime(){
+    //console.log(this.itemArray);
+    
+    this.startDate=new Date(this.startDate);
+    this.finDate=new Date(this.finDate)
+    this.finDate.setHours(23);
+    this.finDate.setMinutes(59);
+    this.finDate.setSeconds(59);
 
+    console.log(this.changed_type);
+    console.log(this.startDate)
+    console.log(this.finDate)
+
+   if(this.changed_type){
+    if(this.changed_type=="import"){
+    this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+    this.items= this.itemsCollection.valueChanges();
+    this.items.subscribe((item)=>{
+          console.log(this.items)
+          this.itemArray = item;
+          this.itemList = this.itemArray;
+          this.loadedItemList = this.itemArray;
+          //loadingPopup.dismiss();
+    })
+    }
+    if(this.changed_type=="export"){
+        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+        this.items= this.itemsCollection.valueChanges();
+        this.items.subscribe((item)=>{
+              console.log(this.items)
+              this.itemArray = item;
+              this.itemList = this.itemArray;
+              this.loadedItemList = this.itemArray;
+              //loadingPopup.dismiss();
+        })
+      }
+
+      if(this.changed_type=="location_changed"){
+        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+        this.items= this.itemsCollection.valueChanges();
+        this.items.subscribe((item)=>{
+              console.log(this.items)
+              this.itemArray = item;
+              this.itemList = this.itemArray;
+              this.loadedItemList = this.itemArray;
+              //loadingPopup.dismiss();
+        })
+      }
+      
+  }
+  else{
+    console.log("no type")
+    this.itemsCollection = this.afs.collection<Log>('log', ref=>ref.where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+    this.items= this.itemsCollection.valueChanges();
+    this.items.subscribe((item)=>{
+          console.log(this.items)
+          this.itemArray = item;
+          this.itemList = this.itemArray;
+          this.loadedItemList = this.itemArray;
+          //loadingPopup.dismiss();
+    })
+
+  }
+
+
+
+  
+
+
+
+  }
 }
+
+
 
 @Component({
   templateUrl: 'fill.html',
@@ -176,40 +203,40 @@ export class ChangeLogPage {
 })
 export class FillPage{
 
-  startDate : Date
-  finDate : Date
+  // startDate : Date
+  // finDate : Date
 
-  public itemsCollection: AngularFirestoreCollection<Log>; 
-  items : any = [];
-  itemList : any=[]; 
-  itemArray : any = [];
-  loadedItemList:  any=[]; 
+  // public itemsCollection: AngularFirestoreCollection<Log>; 
+  // items : any = [];
+  // itemList : any=[]; 
+  // itemArray : any = [];
+  // loadedItemList:  any=[]; 
   
-  items_2 : any = [];
-  itemTemp : any = [];
-  changed_type : any;
+  // items_2 : any = [];
+  // itemTemp : any = [];
+  // changed_type : any;
   
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private afs: AngularFirestore,
-    public fireService : FireService, private modalCtrl : ModalController) {
+  // constructor(public navCtrl: NavController, public navParams: NavParams,
+  //   private afs: AngularFirestore,
+  //   public fireService : FireService, private modalCtrl : ModalController) {
      
-  }
-  Send(){
+  // }
+  // Send(){
 
-    this.changed_type;
-    this.startDate=new Date(this.startDate);
-    this.finDate=new Date(this.finDate)
-    this.finDate.setHours(23);
-    this.finDate.setMinutes(59);
-    this.finDate.setSeconds(59);
-    this.navCtrl.push('ChangeLogPage', {
-      startDate : this.startDate,
-      finDate : this.finDate,
-      changed_type : this.changed_type
-    })
+  //   this.changed_type;
+  //   this.startDate=new Date(this.startDate);
+  //   this.finDate=new Date(this.finDate)
+  //   this.finDate.setHours(23);
+  //   this.finDate.setMinutes(59);
+  //   this.finDate.setSeconds(59);
+  //   this.navCtrl.push('ChangeLogPage', {
+  //     startDate : this.startDate,
+  //     finDate : this.finDate,
+  //     changed_type : this.changed_type
+  //   })
 
   
-  }
+  // }
   
   // SerchTime(){
   //   //console.log(this.itemArray);

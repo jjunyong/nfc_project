@@ -23,6 +23,25 @@
 
 
 <ion-content padding>
+    <ion-item>
+        <ion-label>Type</ion-label>
+        <ion-select [(ngModel)]="changed_type" (ionChange)="getType()">
+          <ion-option value="import">Import</ion-option>
+          <ion-option value="export">Export</ion-option>
+          <ion-option value="location_changed">Location Changed</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+
+    <ion-label>시작일: </ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
+</ion-item>
+<ion-item>
+    <ion-label>종료일: </ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
+</ion-item>
+
+<button ion-button full color="grey-blue"  (click)="SearchTime()" margin-top >confirm</button>
 <ion-list>
     <ion-item *ngFor="let item of itemList" (click)="openDetail(item)">
       <h2> <strong>{{ item.model }}</strong> </h2>

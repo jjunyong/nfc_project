@@ -14,6 +14,10 @@ class Item{
   quantity : number;
   id : string;
 }
+// class modify{
+//   model : any;
+//   attribute : any;
+// }
 
 @IonicPage()
 @Component({
@@ -30,6 +34,10 @@ export class StockManagePage {
   itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
+  // modifyList : modify;
+  count : number=0;
+
+
 
   
   constructor( public loadingCtrl: LoadingController,
@@ -98,7 +106,12 @@ getItems(searchbar) {
  // console.log(q, this.itemList.length);
 }
 
+remove(){
+  
+}
+add(){
 
+}
 manage(){  
     let confirm = this.alertCtrl.create({
       title: '새로운 아이템을 추가하겠습니까?',
