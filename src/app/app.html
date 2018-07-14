@@ -10,7 +10,7 @@
   }
 </style>
 
-<ion-header *ngIf = "show" no-border>
+<ion-header *ngIf="show" no-border>
   <ion-toolbar color="grey-blue">
     <button class="topNav" ion-button clear color="white" (click)="openMain()">
       <ion-icon name="home"></ion-icon>
@@ -78,6 +78,26 @@
   </ion-content>
 </ion-menu>
 
+
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <ion-title margin-top style="text-align:center">Palm CLOUD</ion-title>
+          <p style="text-align:center"><font color="white">NFC</font></p>
+        </ion-col>
+        <ion-col col3></ion-col>
+        <ion-col col-3>
+          <div>
+            <p style="text-align:center">CEO : ZadPARk@palmCLOUD.co.kr</p>
+            <p style="text-align:center">Powered by Palm CLOUD</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
