@@ -12,6 +12,8 @@ interface RepairItem {
   repairman: string;
   id: string;
   isToggled: boolean;
+  startDate: Date;
+  finDate: Date;
 }
 
 @IonicPage()
@@ -124,7 +126,9 @@ export class MaintenanceLogPage {
       id: item.id,
       serialNum: item.serialNum,
       repairman: item.repairman,
-      isToggled: item.isToggled
+      isToggled: item.isToggled,
+      startDate: item.startDate,
+      finDate: item.finDate
     })
   }
 }

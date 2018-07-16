@@ -48,11 +48,11 @@
         </ion-toggle>
       </ion-item>
       <ion-item class="item2">
-        <ion-label color="white">정비 시작일: </ion-label>
+        <ion-label color="white">정비 시작일: {{startDate}}</ion-label>
         <ion-datetime color="white" displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
       </ion-item>
       <ion-item class="item3" *ngIf="isToggled">
-        <ion-label color="white">정비 종료일: </ion-label>
+        <ion-label color="white">정비 종료일: {{finDate}} </ion-label>
         <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
       </ion-item>
     </ion-card-content>

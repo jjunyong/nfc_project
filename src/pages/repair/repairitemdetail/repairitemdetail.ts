@@ -45,8 +45,8 @@ export class RepairitemdetailPage {
   model:string;
   repairman:string;
 
-  startDate : string;
-  finDate : string
+  startDate : Date;
+  finDate : Date
   isToggled: boolean;
 
   backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
@@ -124,7 +124,7 @@ repairfin(){
     console.log(this.isToggled)
     this.RepairItem.isToggled = this.isToggled
     this.RepairItem.finDate = new Date()
-    this.finDate = this.RepairItem.finDate.toISOString();
+    this.finDate = this.RepairItem.finDate;
     this.RepairItem.id = this.id
     this.fireService.finAdd(this.RepairItem)
     console.log(this.finDate)
