@@ -65,17 +65,31 @@
     </div>
   </ion-card>
 
+ 
+
+  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
+    <ion-card-header color="vague-blue">
+      Photos
+    </ion-card-header>
+    <ion-grid>
+      <ion-row wrap color="dark">
+        <ion-col (click)="openFullImage()" tappable col-4 col-md-2 *ngFor="let image of imgGallery, let i = index">
+          <img class="expanded-image" [src]="image.image_url"/>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+  <input type="file" (change)="uploadFile($event)">
+  <div>{{ uploadPercent | async }}</div>
+  <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
+
   <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
     <ion-card-header padding color="vague-blue">
       <strong>Description</strong>
     </ion-card-header>
 
-    <ion-card-content >
+    <ion-card-content>
       <p>detail information of corresponding item...</p>
     </ion-card-content>
   </ion-card>
-
-  <input type="file" (change)="uploadFile($event)">
-  <div>{{ uploadPercent | async }}</div>
-  <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
 </ion-content>

@@ -1,10 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
-import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
-
-import { NumberFormatStyle } from '@angular/common/src/i18n/locale_data_api';
-import { Observable } from 'rxjs';
+import { AngularFireStorage } from 'angularfire2/storage';
 import { GlobalVars } from '../../../../providers/global';
 import { finalize } from 'rxjs/operators';
 
@@ -34,19 +31,17 @@ export class ItemDetailPage {
   public pre_id: any;
   public changed_quantity: any;
 
-  backgroundImage="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
+  backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
   cardImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%852.png?alt=media&token=78826653-cbd4-442d-9607-0b03983167b5"
 
-  // task: AngularFireUploadTask;
-  // percentage: Observable<number>;
-  // snapshot: Observable<any>;
-  // image : string;
   downloadURL
   uploadPercent
+  imgGallery = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef, public afs: AngularFirestore, public alertCtrl: AlertController,
-    public toast : ToastController, public global : GlobalVars, public storage: AngularFireStorage) {
+    public toast: ToastController, public global: GlobalVars, public storage: AngularFireStorage,
+    public modalCtrl: ModalController) {
 
     this.global.changeMessage(false);
 
@@ -61,6 +56,15 @@ export class ItemDetailPage {
     this.pre_location1 = this.location1
     this.pre_location2 = this.location2
     this.pre_model = this.model
+
+
+    console.log(this.id);
+    this.afs.collection('item').doc(this.id).collection('images').valueChanges()
+      .subscribe((images) => {
+        this.imgGallery = images;
+      })
+
+
   }
 
 
@@ -159,7 +163,7 @@ export class ItemDetailPage {
           text: 'Yes',
           handler: () => {
             this.afs.collection('item').doc(this.id).delete().then(() => {
-              
+
               let toast = this.toast.create({
                 message: "성공적으로 삭제하였습니다.",
                 duration: 2000,
@@ -188,22 +192,32 @@ export class ItemDetailPage {
 
   uploadFile(event) {
     const file = event.target.files[0];
-    const filePath = `item_images/${file.name}`;
+    const filePath = `item_images/${this.model}/${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-    
+
     this.uploadPercent = task.percentageChanges();
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
-        finalize(() => this.downloadURL = fileRef.getDownloadURL() )
-     )
-    .subscribe()
+      finalize(() => this.downloadURL = fileRef.getDownloadURL())
+    )
+      .subscribe()
 
-     task.downloadURL()
-      .subscribe((url)=>{
-        this.afs.collection('item').doc(this.id).collection('images').add({
-          image_url : url
+    task.downloadURL()
+      .subscribe((url) => {
+
+        const doc_id = this.afs.createId();
+        this.afs.collection('item').doc(this.id).collection('images').doc(doc_id).set({
+          image_url: url,
+          id : doc_id
         })
       })
+  }
+
+  openFullImage() {
+    let modal = this.modalCtrl.create('GalleryPage', {
+      id : this.id
+    });
+    modal.present();
   }
 }

@@ -7,7 +7,7 @@ export class GlobalVars {
     private messageSource = new BehaviorSubject<boolean>(true);
     currentMessage = this.messageSource.asObservable();
 
-    constructor() {
+    constructor(){
     }
 
     changeMessage(message : boolean){

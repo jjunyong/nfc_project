@@ -18,7 +18,7 @@ import { AuthorizationPage } from './authorization/authorization';
 import { LoginSelectPage } from './app.component'
 import { GlobalVars } from '../providers/global';
 import { FillPage } from '../pages/home/change-log/change-log';
-
+import { GalleryPage } from '../pages/home/stock-manage/item-detail/gallery';
 
 export const config = { 
   apiKey: "AIzaSyACcRwZawea9vXAI0cNz0xsjbHRqP5XTlY",
