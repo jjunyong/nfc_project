@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-navbar color="grey-blue">
     <ion-title>정비 상세 페이지</ion-title>
@@ -7,14 +6,21 @@
 </ion-header>
 
 
-<ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
+<ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
 
+  <div class="title">
+    <h2 margin-left>
+      <font color="white">Model : {{model}}</font>
+    </h2>
+    <p margin-left>
+      <font color="white">serialNum : {{serialNum}}</font>
+    </p>
+  </div>
 
   <!--***********  Description ***********-->
   <!--*********** Contact  ***********-->
-  <ion-card>
+  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
     <ion-card-header padding>
-      <strong>Item Info</strong>
       <div text-right>
         <button ion-button color="blue-gray" clear (click)="confirm($event, item)">Confirm</button>
         <button ion-button color="blue-gray" clear (click)="delete()">Delete</button>
@@ -23,83 +29,60 @@
 
     <div class="info">
       <ion-list no-lines>
-        <ion-item>
-          <ion-icon name="cube" item-left color="darkGray"></ion-icon>
-          model : {{model}}
-        </ion-item>
-
-        <ion-item>
-          <ion-icon name="finger-print" item-left color="darkGray"></ion-icon>
-          SerialNum : {{serialNum}}
-        </ion-item>
-
-        <ion-item>
-          <ion-icon name="person" item-left color="darkGray"></ion-icon>
-          정비담당 : {{repairman}}
+        <ion-item class="item1">
+          <ion-icon name="person" item-left color="white"></ion-icon>
+          <font color="white">정비담당 : {{repairman}}</font>
         </ion-item>
       </ion-list>
     </div>
   </ion-card>
 
-  <ion-card>
+  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
     <ion-card-header padding>
-      <ion-fab right bottom>
-        <button ion-fab color="light">
-          <ion-icon name="arrow-dropleft"></ion-icon>
-        </button>
-        <ion-fab-list side="left">
-          <button ion-fab (click)="add()">
-            <ion-icon name="add"></ion-icon>
-          </button>
-          <button ion-fab (click)="timeline()">
-            <ion-icon name="time"></ion-icon>
-          </button>
-        </ion-fab-list>
-      </ion-fab>
-      <strong>Description</strong>
     </ion-card-header>
 
-    <ion-card-content>
-      <ion-item *ngIf="startDate">
-        <ion-label>정비 종료</ion-label>
+    <ion-card-content no-padding>
+      <ion-item class="item1" *ngIf="startDate">
+        <ion-label color="white">정비 종료</ion-label>
         <ion-toggle (ionChange)="repairfin()" checked="{{isToggled}}" [(ngModel)]="isToggled">
         </ion-toggle>
       </ion-item>
-      <ion-item>
-        <ion-label>정비 시작일: </ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
+      <ion-item class="item2">
+        <ion-label color="white">정비 시작일: </ion-label>
+        <ion-datetime color="white" displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
       </ion-item>
-      <ion-item *ngIf="isToggled">
-        <ion-label>정비 종료일: </ion-label>
+      <ion-item class="item3" *ngIf="isToggled">
+        <ion-label color="white">정비 종료일: </ion-label>
         <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
       </ion-item>
     </ion-card-content>
   </ion-card>
 
 
-<ion-card-content>
+  <ion-card-content>
 
-<ion-list>
-  <ion-item-group>
-       <ul class="timeline">
+    <ion-list>
+      <ion-item-group>
+        <ul class="timeline">
           <li *ngFor="let item of itemList ">
-              <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/default_image.jpg?alt=media&token=6e8d4469-6873-4161-b017-6181ed4d1c7f" alt="" class="timeline-thumb pop-in">
-                <div class="timeline-item">
-                  <h6>{{item.title}}</h6>
-                  <p>{{item.writer}}</p>
-                  <p>{{item.description}}</p>
-                  <p>{{item.timestamp | date: 'fullDate'}}</p>
-                </div>
-              </li>
-          </ul>
-          <ion-col>
-            <button ion-button icon-center clear small>
-              <ion-icon name="arrow-dropdown" (click)="more()">더보기</ion-icon>
-            </button>
-          </ion-col>
-  </ion-item-group>
-</ion-list>
+            <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/default_image.jpg?alt=media&token=6e8d4469-6873-4161-b017-6181ed4d1c7f"
+              alt="" class="timeline-thumb pop-in">
+            <div class="timeline-item">
+              <h6><font color="white">{{item.title}}</font></h6>
+              <p><font color="white">{{item.writer}}</font></p>
+              <p><font color="white">{{item.description}}</font></p>
+              <p><font color="white">{{item.timestamp | date: 'fullDate'}}</font></p>
+            </div>
+          </li>
+        </ul>
+        <ion-col>
+          <button ion-button icon-center clear small>
+            <ion-icon name="arrow-dropdown" (click)="more()">더보기</ion-icon>
+          </button>
+        </ion-col>
+      </ion-item-group>
+    </ion-list>
 
-</ion-card-content>
+  </ion-card-content>
 
 </ion-content>
