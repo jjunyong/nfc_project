@@ -31,9 +31,10 @@ class Log{
   templateUrl: 'change-log.html',
 })
 export class ChangeLogPage {  
-  
+  //startDate = new Date().setTime(1999)
   startDate : Date
   finDate : Date
+  midDate : Date
 
   public itemsCollection: AngularFirestoreCollection<Log>; 
   items : any = [];
@@ -49,15 +50,14 @@ export class ChangeLogPage {
     private afs: AngularFirestore,
     public fireService : FireService, private modalCtrl : ModalController,
     public global : GlobalVars) {
-
+    
     this.changed_type=this.navParams.get('changed_type')
     this.startDate = this.navParams.get('startDate')
     this.finDate = this.navParams.get('finDate')
     
-    // if(this.startDate==null){
-    //   this.startDate.
-    // }
-
+    this.midDate=new Date();
+    this.midDate.setMilliseconds(888);
+    console.log("this", this.midDate)
   }
   getType(get){
     //console.log("input")
@@ -113,16 +113,18 @@ ionViewDidLoad() {
   
   SearchTime(){
     //console.log(this.itemArray);
-    
-    this.startDate=new Date(this.startDate);
-    this.finDate=new Date(this.finDate)
+    this.startDate=new Date (this.startDate);
+    this.finDate=new Date (this.finDate);
+
     this.finDate.setHours(23);
     this.finDate.setMinutes(59);
     this.finDate.setSeconds(59);
-
+  
+    
     console.log(this.changed_type);
     console.log(this.startDate)
-    console.log(this.finDate)
+    console.log(this.finDate);
+    console.log(this.midDate);
 
    if(this.changed_type){
     if(this.changed_type=="import"){
@@ -167,7 +169,6 @@ ionViewDidLoad() {
           this.itemArray = item;
           this.itemList = this.itemArray;
           this.loadedItemList = this.itemArray;
-          //loadingPopup.dismiss();
     })
 
   }
