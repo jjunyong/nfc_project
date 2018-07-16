@@ -9,8 +9,8 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AuthorizationPage } from './authorization/authorization';
 import { subscribeOn } from 'rxjs/operator/subscribeOn';
 import { GlobalVars } from '../providers/global';
- 
-
+import { QrcodePage } from '../pages/qrcode/qrcode';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner'
 
 @Component({
   selector: 'ion-app',
@@ -27,6 +27,11 @@ export class MyApp {
   loginOn: boolean;
   show : boolean;
 
+  qrData =null;
+  createdCode = null;
+  scannedCode=null;
+
+
   private masterEmail: string = "21300649@handong.edu";
   public masterSwitch: boolean = false;
 
@@ -36,8 +41,9 @@ export class MyApp {
     public splashScreen: SplashScreen, public afAuth: AngularFireAuth,
     public auth: AuthData, public toast: ToastController, public alertCtrl: AlertController,
     public afs: AngularFirestore, public popoverCtrl: PopoverController, public modalCtrl: ModalController,
-    public global : GlobalVars
+    public global : GlobalVars, private barcodeScanner : BarcodeScanner
   ) {
+    
 
     this.global.currentMessage.subscribe(message => this.show = message)
     
@@ -59,6 +65,7 @@ export class MyApp {
         this.loginOn = false;
       }
     })
+    
 
 
 
@@ -67,6 +74,7 @@ export class MyApp {
       // { title: '로그인', component: "MainPage" },|
       { title: '재고관리', component: 'HomePage' },
       { title: '정비관리', component: "RepairPage" },
+      { title: 'QR-Code', component: "QrcodePage"}
       // {title:'app1', component:"Category1Page"},
       // {title:'NFC', component:"NfcPage"},
       // {title:'Timeline',component:'TimelinePage'}
@@ -188,6 +196,27 @@ export class MyApp {
     });
     alert.present();
   }
+  qrPage(){
+    
+      this.barcodeScanner.scan().then(barcodeData => {
+        this.scannedCode = barcodeData.text;
+  
+        this.nav.push('LocationManagePage',{
+          location_origin : this.scannedCode
+        })
+  
+      }, (err)=>{
+        console.log('Error : ', err)
+      });
+      
+      //testing qr code
+      // this.scannedCode=1
+      // this.navCtrl.push('LocationManagePage',{
+      //   location_origin : this.scannedCode
+      // })
+  
+    }
+    
 }
 
 
@@ -217,4 +246,6 @@ export class LoginSelectPage{
   loginWithEmail() {
     this.navCtrl.push('LoginPage');
   }
+
+ 
 }

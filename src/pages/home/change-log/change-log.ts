@@ -9,6 +9,7 @@ import { LoginPage } from '../../auth/login/login';
 import { timestamp } from 'rxjs/operators/timestamp';
 import { HomePage } from '../home';
 import { GlobalVars } from '../../../providers/global';
+import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
  /**
  * Generated class for the ChangeLogPage page.
@@ -35,6 +36,7 @@ export class ChangeLogPage {
   startDate : Date
   finDate : Date
   midDate : Date
+  tempDate : Date
 
   public itemsCollection: AngularFirestoreCollection<Log>; 
   items : any = [];
@@ -51,13 +53,10 @@ export class ChangeLogPage {
     public fireService : FireService, private modalCtrl : ModalController,
     public global : GlobalVars) {
     
-    this.changed_type=this.navParams.get('changed_type')
-    this.startDate = this.navParams.get('startDate')
-    this.finDate = this.navParams.get('finDate')
+    // this.changed_type=this.navParams.get('changed_type')
+    // this.startDate = this.navParams.get('startDate')
+    // this.finDate = this.navParams.get('finDate')
     
-    this.midDate=new Date();
-    this.midDate.setMilliseconds(888);
-    console.log("this", this.midDate)
   }
   getType(get){
     //console.log("input")
@@ -115,16 +114,19 @@ ionViewDidLoad() {
     //console.log(this.itemArray);
     this.startDate=new Date (this.startDate);
     this.finDate=new Date (this.finDate);
+    this.midDate=this.startDate;
 
     this.finDate.setHours(23);
     this.finDate.setMinutes(59);
     this.finDate.setSeconds(59);
-  
+
     
     console.log(this.changed_type);
     console.log(this.startDate)
     console.log(this.finDate);
     console.log(this.midDate);
+    console.log(this.tempDate)
+
 
    if(this.changed_type){
     if(this.changed_type=="import"){
@@ -170,19 +172,9 @@ ionViewDidLoad() {
           this.itemList = this.itemArray;
           this.loadedItemList = this.itemArray;
     })
-
   }
-
-
-
-  
-
-
-
   }
 }
-
-
 
 @Component({
   templateUrl: 'fill.html',

@@ -7,6 +7,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { AngularFirestore,  AngularFirestoreCollection } from 'angularfire2/firestore';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { GlobalVars } from '../../../providers/global';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner'
 
 
 
@@ -44,6 +45,8 @@ export class LocationManagePage {
   location1: string;
   location2: string;
 
+  location_origin : any; 
+
   constructor( public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
@@ -51,7 +54,14 @@ export class LocationManagePage {
     public navParams : NavParams,
     public global : GlobalVars
   ){
-
+    
+    this.location_origin= this.navParams.get("location_origin")
+    console.log(this.location_origin, "from QR Page")
+    let alert = this.alertCtrl.create({
+      title : 'Location Origin',
+      subTitle : this.location_origin
+    })
+    
     this.payload = "null";
 
     //this.payload = this.navParams.get('payload')
@@ -63,12 +73,9 @@ export class LocationManagePage {
       this.seperate = this.payload.split('-');
       this.location1 = this.seperate[0];
       this.location2 = this.seperate[1];
-
       console.log(this.location1);
       console.log(this.location2);
-      
       this.goTo2()
-
     }
     // alert(this.payload)
 

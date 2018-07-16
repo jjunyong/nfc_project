@@ -19,6 +19,12 @@ import { LoginSelectPage } from './app.component'
 import { GlobalVars } from '../providers/global';
 import { FillPage } from '../pages/home/change-log/change-log';
 import { GalleryPage } from '../pages/home/stock-manage/item-detail/gallery';
+import { QrcodePage } from '../pages/qrcode/qrcode';
+import { IonicPageModule } from 'ionic-angular/module';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { NavController} from 'ionic-angular'
+ 
 
 export const config = { 
   apiKey: "AIzaSyACcRwZawea9vXAI0cNz0xsjbHRqP5XTlY",
@@ -28,6 +34,7 @@ export const config = {
     storageBucket: "prototype-d68e4.appspot.com",
     messagingSenderId: "498739217733"
 };
+
 
 @NgModule({
   declarations: [
@@ -43,6 +50,8 @@ export const config = {
     AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    IonicPageModule, 
+    NgxQRCodeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +69,8 @@ export const config = {
     NFC,
     Ndef,
     FireService,
-    GlobalVars
+    GlobalVars, 
+    BarcodeScanner, 
   ]
 })
 export class AppModule {} 
