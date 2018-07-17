@@ -167,7 +167,7 @@ export class LocationManagePage {
 
   openDetail(item) {
     this.navCtrl.push('ItemDetailPage', {
-      code: item.code,
+      id: item.id,
       name: item.name,
       location1: item.location1,
       location2: item.location2,
