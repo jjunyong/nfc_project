@@ -5,7 +5,6 @@
     }
     .topNav {
       display: none;
-
     }
   }
 </style>
@@ -64,6 +63,10 @@
       <button menuClose ion-item detail-none (click)="openMain()">
         <ion-icon name="home"></ion-icon>
         Home
+      </button>
+      <button menuClose ion-item detail-none (click)="Admin()">
+        <ion-icon name="user"></ion-icon>
+        Admin
       </button>
       <button *ngIf="!loginOn" menuClose ion-item detail-none (click)="DologIn()">
         로그인
