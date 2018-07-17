@@ -4,7 +4,7 @@ import { FireService } from '../../../providers/FireService'
 import { RepairitemdetailPageModule } from './repairitemdetail.module';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
-
+import {AngularFireAuth} from 'angularfire2/auth'
 
 class RepairItem{
   finDate: Date;
@@ -30,6 +30,7 @@ export class RepairitemdetailPage {
 
   private itemsCollection: AngularFirestoreCollection<RepairItemLog>; 
 
+  id_temp : string ;
   RepairItem = new RepairItem();
 
   itemList : any=[]; 
@@ -41,8 +42,8 @@ export class RepairitemdetailPage {
   transition:boolean = false;
 
   id: string;
-  serialNum:string;
-  model:string;
+  public serialNum:string;
+  public model:string;
   repairman:string;
 
   startDate : Date;
@@ -55,7 +56,7 @@ export class RepairitemdetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toast: ToastController,
     public ref: ChangeDetectorRef,  public fireService : FireService, public afs: AngularFirestore, public alertCtrl: AlertController,
-    public loadingCtrl: LoadingController,) {
+    public loadingCtrl: LoadingController,public afAuth : AngularFireAuth) {
 
       this.id = this.navParams.get('id');
       this.serialNum = this.navParams.get('serialNum');
@@ -63,9 +64,9 @@ export class RepairitemdetailPage {
       this.repairman = this.navParams.get('repairman');
       this.isToggled = this.navParams.get('isToggled');
       this.finDate = this.navParams.get('finDate');
-      this.startDate = this.navParams.get('startDate');
+      this.startDate = this.navParams.get('startDate')
 
-
+      
 
       let loadingPopup = this.loadingCtrl.create({
         spinner: 'crescent', // icon style //
@@ -128,6 +129,13 @@ repairfin(){
     this.RepairItem.id = this.id
     this.fireService.finAdd(this.RepairItem)
     console.log(this.finDate)
+    if(this.isToggled){
+      //console.log(this.model, this.serialNum, "on")
+        this.fireService.Add_User_Log(this.model, this.serialNum)
+    }
+    
+  
+
   }
 
   modify(){
