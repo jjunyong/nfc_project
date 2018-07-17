@@ -7,6 +7,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { FireService } from '../../../../src/providers/FireService'
 import { GlobalVars } from '../../../providers/global';
+import { count } from 'rxjs/operator/count';
 class Item{
   location1: any;
   location2: any;
@@ -35,7 +36,7 @@ export class StockManagePage {
   loadedItemList:  any=[]; 
   items : any = [];
   // modifyList : modify;
-  count : number=0;
+  count_temp : number ;
 
 
 
@@ -72,6 +73,30 @@ export class StockManagePage {
     
    
 }
+remove(item){
+  console.log(item.quantity, item.id, item.model)
+  this.count_temp=item.quantity -1; 
+  Number(this.count_temp)
+  console.log(typeof(this.count_temp))
+  console.log(this.count_temp)
+  this.afs.collection('item').doc(item.id).update({
+    quantity : this.count_temp
+  })
+  
+}
+add(item){
+  console.log(item.quantity, item.id, item.model)
+  this.count_temp=Number(item.quantity)+ Number(1); 
+  console.log(typeof(this.count_temp))
+  console.log(this.count_temp)
+  this.afs.collection('item').doc(item.id).update({
+    quantity : this.count_temp
+  })
+}
+
+Set(){
+
+}
 
 ionViewWillEnter(){
   console.log('ionViewEnteredStockMangePage')
@@ -106,12 +131,9 @@ getItems(searchbar) {
  // console.log(q, this.itemList.length);
 }
 
-remove(){
-  
-}
-add(){
 
-}
+
+
 manage(){  
     let confirm = this.alertCtrl.create({
       title: '새로운 아이템을 추가하겠습니까?',

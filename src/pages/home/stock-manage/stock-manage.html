@@ -14,16 +14,16 @@
 <ion-content padding>
     
   <ion-list>
-    <ion-item *ngFor="let item of itemList" (click)="openDetail(item)">
+    <ion-item *ngFor="let item of itemList">
       <!-- <ion-avatar item-start>
         <img [src]="contact.img">
       </ion-avatar>   -->
-      <h2> <strong>{{ item.model }}</strong> </h2>
+      <h2 (click)="openDetail(item)"> <strong>{{ item.model }}</strong> </h2>
       <h3> 
         Location : {{ item.location1 }}-{{ item.location2 }}
-      <div text-right ><button (click)="remove()" ><ion-icon name="remove"></ion-icon></button>
-        {{ item.quantity }}
-        <button (click)="add()" ><ion-icon name="add" icon-only></ion-icon></button>
+      <div text-right ><button clear ion-button (click)="remove(item)" ><ion-icon name="remove"></ion-icon></button>
+       {{item.quantity}}
+        <button clear ion-button (click)="add(item)" ><ion-icon name="add" icon-only></ion-icon></button>
       </div>
     </h3>
     </ion-item>  
