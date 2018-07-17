@@ -1,4 +1,3 @@
-
 <ion-header>
     <!-- <ion-navbar color="grey-blue">
         <button ion-button menuToggle color="light">
@@ -17,63 +16,74 @@
             </button>
         </ion-buttons>
     </ion-navbar> -->
-  
-  <!--*********** Toolbar with segment ***********-->
-  <ion-toolbar style="margin-top:35px" no-border-top color="grey-blue">
-       <ion-segment  [(ngModel)]="viewType" color="light">
-      <ion-segment-button value="Menu">
-        Menu
-      </ion-segment-button>
-      <ion-segment-button value="Notice">
-        Notice
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-  
-  </ion-header>
-  
-  <ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
-      <ion-grid>
-  
-  <!--*********** Menu View  ***********-->
-  <div *ngIf="viewType==='Menu'">
+
+    <!--*********** Toolbar with segment ***********-->
+    <ion-toolbar style="margin-top:35px" no-border-top color="grey-blue">
+        <ion-segment [(ngModel)]="viewType" color="light">
+            <ion-segment-button value="Menu">
+                Menu
+            </ion-segment-button>
+            <ion-segment-button value="Notice">
+                Notice
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+
+
+    <!--*********** Menu View  ***********-->
+    <div *ngIf="viewType==='Menu'">
 
         <div class="card-background-page">
-                        <ion-row>
-                            <ion-col col-12 col-md-6>
-                <ion-card (click)="openLog()">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/black-and-white-close-up-equipment-210881.jpg?alt=media&token=cf62ebc3-2e4f-48da-b96e-336a1381521c" height="350"/>
-                  <div class="card-title">정비 이력</div>
-                  <div class="card-subtitle">Checkout Repair History</div>
-                </ion-card>
-                    </ion-col>
-        
-                    <ion-col col-12 col-md-6>
-                <ion-card (click)="openOnMaintenance()">
-                  <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/carpentry-close-up-equipment-220638.jpg?alt=media&token=c9cc9ef5-4e7b-47f8-9640-439f01b40d1e" height="350"/>
-                  <div class="card-title">정비 완료 아이템</div>
-                  <div class="card-subtitle">Completed maintenance</div>
-                </ion-card>
+            <ion-row>
+                <ion-col col-12 col-md-6>
+                    <ion-card (click)="openLog()">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/black-and-white-close-up-equipment-210881.jpg?alt=media&token=cf62ebc3-2e4f-48da-b96e-336a1381521c"
+                            height="350" />
+                        <div class="card-title">정비 이력</div>
+                        <div class="card-subtitle">Checkout Repair History</div>
+                    </ion-card>
                 </ion-col>
-                        </ion-row>
-            </div>
-        
-</div>
-  
-  <!--*********** Promotion View  ***********-->
-  <div *ngIf="viewType==='Notice'">
-  
-      <ion-card class="wave">
-            <ion-item class="notices" tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
-                <h2><font color="white">{{item.title}}</font></h2>
-                <p><font color="light">{{item.writer}}, {{item.timestamp | date}}</font></p>
-            </ion-item>
-        </ion-card>
 
-          <ion-fab right bottom>
-            <button ion-fab color="grey-blue" (click)="manage()"><ion-icon name="add"></ion-icon></button>
-          </ion-fab>
-      <!-- <ion-grid >
+                <ion-col col-12 col-md-6>
+                    <ion-card (click)="openOnMaintenance()">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/carpentry-close-up-equipment-220638.jpg?alt=media&token=c9cc9ef5-4e7b-47f8-9640-439f01b40d1e"
+                            height="350" />
+                        <div class="card-title">정비 완료 아이템</div>
+                        <div class="card-subtitle">Completed maintenance</div>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </div>
+
+    </div>
+
+    <!--*********** Promotion View  ***********-->
+    <div *ngIf="viewType==='Notice'">
+
+        <ion-list class="wave">
+            <ion-item class="notices" tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
+                <h2>
+                    <font color="dark">{{item.title}}</font>
+                </h2>
+                <p>
+                    <font color="light">{{item.writer}}, {{item.timestamp | date}}</font>
+                </p>
+            </ion-item>
+        </ion-list>
+
+        <ion-fab right bottom>
+            <button ion-fab color="grey-blue" (click)="manage()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-fab>
+    </div>
+
+</ion-content>
+<!-- <ion-grid >
           <ion-row wrap>
             <ion-col col-6  tappable  *ngFor="let item of items" (click)="goToDetail(item.$key)" color="gray">
               
@@ -88,6 +98,3 @@
             </ion-col>
           </ion-row>
       </ion-grid> -->
-  </div>
-</ion-grid>
-  </ion-content>

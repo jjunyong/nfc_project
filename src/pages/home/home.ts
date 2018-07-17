@@ -92,8 +92,9 @@ export class HomePage {
     this.navCtrl.push('WriteStockNoticePage')
   }
   openNoticeDetailPage(item) {
+    console.log(item);
     this.navCtrl.push('StockNoticeDetailPage', {
-      content: item.content
+      notice: item
     });
   }
 

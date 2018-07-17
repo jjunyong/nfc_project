@@ -11,7 +11,7 @@
   </ion-header>
 
 
-<ion-content>
+<ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   <ion-row>
     <ion-col col-12 col-md-4 col-xl-3  *ngFor="let item of itemList" >
         <ion-card (click)="openDetail(item)">            

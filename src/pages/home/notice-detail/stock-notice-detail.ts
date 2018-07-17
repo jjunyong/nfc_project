@@ -11,11 +11,12 @@ import { GlobalVars } from '../../../providers/global';
 export class StockNoticeDetailPage {
 
   // notice:any;
-  content: string;
+  notice: any;
 
   constructor(public navCtrl: NavController, public afs: AngularFirestore, public navParams: NavParams,
   public global : GlobalVars) {
-    this.content = this.navParams.get('content');
+    this.notice = this.navParams.get('notice');
+    console.log(this.notice);
   }
 
 

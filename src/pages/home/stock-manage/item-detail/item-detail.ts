@@ -220,4 +220,5 @@ export class ItemDetailPage {
     });
     modal.present();
   }
+
 }

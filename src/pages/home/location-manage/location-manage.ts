@@ -57,10 +57,11 @@ export class LocationManagePage {
     
     this.location_origin= this.navParams.get("location_origin")
     console.log(this.location_origin, "from QR Page")
-    let alert = this.alertCtrl.create({
-      title : 'Location Origin',
-      subTitle : this.location_origin
-    })
+    alert(this.location_origin);
+    // let alert = this.alertCtrl.create({
+    //   title : 'Location Origin',
+    //   subTitle : this.location_origin
+    // })
     
     this.payload = "null";
 

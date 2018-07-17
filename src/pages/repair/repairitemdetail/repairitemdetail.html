@@ -58,7 +58,24 @@
     </ion-card-content>
   </ion-card>
 
-
+  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
+      <ion-card-header color="vague-blue">
+        Images
+      </ion-card-header>
+      <ion-grid>
+        <ion-row wrap color="dark">
+          <ion-col (click)="openFullImage()" tappable col-4 col-md-2 *ngFor="let image of imgGallery, let i = index">
+            <img class="expanded-image" [src]="image.image_url" />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <input type="file" accept="image/*" (change)="uploadFile($event)" id="fileInput" />
+      <label for="fileInput" icon-only ion-button clear>
+        <ion-icon color="white" name="add"></ion-icon>
+        <ion-icon color="white" name="images"></ion-icon>
+      </label>
+    </ion-card>
+    
   <ion-card-content>
 
     <ion-list>
@@ -68,10 +85,18 @@
             <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/default_image.jpg?alt=media&token=6e8d4469-6873-4161-b017-6181ed4d1c7f"
               alt="" class="timeline-thumb pop-in">
             <div class="timeline-item">
-              <h6><font color="white">{{item.title}}</font></h6>
-              <p><font color="white">{{item.writer}}</font></p>
-              <p><font color="white">{{item.description}}</font></p>
-              <p><font color="white">{{item.timestamp | date: 'fullDate'}}</font></p>
+              <h6>
+                <font color="white">{{item.title}}</font>
+              </h6>
+              <p>
+                <font color="white">{{item.writer}}</font>
+              </p>
+              <p>
+                <font color="white">{{item.description}}</font>
+              </p>
+              <p>
+                <font color="white">{{item.timestamp | date: 'fullDate'}}</font>
+              </p>
             </div>
           </li>
         </ul>

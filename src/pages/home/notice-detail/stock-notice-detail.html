@@ -8,5 +8,10 @@
 
 
 <ion-content padding>
-  {{content}}
+  <h2>Title : {{notice.title}}</h2>
+  <p>Writer : {{notice.writer}},</p>
+  <p>Date : {{notice.timestamp | date}}</p>
+  <br>
+  <h3>Content</h3>
+  <p>{{notice.content}}</p>
 </ion-content>
