@@ -31,6 +31,8 @@ export class MyApp {
   createdCode = null;
   scannedCode=null;
 
+  user_thumbnail;
+
 
   private masterEmail: string = "21300649@handong.edu";
   public masterSwitch: boolean = false;
@@ -48,11 +50,16 @@ export class MyApp {
     this.global.currentMessage.subscribe(message => this.show = message)
     
     this.afAuth.authState.subscribe((auth) => {
-      console.log(auth.email)
+      // console.log(auth.email)
       this.authUser = auth.email
       if (auth.email === this.masterEmail) {
         this.masterSwitch = true;
       }
+      this.afs.collection('users').doc(auth.uid).valueChanges()
+        .subscribe((user: any)=>{
+          console.log(user)
+          this.user_thumbnail = user.thumbnail;
+        })
     })
 
 

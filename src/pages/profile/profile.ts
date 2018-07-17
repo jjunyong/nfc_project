@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { finalize } from 'rxjs/operators';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 /**
  * Generated class for the ProfilePage page.
@@ -15,14 +20,91 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProfilePage {
 
-  backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
-  profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTouoNcgfCymCvQoQ_QhHuBJX7foOLNm_Qs_kDNXtSuY4Y8XNtDAA";
+  name: string = "";
+  email: string = "";
+  employee_number: string = "";
+  phone_number: number;
+  thumbnail;
+  uid;
+  uploadPercent;
+  downloadURL;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afs: AngularFirestore,
+    public afAuth: AngularFireAuth, public storage : AngularFireStorage, public alertCtrl : AlertController) {
+    this.afAuth.authState.subscribe((user) => {
+      this.uid = user.uid
+      console.log(user.uid);
+      this.afs.collection('users').doc(user.uid).valueChanges()
+        .subscribe((user_info: any) => {
+          this.name = user_info.name;
+          this.email = user_info.email;
+          this.employee_number = user_info.employee_number;
+          this.phone_number = user_info.phone;
+          this.thumbnail = user_info.thumbnail;
+        })
+    })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
   }
 
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = `profiles/${this.uid}/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    this.uploadPercent = task.percentageChanges();
+    // get notified when the download URL is available
+    task.snapshotChanges().pipe(
+      finalize(() => this.downloadURL = fileRef.getDownloadURL())
+    )
+      .subscribe()
+
+      task.downloadURL()
+        .subscribe((url)=>{
+          this.thumbnail = url;
+        })
+    // task.downloadURL()
+    //   .subscribe((url) => {
+
+    //     const doc_id = this.afs.createId();
+    //     this.afs.collection('item').doc(this.id).collection('images').doc(doc_id).set({
+    //       image_url: url,
+    //       id : doc_id
+    //     })
+    //   })
+  }
+  submit(){
+    let alert = this.alertCtrl.create({
+      title: '정말 변경하시겠습니까?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.afs.collection('users').doc(this.uid).update({
+              name : this.name,
+              employee_number : this.employee_number,
+              email : this.email,
+              phone : this.phone_number,
+              thumbnail : this.thumbnail
+          }).then(()=>{
+            this.navCtrl.push('MainPage');
+          })
+        }
+      },
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('cancel clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
+ 
+  }
 }
