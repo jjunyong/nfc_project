@@ -29,17 +29,30 @@
         </ion-select>
      
       </ion-item>
- <ion-list text-center>
+ <!--<ion-list text-center>
   
     <ion-item *ngFor="let item of itemList" (click)="openDetail(item)">
-      <!-- <ion-avatar item-start>
-        <img [src]="contact.img">
-      </ion-avatar>   -->
+      
       <h2> <strong>{{ item.model }}</strong> </h2>
       <h3> Location : {{ item.location1 }}-{{item.location2}}</h3>
       <h3> Quantity : {{ item.quantity }}</h3>
     </ion-item> 
-  </ion-list>
+  </ion-list>-->
+
+  <ion-list>
+      <ion-item *ngFor="let item of itemList">
+        <h2 (click)="openDetail(item)"> <strong>{{ item.model }}</strong> </h2>
+        <h3 (click)="openDetail(item)"> 
+          Location : {{ item.location1 }}-{{ item.location2 }}</h3>
+        <div text-right ><button clear ion-button (click)="remove(item)" ><ion-icon name="arrow-down"></ion-icon></button>
+          {{item.quantity}}
+        <button clear ion-button (click)="add(item)" ><ion-icon name="arrow-up" icon-only></ion-icon></button>
+        </div>
+        
+        
+      </ion-item>  
+  
+    </ion-list>
 
 
 </ion-content>

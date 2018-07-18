@@ -113,6 +113,7 @@
 
     </div>
 
+<<<<<<< Updated upstream
     <!--*********** Promotion View  ***********-->
     <div *ngIf="viewType==='Notice'">
         <ion-list class="wave">
@@ -128,4 +129,29 @@
             </button>
         </ion-fab>
     </div>
+=======
+</div>
+
+<!--*********** Promotion View  ***********-->
+<div *ngIf="viewType==='Notice'">
+        
+    <ion-card margin-top padding tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
+            <h2><strong>{{item.title}}</strong></h2>
+            <p>{{item.writer}}</p>
+            <p>{{item.timestamp | date}}</p>
+    </ion-card>
+    
+    
+    <!--<ion-list class="wave">
+        <ion-item tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
+            <h2>{{item.title}}</h2>
+            <p>{{item.writer}}, {{item.timestamp | date}}</p>
+        </ion-item>
+    </ion-list>-->
+    
+<ion-fab  right bottom >
+        <button color="grey-blue" (click)="manage()" ion-fab ><ion-icon name="add"></ion-icon></button>
+</ion-fab>
+</div>
+>>>>>>> Stashed changes
 </ion-content>

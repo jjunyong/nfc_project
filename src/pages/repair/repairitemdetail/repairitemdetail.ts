@@ -129,12 +129,6 @@ export class RepairitemdetailPage {
     this.RepairItem.id = this.id
     this.fireService.finAdd(this.RepairItem)
     console.log(this.finDate)
-    if(this.isToggled){
-      //console.log(this.model, this.serialNum, "on")
-        this.fireService.Add_User_Log(this.model, this.serialNum)
-    }
-    
-  
 
   }
 
@@ -193,6 +187,7 @@ export class RepairitemdetailPage {
     this.items = this.itemsCollection.valueChanges()
 
 
+<<<<<<< Updated upstream
     this.items.subscribe((RepairItemLog) => {
       this.itemArray = RepairItemLog;
       this.itemList = this.itemArray;
@@ -200,7 +195,12 @@ export class RepairitemdetailPage {
     });
 
 
+=======
+   this.items.subscribe((RepairItemLog)=>{
+        this.itemArray = RepairItemLog;
+        this.itemList = this.itemArray;
+        this.loadedItemList = this.itemArray;
+      });
+>>>>>>> Stashed changes
   }
-
-
 }
