@@ -8,11 +8,11 @@ page-repair {
       
         .card-title {
           position: absolute;
-          top: 36%;
+          top: 28%;
           font-size: 2.0em;
           width: 100%;
           font-weight: bold;
-          color: rgb(0, 0, 0);
+          color: #ffffff
         }
       
         .card-subtitle {
@@ -20,8 +20,16 @@ page-repair {
           position: absolute;
           top: 52%;
           width: 100%;
-          color: rgb(0, 0, 0);
+          color: #ffffff
         }
       
       }
+      .slide{
+        height : 450px;
+      }
+      .slide_img{
+        width:100%;
+        height: 450px;
+      }
+
 }

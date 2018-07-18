@@ -99,5 +99,8 @@ export class HomePage {
       notice: item
     });
   }
+  openRepairPage(){
+    this.navCtrl.push('RepairPage')
+  }
 
 }

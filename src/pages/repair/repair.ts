@@ -69,5 +69,8 @@ export class RepairPage {
       content: item.content
     });
   }
+  openHomePage(){
+    this.navCtrl.push('HomePage');
+  }
 
 }

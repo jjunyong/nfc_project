@@ -1,3 +1,18 @@
+<style>
+        @media screen and (max-width: 600px) {
+            .slide{
+                display: none;
+            }
+            .card{
+                max-height : 150px;
+            }
+            .card-subtitle{
+                margin-top: 20px;
+            }
+        }
+    </style>
+    
+
 <ion-header>
     <!-- <ion-navbar color="grey-blue">
         <button ion-button menuToggle color="light">
@@ -18,7 +33,7 @@
     </ion-navbar> -->
 
     <!--*********** Toolbar with segment ***********-->
-    <ion-toolbar style="margin-top:35px" no-border-top color="grey-blue">
+    <ion-toolbar style="margin-top:45px" no-border-top color="grey-blue">
         <ion-segment [(ngModel)]="viewType" color="light">
             <ion-segment-button value="Menu">
                 Menu
@@ -37,11 +52,31 @@
     <!--*********** Menu View  ***********-->
     <div *ngIf="viewType==='Menu'">
 
+            <ion-slides id="slide" class="slide" autoplay="2000" loop="true" speed="2000">
+                    <ion-slide>
+                        <div class="card-background-page">
+                            <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/tools.png?alt=media&token=cc63b91d-e391-44d8-a273-688d2175b64d">
+                            <h2 class="card-title">Palm Cloud - 정비관리</h2>
+                        </div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="card-background-page">
+                            <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%9D%B4%EB%A6%84%20%EC%97%86%EC%9D%8C.png?alt=media&token=970a421f-28c4-454d-9946-994a73cd8fec">
+                            <h2 class="card-title">Palm Cloud - 재고관리</h2>
+                            <div class="card-subtitle">
+                                <button color="white" ion-button outline (click)="openHomePage()">
+                                    CLICK!
+                                </button>
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+
         <div class="card-background-page">
             <ion-row>
                 <ion-col col-12 col-md-6>
                     <ion-card (click)="openLog()">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/black-and-white-close-up-equipment-210881.jpg?alt=media&token=cf62ebc3-2e4f-48da-b96e-336a1381521c"
+                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2"
                             height="350" />
                         <div class="card-title">정비 이력</div>
                         <div class="card-subtitle">Checkout Repair History</div>
@@ -50,7 +85,7 @@
 
                 <ion-col col-12 col-md-6>
                     <ion-card (click)="openOnMaintenance()">
-                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/carpentry-close-up-equipment-220638.jpg?alt=media&token=c9cc9ef5-4e7b-47f8-9640-439f01b40d1e"
+                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/spanner-3013129_1920.png?alt=media&token=374be8ff-6e03-47b4-a716-a4782a2c1bc1"
                             height="350" />
                         <div class="card-title">정비 완료 아이템</div>
                         <div class="card-subtitle">Completed maintenance</div>

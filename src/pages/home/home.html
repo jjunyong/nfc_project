@@ -15,7 +15,7 @@
 
 <ion-header>
     <!--*********** Toolbar with segment ***********-->
-    <ion-toolbar style="margin-top:35px" no-border-top color="grey-blue">
+    <ion-toolbar style="margin-top:45px" no-border-top color="grey-blue">
         <ion-segment [(ngModel)]="viewType" color="light">
             <ion-segment-button value="Menu">
                 Menu
@@ -60,7 +60,7 @@
     <!--*********** Menu View  ***********-->
     <div *ngIf="viewType==='Menu'">
 
-        <ion-slides id="slide" class="slide" autoplay="3000" loop="true" speed="3000">
+        <ion-slides id="slide" class="slide" autoplay="2000" loop="true" speed="2000">
             <ion-slide>
                 <div class="card-background-page">
                     <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%9D%B4%EB%A6%84%20%EC%97%86%EC%9D%8C.png?alt=media&token=970a421f-28c4-454d-9946-994a73cd8fec">
@@ -72,7 +72,7 @@
                     <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/tools.png?alt=media&token=cc63b91d-e391-44d8-a273-688d2175b64d">
                     <h2 class="card-title">Palm Cloud - 정비관리</h2>
                     <div class="card-subtitle">
-                        <button color="white" ion-button outline>
+                        <button color="white" ion-button outline (click)="openRepairPage()">
                             CLICK!
                         </button>
                     </div>
