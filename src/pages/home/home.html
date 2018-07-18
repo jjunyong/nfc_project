@@ -1,82 +1,134 @@
+<style>
+    @media screen and (max-width: 600px) {
+        .slide{
+            display: none;
+        }
+        .card{
+            max-height : 150px;
+        }
+        .card-subtitle{
+            margin-top: 20px;
+        }
+    }
+</style>
+
 
 <ion-header>
-  <!-- <ion-navbar color="grey-blue">
-      <button ion-button menuToggle color="light">
-          <ion-icon name="menu"></ion-icon>
-      </button>
-
-      <ion-title color="light">재고관리</ion-title>
-      <ion-buttons start hideWhen="ios">
-          <button ion-button icon-only color="light">
-              <ion-icon name="notifications"></ion-icon>
-          </button>
-      </ion-buttons>
-
-      <ion-buttons right>
-          <button ion-button icon-only>
-              <ion-icon name="md-more"></ion-icon>
-          </button>
-      </ion-buttons>
-      
-  </ion-navbar> -->
-
-<!--*********** Toolbar with segment ***********-->
-<ion-toolbar style="margin-top:35px" no-border-top color="grey-blue">
-     <ion-segment  [(ngModel)]="viewType" color="light">
-    <ion-segment-button value="Menu">
-      Menu
-    </ion-segment-button>
-    <ion-segment-button value="Notice">
-      Notice
-    </ion-segment-button>
-  </ion-segment>
-</ion-toolbar>
+    <!--*********** Toolbar with segment ***********-->
+    <ion-toolbar style="margin-top:45px" no-border-top color="grey-blue">
+        <ion-segment [(ngModel)]="viewType" color="light">
+            <ion-segment-button value="Menu">
+                Menu
+            </ion-segment-button>
+            <ion-segment-button value="Notice">
+                Notice
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 
 </ion-header>
 
 <ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
 
-<!--*********** Menu View  ***********-->
-<div *ngIf="viewType==='Menu'">
+    <!-- <ion-slides pager="true" parallax="true" padding>
+
+                <ion-slide>
+                  <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/galaxy7.png?alt=media&token=bd8623ca-11b7-484d-84f6-9bc0a6e68ba4">
+                  <h1>Welcome to my app!</h1>
+                </ion-slide>
+            
+                <ion-slide>
+                  <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/iphone88.jpg?alt=media&token=5de53cbe-a743-4fd8-a7ef-f34df9f4f015">
+                  <h1>All of the features</h1>
+                  <p>Here's what you can do with the app...</p>
+                </ion-slide>
+            
+                <ion-slide>
+                  <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/zenbookj.jpg?alt=media&token=0b4ba833-c939-425b-8356-bd0d1d6f347f">
+                  <h1>Get started now!</h1>
+                  <button ion-button outline small (click)="navHome()">
+                    Start using the app
+                  </button>
+                </ion-slide>
+            /ion-slides> -->
+    <!-- <div class="header"> -->
+
+    <!-- </div> -->
+
+
+
+    <!--*********** Menu View  ***********-->
+    <div *ngIf="viewType==='Menu'">
+
+        <ion-slides id="slide" class="slide" autoplay="2000" loop="true" speed="2000">
+            <ion-slide>
+                <div class="card-background-page">
+                    <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%9D%B4%EB%A6%84%20%EC%97%86%EC%9D%8C.png?alt=media&token=970a421f-28c4-454d-9946-994a73cd8fec">
+                    <h2 class="card-title">Palm Cloud - 재고관리</h2>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="card-background-page">
+                    <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/tools.png?alt=media&token=cc63b91d-e391-44d8-a273-688d2175b64d">
+                    <h2 class="card-title">Palm Cloud - 정비관리</h2>
+                    <div class="card-subtitle">
+                        <button color="white" ion-button outline (click)="openRepairPage()">
+                            CLICK!
+                        </button>
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slides>
 
         <div class="card-background-page">
-                <ion-row>
-    <ion-col col-12 col-md-4>
-        <ion-card (click)="openManage()">
-          <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/black-and-white-close-up-equipment-210881.jpg?alt=media&token=cf62ebc3-2e4f-48da-b96e-336a1381521c" height="350"/>
-          <div class="card-title">입고 및 출고</div>
-          <div class="card-subtitle">Do export and import</div>
-        </ion-card>
-            </ion-col>
-
-    <ion-col col-12 col-md-4>
-                    <ion-card (click)="openLog()">
-                      <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/black-and-white-close-up-equipment-210881.jpg?alt=media&token=cf62ebc3-2e4f-48da-b96e-336a1381521c" height="350"/>
-                      <div class="card-title">입출고 이력 검색</div>
-                      <div class="card-subtitle">Checkout Logs of ex,import</div>
+            <ion-row>
+                <ion-col col-12 col-md-4>
+                    <ion-card class="card" (click)="openManage()">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/export.png?alt=media&token=8588133b-2f86-4afc-9e54-97a5918d81f5"
+                            height="350" />
+                        <div class="card-title">입고 및 출고</div>
+                        <div class="card-subtitle">Do export and import</div>
                     </ion-card>
-                        </ion-col>
-            
-    <ion-col col-12 col-md-4>
-        <ion-card (click)="locationManage()">
-          <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/carpentry-close-up-equipment-220638.jpg?alt=media&token=c9cc9ef5-4e7b-47f8-9640-439f01b40d1e" height="350"/>
-          <div class="card-title">위치별 조회</div>
-          <div class="card-subtitle">Search by location</div>
-        </ion-card>
-        </ion-col>
-    </ion-row>
-    </div>
+                </ion-col>
 
-</div>
+                <ion-col col-12 col-md-4>
+                    <ion-card class="card" (click)="openLog()">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/manuscript-1614234_1920.png?alt=media&token=ec3c03ff-0664-44a8-995a-aec262a082ea"
+                            height="350" />
+                        <div class="card-title">입출고 이력 검색</div>
+                        <div class="card-subtitle">Checkout Logs of ex,import</div>
+                    </ion-card>
+                </ion-col>
+
+                <ion-col col-12 col-md-4>
+                    <ion-card class="card" (click)="locationManage()">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/note-2527458_1920.png?alt=media&token=cfc7ee83-070b-44a6-a473-0d6cbb3c7bd0"
+                            height="350" />
+                        <div class="card-title">위치별 조회</div>
+                        <div class="card-subtitle">Search by location</div>
+                    </ion-card>
+                </ion-col>
+            </ion-row>
+        </div>
+
+    </div>
 
 <!--*********** Promotion View  ***********-->
 <div *ngIf="viewType==='Notice'">
-    <ion-list class="wave">
+        
+    <ion-card margin-top padding tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
+            <h2><strong>{{item.title}}</strong></h2>
+            <p>{{item.writer}}</p>
+            <p>{{item.timestamp | date}}</p>
+    </ion-card>
+    
+    
+    <!--<ion-list class="wave">
         <ion-item tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
             <h2>{{item.title}}</h2>
             <p>{{item.writer}}, {{item.timestamp | date}}</p>
         </ion-item>
-    </ion-list>
+    </ion-list>-->
     
 <ion-fab  right bottom >
         <button color="grey-blue" (click)="manage()" ion-fab ><ion-icon name="add"></ion-icon></button>

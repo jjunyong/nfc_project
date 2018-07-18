@@ -26,6 +26,7 @@ export class HomePage {
     public afs: AngularFirestore, public afAuth: AngularFireAuth, public auth: AuthData,
     public global: GlobalVars) {
 
+
     // this.global.changeMessage(true);
     this.global.currentMessage.subscribe(message => console.log(message))
     // this.global.changeMessage(true)
@@ -49,6 +50,7 @@ export class HomePage {
 
     console.log(this.items)
   }
+
 
   ionViewWillEnter() {
     this.global.changeMessage(true);
@@ -96,6 +98,9 @@ export class HomePage {
     this.navCtrl.push('StockNoticeDetailPage', {
       notice: item
     });
+  }
+  openRepairPage(){
+    this.navCtrl.push('RepairPage')
   }
 
 }

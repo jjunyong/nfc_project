@@ -35,7 +35,7 @@ export class AdminPage {
   itemArray: any = [];
   loadedItemList: any = [];
 
-  auth: string;
+  authoption: string;
   user: Observable<User>;
 
 
@@ -55,7 +55,7 @@ export class AdminPage {
     // });
 
 
-    this.auth = "권한";
+    this.authoption = "권한";
 
 
     let loadingPopup = this.loadingCtrl.create({
@@ -91,7 +91,7 @@ export class AdminPage {
 
 
     let confirm = this.alertCtrl.create({
-      title: '정말로 아이템을 삭제하시겠습니까?',
+      title: '정말로 회원 정보를 삭제하시겠습니까?',
       message: '아이템을 삭제하시려면 Yes를 클릭하세요',
       buttons: [
         {
@@ -100,14 +100,6 @@ export class AdminPage {
 
             this.afs.collection('users').doc(this.userinfo).delete().then(() => {
 
-              admin.auth().deleteUser(this.userinfo)
-                .then(function () {
-                  console.log("Successfully deleted user");
-                })
-                .catch(function (error) {
-                  console.log("Error deleting user:", error);
-                });
-
 
               let toast = this.toast.create({
                 message: "성공적으로 삭제하였습니다.",
@@ -115,7 +107,6 @@ export class AdminPage {
                 position: "bottom"
               });
               toast.present();
-              this.navCtrl.pop();
 
             }).catch(function (error) {
               console.error("삭제에 실패하였습니다. ", error);

@@ -6,6 +6,14 @@
     .topNav {
       display: none;
     }
+    .desktop{
+      display: none;
+    }
+  }
+  @media screen and (min-width: 600px) {
+    .mobile{
+      display: none;
+    }
   }
 </style>
 
@@ -25,11 +33,10 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     
-    <div text-right>
-    <button ion-button mode="ios" (click)="qrPage()">
+    <button class="menu" style="float: right;" ion-button mode="ios" (click)="qrPage()">
       <ion-icon name="qr-scanner"></ion-icon>
     </button>
-    </div>
+    
 
 
   </ion-toolbar>
@@ -88,8 +95,8 @@
   </ion-content>
 </ion-menu>
 
-
-<!-- <ion-footer>
+<!-- 
+<ion-footer class="desktop">
   <ion-toolbar color="dark">
     <ion-grid>
       <ion-row>
@@ -97,17 +104,38 @@
           <ion-title margin-top style="text-align:center">Palm CLOUD</ion-title>
           <p style="text-align:center"><font color="white">NFC</font></p>
         </ion-col>
-        <ion-col col3></ion-col>
+        <ion-col></ion-col>
         <ion-col col-3>
           <div>
-            <p style="text-align:center">CEO : ZadPARk@palmCLOUD.co.kr</p>
-            <p style="text-align:center">Powered by Palm CLOUD</p>
+            <p style="text-align:center"><font color="white">ZadPARk@palmCLOUD.co.kr</font></p>
+            <p style="text-align:center"><font color="white">Powered by Palm CLOUD</font></p>
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-toolbar>
 </ion-footer> -->
+
+<!-- <ion-footer class="mobile">
+    <ion-toolbar color="dark">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-4>
+            <ion-title style="text-align:center"><font color="white" size="2px">Palm CLOUD</font></ion-title>
+          </ion-col>
+          <ion-col col-8>
+            <div>
+              <ion-title style="text-align:right"><font color="white" size="1px">Powered by Palm CLOUD</font></ion-title>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-footer> -->
+
+
+
+
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

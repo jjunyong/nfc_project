@@ -28,6 +28,7 @@ export class OnMaintenancePage {
   items : any = [];
   id : string;
   backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
+  cardImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%852.png?alt=media&token=78826653-cbd4-442d-9607-0b03983167b5"
 
   constructor(public loadingCtrl: LoadingController,
     public navCtrl: NavController,
@@ -72,10 +73,13 @@ export class OnMaintenancePage {
 
   openDetail(item){
     this.navCtrl.push('RepairitemdetailPage',{
-      model : item.model,
+      model: item.model,
       id: item.id,
       serialNum: item.serialNum,
       repairman: item.repairman,
+      isToggled: item.isToggled,
+      startDate: item.startDate,
+      finDate: item.finDate
     })
 
   }

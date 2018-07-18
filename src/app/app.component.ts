@@ -49,6 +49,8 @@ export class MyApp {
 
     this.global.currentMessage.subscribe(message => this.show = message)
     
+    
+
     this.afAuth.authState.subscribe((auth) => {
       // console.log(auth.email)
       this.authUser = auth.email
@@ -127,6 +129,7 @@ export class MyApp {
   }
 
   requestAuthorization() {
+    
     let alert = this.alertCtrl.create();
     alert.setTitle('원하는 권한을 신청하세요');
     alert.addInput({

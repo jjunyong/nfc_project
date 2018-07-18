@@ -48,12 +48,12 @@
         </ion-toggle>
       </ion-item>
       <ion-item class="item2">
-        <ion-label color="white">정비 시작일: {{startDate}}</ion-label>
-        <ion-datetime color="white" displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
+        <ion-label color="white">정비 시작일: {{startDate | date}}</ion-label>
+        <ion-datetime color="white"  [(ngModel)]="startDate"></ion-datetime>
       </ion-item>
       <ion-item class="item3" *ngIf="isToggled">
-        <ion-label color="white">정비 종료일: {{finDate}} </ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="finDate"></ion-datetime>
+        <ion-label color="white">정비 종료일: {{finDate | date}} </ion-label>
+        <ion-datetime  [(ngModel)]="finDate"></ion-datetime>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -95,15 +95,22 @@
                 <font color="white">{{item.description}}</font>
               </p>
               <p>
-                <font color="white">{{item.timestamp | date: 'fullDate'}}</font>
+                <font color="white">{{item.timestamp}}</font>
               </p>
             </div>
           </li>
         </ul>
         <ion-col>
-          <button ion-button icon-center clear small>
-            <ion-icon name="arrow-dropdown" (click)="more()">더보기</ion-icon>
-          </button>
+            <div *ngIf="close;then content else other_content"></div>    
+            <ng-template #content>
+              <button ion-button icon-center clear small>
+                <ion-icon name="arrow-down" (click)="more()">더보기</ion-icon>
+              </button></ng-template>
+            <ng-template #other_content>
+                <button ion-button icon-center clear small>
+                    <ion-icon name="arrow-up"(click)="closed()">접기</ion-icon>
+                  </button>
+            </ng-template>
         </ion-col>
       </ion-item-group>
     </ion-list>

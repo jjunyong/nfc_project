@@ -42,7 +42,7 @@ finAdd(RepairItem){
     toast.present();
   }
 
-  Add_User_Log(model_temp, serialNum_temp){
+  Add_User_Log(title_temp, writer_temp, description_temp){
 
     
     this.id_temp = this.afAuth.auth.currentUser.uid
@@ -51,8 +51,9 @@ finAdd(RepairItem){
     //console.log('testing', this.id_temp, model_temp, serialNum_temp, timestamp)
     this.afs.collection('users').doc(this.id_temp).collection('User_Log').add({
       timestamp : timestamp,
-      model : model_temp, 
-      serialNum : serialNum_temp
+      title : title_temp, 
+      writer : writer_temp, 
+      description : description_temp, 
     })
 
 

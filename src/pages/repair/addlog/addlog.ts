@@ -51,6 +51,9 @@ export class AddlogPage {
 
     this.fireService.LogAdd(this.RepairLog)
     this.navCtrl.pop()
+    this.fireService.Add_User_Log(this.RepairLog.title, this.RepairLog.writer, this.RepairLog.description);
+  
+    
   }
 
 

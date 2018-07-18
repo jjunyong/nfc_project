@@ -1,17 +1,31 @@
-
-
 <ion-header>
-  <ion-navbar color='grey-blue'>
-    <ion-title></ion-title>
-  </ion-navbar>
-</ion-header>
+    <ion-navbar  color="grey-blue" >
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Notice Detail</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  
 
+<ion-content no-padding >
+  <ion-item><ion-label><strong>{{notice.title}}</strong></ion-label></ion-item>
+  <ion-item><ion-label>Writer : {{notice.writer}}</ion-label></ion-item>
+  <ion-item><ion-label>Date : {{notice.timestamp | date}}</ion-label></ion-item>
+  <!--<p padding>Content</p>-->
+  <p padding>{{notice.content}}</p>
+  
 
-<ion-content padding>
-  <h2>Title : {{notice.title}}</h2>
-  <p>Writer : {{notice.writer}},</p>
+  <!--<ion-item><ion-label>Content <br>{{notice.content}}</ion-label>
+   
+  </ion-item>-->
+<!--
+
+  <h2>{{notice.title}}</h2>
+  <p>Writer : {{notice.writer}}</p>
   <p>Date : {{notice.timestamp | date}}</p>
   <br>
   <h3>Content</h3>
-  <p>{{notice.content}}</p>
+  <p>{{notice.content}}</p>-->
 </ion-content>
