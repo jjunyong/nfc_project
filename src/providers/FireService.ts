@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
+import {AngularFireAuth} from 'angularfire2/auth'
+import { timestamp } from 'rxjs/operator/timestamp';
 
 
 @Injectable()
 export class FireService{
-
-  constructor(public afs : AngularFirestore, public toast : ToastController){
+  
+  id_temp : string;
+  constructor(public afs : AngularFirestore, public toast : ToastController, public afAuth : AngularFireAuth){
+    //this.id_temp=this.afAuth.auth.currentUser.uid;
+    
   }
 
 
@@ -35,6 +40,23 @@ finAdd(RepairItem){
             position: "bottom"
     });
     toast.present();
+  }
+
+  Add_User_Log(model_temp, serialNum_temp){
+
+    
+    this.id_temp = this.afAuth.auth.currentUser.uid
+    var timestamp=new Date()
+    
+    //console.log('testing', this.id_temp, model_temp, serialNum_temp, timestamp)
+    this.afs.collection('users').doc(this.id_temp).collection('User_Log').add({
+      timestamp : timestamp,
+      model : model_temp, 
+      serialNum : serialNum_temp
+    })
+
+
+    
   }
 
   RepairAdd(RepairItem){

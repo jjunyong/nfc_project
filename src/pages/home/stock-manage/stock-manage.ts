@@ -74,29 +74,26 @@ export class StockManagePage {
    
 }
 remove(item){
-  console.log(item.quantity, item.id, item.model)
+  //console.log(item.quantity, item.id, item.model)
   this.count_temp=item.quantity -1; 
   Number(this.count_temp)
-  console.log(typeof(this.count_temp))
-  console.log(this.count_temp)
+  //console.log(typeof(this.count_temp))
+  //console.log(this.count_temp)
   this.afs.collection('item').doc(item.id).update({
     quantity : this.count_temp
   })
   
 }
 add(item){
-  console.log(item.quantity, item.id, item.model)
+  //console.log(item.quantity, item.id, item.model)
   this.count_temp=Number(item.quantity)+ Number(1); 
-  console.log(typeof(this.count_temp))
-  console.log(this.count_temp)
+  //console.log(typeof(this.count_temp))
+  //console.log(this.count_temp)
   this.afs.collection('item').doc(item.id).update({
     quantity : this.count_temp
   })
 }
 
-Set(){
-
-}
 
 ionViewWillEnter(){
   console.log('ionViewEnteredStockMangePage')

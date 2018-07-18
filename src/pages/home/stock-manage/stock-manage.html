@@ -19,13 +19,14 @@
         <img [src]="contact.img">
       </ion-avatar>   -->
       <h2 (click)="openDetail(item)"> <strong>{{ item.model }}</strong> </h2>
-      <h3> 
-        Location : {{ item.location1 }}-{{ item.location2 }}
-      <div text-right ><button clear ion-button (click)="remove(item)" ><ion-icon name="remove"></ion-icon></button>
-       {{item.quantity}}
-        <button clear ion-button (click)="add(item)" ><ion-icon name="add" icon-only></ion-icon></button>
+      <h3 (click)="openDetail(item)"> 
+        Location : {{ item.location1 }}-{{ item.location2 }}</h3>
+      <div text-right ><button clear ion-button (click)="remove(item)" ><ion-icon name="arrow-down"></ion-icon></button>
+        {{item.quantity}}
+      <button clear ion-button (click)="add(item)" ><ion-icon name="arrow-up" icon-only></ion-icon></button>
       </div>
-    </h3>
+      
+      
     </ion-item>  
 
   </ion-list>
