@@ -58,6 +58,7 @@ login(){
 //   this.navCtrl.push('ForgotPage');
 // }
 serviceRequest(){
+  
   console.log('서비스 신청 하는거 구현해야됨')
 }
 

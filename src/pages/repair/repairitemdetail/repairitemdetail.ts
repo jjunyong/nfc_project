@@ -6,13 +6,13 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import {AngularFireAuth} from 'angularfire2/auth'
 
-class RepairItem{
+class RepairItem {
   finDate: Date;
   id: string;
   isToggled: boolean;
 }
 
-interface RepairItemLog{
+interface RepairItemLog {
   title: string,
   writer: string,
   description: string;
@@ -28,26 +28,26 @@ interface RepairItemLog{
 
 export class RepairitemdetailPage {
 
-  private itemsCollection: AngularFirestoreCollection<RepairItemLog>; 
+  private itemsCollection: AngularFirestoreCollection<RepairItemLog>;
 
   id_temp : string ;
   RepairItem = new RepairItem();
 
-  itemList : any=[]; 
-  itemArray : any = [];
-  loadedItemList:  any=[]; 
-  items : any = [];
+  itemList: any = [];
+  itemArray: any = [];
+  loadedItemList: any = [];
+  items: any = [];
 
-  showToolbar:boolean = false;
-  transition:boolean = false;
+  showToolbar: boolean = false;
+  transition: boolean = false;
 
   id: string;
-  public serialNum:string;
-  public model:string;
-  repairman:string;
+  serialNum: string;
+  model: string;
+  repairman: string;
 
-  startDate : Date;
-  finDate : Date
+  startDate: Date;
+  finDate: Date
   isToggled: boolean;
 
   backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
@@ -94,32 +94,32 @@ export class RepairitemdetailPage {
     console.log('ionViewDidLoad ItemDetailPage');
   }
 
-  onScroll($event: any){
+  onScroll($event: any) {
     let scrollTop = $event.scrollTop;
     this.showToolbar = scrollTop >= 100;
-    if(scrollTop < 0){
-        this.transition = false;
-        //this.headerImgSize = `${ Math.abs(scrollTop)/2 + 100}%`;
-    }else{
-        this.transition = true;
-       // this.headerImgSize = '100%'
+    if (scrollTop < 0) {
+      this.transition = false;
+      //this.headerImgSize = `${ Math.abs(scrollTop)/2 + 100}%`;
+    } else {
+      this.transition = true;
+      // this.headerImgSize = '100%'
     }
     this.ref.detectChanges();
   }
 
-  add(){
-    this.navCtrl.push('AddlogPage',{
-      id : this.id
-    })
-  }  
-  
-  timeline(){
-    this.navCtrl.push('TimelinePage',{
-      id : this.id
+  add() {
+    this.navCtrl.push('AddlogPage', {
+      id: this.id
     })
   }
 
-repairfin(){
+  timeline() {
+    this.navCtrl.push('TimelinePage', {
+      id: this.id
+    })
+  }
+
+  repairfin() {
 
     this.isToggled !== true;
     console.log(this.isToggled)
@@ -138,16 +138,15 @@ repairfin(){
 
   }
 
-  modify(){
+  modify() {
 
   }
 
-  addtime(item)
-  {
+  addtime(item) {
 
   }
 
-  
+
   delete() {
 
     let confirm = this.alertCtrl.create({
@@ -158,7 +157,7 @@ repairfin(){
           text: 'Yes',
           handler: () => {
             this.afs.collection('RepairItem').doc(this.id).delete().then(() => {
-              
+
               let toast = this.toast.create({
                 message: "성공적으로 삭제하였습니다.",
                 duration: 2000,
@@ -188,19 +187,19 @@ repairfin(){
   }
 
 
-  more(){
+  more() {
 
-    this.itemsCollection = this.afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref=>ref.orderBy('timestamp','desc'))
-    this.items= this.itemsCollection.valueChanges()
+    this.itemsCollection = this.afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref => ref.orderBy('timestamp', 'desc'))
+    this.items = this.itemsCollection.valueChanges()
 
 
-   this.items.subscribe((RepairItemLog)=>{
-        this.itemArray = RepairItemLog;
-        this.itemList = this.itemArray;
-        this.loadedItemList = this.itemArray;
-      });
+    this.items.subscribe((RepairItemLog) => {
+      this.itemArray = RepairItemLog;
+      this.itemList = this.itemArray;
+      this.loadedItemList = this.itemArray;
+    });
 
-  
+
   }
 
 

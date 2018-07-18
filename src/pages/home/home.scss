@@ -1,6 +1,8 @@
 page-home {
     .card-background-page {
 
+        
+
         ion-card {
           position: relative;
           text-align: center;
@@ -12,7 +14,7 @@ page-home {
           font-size: 2.0em;
           width: 100%;
           font-weight: bold;
-          color: rgb(0, 0, 0);
+          color: #ffffff
         }
       
         .card-subtitle {
@@ -20,9 +22,25 @@ page-home {
           position: absolute;
           top: 52%;
           width: 100%;
-          color: rgb(0, 0, 0);
+          color: #ffffff
         }
       
       }
+
+
+      // .header {
+      //   margin-top : 50px;
+      //   height : 400px;
+      // }
+      .slide{
+        height : 450px;
+      }
+      .slide_img{
+        width:100%;
+        height: 450px;
+      }
+
+
+
 
 }

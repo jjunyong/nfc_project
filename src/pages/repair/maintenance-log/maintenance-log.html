@@ -14,14 +14,14 @@
 <ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   <ion-row>
     <ion-col col-12 col-md-4 col-xl-3  *ngFor="let item of itemList" >
-        <ion-card (click)="openDetail(item)">            
+        <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}" (click)="openDetail(item)">            
             <img src="{{item.Image}}" height="200">
             <ion-card-content>
-              <ion-card-title>
+              <ion-card-title color="white">
                 {{item.model}}
                 </ion-card-title>
-               <h5>설비번호: {{item.serialNum}}</h5>
-               <h6>정비담당: {{item.repairman}}</h6>
+               <h5><font color="white">설비번호: {{item.serialNum}}</font></h5>
+               <h6><font color="white">정비담당: {{item.repairman}}</font></h6>
             </ion-card-content>
           </ion-card>
     </ion-col>
