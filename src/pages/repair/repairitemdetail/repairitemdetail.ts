@@ -106,7 +106,7 @@ export class RepairitemdetailPage {
     this.ref.detectChanges();
   }
 
-  add(){
+  addlog(){
     this.navCtrl.push('AddlogPage',{
       id : this.id
     })

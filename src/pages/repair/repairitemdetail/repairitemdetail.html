@@ -59,23 +59,23 @@
   </ion-card>
 
   <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
-      <ion-card-header color="vague-blue">
-        Images
-      </ion-card-header>
-      <ion-grid>
-        <ion-row wrap color="dark">
-          <ion-col (click)="openFullImage()" tappable col-4 col-md-2 *ngFor="let image of imgGallery, let i = index">
-            <img class="expanded-image" [src]="image.image_url" />
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <input type="file" accept="image/*" (change)="uploadFile($event)" id="fileInput" />
-      <label for="fileInput" icon-only ion-button clear>
-        <ion-icon color="white" name="add"></ion-icon>
-        <ion-icon color="white" name="images"></ion-icon>
-      </label>
-    </ion-card>
-    
+    <ion-card-header color="vague-blue">
+      Images
+    </ion-card-header>
+    <ion-grid>
+      <ion-row wrap color="dark">
+        <ion-col (click)="openFullImage()" tappable col-4 col-md-2 *ngFor="let image of imgGallery, let i = index">
+          <img class="expanded-image" [src]="image.image_url" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <input type="file" accept="image/*" (change)="uploadFile($event)" id="fileInput" />
+    <label for="fileInput" icon-only ion-button clear>
+      <ion-icon color="white" name="add"></ion-icon>
+      <ion-icon color="white" name="images"></ion-icon>
+    </label>
+  </ion-card>
+
   <ion-card-content>
 
     <ion-list>
@@ -109,5 +109,7 @@
     </ion-list>
 
   </ion-card-content>
-
+  <ion-fab right bottom>
+    <button color="grey-blue" (click)="addlog()" ion-fab><ion-icon name="add"></ion-icon></button>
+</ion-fab>
 </ion-content>

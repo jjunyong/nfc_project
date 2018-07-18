@@ -196,7 +196,7 @@ export class MyApp {
     this.nav.setRoot('MainPage');
   }
   Admin(){
-    this.nav.setRoot('AdminPage')
+    this.nav.setRoot('AdminPage');
   }
 
   showAlert() {
