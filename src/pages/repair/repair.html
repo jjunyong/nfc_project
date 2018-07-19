@@ -98,23 +98,25 @@
 
     <!--*********** Promotion View  ***********-->
     <div *ngIf="viewType==='Notice'">
-
-        <ion-list class="wave">
-            <ion-item class="notices" tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
-                <h2>
-                    <font color="dark">{{item.title}}</font>
-                </h2>
-                <p>
-                    <font color="light">{{item.writer}}, {{item.timestamp | date}}</font>
-                </p>
+        
+        <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}"
+        margin-top padding tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
+                <h2 style="color : white"><strong>{{item.title}}</strong></h2>
+                <p style="color : white">{{item.writer}}</p>
+                <p style="color : white">{{item.timestamp | date}}</p>
+        </ion-card>
+        
+        
+        <!--<ion-list class="wave">
+            <ion-item tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
+                <h2>{{item.title}}</h2>
+                <p>{{item.writer}}, {{item.timestamp | date}}</p>
             </ion-item>
-        </ion-list>
-
-        <ion-fab right bottom>
-            <button ion-fab color="grey-blue" (click)="manage()">
-                <ion-icon name="add"></ion-icon>
-            </button>
-        </ion-fab>
+        </ion-list>-->
+        
+    <ion-fab  right bottom >
+            <button color="grey-blue" (click)="manage()" ion-fab ><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
     </div>
 
 </ion-content>

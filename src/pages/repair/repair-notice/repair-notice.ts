@@ -18,9 +18,15 @@ export class RepairNoticePage {
 
 // notice:any;
 content: string;
+title : string;
+writer :string;
+timestamp : Date;
 
 constructor(public navCtrl: NavController, public afs:AngularFirestore, public navParams: NavParams) {
   this.content = this.navParams.get('content');
+  this.title = this.navParams.get('title');
+  this.writer = this.navParams.get('writer');
+  this.timestamp = this.navParams.get('timestamp')
 }
 
   ionViewDidLoad() {

@@ -116,10 +116,11 @@
 <!--*********** Promotion View  ***********-->
 <div *ngIf="viewType==='Notice'">
         
-    <ion-card margin-top padding tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
-            <h2><strong>{{item.title}}</strong></h2>
-            <p>{{item.writer}}</p>
-            <p>{{item.timestamp | date}}</p>
+    <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}"
+    margin-top padding tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
+            <h2 style="color : white"><strong>{{item.title}}</strong></h2>
+            <p style="color : white">{{item.writer}}</p>
+            <p style="color : white">{{item.timestamp | date}}</p>
     </ion-card>
     
     
