@@ -4,6 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<!--
 <ion-header>
 
   <ion-navbar>
@@ -43,4 +44,43 @@
               </ion-grid>
         </ion-list>
  
+</ion-content>-->
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<ion-header>
+
+  <ion-navbar color="grey-blue">
+    <ion-title>Add timeline</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+<div class="container">
+      <div  class="form-group">
+        <label class="col-md-2 control-label">제목</label>
+        <div class="col-md-10">
+          <input margin-top margin-bottom class="form-control" type="text" [(ngModel)]="title" placeholder="Enter the title">
+        </div>
+      </div>
+     <div class="form-group">
+        <label class="col-md-2 control-label">작성자</label>
+        <div class="col-md-10">
+          <input margin-top margin-bottom class="form-control" type="text" [(ngModel)]="writer" placeholder="Enter your name.">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">정비 내역</label>
+        <div class="col-md-10">
+          <textarea margin-top margin-bottom class="form-control"  [(ngModel)]="description" rows="10" placeholder="Enter the content"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" text-right>
+          <button ion-button type="button" mode="ios" outline (click)="save()" color="grey-blue">Save</button>
+        </div>
+      </div>
+  </div>
 </ion-content>

@@ -4,7 +4,7 @@ import { AngularFirestore } from 'angularfire2/firestore'
 import { AngularFireStorage } from 'angularfire2/storage';
 import { GlobalVars } from '../../../../providers/global';
 import { finalize } from 'rxjs/operators';
-
+import { AngularFireAuth} from 'angularfire2/auth'
 
 
 @IonicPage()
@@ -24,6 +24,8 @@ export class ItemDetailPage {
   quantity: number;
   id: string;
 
+  id_temp : string;
+
   public pre_model: any;
   public pre_location1: any;
   public pre_location2: any;
@@ -41,7 +43,7 @@ export class ItemDetailPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef, public afs: AngularFirestore, public alertCtrl: AlertController,
     public toast: ToastController, public global: GlobalVars, public storage: AngularFireStorage,
-    public modalCtrl: ModalController) {
+    public modalCtrl: ModalController, public afAuth : AngularFireAuth) {
 
     this.global.changeMessage(false);
 
@@ -115,6 +117,16 @@ export class ItemDetailPage {
         changed_quantity: this.changed_quantity,
 
       })
+      this.id_temp = this.afAuth.auth.currentUser.uid
+      this.afs.collection('users').doc(this.id_temp).collection('Stock_Log').add({
+        model: this.model,
+        type: "location_changed",
+        quantity: this.quantity,
+        location1: this.location1,
+        location2: this.location2,
+        timestamp: new Date(),
+        changed_quantity: this.changed_quantity,
+      })
     }
 
     if (this.changed_quantity > 0) {
@@ -128,6 +140,16 @@ export class ItemDetailPage {
         changed_quantity: this.changed_quantity,
 
       })
+      this.id_temp = this.afAuth.auth.currentUser.uid
+      this.afs.collection('users').doc(this.id_temp).collection('Stock_Log').add({
+        model: this.model,
+        type: "import",
+        quantity: this.quantity,
+        location1: this.location1,
+        location2: this.location2,
+        timestamp: new Date(),
+        changed_quantity: this.changed_quantity,
+      })
     }
 
     if (this.changed_quantity < 0) {
@@ -140,6 +162,16 @@ export class ItemDetailPage {
         timestamp: new Date(),
         changed_quantity: this.changed_quantity,
 
+      })
+      this.id_temp = this.afAuth.auth.currentUser.uid
+      this.afs.collection('users').doc(this.id_temp).collection('Stock_Log').add({
+        model: this.model,
+        type: "export",
+        quantity: this.quantity,
+        location1: this.location1,
+        location2: this.location2,
+        timestamp: new Date(),
+        changed_quantity: this.changed_quantity,
       })
     }
     this.navCtrl.push('StockManagePage', {

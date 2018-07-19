@@ -49,7 +49,7 @@ finAdd(RepairItem){
     var timestamp=new Date()
     
     //console.log('testing', this.id_temp, model_temp, serialNum_temp, timestamp)
-    this.afs.collection('users').doc(this.id_temp).collection('User_Log').add({
+    this.afs.collection('users').doc(this.id_temp).collection('Repair_Log').add({
       timestamp : timestamp,
       title : title_temp, 
       writer : writer_temp, 

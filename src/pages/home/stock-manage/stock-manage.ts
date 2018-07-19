@@ -14,6 +14,8 @@ class Item{
   model: string;
   quantity : number;
   id : string;
+  public add_num : number ;
+  public remove_num :number;
 }
 // class modify{
 //   model : any;
@@ -36,7 +38,14 @@ export class StockManagePage {
   loadedItemList:  any=[]; 
   items : any = [];
   // modifyList : modify;
+
+  public setArray : any =[];
+
+  addArray : any =[];
+  removeArray : any =[];
   count_temp : number ;
+
+  temp : number=0;
 
 
 
@@ -67,31 +76,63 @@ export class StockManagePage {
       this.itemArray = item;
       this.itemList = this.itemArray;
       this.loadedItemList = this.itemArray;
-      loadingPopup.dismiss();
+      loadingPopup.dismiss()
     })
-    console.log(this.loadedItemList)
-    
-   
+
+    //console.log("test")
+    // for (var i=0;i<this.temp;i++){
+    //   console.log()
+    // }
+  setTimeout(()=>{
+  this.temp=this.itemArray.length;
+  for(var i=0; i<this.temp; i++){
+    this.itemArray[i].add_num=0;
+    this.itemArray[i].remove_num=0;
+    this.setArray[i]=this.itemArray[i]
+   // this.removeArray[i]=this.itemArray[i]
+   // this.addArray[i]=this.itemArray[i]
+    // this.removeArray[i]=0;
+    // this.addArray[i]=0;
+    console.log(this.setArray[i].model, this.setArray[i].add_num, this.setArray[i].remove_num)
+  }
+  
+
+  }, 500);
+  
+
 }
-remove(item){
-  //console.log(item.quantity, item.id, item.model)
+remove(item){ 
+  for(var i=0;i<this.temp;i++){
+    if(item.model==this.setArray[i].model){
+      this.setArray[i].remove_num++;
+      console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
+    }
+  }
   this.count_temp=item.quantity -1; 
   Number(this.count_temp)
-  //console.log(typeof(this.count_temp))
-  //console.log(this.count_temp)
   this.afs.collection('item').doc(item.id).update({
     quantity : this.count_temp
   })
-  
+  //this.count_remove++;
+  //this.removeArray[this.count_remove]=item.model;
+  //console.log(this.count_remove, this.removeArray[this.count_remove])
 }
+
 add(item){
-  //console.log(item.quantity, item.id, item.model)
+  
+  for(var i=0;i<this.temp;i++){
+  if(item.model==this.setArray[i].model){
+    this.setArray[i].add_num++;
+    console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+  }
+}
   this.count_temp=Number(item.quantity)+ Number(1); 
-  //console.log(typeof(this.count_temp))
-  //console.log(this.count_temp)
   this.afs.collection('item').doc(item.id).update({
     quantity : this.count_temp
   })
+  //this.count_add++;
+  //this.addArray[this.count_add]=item.model;
+  //console.log(this.count_add, this.addArray[this.count_add])
 }
 
 
@@ -100,8 +141,52 @@ ionViewWillEnter(){
   this.global.changeMessage(false);
 }
 
+set(){
+  //console.log(this.count_add, this.count_remove)
+  //this.temp=this.itemArray.length;
+  //console.log(this.temp, "test")
+  let confirm = this.alertCtrl.create({
+    title: '현재 상태를 저장하시겠습니까?',
+    message: '현재 상태를 저장하려면 Yes를 클릭하세요',
+    buttons: [
+      {
+        text: 'Yes',
+        handler: () => {
+          this.fire_update()
+        }
+      },
+      {
+        text: 'Cancel',
+        handler: () => {
+          this.fire_reset()
+        }
+      }
+    ]
+  });
+  confirm.present();
+}
+
 initializeItems(){
   this.itemList = this.loadedItemList;
+  
+}
+fire_update(){
+//log update
+console.log("log update")
+for(var i=0; i<this.temp; i++){
+  console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+  console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
+  }
+}
+
+
+fire_reset(){
+//firestore reset
+console.log("log reset")
+for(var i=0; i<this.temp; i++){
+  console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+  console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
+  }
 }
 
 getItems(searchbar) {
