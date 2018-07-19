@@ -9,22 +9,18 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
 import { AngularFireStorageModule } from 'angularfire2/storage';
-import { AuthData } from '../providers/auth-data';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFirestoreModule } from 'angularfire2/firestore'
 import { NFC, Ndef} from '@ionic-native/nfc';
 import { FireService } from '../providers/FireService';
 import { AuthorizationPage } from './authorization/authorization';
-import { LoginSelectPage } from './app.component'
+// import { LoginSelectPage } from './app.component'
 import { GlobalVars } from '../providers/global';
 import { FillPage } from '../pages/home/change-log/change-log';
-import { GalleryPage } from '../pages/home/stock-manage/item-detail/gallery';
-import { QrcodePage } from '../pages/qrcode/qrcode';
 import { IonicPageModule } from 'ionic-angular/module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { NavController} from 'ionic-angular'
-import * as admin from 'firebase-admin';
+import { AuthService } from '../providers/auth.service';
  
 
 export const config = { 
@@ -41,7 +37,7 @@ export const config = {
   declarations: [
     MyApp,
     AuthorizationPage,
-    LoginSelectPage,
+    // LoginSelectPage,
     FillPage
   ],
   imports: [
@@ -58,20 +54,20 @@ export const config = {
   entryComponents: [
     MyApp,
     AuthorizationPage,
-    LoginSelectPage,
+    // LoginSelectPage,
     FillPage
   ],  
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthData,
     GooglePlus,
     NFC,
     Ndef,
     FireService,
     GlobalVars, 
     BarcodeScanner, 
+    AuthService
   ]
 })
 export class AppModule {} 

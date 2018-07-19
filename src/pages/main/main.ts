@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { NFC } from '@ionic-native/nfc';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { auth } from 'firebase';
-import { AuthData } from '../../providers/auth-data';
 import { GlobalVars } from '../../providers/global';
+import { AuthService } from '../../providers/auth.service';
 
 /**
  * Generated class for the MainPage page.
@@ -28,7 +27,8 @@ export class MainPage {
   
 
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC,
-    public authData: AuthData, public global : GlobalVars) {
+    public auth: AuthService, public global : GlobalVars) {
+
 
       this.global.changeMessage(true);
 
@@ -73,7 +73,5 @@ export class MainPage {
   logout() {
     this.afAuth.auth.signOut()
   }
-
-
 }
 

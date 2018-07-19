@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { AuthData } from '../../../providers/auth-data';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../../providers/auth.service';
 
 /**
  * Generated class for the RegisterPage page.
@@ -20,7 +20,7 @@ export class RegisterPage {
   public registerForm;
   public backgroundImage: any = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/register.jpg?alt=media&token=482d277e-5094-4296-a8ff-89a46f5fd1ea";
 
-  constructor(public navCtrl: NavController, public authData : AuthData, 
+  constructor(public navCtrl: NavController, public auth : AuthService, 
     public navParams: NavParams, public fb: FormBuilder, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
       

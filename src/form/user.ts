@@ -7,5 +7,9 @@ export interface Roles{
 export interface User{
     uid: string;
     email: string;
+    name?: string;
+    phone?: string;
+    thumbnail?: string;
+    employee_number?: string;
     roles : Roles;
 }

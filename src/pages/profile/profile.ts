@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { finalize } from 'rxjs/operators';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { AuthService } from '../../providers/auth.service';
 
 /**
  * Generated class for the ProfilePage page.
@@ -32,11 +33,12 @@ export class ProfilePage {
   backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afs: AngularFirestore,
-    public afAuth: AngularFireAuth, public storage : AngularFireStorage, public alertCtrl : AlertController) {
-    this.afAuth.authState.subscribe((user) => {
+    public storage : AngularFireStorage, public alertCtrl : AlertController,
+  public auth: AuthService) {
+
+    this.auth.user.subscribe((user)=>{
       this.uid = user.uid
-      console.log(user.uid);
-      this.afs.collection('users').doc(user.uid).valueChanges()
+      this.afs.collection('users').doc(`${user.uid}`).valueChanges()
         .subscribe((user_info: any) => {
           this.name = user_info.name;
           this.email = user_info.email;

@@ -1,13 +1,16 @@
 <style>
     @media screen and (max-width: 600px) {
-        .slide{
+        .slide {
             display: none;
         }
-        .card{
-            max-height : 150px;
+        .card {
+            max-height: 150px;
         }
-        .card-subtitle{
+        .card-subtitle {
             margin-top: 20px;
+        }
+        .desktop {
+            display: none;
         }
     }
 </style>
@@ -110,6 +113,30 @@
                 </ion-col>
             </ion-row>
         </div>
+
+
+        <ion-footer class="desktop">
+            <ion-toolbar color="dark">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-title margin-top>Palm CLOUD</ion-title>
+                        </ion-col>
+                        <ion-col col-3></ion-col>
+                        <ion-col col-3></ion-col>
+                        <ion-col col-3>
+                            <ion-title style="text-align:right">
+                                <font size="3px">ZadPARk@palmCLOUD.co.kr</font>
+                            </ion-title>
+                            <ion-title style="text-align:right">
+                                <font size="2px">Powered by Palm CLOUD</font>
+                            </ion-title>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-toolbar>
+        </ion-footer>
+
 
     </div>
 

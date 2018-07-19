@@ -6,12 +6,13 @@
     .topNav {
       display: none;
     }
-    .desktop{
+    .desktop {
       display: none;
     }
   }
+
   @media screen and (min-width: 600px) {
-    .mobile{
+    .mobile {
       display: none;
     }
   }
@@ -24,19 +25,19 @@
     </button>
     <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openStock()">재고관리</button>
     <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openRepair()">정비관리</button>
-    <button *ngIf="!loginOn" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="DologIn()">로그인</button>
-    <button *ngIf="loginOn" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="logout()">로그아웃</button>
+    <button *ngIf="!(auth.user | async);" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="DologIn()">로그인</button>
+    <button *ngIf="auth.user | async;" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="logout()">로그아웃</button>
     <!-- <button ion-button menuToggle>
           <ion-icon class="menu_icon" name="menu"></ion-icon>
         </button> -->
     <button class="menu" ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    
+
     <button class="menu" style="float: right;" ion-button mode="ios" (click)="qrPage()">
       <ion-icon name="qr-scanner"></ion-icon>
     </button>
-    
+
 
 
   </ion-toolbar>
@@ -56,14 +57,18 @@
           <span class="icon-badge"></span>
         </ion-col>
         <ion-col col-6>
-      <img class="user-avatar round" src="{{user_thumbnail}}">
+          <div *ngIf="auth.user | async as user">
+            <img class="user-avatar round" src="{{user.thumbnail}}">
+          </div>
         </ion-col>
         <ion-col col-3>
           <!-- <img src="assets/icon/icon-calendar.svg" /> -->
         </ion-col>
       </ion-row>
       <ion-row style="justify-content: center;">
-        <h3>{{authUser}}</h3>
+        <div *ngIf="auth.user | async as user">
+          <h3>{{user.email}}</h3>
+        </div>
       </ion-row>
     </div>
     <ion-list no-lines>
@@ -75,14 +80,14 @@
         <ion-icon name="user"></ion-icon>
         Admin
       </button>
-      <button *ngIf="!loginOn" menuClose ion-item detail-none (click)="DologIn()">
+      <button *ngIf="!(auth.user | async);" menuClose ion-item detail-none (click)="DologIn()">
         로그인
       </button>
       <button menuClose ion-item detail-none *ngFor="let p of pages" (click)="openPage(p)">
         <!--<ion-icon [name]="p.icon" item-left></ion-icon>-->
         {{p.title}}
       </button>
-      <button *ngIf="loginOn" menuClose ion-item detail-none (click)="logout()">
+      <button *ngIf="auth.user | async;" menuClose ion-item detail-none (click)="logout()">
         로그아웃
       </button>
       <!-- <button *ngIf="!masterSwitch && login" menuClose ion-item detail-none (click)="requestAuthorization()">
@@ -94,48 +99,6 @@
     </ion-list>
   </ion-content>
 </ion-menu>
-
-<!-- 
-<ion-footer class="desktop">
-  <ion-toolbar color="dark">
-    <ion-grid>
-      <ion-row>
-        <ion-col col-3>
-          <ion-title margin-top style="text-align:center">Palm CLOUD</ion-title>
-          <p style="text-align:center"><font color="white">NFC</font></p>
-        </ion-col>
-        <ion-col></ion-col>
-        <ion-col col-3>
-          <div>
-            <p style="text-align:center"><font color="white">ZadPARk@palmCLOUD.co.kr</font></p>
-            <p style="text-align:center"><font color="white">Powered by Palm CLOUD</font></p>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
-</ion-footer> -->
-
-<!-- <ion-footer class="mobile">
-    <ion-toolbar color="dark">
-      <ion-grid>
-        <ion-row>
-          <ion-col col-4>
-            <ion-title style="text-align:center"><font color="white" size="2px">Palm CLOUD</font></ion-title>
-          </ion-col>
-          <ion-col col-8>
-            <div>
-              <ion-title style="text-align:right"><font color="white" size="1px">Powered by Palm CLOUD</font></ion-title>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-toolbar>
-  </ion-footer> -->
-
-
-
-
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

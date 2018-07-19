@@ -4,8 +4,6 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FireService } from '../../providers/FireService';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import * as admin from 'firebase-admin';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
 
 
@@ -73,16 +71,6 @@ export class AdminPage {
       this.loadedItemList = this.itemArray;
       loadingPopup.dismiss();
     })
-
-    // this.user = this.afAuth.authState.pipe(
-    //   switchMap(user => {
-    //     if (user) {
-    //       return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
-    //     } else {
-
-    //     }
-    //   })
-    // )
   }
 
   delete(item) {

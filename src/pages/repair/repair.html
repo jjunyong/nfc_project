@@ -1,17 +1,20 @@
 <style>
-        @media screen and (max-width: 600px) {
-            .slide{
-                display: none;
-            }
-            .card{
-                max-height : 150px;
-            }
-            .card-subtitle{
-                margin-top: 20px;
-            }
+    @media screen and (max-width: 600px) {
+        .slide {
+            display: none;
         }
-    </style>
-    
+        .card {
+            max-height: 150px;
+        }
+        .card-subtitle {
+            margin-top: 20px;
+        }
+        .desktop {
+            display: none;
+        }
+    }
+</style>
+
 
 <ion-header>
     <!-- <ion-navbar color="grey-blue">
@@ -52,25 +55,25 @@
     <!--*********** Menu View  ***********-->
     <div *ngIf="viewType==='Menu'">
 
-            <ion-slides id="slide" class="slide" autoplay="2000" loop="true" speed="2000">
-                    <ion-slide>
-                        <div class="card-background-page">
-                            <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/tools.png?alt=media&token=cc63b91d-e391-44d8-a273-688d2175b64d">
-                            <h2 class="card-title">Palm Cloud - 정비관리</h2>
-                        </div>
-                    </ion-slide>
-                    <ion-slide>
-                        <div class="card-background-page">
-                            <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%9D%B4%EB%A6%84%20%EC%97%86%EC%9D%8C.png?alt=media&token=970a421f-28c4-454d-9946-994a73cd8fec">
-                            <h2 class="card-title">Palm Cloud - 재고관리</h2>
-                            <div class="card-subtitle">
-                                <button color="white" ion-button outline (click)="openHomePage()">
-                                    CLICK!
-                                </button>
-                            </div>
-                        </div>
-                    </ion-slide>
-                </ion-slides>
+        <ion-slides id="slide" class="slide" autoplay="2000" loop="true" speed="2000">
+            <ion-slide>
+                <div class="card-background-page">
+                    <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/tools.png?alt=media&token=cc63b91d-e391-44d8-a273-688d2175b64d">
+                    <h2 class="card-title">Palm Cloud - 정비관리</h2>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="card-background-page">
+                    <img class="slide_img" src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EC%9D%B4%EB%A6%84%20%EC%97%86%EC%9D%8C.png?alt=media&token=970a421f-28c4-454d-9946-994a73cd8fec">
+                    <h2 class="card-title">Palm Cloud - 재고관리</h2>
+                    <div class="card-subtitle">
+                        <button color="white" ion-button outline (click)="openHomePage()">
+                            CLICK!
+                        </button>
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slides>
 
         <div class="card-background-page">
             <ion-row>
@@ -93,6 +96,28 @@
                 </ion-col>
             </ion-row>
         </div>
+
+        <ion-footer class="desktop">
+            <ion-toolbar color="dark">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-3>
+                            <ion-title margin-top>Palm CLOUD</ion-title>
+                        </ion-col>
+                        <ion-col col-3></ion-col>
+                        <ion-col col-3></ion-col>
+                        <ion-col col-3>
+                            <ion-title style="text-align:right">
+                                <font size="3px">ZadPARk@palmCLOUD.co.kr</font>
+                            </ion-title>
+                            <ion-title style="text-align:right">
+                                <font size="2px">Powered by Palm CLOUD</font>
+                            </ion-title>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-toolbar>
+        </ion-footer>
 
     </div>
 
