@@ -42,18 +42,23 @@ finAdd(RepairItem){
     toast.present();
   }
 
-  Add_User_Log(title_temp, writer_temp, description_temp){
+
+  //repair log 남기기
+  Add_User_Log(RepairLog){
 
     
     this.id_temp = this.afAuth.auth.currentUser.uid
-    var timestamp=new Date()
+    var timestamp_temp=new Date()
     
     //console.log('testing', this.id_temp, model_temp, serialNum_temp, timestamp)
     this.afs.collection('users').doc(this.id_temp).collection('Repair_Log').add({
-      timestamp : timestamp,
-      title : title_temp, 
-      writer : writer_temp, 
-      description : description_temp, 
+      timestamp : timestamp_temp,
+      title : RepairLog.title, 
+      writer : RepairLog.writer, 
+      description : RepairLog.description, 
+      model : RepairLog.model,
+      serialNum:RepairLog.serialNum 
+
     })
 
 

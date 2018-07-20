@@ -114,7 +114,9 @@ export class RepairitemdetailPage {
 
   addlog(){
     this.navCtrl.push('AddlogPage',{
-      id : this.id
+      id : this.id,
+      serialNum : this.serialNum, 
+      model : this.model
     })
   }
 

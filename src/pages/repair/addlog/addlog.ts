@@ -10,6 +10,8 @@ class RepairLog{
   description: string
   id: string
   timestamp: Date
+  model : string
+  serialNum:string
 }
 
 @IonicPage()
@@ -24,6 +26,8 @@ export class AddlogPage {
   writer : string
   description : string
   id : string
+  model : string
+  serialNum : string
   
  
 
@@ -31,6 +35,8 @@ export class AddlogPage {
   public fireService : FireService, private viewCtrl: ViewController) {
 
     this.id = this.navParams.get('id');
+    this.serialNum =this.navParams.get('serialNum')
+    this.model= this.navParams.get('model')
 }
 
   ionViewDidLoad() {
@@ -47,11 +53,13 @@ export class AddlogPage {
     this.RepairLog.writer = this.writer;
     this.RepairLog.description = this.description;
     this.RepairLog.id = this.id;
+    this.RepairLog.model=this.model;
+    this.RepairLog.serialNum=this.serialNum;
     
 
     this.fireService.LogAdd(this.RepairLog)
     this.navCtrl.pop()
-    this.fireService.Add_User_Log(this.RepairLog.title, this.RepairLog.writer, this.RepairLog.description);
+    this.fireService.Add_User_Log(this.RepairLog);
   
     
   }
