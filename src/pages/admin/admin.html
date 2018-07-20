@@ -40,8 +40,9 @@
         <div class="panel-heading">
           <h3 class="panel-title">User List</h3>
         </div>
+
         <div class="panel-body">
-          <div class="table-container" *ngFor="let item of itemList">
+          <div class="table-container" *ngFor="let item of itemList" (click)="profile(item)">
             <table class="table-users table" border="0">
               <tbody>
                 <tr>
@@ -62,8 +63,8 @@
                   </td>
                   <td align="right">
                     <ion-item style="max-width:150px">
-                        <ion-label>{{auth}}</ion-label>
-                        <ion-select [(ngModel)]="auth">
+                        <ion-label>{{authoption}}</ion-label>
+                        <ion-select *ngIf="authoption" style="display:none"[(ngModel)]="authoption" >
                           <ion-option value="admin">admin</ion-option>
                           <ion-option value="editor">editor</ion-option>
                           <ion-option value="subscriber">subscriber</ion-option>
@@ -91,7 +92,7 @@
             <h3 class="panel-title">User List</h3>
           </div>
           <div class="panel-body">
-            <div class="table-container" *ngFor="let item of itemList">
+            <div class="table-container" *ngFor="let item of itemList" (click)="profile(item)">
               <table class="table-users table" border="0">
                 <tbody>
                   <tr>
@@ -104,7 +105,7 @@
                     <td align="right">
                         <ion-item style="max-width:150px">
                             <ion-label>{{authoption}}</ion-label>
-                            <ion-select width="20" [(ngModel)]="auth" >
+                            <ion-select [(ngModel)]="authoption" >
                               <ion-option value="admin">admin</ion-option>
                               <ion-option value="editor">editor</ion-option>
                               <ion-option value="subscriber">subscriber</ion-option>

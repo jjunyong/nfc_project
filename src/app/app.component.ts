@@ -190,6 +190,7 @@ export class MyApp {
   openMain() {
     this.nav.setRoot('MainPage');
   }
+  
   Admin(){
     this.nav.setRoot('AdminPage');
   }

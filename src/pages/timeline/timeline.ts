@@ -1,6 +1,5 @@
 import { Component  } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import 'rxjs/add/operator/map'; // you might need to import this, or not depends on your setup
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 interface RepairItemLog{

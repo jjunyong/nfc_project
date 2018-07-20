@@ -60,6 +60,8 @@ export class LocationManagePage {
     this.location_origin = null; //초기화
     this.payload = null;
 
+    this.location1 = null;
+    this.location2 = null;
     this.payload = this.navParams.get('payload')
     this.location_origin = this.navParams.get("location_origin")
 
@@ -148,7 +150,7 @@ export class LocationManagePage {
 
   goTo1() {
 
-    if (this.location2 === "null") {
+    if (this.location2 == null) {
       this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1))
     } //location2 옵션 변경시 바뀌게 하는 조건
     else {
@@ -167,7 +169,7 @@ export class LocationManagePage {
 
 
   goTo2() {
-    if (this.location1 === "null") {
+    if (this.location1 == null) {
       this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location2', '==', this.location2))
     } //location2 옵션 변경시 바뀌게 하는 조건
     else {

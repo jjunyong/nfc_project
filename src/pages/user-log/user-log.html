@@ -1,0 +1,75 @@
+<style>
+  @media screen and (max-width: 600px) {
+    .web {
+      display: none;
+    }
+    .mobile {
+      display: block;
+    }
+  }
+  @media screen and (min-width: 600px) {
+    .web {
+      display: block;
+    }
+    .mobile {
+      display: none;
+    }
+  }
+</style>
+
+
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title text-center>Timeline</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+<div class="web">
+  <ion-grid>
+    <ion-col col-6>
+  <div class="container">
+    <ul>
+      <li *ngFor="let repairlog of repairlogList"><span></span>
+        <div>
+          <div class="title">{{repairlog.title}}</div>
+          <div class="info">{{repairlog.description}}</div>
+        </div> <span class="number"><span>{{repairlog.timestamp | date}}</span></span>
+      </li>
+    </ul>
+  </div>
+</ion-col>
+
+<ion-col col-6>
+  <div class="container">
+    <ul>
+      <li *ngFor="let stocklog of stocklogList"><span></span>
+        <div>
+          <div class="title">{{stocklog.model}}</div>
+          <div class="info">{{stocklog.type}}</div>
+          <div class="type">{{stocklog.changed_quantity}}</div>
+        </div> <span class="number"><span>{{stocklog.timestamp | date}}</span></span>
+      </li>
+    </ul>
+  </div>
+</ion-col>
+</ion-grid>
+</div>
+
+
+
+<div class="mobile">
+  <div class="container">
+    <ul>
+      <li *ngFor="let stocklog of stocklogList"><span></span>
+        <div>
+          <div class="title">{{stocklog.model}}</div>
+          <div class="info">{{stocklog.type}}</div>
+          <div class="type">{{stocklog.changed_quantity}}</div>
+        </div> <span class="number"><span>{{stocklog.timestamp | date}}</span></span>
+      </li>
+    </ul>
+  </div>
+</div>
+</ion-content>

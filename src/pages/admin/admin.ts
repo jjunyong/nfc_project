@@ -26,6 +26,7 @@ interface User {
 export class AdminPage {
 
   userinfo: string;
+  id: string;
 
   public itemsCollection: AngularFirestoreCollection<User>;
   items: any = [];
@@ -43,10 +44,10 @@ export class AdminPage {
 
 
 
-   // var admin = require("firebase-admin");
+    // var admin = require("firebase-admin");
 
     // var serviceAccount = require("../../../prototype-d68e4-firebase-adminsdk-ehk2t-8bc1d6cf15.json");
- 
+
     // admin.initializeApp({
     //   credential: admin.credential.cert(serviceAccount),
     //   databaseURL: 'https://prototype-d68e4.firebaseio.com'
@@ -56,11 +57,11 @@ export class AdminPage {
     this.authoption = "권한";
 
 
-    let loadingPopup = this.loadingCtrl.create({
-      spinner: 'crescent', // icon style //
-      content: '',
-    });
-    loadingPopup.present();
+    // let loadingPopup = this.loadingCtrl.create({
+    //   spinner: 'crescent', // icon style //
+    //   content: '',
+    // });
+    // loadingPopup.present();
 
     this.itemsCollection = afs.collection('users');
     this.items = this.itemsCollection.valueChanges();
@@ -69,7 +70,7 @@ export class AdminPage {
       this.itemArray = item;
       this.itemList = this.itemArray;
       this.loadedItemList = this.itemArray;
-      loadingPopup.dismiss();
+      // loadingPopup.dismiss();
     })
   }
 
@@ -116,6 +117,15 @@ export class AdminPage {
 
   }
 
+  profile(item) {
+    
+    console.log(item.uid);
+
+    this.navCtrl.push('UserLogPage', {
+     uid : item.uid,
+    }
+    )
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPage');
