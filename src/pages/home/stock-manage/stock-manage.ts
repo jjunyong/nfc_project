@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
 // import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database-deprecated';
 // import 'rxjs/add/operator/map'; // you might need to import this, or not depends on your setup
+
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { FireService } from '../../../../src/providers/FireService'
 import { GlobalVars } from '../../../providers/global';
 import { count } from 'rxjs/operator/count';
-import { AngularFireAuth } from 'angularfire2/auth'
-
 class Item{
   location1: any;
   location2: any;
@@ -30,7 +29,7 @@ class Item{
 })
 export class StockManagePage {
   item = new Item()
-  id_temp : string;
+
   new_item;
 
   public itemsCollection: AngularFirestoreCollection<Item>; 
@@ -47,9 +46,6 @@ export class StockManagePage {
   count_temp : number ;
 
   temp : number=0;
-  modify : boolean = false;
-
-
 
 
 
@@ -60,8 +56,7 @@ export class StockManagePage {
     private afs: AngularFirestore,
     public navParams : NavParams,
     public fireService : FireService,
-    public global : GlobalVars,
-    public afAuth : AngularFireAuth
+    public global : GlobalVars
   ) {
 
     // this.global.currentMessage.subscribe(message => this.show = message)
@@ -98,18 +93,19 @@ export class StockManagePage {
    // this.addArray[i]=this.itemArray[i]
     // this.removeArray[i]=0;
     // this.addArray[i]=0;
-    //console.log(this.setArray[i].model, this.setArray[i].add_num, this.setArray[i].remove_num)
+    console.log(this.setArray[i].model, this.setArray[i].add_num, this.setArray[i].remove_num)
   }
+  
+
   }, 500);
   
 
 }
 remove(item){ 
-  
   for(var i=0;i<this.temp;i++){
     if(item.model==this.setArray[i].model){
       this.setArray[i].remove_num++;
-     // console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
+      console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
     }
   }
   this.count_temp=item.quantity -1; 
@@ -117,7 +113,6 @@ remove(item){
   this.afs.collection('item').doc(item.id).update({
     quantity : this.count_temp
   })
-  this.modify=true;
   //this.count_remove++;
   //this.removeArray[this.count_remove]=item.model;
   //console.log(this.count_remove, this.removeArray[this.count_remove])
@@ -128,14 +123,13 @@ add(item){
   for(var i=0;i<this.temp;i++){
   if(item.model==this.setArray[i].model){
     this.setArray[i].add_num++;
-    //console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+    console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
   }
 }
   this.count_temp=Number(item.quantity)+ Number(1); 
   this.afs.collection('item').doc(item.id).update({
     quantity : this.count_temp
   })
-  this.modify=true;
   //this.count_add++;
   //this.addArray[this.count_add]=item.model;
   //console.log(this.count_add, this.addArray[this.count_add])
@@ -146,11 +140,7 @@ ionViewWillEnter(){
   console.log('ionViewEnteredStockMangePage')
   this.global.changeMessage(false);
 }
-ionViewWillUnload(){
-  if(this.modify==true){
-  this.set()
-  }
-}
+
 set(){
   //console.log(this.count_add, this.count_remove)
   //this.temp=this.itemArray.length;
@@ -182,95 +172,21 @@ initializeItems(){
 }
 fire_update(){
 //log update
-//console.log("---------log update-----------")
+console.log("log update")
 for(var i=0; i<this.temp; i++){
-  //console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
-  if(this.setArray[i].add_num>0){
-    this.id_temp = this.afAuth.auth.currentUser.uid
-    //console.log(this.id_temp)
-    this.afs.collection('users').doc(this.id_temp).collection('Stock_Log').add({
-        model: this.setArray[i].model,
-        type: "import",
-        quantity: this.setArray[i].quantity+this.setArray[i].add_num,
-        location1: this.setArray[i].location1,
-        location2: this.setArray[i].location2,
-        timestamp: new Date(),
-        changed_quantity: this.setArray[i].add_num,
-    })
-    this.afs.collection('log').add({
-        model: this.setArray[i].model,
-        type: "import",
-        quantity: this.setArray[i].quantity+this.setArray[i].add_num,
-        location1: this.setArray[i].location1,
-        location2: this.setArray[i].location2,
-        timestamp: new Date(),
-        changed_quantity: this.setArray[i].add_num,
-    })
-    
-
+  console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+  console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
   }
-  //console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
-  if(this.setArray[i].remove_num>0){
-    this.id_temp = this.afAuth.auth.currentUser.uid
-    //console.log(this.id_temp)
-    this.afs.collection('users').doc(this.id_temp).collection('Stock_Log').add({
-        model: this.setArray[i].model,
-        type: "export",
-        quantity: this.setArray[i].quantity,
-        location1: this.setArray[i].location1,
-        location2: this.setArray[i].location2,
-        timestamp: new Date(),
-        changed_quantity: this.setArray[i].remove_num,
-    })
-    this.afs.collection('log').add({
-      model: this.setArray[i].model,
-      type: "export",
-      quantity: this.setArray[i].quantity,
-      location1: this.setArray[i].location1,
-      location2: this.setArray[i].location2,
-      timestamp: new Date(),
-      changed_quantity: this.setArray[i].remove_num,
-
-    })
-
-  }
-  
-  
-  this.setArray[i].add_num=0;
-  this.setArray[i].remove_num=0;
-  
-}
-
-
-  
 }
 
 
 fire_reset(){
 //firestore reset
-//console.log("log reset")
+console.log("log reset")
 for(var i=0; i<this.temp; i++){
-  
-  //console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
-  if(this.setArray[i].add_num>0){
-    //User log랑 log
-    this.afs.collection('item').doc(this.setArray[i].id).update({
-      quantity : this.setArray[i].quantity
-    })
-    
-
+  console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+  console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
   }
-  //console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
-  if(this.setArray[i].remove_num>0){
-    this.afs.collection('item').doc(this.setArray[i].id).update({
-      quantity : this.setArray[i].quantity
-    })
-  }
-
-  this.setArray[i].add_num=0;
-  this.setArray[i].remove_num=0;
-}
-  
 }
 
 getItems(searchbar) {

@@ -93,4 +93,26 @@ page-user-log {
     .container span.number span:last-child {
         top: 100%;
     }
+
+    // #col {
+    //     -moz-column-count: 2;
+    //     -webkit-column-count: 2;
+    //     column-count: 2;
+    //     }
+
+        #repair{
+            width: 50%;
+            padding: 20px;
+            margin-bottom: 20px;
+            float: left;
+            border: none
+        }
+
+        #stock{
+            width: 50%;
+            padding: 20px;
+            margin-bottom: 20px;
+            float: right;
+            border: none
+        }
 }

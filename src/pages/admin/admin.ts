@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { FireService } from '../../providers/FireService';
 import { Observable } from 'rxjs';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
+import { Roles } from '../../form/user'
 
 
 interface User {
@@ -13,7 +14,7 @@ interface User {
   name: string
   phone: string
   uid: string
-  role: boolean
+  role: Roles
   thumbnail: string
 }
 
@@ -63,7 +64,7 @@ export class AdminPage {
     // });
     // loadingPopup.present();
 
-    this.itemsCollection = afs.collection('users');
+    this.itemsCollection = afs.collection<User>('users');
     this.items = this.itemsCollection.valueChanges();
 
     this.items.subscribe((item) => {
@@ -72,7 +73,12 @@ export class AdminPage {
       this.loadedItemList = this.itemArray;
       // loadingPopup.dismiss();
     })
+
+
+
   }
+  
+
 
   delete(item) {
 
