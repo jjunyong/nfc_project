@@ -96,7 +96,7 @@ export class StockManagePage {
     console.log(this.setArray[i].model, this.setArray[i].add_num, this.setArray[i].remove_num)
   }
   
-
+ //wait 0.5 seconds
   }, 500);
   
 
