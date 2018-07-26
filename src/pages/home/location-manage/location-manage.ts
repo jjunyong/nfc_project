@@ -47,6 +47,7 @@ export class LocationManagePage {
 
   location_origin: string;
   count_temp : number ;
+  backgroundImage="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
 
   constructor(public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
@@ -67,13 +68,6 @@ export class LocationManagePage {
 
    console.log(this.location_origin, "from QR Page")
 
-  
-      let loadingPopup = this.loadingCtrl.create({
-        spinner: 'crescent', // icon style //
-        content: '',
-        duration: 1000
-      });
-      loadingPopup.present();
 
       this.itemsCollection = afs.collection<Item>('item');
       this.items = this.itemsCollection.valueChanges();
@@ -82,7 +76,6 @@ export class LocationManagePage {
         this.itemArray = item;
         this.itemList = this.itemArray;
         this.loadedItemList = this.itemArray;
-        loadingPopup.dismiss();
       })
 
      

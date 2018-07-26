@@ -4,7 +4,11 @@ import { AngularFirestore } from 'angularfire2/firestore'
 import { AngularFireStorage } from 'angularfire2/storage';
 import { GlobalVars } from '../../../../providers/global';
 import { finalize } from 'rxjs/operators';
-import { AngularFireAuth} from 'angularfire2/auth'
+import { AngularFireAuth } from 'angularfire2/auth'
+import { Camera, CameraOptions } from '@ionic-native/camera'
+import firebase from 'firebase';
+
+
 
 
 @IonicPage()
@@ -24,7 +28,7 @@ export class ItemDetailPage {
   quantity: number;
   id: string;
 
-  id_temp : string;
+  id_temp: string;
 
   public pre_model: any;
   public pre_location1: any;
@@ -40,10 +44,10 @@ export class ItemDetailPage {
   uploadPercent
   imgGallery = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(private camera: Camera, public navCtrl: NavController, public navParams: NavParams,
     public ref: ChangeDetectorRef, public afs: AngularFirestore, public alertCtrl: AlertController,
     public toast: ToastController, public global: GlobalVars, public storage: AngularFireStorage,
-    public modalCtrl: ModalController, public afAuth : AngularFireAuth) {
+    public modalCtrl: ModalController, public afAuth: AngularFireAuth) {
 
     this.global.changeMessage(false);
 
@@ -72,7 +76,6 @@ export class ItemDetailPage {
 
 
   ionViewDidLoad() {
-
     console.log('ionViewDidLoad ItemDetailPage');
   }
 
@@ -222,7 +225,7 @@ export class ItemDetailPage {
     confirm.present();
   }
 
-  uploadFile(event) {
+  uploadFileDesktop(event) {
     const file = event.target.files[0];
     const filePath = `item_images/${this.model}/${file.name}`;
     const fileRef = this.storage.ref(filePath);
@@ -241,14 +244,46 @@ export class ItemDetailPage {
         const doc_id = this.afs.createId();
         this.afs.collection('item').doc(this.id).collection('images').doc(doc_id).set({
           image_url: url,
-          id : doc_id
+          id: doc_id
         })
       })
   }
 
+  async uploadFileMobile() {
+    try {
+      const options: CameraOptions = {
+        quality: 50,
+        targetHeight: 600,
+        targetWidth: 600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+      }
+      const result = await this.camera.getPicture(options);
+
+      const image = `data:image/jpeg;base64,${result}`;
+
+      const pictures = this.storage.ref(`item_images/${this.model}`)
+      pictures.putString(image, 'data_url');
+
+      pictures.getDownloadURL()
+        .subscribe((url) => {
+          const doc_id = this.afs.createId();
+          this.afs.collection('item').doc(this.id).collection('images').doc(doc_id).set({
+            image_url: url,
+            id: doc_id
+          })
+
+        })
+    }
+    catch (e) {
+      console.error(e);
+    }
+  }
+
   openFullImage() {
     let modal = this.modalCtrl.create('GalleryPage', {
-      id : this.id
+      id: this.id
     });
     modal.present();
   }

@@ -64,14 +64,14 @@ export class RepairPage {
   openNextPage() {
     this.navCtrl.push('WriteRepairNoticePage')
   }
+
   openNoticeDetailPage(item) {
+    console.log(item);
     this.navCtrl.push('RepairNoticePage', {
-      content: item.content,
-      title : item.title, 
-      writer : item.writer, 
-      timestamp : item.timestamp
+      notice: item
     });
   }
+  
   openHomePage(){
     this.navCtrl.push('HomePage');
   }

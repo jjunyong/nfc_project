@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, ToastController, AlertController, PopoverController, ModalController, ViewController, NavController} from 'ionic-angular';
+import { Platform, Nav, ToastController, AlertController, PopoverController, ModalController, ViewController, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -21,12 +21,12 @@ export class MyApp {
   testCheckboxOpen: boolean;
   testCheckboxResult;
   requests: any;
-  show : boolean;
+  show: boolean;
   loggedIn;
 
-  qrData =null;
+  qrData = null;
   createdCode = null;
-  scannedCode=null;
+  scannedCode = null;
 
   private masterEmail: string = "21300649@handong.edu";
   public masterSwitch: boolean = false;
@@ -37,23 +37,23 @@ export class MyApp {
     public splashScreen: SplashScreen,
     public auth: AuthService, public toast: ToastController, public alertCtrl: AlertController,
     public afs: AngularFirestore, public popoverCtrl: PopoverController, public modalCtrl: ModalController,
-    public global : GlobalVars, private barcodeScanner : BarcodeScanner
+    public global: GlobalVars, private barcodeScanner: BarcodeScanner
   ) {
 
-    this.auth.user.subscribe((user)=>{
-      if(user){
-      this.loggedIn = true;
+    this.auth.user.subscribe((user) => {
+      if (user) {
+        this.loggedIn = true;
       }
-      else{
+      else {
         this.loggedIn = false;
       }
     })
 
-    
-    
+
+
 
     this.global.currentMessage.subscribe(message => this.show = message)
-    
+
 
     // this.auth.user.subscribe((auth) => {
     //   // console.log(auth.email)
@@ -68,15 +68,15 @@ export class MyApp {
     //     })
     // })
 
-  
+
 
     this.initializeApp();
     this.pages = [
       // { title: '로그인', component: "MainPage" },
       { title: '재고관리', component: 'HomePage' },
       { title: '정비관리', component: "RepairPage" },
-      { title: 'QR-Code', component: "QrcodePage"},
-      { title: 'My profile', component: "ProfilePage"}
+      { title: 'QR-Code', component: "QrcodePage" },
+      { title: 'My profile', component: "ProfilePage" }
       // {title:'app1', component:"Category1Page"},
       // {title:'NFC', component:"NfcPage"},
       // {title:'Timeline',component:'TimelinePage'}
@@ -101,14 +101,14 @@ export class MyApp {
     }
   }
 
-  DologIn(){
+  DologIn() {
     this.nav.push('LoginPage');
     // let modal = this.modalCtrl.create(LoginSelectPage);
     // modal.present();
   }
 
   logout() {
-    this.auth.logout().then(()=>{
+    this.auth.logout().then(() => {
       let toast = this.toast.create({
         message: "로그아웃 되었습니다",
         duration: 2000,
@@ -117,11 +117,11 @@ export class MyApp {
       toast.present();
       this.nav.setRoot('MainPage');
     });
-    
+
   }
 
   // requestAuthorization() {
-    
+
   //   let alert = this.alertCtrl.create();
   //   alert.setTitle('원하는 권한을 신청하세요');
   //   alert.addInput({
@@ -171,27 +171,26 @@ export class MyApp {
   }
 
   openStock() {
-    if(this.auth.user){
-    this.nav.setRoot('HomePage');
+    if (this.auth.user) {
+      this.nav.setRoot('HomePage');
     }
-    else{
+    else {
       this.showAlert();
     }
   }
 
   openRepair() {
-    if(this.auth.user){
-    this.nav.setRoot('RepairPage');
+    if (this.auth.user) {
+      this.nav.setRoot('RepairPage');
     }
-    else{
+    else {
       this.showAlert();
     }
   }
   openMain() {
     this.nav.setRoot('MainPage');
   }
-  
-  Admin(){
+  openAdmin() {
     this.nav.setRoot('AdminPage');
   }
 
@@ -203,27 +202,30 @@ export class MyApp {
     });
     alert.present();
   }
-  qrPage(){
-    
-      this.barcodeScanner.scan().then(barcodeData => {
-        this.scannedCode = barcodeData.text;
-  
-        this.nav.push('LocationManagePage',{
-          location_origin : this.scannedCode
-        })
-  
-      }, (err)=>{
-        console.log('Error : ', err)
-      });
-      
-      //testing qr code
-      // this.scannedCode=1
-      // this.navCtrl.push('LocationManagePage',{
-      //   location_origin : this.scannedCode
-      // })
-  
-    }
-    
+  qrPage() {
+
+    this.barcodeScanner.scan().then(barcodeData => {
+      this.scannedCode = barcodeData.text;
+
+      this.nav.push('LocationManagePage', {
+        location_origin: this.scannedCode
+      })
+
+    }, (err) => {
+      console.log('Error : ', err)
+    });
+
+    //testing qr code
+    // this.scannedCode=1
+    // this.navCtrl.push('LocationManagePage',{
+    //   location_origin : this.scannedCode
+    // })
+
+  }
+  openProfile() {
+    this.nav.setRoot('ProfilePage');
+  }
+
 }
 
 
@@ -241,7 +243,7 @@ export class MyApp {
 //   dismiss(){   //자기 자신을 끄게 해야 한다. ViewController를 이용하여
 //     this.viewCtrl.dismiss();
 //   }
-  
+
 
 //   googleLogin() {
 //     // this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
@@ -254,5 +256,5 @@ export class MyApp {
 //     this.navCtrl.push('LoginPage');
 //   }
 
- 
+
 // }

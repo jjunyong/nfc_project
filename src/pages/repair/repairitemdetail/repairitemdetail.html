@@ -20,28 +20,17 @@
   <!--***********  Description ***********-->
   <!--*********** Contact  ***********-->
   <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
-    <ion-card-header padding>
-      <div text-right>
-        <button ion-button color="blue-gray" clear (click)="confirm($event, item)">Confirm</button>
-        <button ion-button color="blue-gray" clear (click)="delete()">Delete</button>
-      </div>
-    </ion-card-header>
+    <!-- <ion-card-header padding>
 
-    <div class="info">
-      <ion-list no-lines>
-        <ion-item class="item1">
-          <ion-icon name="person" item-left color="white"></ion-icon>
-          <font color="white">정비담당 : {{repairman}}</font>
-        </ion-item>
-      </ion-list>
-    </div>
-  </ion-card>
-
-  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
-    <ion-card-header padding>
-    </ion-card-header>
+    </ion-card-header> -->
 
     <ion-card-content no-padding>
+
+      <ion-item class="item1">
+        <ion-icon name="person" item-left color="white"></ion-icon>
+        <font color="white">정비담당 : {{repairman}}</font>
+      </ion-item>
+
       <ion-item class="item1" *ngIf="startDate">
         <ion-label color="white">정비 종료</ion-label>
         <ion-toggle (ionChange)="repairfin()" checked="{{isToggled}}" [(ngModel)]="isToggled">
@@ -49,11 +38,11 @@
       </ion-item>
       <ion-item class="item2">
         <ion-label color="white">정비 시작일: {{startDate | date}}</ion-label>
-        <ion-datetime color="white"  [(ngModel)]="startDate"></ion-datetime>
+        <ion-datetime color="white" [(ngModel)]="startDate"></ion-datetime>
       </ion-item>
       <ion-item class="item3" *ngIf="isToggled">
         <ion-label color="white">정비 종료일: {{finDate | date}} </ion-label>
-        <ion-datetime  [(ngModel)]="finDate"></ion-datetime>
+        <ion-datetime [(ngModel)]="finDate"></ion-datetime>
       </ion-item>
     </ion-card-content>
   </ion-card>
@@ -101,22 +90,25 @@
           </li>
         </ul>
         <ion-col>
-            <div *ngIf="close;then content else other_content"></div>    
-            <ng-template #content>
-              <button ion-button icon-center clear small>
-                <ion-icon name="arrow-down" (click)="more()">더보기</ion-icon>
-              </button></ng-template>
-            <ng-template #other_content>
-                <button ion-button icon-center clear small>
-                    <ion-icon name="arrow-up"(click)="closed()">접기</ion-icon>
-                  </button>
-            </ng-template>
+          <div *ngIf="close;then content else other_content"></div>
+          <ng-template #content>
+            <button ion-button icon-center clear small>
+              <ion-icon name="arrow-down" (click)="more()">더보기</ion-icon>
+            </button>
+          </ng-template>
+          <ng-template #other_content>
+            <button ion-button icon-center clear small>
+              <ion-icon name="arrow-up" (click)="closed()">접기</ion-icon>
+            </button>
+          </ng-template>
         </ion-col>
       </ion-item-group>
     </ion-list>
 
   </ion-card-content>
   <ion-fab right bottom>
-    <button color="grey-blue" (click)="addlog()" ion-fab><ion-icon name="add"></ion-icon></button>
-</ion-fab>
+    <button color="grey-blue" (click)="addlog()" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

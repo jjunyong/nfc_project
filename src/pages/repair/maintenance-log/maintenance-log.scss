@@ -5,4 +5,10 @@ page-maintenance-log {
          -ms-flex-align:  flex-start !important;
          align-items:  flex-start !important;
     }
+
+    .card{
+        background-color : transparent;
+        background-color : rgba(255,255,255,.2);
+        -webkit-box-shadow: 0px 22px 47px -1px rgba(0,0,0,0.57);
+      }
 }

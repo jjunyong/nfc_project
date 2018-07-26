@@ -21,7 +21,11 @@ import { IonicPageModule } from 'ionic-angular/module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AuthService } from '../providers/auth.service';
+import { Camera } from '@ionic-native/camera'
  
+
+
+
 
 export const config = { 
   apiKey: "AIzaSyACcRwZawea9vXAI0cNz0xsjbHRqP5XTlY",
@@ -67,7 +71,8 @@ export const config = {
     FireService,
     GlobalVars, 
     BarcodeScanner, 
-    AuthService
+    AuthService,
+    Camera
   ]
 })
 export class AppModule {} 

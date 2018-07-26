@@ -14,7 +14,7 @@
 <ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   <ion-row>
     <ion-col col-12 col-md-4 col-xl-3  *ngFor="let item of itemList" >
-        <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}" (click)="openDetail(item)">            
+          <ion-card class="card" (click)="openDetail(item)">
             <img src="{{item.Image}}" height="200">
             <ion-card-content>
               <ion-card-title color="white">

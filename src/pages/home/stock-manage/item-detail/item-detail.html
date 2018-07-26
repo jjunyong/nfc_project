@@ -1,28 +1,30 @@
-<!-- <ion-header>
-  <ion-navbar color="grey-blue" transparent [class.show-background]="showToolbar">
-    <ion-title color="grey-blue" [hidden]="!showToolbar">Detail</ion-title>
-  </ion-navbar>
-</ion-header> -->
+<style>
+@media screen and (max-width: 600px){
+  .desktop{
+    display: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  .mobile{
+    display: none;
+  }
+}
+</style>
+
 <ion-header>
   <ion-navbar color="grey-blue">
     <ion-title></ion-title>
   </ion-navbar>
 </ion-header>
 
-<!-- <ion-content no-padding class="content" (ionScroll)="onScroll($event)" [class.transition]="transition"> -->
 <ion-content no-padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
 
-  <!--*********** Image header  ***********-->
-  <!-- <div class="detail-header">
-    <h2 class="detail-name ">{{model}}</h2>  
-  </div> -->
   <div class="title">
     <h2 margin-left>
       <font color="white">Model : {{model}}</font>
     </h2>
   </div>
 
-  <!--*********** Contact  ***********-->
   <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
     <div class="info">
       <ion-list block no-lines>
@@ -78,11 +80,19 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <input type="file" accept="image/*" (change)="uploadFile($event)" id="fileInput" />
-    <label for="fileInput" icon-only ion-button clear>
+    <input class="desktop" type="file" accept="image/*" (change)="uploadFileDesktop($event)" id="fileInput" />
+    <label class="desktop" for="fileInput" icon-only ion-button clear>
       <ion-icon color="white" name="add"></ion-icon>
       <ion-icon color="white" name="images"></ion-icon>
     </label>
+
+    <button class="mobile" id="fileInput2" ion-button (click)="uploadFileMobile()"></button>
+    <label class="mobile" for="fileInput2" icon-only ion-button clear>
+      <ion-icon color="white" name="add"></ion-icon>
+      <ion-icon color="white" name="images"></ion-icon>
+    </label>
+
+
   </ion-card>
   
 

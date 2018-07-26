@@ -61,7 +61,7 @@ export class LoginPage {
   // }
   serviceRequest() {
     let alert = this.alertCtrl.create({
-      title: 'ZadPark@palmCLOUD.co.kr로 문의하세요',
+      subTitle: 'ZadPark@palmCLOUD.co.kr로 문의하세요',
       buttons: ['OK']
     });
     alert.present();
