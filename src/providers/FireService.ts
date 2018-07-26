@@ -24,11 +24,14 @@ finAdd(RepairItem){
 
   }
 
+ 
+
   fire_update(itemList){
     // this.afs.collection('item').add({
     //   item: itemList
     // })
-    console.log(itemList.quantity);
+
+    //console.log(itemList.quantity);
   }
 
   LogAdd(RepairLog){
@@ -51,11 +54,8 @@ finAdd(RepairItem){
 
   //repair log 남기기
   Add_User_Log(RepairLog){
-
-    
     this.id_temp = this.afAuth.auth.currentUser.uid
     var timestamp_temp=new Date()
-    
     //console.log('testing', this.id_temp, model_temp, serialNum_temp, timestamp)
     this.afs.collection('users').doc(this.id_temp).collection('Repair_Log').add({
       timestamp : timestamp_temp,
@@ -64,11 +64,7 @@ finAdd(RepairItem){
       description : RepairLog.description, 
       model : RepairLog.model,
       serialNum:RepairLog.serialNum 
-
     })
-
-
-    
   }
 
   RepairAdd(RepairItem){

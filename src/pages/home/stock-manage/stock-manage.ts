@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ViewController } from 'ionic-angular';
 // import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2/database-deprecated';
 // import 'rxjs/add/operator/map'; // you might need to import this, or not depends on your setup
-
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { FireService } from '../../../../src/providers/FireService'
@@ -34,7 +33,7 @@ export class StockManagePage {
 
   public itemsCollection: AngularFirestoreCollection<Item>; 
   itemList : any=[]; 
-  itemArray : any = [];
+  public itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
   // modifyList : modify;
@@ -43,7 +42,8 @@ export class StockManagePage {
 
   addArray : any =[];
   removeArray : any =[];
-  count_temp : number ;
+  public count_temp : number =0;
+  public pre_quan : any=[];
 
   temp : number=0;
 
@@ -71,21 +71,21 @@ export class StockManagePage {
 
     this.itemsCollection = afs.collection<Item>('item');
     this.items= this.itemsCollection.valueChanges();
-    
+
+    //console.log(this.items)
     this.items.subscribe((item)=>{
       this.itemArray = item;
       this.itemList = this.itemArray;
       this.loadedItemList = this.itemArray;
       loadingPopup.dismiss()
     })
-
     //console.log("test")
     // for (var i=0;i<this.temp;i++){
     //   console.log()
     // }
   setTimeout(()=>{
-  this.temp=this.itemArray.length;
-  for(var i=0; i<this.temp; i++){
+  this.count_temp=0;
+  for(var i=0; i<this.itemArray.length; i++){
     this.itemArray[i].add_num=0;
     this.itemArray[i].remove_num=0;
     this.setArray[i]=this.itemArray[i]
@@ -93,11 +93,18 @@ export class StockManagePage {
    // this.addArray[i]=this.itemArray[i]
     // this.removeArray[i]=0;
     // this.addArray[i]=0;
-    console.log(this.setArray[i].model, this.setArray[i].add_num, this.setArray[i].remove_num)
-  }
-  
+   // this.setArray[i].quantity=this.itemArray[i].quantity
+    //console.log(this.setArray[i].model, this.setArray[i].quantity, "setTimeout")
+    this.afs.collection('item').doc(this.itemArray[i].id).ref.get()
+    .then((Model)=>{
+      //console.log(Model.get('quantity'), "Model")
+      this.pre_quan[this.count_temp++]=Model.get('quantity')
+      //console.log(this.pre_quan[this.count_temp-1]);
+    })
+    
+  }  
  //wait 0.5 seconds
-  }, 500);
+  }, 50);
   
 
 }
@@ -106,6 +113,7 @@ remove(item){
   event.stopPropagation(); 
   item.quantity--;
   console.log(item.quantity)
+  //console.log(this.itemArray[0].quantity);
   // for(var i=0;i<this.temp;i++){
   //   if(item.model==this.setArray[i].model){
   //     this.setArray[i].remove_num++;
@@ -127,7 +135,6 @@ add(item){
   event.stopPropagation();
   item.quantity++;
   console.log(item.quantity)
-  
 //   for(var i=0;i<this.temp;i++){
 //   if(item.model==this.setArray[i].model){
 //     this.setArray[i].add_num++;
@@ -160,13 +167,15 @@ set(){
       {
         text: 'Yes',
         handler: () => {
-          this.fireService.fire_update(this.itemList)
+          this.fire_update();
+          //this.fireService.fire_update(this.itemList)
         }
       },
       {
         text: 'Cancel',
         handler: () => {
-          // this.fire_reset()
+          // this.fire_reset() 
+         // this.itemList=this.itemArray; 
         }
       }
     ]
@@ -179,6 +188,68 @@ initializeItems(){
   
 }
 fire_update(){
+  for(var i=0; i<this.itemArray.length; i++){
+
+ // console.log("i", i, this.itemArray[i].quantity)
+ // console.log("pre_quan", this.pre_quan[i])
+  if(this.pre_quan[i]<this.itemArray[i].quantity){
+      this.itemArray[i].add_num=this.itemArray[i].quantity-this.pre_quan[i];
+      console.log("added",this.itemArray[i].model, this.itemArray[i].add_num);
+      
+      //log add
+      this.afs.collection('log').add({
+        changed_quantity : this.itemArray[i].add_num, 
+        location1 : this.itemArray[i].location1, 
+        location2 : this.itemArray[i].location2, 
+        model :this.itemArray[i].model, 
+        quantity : this.itemArray[i].quantity, 
+        timestamp : new Date(), 
+        type : "import"
+      })
+      //item update
+      this.afs.collection('item').doc(this.itemArray[i].id).update({
+        quantity : this.itemArray[i].quantity
+      })
+      //user stock_log
+     
+      
+
+
+      this.pre_quan[i]=this.itemArray[i].quantity
+  }
+  else if(this.pre_quan[i]>this.itemArray[i].quantity){
+    this.itemArray[i].remove_num=this.pre_quan[i]-this.itemArray[i].remove_num;
+    console.log("removed",this.itemArray[i].model, this.itemArray[i].remove_num )
+    
+    //log add
+    this.afs.collection('log').add({
+      changed_quantity : this.itemArray[i].remove_num, 
+      location1 : this.itemArray[i].location1, 
+      location2 : this.itemArray[i].location2, 
+      model :this.itemArray[i].model, 
+      quantity : this.itemArray[i].quantity, 
+      timestamp : new Date(), 
+      type : "export"
+    })
+     //item update
+     this.afs.collection('item').doc(this.itemArray[i].id).update({
+      quantity : this.itemArray[i].quantity
+    })
+    //user stock_log
+
+
+    this.pre_quan[i]=this.itemArray[i].quantity
+  }
+
+
+ //console.log(this.setArray[i].quantity, this.itemArray[i].quantity, "dd");
+
+    // if(this.itemList[i]>this.itemArray[i]){
+    //   this.itemList[i].add_num=this.itemList[i]-this.itemArray[i];
+    //   console.log(this.itemList[i].model, this.itemList[i].add_num, "add", this.itemList[i].remove_num, "remove");
+    // }
+
+  }
 // //log update
 // console.log("log update")
 // for(var i=0; i<this.temp; i++){
