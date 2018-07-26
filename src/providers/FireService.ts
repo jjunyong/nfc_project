@@ -24,6 +24,12 @@ finAdd(RepairItem){
 
   }
 
+  fire_update(itemList){
+    // this.afs.collection('item').add({
+    //   item: itemList
+    // })
+    console.log(itemList.quantity);
+  }
 
   LogAdd(RepairLog){
     console.log(RepairLog.id)

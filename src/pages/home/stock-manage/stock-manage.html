@@ -21,8 +21,10 @@
       <h2 (click)="openDetail(item)"> <strong>{{ item.model }}</strong> </h2>
       <h3 (click)="openDetail(item)"> 
         Location : {{ item.location1 }}-{{ item.location2 }}</h3>
-      <div text-right ><button clear ion-button (click)="remove(item)" ><ion-icon name="arrow-down"></ion-icon></button>
-        {{item.quantity}}
+      <div class="container" text-right >
+        <button clear ion-button (click)="remove(item)" ><ion-icon name="arrow-down"></ion-icon></button>
+        <!-- <div class="container" text-right> -->
+        <input type="number" [(ngModel)]="item.quantity"  placeholder="{{item.quantity}}" style="width:3em ">
       <button clear ion-button (click)="add(item)" ><ion-icon name="arrow-up" icon-only></ion-icon></button>
       </div>
 

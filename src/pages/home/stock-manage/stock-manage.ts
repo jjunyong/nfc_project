@@ -102,34 +102,39 @@ export class StockManagePage {
 
 }
 remove(item){ 
-  for(var i=0;i<this.temp;i++){
-    if(item.model==this.setArray[i].model){
-      this.setArray[i].remove_num++;
-      console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
-    }
-  }
-  this.count_temp=item.quantity -1; 
-  Number(this.count_temp)
-  this.afs.collection('item').doc(item.id).update({
-    quantity : this.count_temp
-  })
-  //this.count_remove++;
-  //this.removeArray[this.count_remove]=item.model;
-  //console.log(this.count_remove, this.removeArray[this.count_remove])
+  item.quantity--;
+  console.log(item.quantity)
+  // for(var i=0;i<this.temp;i++){
+  //   if(item.model==this.setArray[i].model){
+  //     this.setArray[i].remove_num++;
+  //     console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
+  //   }
+  // }
+  // this.count_temp=item.quantity -1; 
+  // Number(this.count_temp)
+  // this.afs.collection('item').doc(item.id).update({
+  //   quantity : this.count_temp
+  // })
+  // //this.count_remove++;
+  // //this.removeArray[this.count_remove]=item.model;
+  // //console.log(this.count_remove, this.removeArray[this.count_remove])
 }
 
 add(item){
+
+  item.quantity++;
+  console.log(item.quantity)
   
-  for(var i=0;i<this.temp;i++){
-  if(item.model==this.setArray[i].model){
-    this.setArray[i].add_num++;
-    console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
-  }
-}
-  this.count_temp=Number(item.quantity)+ Number(1); 
-  this.afs.collection('item').doc(item.id).update({
-    quantity : this.count_temp
-  })
+//   for(var i=0;i<this.temp;i++){
+//   if(item.model==this.setArray[i].model){
+//     this.setArray[i].add_num++;
+//     console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+//   }
+// }
+//   this.count_temp=Number(item.quantity)+ Number(1); 
+//   this.afs.collection('item').doc(item.id).update({
+//     quantity : this.count_temp
+//   })
   //this.count_add++;
   //this.addArray[this.count_add]=item.model;
   //console.log(this.count_add, this.addArray[this.count_add])
@@ -152,13 +157,13 @@ set(){
       {
         text: 'Yes',
         handler: () => {
-          this.fire_update()
+          this.fireService.fire_update(this.itemList)
         }
       },
       {
         text: 'Cancel',
         handler: () => {
-          this.fire_reset()
+          // this.fire_reset()
         }
       }
     ]
@@ -171,22 +176,22 @@ initializeItems(){
   
 }
 fire_update(){
-//log update
-console.log("log update")
-for(var i=0; i<this.temp; i++){
-  console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
-  console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
-  }
+// //log update
+// console.log("log update")
+// for(var i=0; i<this.temp; i++){
+//   console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+//   console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
+//   }
 }
 
 
 fire_reset(){
-//firestore reset
-console.log("log reset")
-for(var i=0; i<this.temp; i++){
-  console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
-  console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
-  }
+// //firestore reset
+// console.log("log reset")
+// for(var i=0; i<this.temp; i++){
+//   console.log(this.setArray[i].model, this.setArray[i].add_num, "add")
+//   console.log(this.setArray[i].model, this.setArray[i].remove_num, "remove")
+//   }
 }
 
 getItems(searchbar) {
