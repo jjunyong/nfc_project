@@ -25,6 +25,8 @@
     </button>
     <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openStock()">재고관리</button>
     <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openRepair()">정비관리</button>
+    <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openProfile()">My Profile</button>
+    <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openAdmin()">Admin</button>
     <button *ngIf="!(auth.user | async);" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="DologIn()">로그인</button>
     <button *ngIf="auth.user | async;" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="logout()">로그아웃</button>
     <!-- <button ion-button menuToggle>
@@ -76,7 +78,7 @@
         <ion-icon name="home"></ion-icon>
         Home
       </button>
-      <button menuClose ion-item detail-none (click)="Admin()">
+      <button menuClose ion-item detail-none (click)="openAdmin()">
         <ion-icon name="user"></ion-icon>
         Admin
       </button>

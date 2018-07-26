@@ -78,7 +78,7 @@
         <div class="card-background-page">
             <ion-row>
                 <ion-col col-12 col-md-6>
-                    <ion-card (click)="openLog()">
+                    <ion-card class="card" (click)="openLog()">
                         <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2"
                             height="350" />
                         <div class="card-title">정비 이력</div>
@@ -87,7 +87,7 @@
                 </ion-col>
 
                 <ion-col col-12 col-md-6>
-                    <ion-card (click)="openOnMaintenance()">
+                    <ion-card class="card" (click)="openOnMaintenance()">
                         <img src="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/spanner-3013129_1920.png?alt=media&token=374be8ff-6e03-47b4-a716-a4782a2c1bc1"
                             height="350" />
                         <div class="card-title">정비 완료 아이템</div>
@@ -123,25 +123,34 @@
 
     <!--*********** Promotion View  ***********-->
     <div *ngIf="viewType==='Notice'">
-        
-        <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}"
-        margin-top padding tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
-                <h2 style="color : white"><strong>{{item.title}}</strong></h2>
-                <p style="color : white">{{item.writer}}</p>
-                <p style="color : white">{{item.timestamp | date}}</p>
-        </ion-card>
-        
-        
+
+        <ion-grid>
+            <ion-row>
+                <ion-col col-12 col-md-6 *ngFor="let item of items">
+                    <div class="card" margin-top padding tappable (click)="openNoticeDetailPage(item)">
+                        <h2 style="color : white">
+                            <strong>{{item.title}}</strong>
+                        </h2>
+                        <p style="color : white">{{item.writer}}</p>
+                        <p style="color : white">{{item.timestamp | date}}</p>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+
         <!--<ion-list class="wave">
             <ion-item tappable (click)="openNoticeDetailPage(item)" *ngFor="let item of items">
                 <h2>{{item.title}}</h2>
                 <p>{{item.writer}}, {{item.timestamp | date}}</p>
             </ion-item>
         </ion-list>-->
-        
-    <ion-fab  right bottom >
-            <button color="grey-blue" (click)="manage()" ion-fab ><ion-icon name="add"></ion-icon></button>
-    </ion-fab>
+
+        <ion-fab right bottom>
+            <button color="grey-blue" (click)="manage()" ion-fab>
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-fab>
     </div>
 
 </ion-content>
