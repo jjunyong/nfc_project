@@ -56,7 +56,8 @@ export class LocationManagePage {
     public navParams: NavParams,
     public global: GlobalVars
   ) {
-
+    this.location1 = null;
+    this.location2 = null;
 
     this.location_origin = null; //초기화
     this.payload = null;
@@ -66,7 +67,23 @@ export class LocationManagePage {
     this.payload = this.navParams.get('payload')
     this.location_origin = this.navParams.get("location_origin")
 
-   console.log(this.location_origin, "from QR Page")
+    console.log(this.location_origin, "from QR Page")
+    let loadingPopup = this.loadingCtrl.create({
+      spinner: 'crescent', // icon style //
+      content: '',
+      duration: 1000
+    });
+    loadingPopup.present();
+
+    this.itemsCollection = afs.collection<Item>('item');
+    this.items = this.itemsCollection.valueChanges();
+
+    this.items.subscribe((item) => {
+      this.itemArray = item;
+      this.itemList = this.itemArray;
+      this.loadedItemList = this.itemArray;
+      loadingPopup.dismiss();
+    })
 
 
       this.itemsCollection = afs.collection<Item>('item');
@@ -79,59 +96,48 @@ export class LocationManagePage {
       })
 
      
+  
     if (this.location_origin != null) {
-
       this.afs.collection('location_map').doc(this.location_origin).valueChanges()
         .subscribe((location_info: any) => {
-
           this.location1 = location_info.location1;
           this.location2 = location_info.location2;
-
           console.log(this.location1);
           console.log(this.location2);
-
           this.goTo2();
         })
-
     }
 
     else if (this.payload != null) {
-
       this.afs.collection('location_map').doc(`${this.payload}`).valueChanges()
         .subscribe((location_info: any) => {
           this.location1 = location_info.location1;
           this.location2 = location_info.location2;
-
-
           console.log(this.location1);
           console.log(this.location2);
           this.goTo2()
-
         })
-
-
     }
- 
   }
 
-  remove(item){
+  remove(item) {
     //console.log(item.quantity, item.id, item.model)
-    this.count_temp=item.quantity -1; 
+    this.count_temp = item.quantity - 1;
     Number(this.count_temp)
     //console.log(typeof(this.count_temp))
     //console.log(this.count_temp)
     this.afs.collection('item').doc(item.id).update({
-      quantity : this.count_temp
+      quantity: this.count_temp
     })
-    
+
   }
-  add(item){
+  add(item) {
     //console.log(item.quantity, item.id, item.model)
-    this.count_temp=Number(item.quantity)+ Number(1); 
+    this.count_temp = Number(item.quantity) + Number(1);
     //console.log(typeof(this.count_temp))
     //console.log(this.count_temp)
     this.afs.collection('item').doc(item.id).update({
-      quantity : this.count_temp
+      quantity: this.count_temp
     })
   }
 
@@ -159,6 +165,7 @@ export class LocationManagePage {
 
     })
   }
+  
 
 
   goTo2() {
@@ -178,6 +185,34 @@ export class LocationManagePage {
 
     })
   }
+
+  set(){
+    //console.log(this.count_add, this.count_remove)
+    //this.temp=this.itemArray.length;
+    //console.log(this.temp, "test")
+    let confirm = this.alertCtrl.create({
+      title: '현재 상태를 저장하시겠습니까?',
+      message: '현재 상태를 저장하려면 Yes를 클릭하세요',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            //저장 함수 실행
+            
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            //저장 취소 함수 실행
+
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+  
 
 
 

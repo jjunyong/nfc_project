@@ -53,12 +53,22 @@ export class ChangeLogPage {
     private afs: AngularFirestore,
     public fireService : FireService, private modalCtrl : ModalController,
     public global : GlobalVars) {
+      
+    this.itemsCollection = this.afs.collection<Log>('log');
+    this.items= this.itemsCollection.valueChanges();
+    this.items.subscribe((item)=>{
+          this.itemArray = item;
+          this.itemList = this.itemArray;
+          this.loadedItemList = this.itemArray;
+          //loadingPopup.dismiss();
+    })
+    
+    }
     
     // this.changed_type=this.navParams.get('changed_type')
     // this.startDate = this.navParams.get('startDate')
     // this.finDate = this.navParams.get('finDate')
-    
-  }
+  
   getType(get){
     //console.log("input")
     
