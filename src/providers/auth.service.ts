@@ -11,7 +11,8 @@ import { User } from "../form/user";
 @Injectable()
 export class AuthService {
 
-    user: Observable<User>;
+    user: Observable<User>;  //항상 user의 로그인 상태를 check
+    userCheck: Observable<User> //로그인 할 때 한 번만(take(1)써서) valid한 user인지 check
 
     constructor(private afAuth: AngularFireAuth,
         private afs: AngularFirestore,
@@ -24,15 +25,24 @@ export class AuthService {
                 else {
                     return Observable.of(null);
                 }
-            })
-    }
+            });
 
+        this.userCheck = this.afAuth.authState
+            .switchMap(user => {
+                if (user) {
+                    return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+                }
+                else {
+                    return Observable.of(null);
+                }
+            }).take(1);
+    }
 
     // googleLogin() {
     //     const provider = new firebase.auth.GoogleAuthProvider()
     //     return this.oAuthLogin(provider);
     // }
-    
+
     loginUser(newEmail: string, newPassword: string): Promise<any> {
         return this.afAuth.auth.signInWithEmailAndPassword(newEmail, newPassword)
     }
@@ -62,8 +72,13 @@ export class AuthService {
 
     private checkAuthorization(user: User, allowedRoles: string[]): boolean {
         if (!user) return false
-        for (const role of allowedRoles) {
-            if (user.roles[role]) {
+        // for (const role of allowedRoles) {
+        //     if (user.roles[role]) {
+        //         return true;
+        //     }
+        // }
+        for (var i = 0; i < allowedRoles.length; i++) {
+            if (user.role === allowedRoles[i]) {
                 return true;
             }
         }
@@ -86,9 +101,9 @@ export class AuthService {
     }
 
 
-    logout(){
+    logout() {
         return this.afAuth.auth.signOut();
     }
 
-    
+
 }

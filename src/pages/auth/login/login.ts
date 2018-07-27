@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../providers/auth.service';
+import { AngularFireAuth } from 'angularfire2/auth'
 
 /**
  * Generated class for the LoginPage page.
@@ -21,7 +22,7 @@ export class LoginPage {
   public backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802.jpg?alt=media&token=d3079014-9b17-4310-adc8-a20c3fb3b87b"
   // public imgLogo: any = "./assets/medium_150.70391061453px_1202562_easyicon.net.png";
 
-  constructor(public navCtrl: NavController, public auth: AuthService, public fb: FormBuilder, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
+  constructor(public afAuth : AngularFireAuth, public navCtrl: NavController, public auth: AuthService, public fb: FormBuilder, public alertCtrl: AlertController, public loadingCtrl: LoadingController) {
     let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
     this.loginForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern(EMAIL_REGEXP)])],
@@ -30,30 +31,47 @@ export class LoginPage {
   }
 
   login() {
-    if (!this.loginForm.valid) {
-      //this.presentAlert('Username password can not be blank')
-      console.log("error");
-    } else {
-      let loadingPopup = this.loadingCtrl.create({
-        spinner: 'crescent',
-        content: ''
-      });
-      loadingPopup.present();
 
+      if (this.afAuth.auth.currentUser) {
+        alert('이미 로그인 되어 있습니다. 로그아웃 이후 이용하세요.')
+      }
+      else {
 
-
-      this.auth.loginUser(this.loginForm.value.email, this.loginForm.value.password)
-        .then(authData => {
-          console.log("Auth pass");
-          loadingPopup.dismiss();
-          this.navCtrl.setRoot('HomePage');
-        }, error => {
-          var errorMessage: string = error.message;
-          loadingPopup.dismiss().then(() => {
-            this.presentAlert(errorMessage)
+        if (!this.loginForm.valid) {
+          //this.presentAlert('Username password can not be blank')
+          console.log("error");
+        } else {
+          let loadingPopup = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: ''
           });
-        });
-    }
+          loadingPopup.present();
+
+
+
+          this.auth.loginUser(this.loginForm.value.email, this.loginForm.value.password)
+            .then(authData => {
+              console.log("Auth pass");
+              loadingPopup.dismiss();
+              this.navCtrl.setRoot('HomePage');
+
+              this.auth.userCheck.subscribe((user)=>{
+                if(user==null){
+                  alert("Database에 존재하지 않는 user입니다.")
+                  this.auth.logout().then(()=>{
+                    this.navCtrl.setRoot('MainPage');
+                  })
+                }
+              })
+
+            }, error => {
+              var errorMessage: string = error.message;
+              loadingPopup.dismiss().then(() => {
+                this.presentAlert(errorMessage)
+              });
+            });
+        }
+      }
   }
 
   // forgot(){

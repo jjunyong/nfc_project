@@ -5,18 +5,19 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { FireService } from '../../providers/FireService';
 import { Observable } from 'rxjs';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
-import { Roles } from '../../form/user'
+import { User } from '../../form/user'
 
 
-interface User {
-  email: string
-  employee_number: string
-  name: string
-  phone: string
-  uid: string
-  role: Roles
-  thumbnail: string
-}
+
+// interface User {
+//   email: string
+//   employee_number: string
+//   name: string
+//   phone: string
+//   uid: string
+//   role: Roles
+//   thumbnail: string
+// }
 
 
 @IonicPage()
@@ -29,14 +30,14 @@ export class AdminPage {
   userinfo: string;
   id: string;
 
-  public itemsCollection: AngularFirestoreCollection<User>;
-  items: any = [];
-  itemList: any = [];
-  itemArray: any = [];
-  loadedItemList: any = [];
+  // public itemsCollection: AngularFirestoreCollection<User>;
+  // items: any = [];
+  // itemList: any = [];
+  // itemArray: any = [];
+  // loadedItemList: any = [];
 
-  authoption: string;
-  user: Observable<User>;
+  authoption: string = "subscriber"
+  users;
   backgroundImage="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
 
 
@@ -44,28 +45,19 @@ export class AdminPage {
     public fireService: FireService, public loadingCtrl: LoadingController, private alertCtrl: AlertController,
     public afAuth: AngularFireAuth, public viewCtrl: ViewController, public toast: ToastController) {
 
+    this.afs.collection<User>('users').valueChanges()
+      .subscribe((users)=>{
+        this.users = users;
+      })
 
+    // this.itemsCollection = afs.collection('users');
+    // this.items = this.itemsCollection.valueChanges();
 
-    // var admin = require("firebase-admin");
-
-    // var serviceAccount = require("../../../prototype-d68e4-firebase-adminsdk-ehk2t-8bc1d6cf15.json");
-
-    // admin.initializeApp({
-    //   credential: admin.credential.cert(serviceAccount),
-    //   databaseURL: 'https://prototype-d68e4.firebaseio.com'
-    // });
-
-
-    this.authoption = "권한";
-
-    this.itemsCollection = afs.collection('users');
-    this.items = this.itemsCollection.valueChanges();
-
-    this.items.subscribe((item) => {
-      this.itemArray = item;
-      this.itemList = this.itemArray;
-      this.loadedItemList = this.itemArray;
-    })
+    // this.items.subscribe((item) => {
+      // this.itemArray = item;
+      // this.itemList = this.itemArray;
+      // this.loadedItemList = this.itemArray;
+    // })
 
 
 
@@ -78,8 +70,6 @@ export class AdminPage {
     event.stopPropagation(); 
 
     this.userinfo = item.uid
-
-
     let confirm = this.alertCtrl.create({
       title: '정말로 회원 정보를 삭제하시겠습니까?',
       message: '아이템을 삭제하시려면 Yes를 클릭하세요',
@@ -130,6 +120,12 @@ export class AdminPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPage');
+  }
+
+  updateRole(user, role){
+    this.afs.collection('users').doc(user.uid).update({
+      role : role
+    })
   }
 
 
