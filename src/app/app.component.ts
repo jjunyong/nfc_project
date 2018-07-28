@@ -8,6 +8,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner'
 import { AuthService } from '../providers/auth.service';
 import { User } from '../form/user';
 
+
 @Component({
   selector: 'ion-app',
   templateUrl: 'app.html'
@@ -27,7 +28,7 @@ export class MyApp {
   createdCode = null;
   scannedCode = null;
 
-  private masterEmail: string = "21300649@handong.edu";
+  private masterEmail: string = "admin@palmCLOUD.co.kr";
   public masterSwitch: boolean = false;
 
 
@@ -51,11 +52,14 @@ export class MyApp {
     this.global.currentMessage.subscribe(message => this.show = message)
 
     // this.auth.user.subscribe((auth) => {
-    //   // console.log(auth.email)
-    //   this.authUser = auth.email
+    //   console.log(auth.email)
     //   if (auth.email === this.masterEmail) {
     //     this.masterSwitch = true;
     //   }
+    // })
+
+
+    
     //   this.afs.collection('users').doc(auth.uid).valueChanges()
     //     .subscribe((user: any)=>{
     //       console.log(user)

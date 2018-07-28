@@ -3,12 +3,9 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FireService } from '../../providers/FireService';
-import { Observable } from 'rxjs';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
-import { User } from '../../form/user'
-
-
-
+// import { PaginationService } from './pagination.service';
+import firebase from 'firebase'
 // interface User {
 //   email: string
 //   employee_number: string
@@ -30,46 +27,107 @@ export class AdminPage {
   userinfo: string;
   id: string;
 
-  // public itemsCollection: AngularFirestoreCollection<User>;
-  // items: any = [];
-  // itemList: any = [];
-  // itemArray: any = [];
-  // loadedItemList: any = [];
+  users = [];
+  backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
 
-  authoption: string = "subscriber"
-  users;
-  backgroundImage="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
+  db = firebase.firestore();
+  lastVisible;
+  user_length: number;
+  length_cnt: number = 0;
+
+  loadedItemList;
 
 
   constructor(public afs: AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
     public fireService: FireService, public loadingCtrl: LoadingController, private alertCtrl: AlertController,
-    public afAuth: AngularFireAuth, public viewCtrl: ViewController, public toast: ToastController) {
+    public afAuth: AngularFireAuth, public viewCtrl: ViewController, public toast: ToastController,
+  ) {
 
-    this.afs.collection<User>('users').valueChanges()
-      .subscribe((users)=>{
-        this.users = users;
-      })
-
-    // this.itemsCollection = afs.collection('users');
-    // this.items = this.itemsCollection.valueChanges();
-
-    // this.items.subscribe((item) => {
-      // this.itemArray = item;
-      // this.itemList = this.itemArray;
-      // this.loadedItemList = this.itemArray;
+    this.loadUsers();
+    this.afs.collection('users').valueChanges().subscribe((snap)=>{
+      this.user_length = snap.length;
+      this.loadedItemList = snap;
+    })
+    // this.db.collection('users').get().then((snap) => {
+    //   this.user_length = snap.docs.length;
+    //   console.log(this.user_length)
     // })
-
-
-
   }
-  
 
+  loadUsers(infiniteScroll?) {
 
-  delete(item) {
+    if (this.lastVisible == null) {
+      // this.afs.collection('users', ref=>ref.orderBy('name').limit(9)).valueChanges().subscribe((snapshot)=>{
+      //   this.lastVisible = snapshot[snapshot.length-1];
+      //   console.log(this.lastVisible);
+      //   this.length_cnt = this.length_cnt + snapshot.length;
 
-    event.stopPropagation(); 
+      //   snapshot.forEach((e)=>{
+      //     this.users.push(e);
+      //   })
+      // })
+      this.db.collection('users')
+        .orderBy('name')
+        .limit(10)
+        .get()
+        .then((querySnapshot) => {
+          this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+          this.length_cnt = this.length_cnt + querySnapshot.docs.length;
+          console.log(this.length_cnt)
+          querySnapshot.forEach((doc) => {
+            this.users.push(doc.data())
+          })
+        })
+    }
+    else {
 
-    this.userinfo = item.uid
+      // this.afs.collection('users', ref=>ref.orderBy('name').startAfter(this.lastVisible).limit(5)).valueChanges().subscribe((snapshot)=>{
+      //   this.lastVisible = snapshot[snapshot.length-1];
+      //     console.log(this.lastVisible);
+      //   this.length_cnt = this.length_cnt + snapshot.length;
+
+      //   snapshot.forEach((e)=>{
+      //     this.users.push(e);
+      //   })
+
+      //   if(infiniteScroll){
+      //     infiniteScroll.complete();
+      //   }
+      // })
+      this.db.collection('users')
+        .orderBy('name')
+        .startAfter(this.lastVisible)
+        .limit(5)
+        .get()
+        .then((querySnapshot) => {
+
+          this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+          this.length_cnt = this.length_cnt + querySnapshot.docs.length;
+          console.log(this.length_cnt)
+          querySnapshot.forEach((doc) => {
+            this.users.push(doc.data())
+          })
+
+          if (infiniteScroll) {
+            infiniteScroll.complete();
+          }
+        })
+    }
+  }
+
+  loadMore(infiniteScroll) {
+
+    if (this.length_cnt < this.user_length)
+      this.loadUsers(infiniteScroll);
+
+    console.log(this.user_length)
+    if (this.length_cnt >= this.user_length)
+      infiniteScroll.enable(false);
+  }
+
+  delete(user) {
+
+    event.stopPropagation();
     let confirm = this.alertCtrl.create({
       title: '정말로 회원 정보를 삭제하시겠습니까?',
       message: '아이템을 삭제하시려면 Yes를 클릭하세요',
@@ -78,7 +136,7 @@ export class AdminPage {
           text: 'Yes',
           handler: () => {
 
-            this.afs.collection('users').doc(this.userinfo).delete().then(() => {
+            this.afs.collection('users').doc(user.uid).delete().then(() => {
 
 
               let toast = this.toast.create({
@@ -102,31 +160,51 @@ export class AdminPage {
         }
       ]
     });
-
-
     confirm.present();
-
   }
 
   profile(item) {
-    
     console.log(item.uid);
-
     this.navCtrl.push('UserLogPage', {
-     uid : item.uid,
-    }
-    )
+      uid: item.uid,
+    })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPage');
   }
 
-  updateRole(user, role){
+  updateRole(user, role) {
     this.afs.collection('users').doc(user.uid).update({
-      role : role
+      role: role
     })
   }
+  
+getItems(searchbar) {
+  // Reset items back to all of the items
+  this.initializeItems();
+
+  //console.log(this.itemList)
+  // set q to the value of the searchbar
+  var q = searchbar.srcElement.value;
+  // if the value is an empty string don't filter the items
+  if (!q) {
+    return;
+  }
+  this.users = this.users.filter((v) => {
+    if(v.name && q) { 
+      if (v.name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+        return true;
+      }
+      return false;
+    }
+  });
+}
+
+initializeItems(){
+  this.users = this.loadedItemList;
+}
+
 
 
 }

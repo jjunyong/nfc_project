@@ -19,19 +19,17 @@
 </style>
 
 <ion-header *ngIf="show" no-border>
-  <ion-toolbar color="grey-blue">
+  <ion-toolbar color="grey-blue" *ngIf="auth.user | async as user; else other">
     <button class="topNav" ion-button clear color="white" (click)="openMain()">
       <ion-icon name="home"></ion-icon>
     </button>
     <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openStock()">재고관리</button>
     <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openRepair()">정비관리</button>
     <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openProfile()">My Profile</button>
-    <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openAdmin()">Admin</button>
+    <button *ngIf="user.email == masterEmail" class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white"
+      (click)="openAdmin()">Admin</button>
     <button *ngIf="!(auth.user | async);" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="DologIn()">로그인</button>
     <button *ngIf="auth.user | async;" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="logout()">로그아웃</button>
-    <!-- <button ion-button menuToggle>
-          <ion-icon class="menu_icon" name="menu"></ion-icon>
-        </button> -->
     <button class="menu" ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -39,15 +37,26 @@
     <button class="menu" style="float: right;" ion-button mode="ios" (click)="qrPage()">
       <ion-icon name="qr-scanner"></ion-icon>
     </button>
-
-
-
   </ion-toolbar>
-  <!-- <ion-navbar transparent>
-    <button *ngIf="login" ion-button menuToggle>
-      <ion-icon name="menu" color="light"></ion-icon>
-    </button>
-  </ion-navbar> -->
+
+  <ng-template #other>
+    <ion-toolbar color="grey-blue">
+      <button class="topNav" ion-button clear color="white" (click)="openMain()">
+        <ion-icon name="home"></ion-icon>
+      </button>
+      <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openStock()">재고관리</button>
+      <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openRepair()">정비관리</button>
+      <button class="topNav" style="font-family: 'Jeju Gothic';" ion-button clear color="white" (click)="openProfile()">My Profile</button>
+      <button *ngIf="!(auth.user | async);" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="DologIn()">로그인</button>
+      <button *ngIf="auth.user | async;" style="font-family: 'Jeju Gothic';" class="topNav" ion-button clear color="white" (click)="logout()">로그아웃</button>
+      <button class="menu" ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <button class="menu" style="float: right;" ion-button mode="ios" (click)="qrPage()">
+        <ion-icon name="qr-scanner"></ion-icon>
+      </button>
+    </ion-toolbar>
+  </ng-template>
 </ion-header>
 
 <ion-menu [content]="content" id="menu-avatar">
@@ -78,10 +87,12 @@
         <ion-icon name="home"></ion-icon>
         Home
       </button>
-      <button menuClose ion-item detail-none (click)="openAdmin()">
-        <ion-icon name="user"></ion-icon>
-        Admin
-      </button>
+      <div *ngIf="auth.user | async as user">
+        <button *ngIf="user.email == masterEmail" menuClose ion-item detail-none (click)="openAdmin()">
+          <ion-icon name="user"></ion-icon>
+          Admin
+        </button>
+      </div>
       <button *ngIf="!(auth.user | async);" menuClose ion-item detail-none (click)="DologIn()">
         로그인
       </button>
