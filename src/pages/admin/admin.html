@@ -103,6 +103,7 @@
         <div class="panel panel-default user_panel">
           <div class="panel-heading">
             <h3 class="panel-title">User List</h3>
+            <ion-searchbar padding (ionInput)="getItems($event)"></ion-searchbar>
           </div>
           <div class="panel-body">
             <div class="table-container" *ngFor="let user of users" (click)="profile(user)">

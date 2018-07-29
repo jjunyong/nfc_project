@@ -6,6 +6,17 @@
 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+   @media screen and (max-width: 600px) {
+    .desktop {
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    .mobile {
+      display: none;
+    }
+  }
   body {
     font-family: Arial;
     font-size: 17px;
@@ -154,6 +165,7 @@
   a:hover {
     opacity: 0.7;
   }
+
   .labels {}
 </style>
 
@@ -184,10 +196,22 @@
               <label for="thumbnail">
                 <i class="fa fa-image"></i> Thumbnail Image</label>
               <input type="text" [(ngModel)]="thumbnail" id="thumbnail" name="thumnail_image">
-              <input type="file" accept="image/*" (change)="uploadFile($event)" id="fileInput" />
+
+              <!-- <input type="file" accept="image/*" (change)="uploadFile($event)" id="fileInput" />
               <label for="fileInput" icon-only ion-button clear>
                 <ion-icon color="dark" name="add"></ion-icon>
                 <ion-icon color="dark" name="images"></ion-icon>
+              </label> -->
+              <input class="desktop" type="file" accept="image" (change)="uploadFileDesktop($event)" id="fileInput" />
+              <label class="desktop" for="fileInput" icon-only ion-button clear>
+                <ion-icon color="black" name="add"></ion-icon>
+                <ion-icon color="black" name="images"></ion-icon>
+              </label>
+
+              <button class="mobile" id="fileInput2" ion-button (click)="uploadFileMobile()"></button>
+              <label class="mobile" for="fileInput2" icon-only ion-button clear>
+                <ion-icon color="black" name="add"></ion-icon>
+                <ion-icon color="black" name="images"></ion-icon>
               </label>
             </div>
           </div>
