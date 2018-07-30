@@ -11,8 +11,6 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner'
 import { AngularFireAuth } from 'angularfire2/auth'
 import { FirebaseAuth } from '@firebase/auth-types';
 
-
-
 class Item {
   location1: any;
   location2: any;
@@ -40,6 +38,7 @@ export class LocationManagePage {
   public count_temp : number =0;
   public pre_quan : any =[];
   public modify : boolean = false;
+  public input_mod : boolean;
 
   temp : number =0;
   public setArray : any=[];
@@ -145,7 +144,12 @@ export class LocationManagePage {
     event.stopPropagation();
     item.quantity++;
   }
-
+  input(item){
+    event.stopPropagation();
+    //console.log("input", item.mode,  item.quantity)
+    this.modify=true;
+    this.input_mod = true;
+  }
 
   ionViewWillEnter() {
     // console.log('ionViewEnteredStockMangePage')
@@ -168,12 +172,9 @@ export class LocationManagePage {
       this.itemArray = item;
       this.itemList = this.itemArray;
       this.loadedItemList = this.itemArray;
-
     })
   }
   
-
-
   goTo2() {
     if (this.location1 == null) {
       this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location2', '==', this.location2).orderBy("model"))
@@ -220,10 +221,14 @@ export class LocationManagePage {
   reload(){
     this.navCtrl.setRoot(this.navCtrl.getActive().component)
   }
-
+  left(){
+    for(var i=0; i<this.itemArray.length; i++){
+      //console.log(this.itemArray[i].model, this.itemArray[i].quantity, this.pre_quan[i])
+    }
+  }
   fire_update() {
+    this.left();
     for (var i = 0; i < this.itemArray.length; i++) {
-
       if (this.pre_quan[i] < this.itemArray[i].quantity) {
         this.itemArray[i].add_num = this.itemArray[i].quantity - this.pre_quan[i];
         console.log("added", this.itemArray[i].model, this.itemArray[i].add_num);
@@ -289,15 +294,8 @@ export class LocationManagePage {
 
         this.pre_quan[i] = this.itemArray[i].quantity
       }
-
-
     }
   }
-  
-  
-
-
-
   openDetail(item) {
     this.navCtrl.push('ItemDetailPage', {
       id: item.id,

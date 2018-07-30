@@ -45,7 +45,7 @@ export class StockManagePage {
 
   temp: number = 0;
 
-
+  public input_mod : boolean = false;
 
 
   constructor(public loadingCtrl: LoadingController,
@@ -104,6 +104,13 @@ export class StockManagePage {
     item.quantity++;
   }
 
+  input(item){
+    event.stopPropagation();
+    //console.log("input", item.mode,  item.quantity)
+    this.modify=true;
+    this.input_mod = true;
+  }
+
   ionViewWillUnload() {
     if (this.modify == true) {
       this.set();
@@ -140,9 +147,19 @@ export class StockManagePage {
     this.itemList = this.loadedItemList;
 
   }
-  fire_update() {
-    for (var i = 0; i < this.itemArray.length; i++) {
 
+  left(){
+    for(var i=0; i<this.itemArray.length; i++){
+      //console.log(this.itemArray[i].model, this.itemArray[i].quantity, this.pre_quan[i])
+    }
+  }
+  fire_update() {
+    this.left();
+    // if(this.input_mod==true){
+    //   console.log("input mod ", this.item)
+    // }
+    //console.log("update")
+    for (var i =0; i < this.itemArray.length; i++) {
       if (this.pre_quan[i] < this.itemArray[i].quantity) {
         this.itemArray[i].add_num = this.itemArray[i].quantity - this.pre_quan[i];
         console.log("added", this.itemArray[i].model, this.itemArray[i].add_num);
