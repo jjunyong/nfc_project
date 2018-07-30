@@ -1,14 +1,15 @@
 <style>
-@media screen and (max-width: 600px){
-  .desktop{
-    display: none;
+  @media screen and (max-width: 600px) {
+    .desktop {
+      display: none;
+    }
   }
-}
-@media screen and (min-width: 600px) {
-  .mobile{
-    display: none;
+
+  @media screen and (min-width: 600px) {
+    .mobile {
+      display: none;
+    }
   }
-}
 </style>
 
 <ion-header>
@@ -30,6 +31,12 @@
       <ion-list block no-lines>
 
         <ion-item class="item1">
+          <ion-icon name="stats" item-left color="darkGray"></ion-icon>
+          <ion-label color="white">Quantity :</ion-label>
+          <ion-input type="number" [(ngModel)]="quantity">{{quantity}}</ion-input>
+        </ion-item>
+
+        <ion-item class="item2">
           <ion-icon name="pin" item-left color="darkGray"></ion-icon>
           <ion-label color="white" strong>Location1 : </ion-label>
           <ion-select [(ngModel)]="location1">
@@ -42,7 +49,7 @@
           </ion-select>
         </ion-item>
 
-        <ion-item class="item2">
+        <ion-item class="item3">
           <ion-icon name="pin" item-left color="light"></ion-icon>
           <ion-label color="white" strong>Location2 : </ion-label>
           <ion-select [(ngModel)]="location2">
@@ -54,11 +61,7 @@
           </ion-select>
         </ion-item>
 
-        <ion-item class="item3">
-          <ion-icon name="stats" item-left color="darkGray"></ion-icon>
-          <ion-label color="white">Quantity :</ion-label>
-          <ion-input type="number" [(ngModel)]="quantity">{{quantity}}</ion-input>
-        </ion-item>
+
       </ion-list>
     </div>
     <div text-right>
@@ -80,7 +83,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <input class="desktop" type="file" accept="image/*" (change)="uploadFileDesktop($event)" id="fileInput" />
+    <input class="desktop" type="file" accept="image" (change)="uploadFileDesktop($event)" id="fileInput" />
     <label class="desktop" for="fileInput" icon-only ion-button clear>
       <ion-icon color="white" name="add"></ion-icon>
       <ion-icon color="white" name="images"></ion-icon>
@@ -94,7 +97,7 @@
 
 
   </ion-card>
-  
+
 
   <div>{{ uploadPercent | async }}</div>
   <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->

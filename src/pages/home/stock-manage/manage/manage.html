@@ -6,33 +6,33 @@
 -->
 <ion-header>
 
-    <ion-navbar  color="grey-blue" >
-        <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>새로운 아이템 추가</ion-title>
-          </ion-navbar>
+  <ion-navbar color="grey-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>새로운 아이템 추가</ion-title>
+  </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
 
   <ion-list>
 
-    <ion-item>
-      <ion-label floating>제품 모델</ion-label>
+    <ion-item class="back">
+      <ion-label floating color="white">제품 모델</ion-label>
       <ion-input type="text" [(ngModel)]="model"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label floating>수량</ion-label>
+    <ion-item class="back">
+      <ion-label floating color="white">수량</ion-label>
       <ion-input type="number" [(ngModel)]="quantity"></ion-input>
     </ion-item>
 
-  
 
-    <ion-item>
-      <ion-label>위치(대분류)</ion-label>
+
+    <ion-item class="back">
+      <ion-label color="white">위치(대분류)</ion-label>
       <ion-select [(ngModel)]="location1">
         <ion-option value="A">A</ion-option>
         <ion-option value="B">B</ion-option>
@@ -43,8 +43,8 @@
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label>위치(소분류)</ion-label>
+    <ion-item class="back">
+      <ion-label color="white">위치(소분류)</ion-label>
       <ion-select [(ngModel)]="location2">
         <ion-option value="1">1</ion-option>
         <ion-option value="2">2</ion-option>
@@ -57,6 +57,8 @@
 
   </ion-list>
 
-  <button ion-button (click)="add($event)" full color="grey-blue">확인</button>
+  <div text-left>
+    <button ion-button (click)="add($event)" color="grey-blue">확인</button>
+  </div>
 
 </ion-content>

@@ -7,27 +7,20 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
     <ion-list>
-        
-          <ion-item>
+          <ion-item class="back">
               <ion-label floating>제품 고유 번호</ion-label>
               <ion-input type="text" [(ngModel)]="serialNum"></ion-input>
             </ion-item>
-
-            <ion-item>
+            <ion-item class="back">
               <ion-label floating>모델</ion-label>
               <ion-input type="text" [(ngModel)]="model"></ion-input>
             </ion-item>
-
-
-            <ion-item>
+            <ion-item class="back">
               <ion-label floating>정비담당</ion-label>
               <ion-input type="text" [(ngModel)]="repairman"></ion-input>
             </ion-item>
-
-
       </ion-list>
 
       <button color="grey-blue" ion-button (click)="update()">확인</button>

@@ -2,12 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { Platform, Nav, ToastController, AlertController, PopoverController, ModalController, ViewController, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { AuthorizationPage } from './authorization/authorization';
 import { GlobalVars } from '../providers/global';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner'
 import { AuthService } from '../providers/auth.service';
+import { User } from '../form/user';
+
 
 @Component({
   selector: 'ion-app',
@@ -28,7 +28,7 @@ export class MyApp {
   createdCode = null;
   scannedCode = null;
 
-  private masterEmail: string = "21300649@handong.edu";
+  private masterEmail: string = "admin@palmCLOUD.co.kr";
   public masterSwitch: boolean = false;
 
 
@@ -49,18 +49,17 @@ export class MyApp {
       }
     })
 
-
-
-
     this.global.currentMessage.subscribe(message => this.show = message)
 
-
     // this.auth.user.subscribe((auth) => {
-    //   // console.log(auth.email)
-    //   this.authUser = auth.email
+    //   console.log(auth.email)
     //   if (auth.email === this.masterEmail) {
     //     this.masterSwitch = true;
     //   }
+    // })
+
+
+    
     //   this.afs.collection('users').doc(auth.uid).valueChanges()
     //     .subscribe((user: any)=>{
     //       console.log(user)
@@ -75,7 +74,7 @@ export class MyApp {
       // { title: '로그인', component: "MainPage" },
       { title: '재고관리', component: 'HomePage' },
       { title: '정비관리', component: "RepairPage" },
-      { title: 'QR-Code', component: "QrcodePage" },
+      // { title: 'QR-Code', component: "QrcodePage" },
       { title: 'My profile', component: "ProfilePage" }
       // {title:'app1', component:"Category1Page"},
       // {title:'NFC', component:"NfcPage"},
@@ -166,12 +165,12 @@ export class MyApp {
   //   })
   // }
 
-  approveAuthorization() {
-    this.nav.push(AuthorizationPage);
-  }
+  // approveAuthorization() {
+  //   this.nav.push(AuthorizationPage);
+  // }
 
   openStock() {
-    if (this.auth.user) {
+    if (this.loggedIn) {
       this.nav.setRoot('HomePage');
     }
     else {
@@ -180,7 +179,7 @@ export class MyApp {
   }
 
   openRepair() {
-    if (this.auth.user) {
+    if (this.loggedIn) {
       this.nav.setRoot('RepairPage');
     }
     else {
@@ -191,7 +190,12 @@ export class MyApp {
     this.nav.setRoot('MainPage');
   }
   openAdmin() {
-    this.nav.setRoot('AdminPage');
+    if (this.loggedIn) {
+      this.nav.setRoot('AdminPage');
+    }
+    else {
+      this.showAlert();
+    }
   }
 
   showAlert() {
@@ -223,7 +227,12 @@ export class MyApp {
 
   }
   openProfile() {
-    this.nav.setRoot('ProfilePage');
+    if (this.loggedIn) {
+      this.nav.setRoot('ProfilePage');
+    }
+    else {
+      this.showAlert();
+    }
   }
 
 }

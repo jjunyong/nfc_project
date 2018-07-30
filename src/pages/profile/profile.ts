@@ -6,6 +6,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 import { finalize } from 'rxjs/operators';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AuthService } from '../../providers/auth.service';
+import { CameraOptions, Camera } from '@ionic-native/camera';
 
 /**
  * Generated class for the ProfilePage page.
@@ -33,7 +34,7 @@ export class ProfilePage {
   backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afs: AngularFirestore,
-    public storage : AngularFireStorage, public alertCtrl : AlertController,
+    public storage : AngularFireStorage, public alertCtrl : AlertController, public camera : Camera,
   public auth: AuthService) {
 
     this.auth.user.subscribe((user)=>{
@@ -53,9 +54,9 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
   }
 
-  uploadFile(event) {
+  uploadFileDesktop(event) {
     const file = event.target.files[0];
-    const filePath = `profiles/${this.uid}/${file.name}`;
+    const filePath = `profiles/${this.uid}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
@@ -66,20 +67,39 @@ export class ProfilePage {
     )
       .subscribe()
 
-      task.downloadURL()
-        .subscribe((url)=>{
+    task.downloadURL()
+      .subscribe((url) => {
+        this.thumbnail = url;
+        })
+  }
+
+  async uploadFileMobile() {
+    try {
+      const options: CameraOptions = {
+        quality: 50,
+        targetHeight: 600,
+        targetWidth: 600,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+      }
+      const result = await this.camera.getPicture(options);
+
+      const image = `data:image/jpeg;base64,${result}`;
+
+      const pictures = this.storage.ref(`profiles/${this.uid}`)
+      pictures.putString(image, 'data_url');
+
+      pictures.getDownloadURL()
+        .subscribe((url) => {
           this.thumbnail = url;
         })
-    // task.downloadURL()
-    //   .subscribe((url) => {
-
-    //     const doc_id = this.afs.createId();
-    //     this.afs.collection('item').doc(this.id).collection('images').doc(doc_id).set({
-    //       image_url: url,
-    //       id : doc_id
-    //     })
-    //   })
+    }
+    catch (e) {
+      console.error(e);
+    }
   }
+
   submit(){
     let alert = this.alertCtrl.create({
       title: '정말 변경하시겠습니까?',

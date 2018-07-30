@@ -6,7 +6,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { FireService } from '../../../../src/providers/FireService'
 import { GlobalVars } from '../../../providers/global';
-import { count } from 'rxjs/operator/count';
+
 class Item{
   location1: any;
   location2: any;
@@ -36,8 +36,6 @@ export class StockManagePage {
   public itemArray : any = [];
   loadedItemList:  any=[]; 
   items : any = [];
-  // modifyList : modify;
-
   public setArray : any =[];
 
   addArray : any =[];
@@ -185,7 +183,6 @@ set(){
 
 initializeItems(){
   this.itemList = this.loadedItemList;
-  
 }
 fire_update(){
   for(var i=0; i<this.itemArray.length; i++){
@@ -288,8 +285,6 @@ getItems(searchbar) {
       return false;
     }
   });
-
- // console.log(q, this.itemList.length);
 }
 
 
@@ -333,15 +328,4 @@ openDetail(item){
 }
 
 }
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,8 +1,8 @@
-export interface Roles{
-    subscriber?: boolean;
-    editor?: boolean;
-    admin?: boolean;
-}
+// export interface Roles{
+//     subscriber?: boolean;
+//     editor?: boolean;
+//     admin?: boolean;
+// }
 
 export interface User{
     uid: string;
@@ -11,5 +11,5 @@ export interface User{
     phone?: string;
     thumbnail?: string;
     employee_number?: string;
-    roles : Roles;
+    role : string;
 }
