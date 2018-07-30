@@ -57,7 +57,7 @@
             <button color="white" clear ion-button (click)="remove(item)">
               <ion-icon name="arrow-down"></ion-icon>
             </button>
-            {{item.quantity}}
+            <input (click)="input(item)" type="number" [(ngModel)]="item.quantity" placeholder="{{item.quantity}}" style="width:3em ">
             <button color="white" clear ion-button (click)="add(item)">
               <ion-icon name="arrow-up" icon-only></ion-icon>
             </button>
@@ -66,6 +66,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-fab right bottom>
+    <button (click)="set()" ion-fab color="grey-blue">
+      <!-- <ion-icon name="done-all"></ion-icon> -->
+      <!-- <ion-icon name="download"></ion-icon> -->
+      SAVE
+    </button>
+  </ion-fab>
 
     
 
