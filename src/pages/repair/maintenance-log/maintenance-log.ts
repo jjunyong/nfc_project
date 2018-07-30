@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController, ToastController } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { GlobalVars } from '../../../providers/global';
@@ -37,7 +37,8 @@ export class MaintenanceLogPage {
     public navCtrl: NavController,
     public afs: AngularFirestore,
     public alertCtrl: AlertController,
-    public global: GlobalVars
+    public global: GlobalVars,
+    public toast: ToastController
   ) {
 
     let loadingPopup = this.loadingCtrl.create({
@@ -67,6 +68,43 @@ export class MaintenanceLogPage {
 
   initializeItems() {
     this.itemList = this.loadedItemList;
+  }
+
+  delete(item){
+    event.stopPropagation();
+    let confirm = this.alertCtrl.create({
+      title: '아이템을 삭제하시겠습니까?',
+      message: '삭제하시려면 Yes를 클릭하세요',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.real_deleted(item)
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            console.log('cancel clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+  real_deleted(item){
+    console.log(item.model)
+    this.afs.collection('RepairItem').doc(item.id).delete().then(() => {
+      let toast = this.toast.create({
+        message: "성공적으로 삭제하였습니다.",
+        duration: 2000,
+        position: "bottom"
+      });
+      toast.present();
+      this.navCtrl.pop();
+    }).catch(function (error) {
+      console.error("삭제에 실패하였습니다. ", error);
+    });
   }
 
   getItems(searchbar) {

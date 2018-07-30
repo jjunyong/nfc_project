@@ -30,12 +30,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 export const config = { 
   apiKey: "AIzaSyACcRwZawea9vXAI0cNz0xsjbHRqP5XTlY",
-    authDomain: "prototype-d68e4.firebaseapp.com",
-    databaseURL: "https://prototype-d68e4.firebaseio.com",
-    projectId: "prototype-d68e4",
-    storageBucket: "prototype-d68e4.appspot.com",
-    messagingSenderId: "498739217733"
+  authDomain: "prototype-d68e4.firebaseapp.com",
+  databaseURL: "https://prototype-d68e4.firebaseio.com",
+  projectId: "prototype-d68e4",
+  storageBucket: "prototype-d68e4.appspot.com",
+  messagingSenderId: "498739217733"
 };
+
 
 
 @NgModule({

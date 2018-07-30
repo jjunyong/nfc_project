@@ -17,11 +17,17 @@
           <ion-card class="card" (click)="openDetail(item)">
             <img src="{{item.thumbnail}}" height="200">
             <ion-card-content>
+             
               <ion-card-title color="white">
-                {{item.model}}
-                </ion-card-title>
+                {{item.model}} 
+                <button style="float:right" ion-button icon-start clear small (click)="delete(item)" color="white">
+                    <ion-icon name="trash"></ion-icon>
+                    <div>DELETE</div>
+                </button>
+                  </ion-card-title>
                <h5><font color="white">설비번호: {{item.serialNum}}</font></h5>
                <h6><font color="white">정비담당: {{item.repairman}}</font></h6>
+               
             </ion-card-content>
           </ion-card>
     </ion-col>
