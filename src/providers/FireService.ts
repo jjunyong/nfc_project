@@ -103,11 +103,11 @@ finAdd(RepairItem){
     })
 
     this.afs.collection("log").add({
-        itemModel : item.model,
+        model : item.model,
         type : "add",
-        itemQuantity : item.quantity,
-        itemLocation1 : item.location1, 
-        itemLocation2 : item.location2,
+        quantity : item.quantity,
+        location1 : item.location1, 
+        location2 : item.location2,
         timestamp : new Date()
       })
     

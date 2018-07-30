@@ -2,13 +2,13 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Completed maintenance
+      Record of Items I Managed
     </ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
-      <ion-row>
+
+    <ion-row>
         <ion-col col-12 col-md-4 col-xl-3  *ngFor="let item of itemList" >
             <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}" (click)="openDetail(item)">            
                 <img src="{{item.Image}}" height="200">
@@ -22,8 +22,6 @@
               </ion-card>
         </ion-col>
       </ion-row>
-
- 
 </ion-content>
 
 

@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore'
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { GlobalVars } from '../../../providers/global';
-
+import { AngularFireAuth} from 'angularfire2/auth'
 interface RepairItem{
   model: string;
   serialNum: string;
@@ -34,7 +34,8 @@ export class OnMaintenancePage {
     public navCtrl: NavController,
     public afs: AngularFirestore,
     public navParams: NavParams,
-  public global : GlobalVars) {
+  public global : GlobalVars,
+public afAuth: AngularFireAuth) {
 
     
     let loadingPopup = this.loadingCtrl.create({

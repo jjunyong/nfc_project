@@ -54,7 +54,7 @@ export class ChangeLogPage {
     public fireService : FireService, private modalCtrl : ModalController,
     public global : GlobalVars) {
       
-    this.itemsCollection = this.afs.collection<Log>('log');
+    this.itemsCollection = this.afs.collection<Log>('log', ref=>ref.orderBy("timestamp", "desc"));
     this.items= this.itemsCollection.valueChanges();
     this.items.subscribe((item)=>{
           this.itemArray = item;
@@ -68,13 +68,14 @@ export class ChangeLogPage {
     // this.changed_type=this.navParams.get('changed_type')
     // this.startDate = this.navParams.get('startDate')
     // this.finDate = this.navParams.get('finDate')
-  
+
+
   getType(get){
     //console.log("input")
     
     if(this.changed_type=="import"){
         
-      this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import'));
+      this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import').orderBy("timestamp", "desc"));
       this.items= this.itemsCollection.valueChanges();
       this.items.subscribe((item)=>{
             this.itemArray = item;
@@ -84,7 +85,7 @@ export class ChangeLogPage {
       })
       }
       if(this.changed_type=="export"){
-          this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export'));
+          this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export').orderBy("timestamp", "desc"));
           this.items= this.itemsCollection.valueChanges();
           this.items.subscribe((item)=>{
                 this.itemArray = item;
@@ -93,9 +94,9 @@ export class ChangeLogPage {
                 //loadingPopup.dismiss();
           })
         }
-  
+
         if(this.changed_type=="location_changed"){
-          this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed'));
+          this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed').orderBy("timestamp", "desc"));
           this.items= this.itemsCollection.valueChanges();
           this.items.subscribe((item)=>{
                 this.itemArray = item;
@@ -121,8 +122,9 @@ ionViewDidLoad() {
     })
   }
   
-  search(){
-    //console.log(this.itemArray);
+  search(get_value){
+    setTimeout(() => {
+       //console.log(this.itemArray);
     this.startDate=new Date (this.startDate);
     this.finDate=new Date (this.finDate);
     this.midDate=this.startDate;
@@ -141,7 +143,7 @@ ionViewDidLoad() {
 
    if(this.changed_type){
     if(this.changed_type=="import"){
-    this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+    this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'import').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate).orderBy("timestamp", "desc"));
     this.items= this.itemsCollection.valueChanges();
     this.items.subscribe((item)=>{
           console.log(this.items)
@@ -152,7 +154,7 @@ ionViewDidLoad() {
     })
     }
     if(this.changed_type=="export"){
-        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'export').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate).orderBy("timestamp", "desc"));
         this.items= this.itemsCollection.valueChanges();
         this.items.subscribe((item)=>{
               this.itemArray = item;
@@ -163,7 +165,7 @@ ionViewDidLoad() {
       }
 
       if(this.changed_type=="location_changed"){
-        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+        this.itemsCollection = this.afs.collection<Log>('log', ref => ref.where('type', '==', 'location_changed').where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate).orderBy("timestamp", "desc"));
         this.items= this.itemsCollection.valueChanges();
         this.items.subscribe((item)=>{
               this.itemArray = item;
@@ -176,7 +178,7 @@ ionViewDidLoad() {
   }
   else{
     console.log("no type")
-    this.itemsCollection = this.afs.collection<Log>('log', ref=>ref.where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate));
+    this.itemsCollection = this.afs.collection<Log>('log', ref=>ref.where('timestamp', '<=', this.finDate).where('timestamp', '>=', this.startDate).orderBy("timestamp", "desc"));
     this.items= this.itemsCollection.valueChanges();
     this.items.subscribe((item)=>{
           this.itemArray = item;
@@ -184,7 +186,12 @@ ionViewDidLoad() {
           this.loadedItemList = this.itemArray;
     })
   }
+      
+    }, 50);
+
+   
   }
+
 }
 
 @Component({

@@ -8,14 +8,19 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { GlobalVars } from '../../../providers/global';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner'
+import { AngularFireAuth } from 'angularfire2/auth'
+import { FirebaseAuth } from '@firebase/auth-types';
 
 
 
-interface Item {
+class Item {
   location1: any;
   location2: any;
   model: string;
   quantity: number;
+  id :string;
+  public add_num : number;
+  public remove_num : number;
 }
 
 @IonicPage()
@@ -30,6 +35,15 @@ export class LocationManagePage {
   itemList: any = [];
   itemArray: any = [];
   loadedItemList: any = [];
+  addArray : any =[];
+  removeArray : any =[];
+  public count_temp : number =0;
+  public pre_quan : any =[];
+  public modify : boolean = false;
+
+  temp : number =0;
+  public setArray : any=[];
+
 
   itemList1: any = [];
   itemList2: any = [];
@@ -46,7 +60,6 @@ export class LocationManagePage {
   location2: string;
 
   location_origin: string;
-  count_temp : number ;
   backgroundImage="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
 
   constructor(public loadingCtrl: LoadingController,
@@ -54,7 +67,8 @@ export class LocationManagePage {
     public navCtrl: NavController,
     private afs: AngularFirestore,
     public navParams: NavParams,
-    public global: GlobalVars
+    public global: GlobalVars, 
+    public afAuth : AngularFireAuth
   ) {
     this.location1 = null;
     this.location2 = null;
@@ -75,7 +89,7 @@ export class LocationManagePage {
     });
     loadingPopup.present();
 
-    this.itemsCollection = afs.collection<Item>('item');
+    this.itemsCollection = afs.collection<Item>('item', ref=>ref.orderBy("model"));
     this.items = this.itemsCollection.valueChanges();
 
     this.items.subscribe((item) => {
@@ -85,18 +99,19 @@ export class LocationManagePage {
       loadingPopup.dismiss();
     })
 
+    setTimeout(() => {
+      this.count_temp = 0;
+      for (var i = 0; i < this.itemArray.length; i++) {
+        this.itemArray[i].add_num = 0;
+        this.itemArray[i].remove_num = 0;
+        this.setArray[i] = this.itemArray[i]
+        this.afs.collection('item').doc(this.itemArray[i].id).ref.get()
+          .then((Model) => {
+            this.pre_quan[this.count_temp++] = Model.get('quantity')
+          })
+      }
+    }, 50);
 
-      this.itemsCollection = afs.collection<Item>('item');
-      this.items = this.itemsCollection.valueChanges();
-
-      this.items.subscribe((item) => {
-        this.itemArray = item;
-        this.itemList = this.itemArray;
-        this.loadedItemList = this.itemArray;
-      })
-
-     
-  
     if (this.location_origin != null) {
       this.afs.collection('location_map').doc(this.location_origin).valueChanges()
         .subscribe((location_info: any) => {
@@ -107,7 +122,6 @@ export class LocationManagePage {
           this.goTo2();
         })
     }
-
     else if (this.payload != null) {
       this.afs.collection('location_map').doc(`${this.payload}`).valueChanges()
         .subscribe((location_info: any) => {
@@ -121,25 +135,17 @@ export class LocationManagePage {
   }
 
   remove(item) {
-    //console.log(item.quantity, item.id, item.model)
-    this.count_temp = item.quantity - 1;
-    Number(this.count_temp)
-    //console.log(typeof(this.count_temp))
-    //console.log(this.count_temp)
-    this.afs.collection('item').doc(item.id).update({
-      quantity: this.count_temp
-    })
-
+    this.modify=true;
+    event.stopPropagation();
+    item.quantity--;
+  
   }
   add(item) {
-    //console.log(item.quantity, item.id, item.model)
-    this.count_temp = Number(item.quantity) + Number(1);
-    //console.log(typeof(this.count_temp))
-    //console.log(this.count_temp)
-    this.afs.collection('item').doc(item.id).update({
-      quantity: this.count_temp
-    })
+    this.modify=true;
+    event.stopPropagation();
+    item.quantity++;
   }
+
 
   ionViewWillEnter() {
     // console.log('ionViewEnteredStockMangePage')
@@ -150,10 +156,10 @@ export class LocationManagePage {
   goTo1() {
 
     if (this.location2 == null) {
-      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1))
+      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1).orderBy("model"))
     } //location2 옵션 변경시 바뀌게 하는 조건
     else {
-      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1).where('location2', '==', this.location2))
+      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1).where('location2', '==', this.location2).orderBy("model"))
     }
 
     this.items = this.itemsCollection.valueChanges();
@@ -170,10 +176,10 @@ export class LocationManagePage {
 
   goTo2() {
     if (this.location1 == null) {
-      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location2', '==', this.location2))
+      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location2', '==', this.location2).orderBy("model"))
     } //location2 옵션 변경시 바뀌게 하는 조건
     else {
-      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1).where('location2', '==', this.location2))
+      this.itemsCollection = this.afs.collection<Item>('item', ref => ref.where('location1', '==', this.location1).where('location2', '==', this.location2).orderBy("model"))
     }
 
     this.items = this.itemsCollection.valueChanges();
@@ -187,9 +193,6 @@ export class LocationManagePage {
   }
 
   set(){
-    //console.log(this.count_add, this.count_remove)
-    //this.temp=this.itemArray.length;
-    //console.log(this.temp, "test")
     let confirm = this.alertCtrl.create({
       title: '현재 상태를 저장하시겠습니까?',
       message: '현재 상태를 저장하려면 Yes를 클릭하세요',
@@ -198,13 +201,14 @@ export class LocationManagePage {
           text: 'Yes',
           handler: () => {
             //저장 함수 실행
-            
+            this.fire_update();
           }
         },
         {
           text: 'Cancel',
           handler: () => {
-            //저장 취소 함수 실행
+            //page reload함수 
+            this.reload();
 
           }
         }
@@ -212,6 +216,84 @@ export class LocationManagePage {
     });
     confirm.present();
   }
+  
+  reload(){
+    this.navCtrl.setRoot(this.navCtrl.getActive().component)
+  }
+
+  fire_update() {
+    for (var i = 0; i < this.itemArray.length; i++) {
+
+      if (this.pre_quan[i] < this.itemArray[i].quantity) {
+        this.itemArray[i].add_num = this.itemArray[i].quantity - this.pre_quan[i];
+        console.log("added", this.itemArray[i].model, this.itemArray[i].add_num);
+
+        //log add
+        this.afs.collection('log').add({
+          changed_quantity: this.itemArray[i].add_num,
+          location1: this.itemArray[i].location1,
+          location2: this.itemArray[i].location2,
+          model: this.itemArray[i].model,
+          quantity: this.itemArray[i].quantity,
+          timestamp: new Date(),
+          type: "import"
+        })
+        //item update
+        this.afs.collection('item').doc(this.itemArray[i].id).update({
+          quantity: this.itemArray[i].quantity
+        })
+        //user stock_log
+        var timestamp_temp = new Date()
+    
+        this.afs.collection('users').doc(this.afAuth.auth.currentUser.uid).collection('Stock_Log').add({
+          timestamp: timestamp_temp,
+          changed_quantity: this.itemArray[i].add_num,
+          location1: this.itemArray[i].location1,
+          location2: this.itemArray[i].location2,
+          model: this.itemArray[i].model,
+          quantity: this.itemArray[i].quantity,
+          type: "import"
+        })
+        this.pre_quan[i] = this.itemArray[i].quantity
+      }
+      else if (this.pre_quan[i] > this.itemArray[i].quantity) {
+        this.itemArray[i].remove_num = this.pre_quan[i] - this.itemArray[i].remove_num;
+        console.log("removed", this.itemArray[i].model, this.itemArray[i].remove_num)
+
+        //log add
+        this.afs.collection('log').add({
+          changed_quantity: this.itemArray[i].remove_num,
+          location1: this.itemArray[i].location1,
+          location2: this.itemArray[i].location2,
+          model: this.itemArray[i].model,
+          quantity: this.itemArray[i].quantity,
+          timestamp: new Date(),
+          type: "export"
+        })
+        //item update
+        this.afs.collection('item').doc(this.itemArray[i].id).update({
+          quantity: this.itemArray[i].quantity
+        })
+        //user stock_log
+        var timestamp_temp = new Date()
+        this.afs.collection('users').doc(this.afAuth.auth.currentUser.uid).collection('Stock_Log').add({
+          timestamp: timestamp_temp,
+          changed_quantity: this.itemArray[i].remove_num,
+          location1: this.itemArray[i].location1,
+          location2: this.itemArray[i].location2,
+          model: this.itemArray[i].model,
+          quantity: this.itemArray[i].quantity,
+          type: "export"
+        })
+
+
+        this.pre_quan[i] = this.itemArray[i].quantity
+      }
+
+
+    }
+  }
+  
   
 
 
@@ -221,7 +303,7 @@ export class LocationManagePage {
       id: item.id,
       name: item.name,
       location1: item.location1,
-      location2: item.location2,
+      location2: item.location2, 
       quantity: item.quantity
     })
   }
