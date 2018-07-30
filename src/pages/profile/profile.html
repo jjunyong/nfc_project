@@ -197,11 +197,16 @@
                 <i class="fa fa-image"></i> Thumbnail Image</label>
               <input type="text" [(ngModel)]="thumbnail" id="thumbnail" name="thumnail_image">
 
-              <!-- <input type="file" accept="image/*" (change)="uploadFile($event)" id="fileInput" />
-              <label for="fileInput" icon-only ion-button clear>
-                <ion-icon color="dark" name="add"></ion-icon>
-                <ion-icon color="dark" name="images"></ion-icon>
-              </label> -->
+              <div margin-top *ngIf = "uploadPercent | async as pct">
+                  <div *ngIf = "pct < 100; else other">
+                  <progress [value]="pct" max="100"></progress>
+                  {{pct}}%
+                  </div>
+                  <ng-template #other>
+                    <p><font color="primary">Successfully uploaded!</font></p>
+                  </ng-template>
+                </div>
+
               <input class="desktop" type="file" accept="image" (change)="uploadFileDesktop($event)" id="fileInput" />
               <label class="desktop" for="fileInput" icon-only ion-button clear>
                 <ion-icon color="black" name="add"></ion-icon>

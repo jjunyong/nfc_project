@@ -1,3 +1,16 @@
+<style>
+  @media screen and (max-width: 600px) {
+   .desktop {
+     display: none;
+   }
+ }
+
+ @media screen and (min-width: 600px) {
+   .mobile {
+     display: none;
+   }
+ }
+ </style>
 
 <ion-header>
   <ion-navbar color="grey-blue">
@@ -8,22 +21,52 @@
 
 
 <ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
-    <ion-list>
-          <ion-item class="back">
-              <ion-label floating>제품 고유 번호</ion-label>
-              <ion-input type="text" [(ngModel)]="serialNum"></ion-input>
-            </ion-item>
-            <ion-item class="back">
-              <ion-label floating>모델</ion-label>
-              <ion-input type="text" [(ngModel)]="model"></ion-input>
-            </ion-item>
-            <ion-item class="back">
-              <ion-label floating>정비담당</ion-label>
-              <ion-input type="text" [(ngModel)]="repairman"></ion-input>
-            </ion-item>
-      </ion-list>
+  <ion-list>
+    <ion-item class="back">
+      <ion-label floating>제품 고유 번호</ion-label>
+      <ion-input type="text" [(ngModel)]="serialNum"></ion-input>
+    </ion-item>
+    <ion-item class="back">
+      <ion-label floating>모델</ion-label>
+      <ion-input type="text" [(ngModel)]="model"></ion-input>
+    </ion-item>
+    <ion-item class="back">
+      <ion-label floating>정비담당</ion-label>
+      <ion-input type="text" [(ngModel)]="repairman"></ion-input>
+    </ion-item>
+    <ion-item class="back">
+      <ion-label floating>thumbnail</ion-label>
+      <ion-input type="text" [(ngModel)]="thumbnail"></ion-input>
+    </ion-item>
 
-      <button color="grey-blue" ion-button (click)="update()">확인</button>
+<ion-item class="back">
+  <div margin-top *ngIf = "uploadPercent | async as pct">
+    <div *ngIf = "pct < 100; else other">
+    <progress [value]="pct" max="100"></progress>
+    {{pct}}%
+    </div>
+    <ng-template #other>
+      <p><font color="white">Successfully uploaded!</font></p>
+    </ng-template>
+  </div>
+  <!-- <div *ngIf="(snapshot | async) as snap">
+    {{snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
+  </div> -->
+  
+  <input class="desktop" type="file" accept="image" (change)="uploadFileDesktop($event)" id="fileInput"/>
+  <label class="desktop" for="fileInput" icon-only ion-button clear>
+    <ion-icon color="white" name="add"></ion-icon>
+    <ion-icon color="white" name="images"></ion-icon>
+  </label>
+
+  <button class="mobile" id="fileInput2" ion-button (click)="uploadFileMobile()"></button>
+  <label class="mobile" for="fileInput2" icon-only ion-button clear>
+    <ion-icon color="white" name="add"></ion-icon>
+    <ion-icon color="white" name="images"></ion-icon>
+  </label>
+</ion-item>
+</ion-list>
+
+  <button color="grey-blue" ion-button (click)="update()">확인</button>
 
 </ion-content>
-

@@ -95,14 +95,17 @@
       <ion-icon color="white" name="images"></ion-icon>
     </label>
 
-
+    <div margin-top *ngIf = "uploadPercent">
+        <div *ngIf = "percent < 100">
+        <progress [value]="percent" max="100"></progress>
+        {{percent}}%
+        </div>
+      </div>
   </ion-card>
 
-
-  <div>{{ uploadPercent | async }}</div>
   <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
 
-  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
+  <!-- <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
     <ion-card-header padding color="vague-blue">
       <strong>Description</strong>
     </ion-card-header>
@@ -110,5 +113,5 @@
     <ion-card-content>
       <p>detail information of corresponding item...</p>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </ion-content>

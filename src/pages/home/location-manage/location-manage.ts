@@ -69,8 +69,6 @@ export class LocationManagePage {
     public global: GlobalVars, 
     public afAuth : AngularFireAuth
   ) {
-    this.location1 = null;
-    this.location2 = null;
 
     this.location_origin = null; //초기화
     this.payload = null;
@@ -79,8 +77,9 @@ export class LocationManagePage {
     this.location2 = null;
     this.payload = this.navParams.get('payload')
     this.location_origin = this.navParams.get("location_origin")
-
+    
     console.log(this.location_origin, "from QR Page")
+    // alert(this.location_origin);
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
       content: '',
@@ -112,12 +111,12 @@ export class LocationManagePage {
     }, 50);
 
     if (this.location_origin != null) {
-      this.afs.collection('location_map').doc(this.location_origin).valueChanges()
+      this.afs.collection('location_map').doc(`${this.location_origin}`).valueChanges()
         .subscribe((location_info: any) => {
           this.location1 = location_info.location1;
           this.location2 = location_info.location2;
-          console.log(this.location1);
-          console.log(this.location2);
+          // alert(this.location1);
+          // alert(this.location2);
           this.goTo2();
         })
     }

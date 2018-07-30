@@ -83,12 +83,13 @@
     <allow-navigation href="http://192.168.0.31:8100" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="phonegap-nfc" spec="^0.7.3" />
-    <engine name="android" spec="7.0.0" />
-    <engine name="ios" spec="~4.5.4" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^8.0.0" />
     <plugin name="cordova-plugin-filechooser" spec="^1.0.1" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <allow-navigation href="http://192.168.0.101:8100" />
+    <allow-navigation href="http://192.168.0.16:8100" />
+    <engine name="android" spec="^7.1.1" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>

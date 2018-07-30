@@ -50,6 +50,7 @@ export class MyApp {
     })
 
     this.global.currentMessage.subscribe(message => this.show = message)
+    
 
     // this.auth.user.subscribe((auth) => {
     //   console.log(auth.email)
@@ -74,7 +75,7 @@ export class MyApp {
       // { title: '로그인', component: "MainPage" },
       { title: '재고관리', component: 'HomePage' },
       { title: '정비관리', component: "RepairPage" },
-      // { title: 'QR-Code', component: "QrcodePage" },
+      { title: 'QR-Code', component: "QrcodePage" },
       { title: 'My profile', component: "ProfilePage" }
       // {title:'app1', component:"Category1Page"},
       // {title:'NFC', component:"NfcPage"},

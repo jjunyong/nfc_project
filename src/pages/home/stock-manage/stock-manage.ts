@@ -7,7 +7,6 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { FireService } from '../../../../src/providers/FireService'
 import { GlobalVars } from '../../../providers/global';
-import { count } from 'rxjs/operator/count';
 import { AngularFireAuth } from 'angularfire2/auth'
 class Item {
   location1: any;
@@ -57,14 +56,7 @@ export class StockManagePage {
     public global: GlobalVars,
     public afAuth: AngularFireAuth
   ) {
-    this.global.changeMessage(true);
-
-    let loadingPopup = this.loadingCtrl.create({
-      spinner: 'crescent', // icon style //
-      content: '',
-    });
-    loadingPopup.present();
-
+  
     this.itemsCollection = afs.collection<Item>('item');
     this.items = this.itemsCollection.valueChanges();
     //this.items=this.afs.collection<Item>('item').ref.orderBy("model");
@@ -74,7 +66,6 @@ export class StockManagePage {
       this.itemArray = item;
       this.itemList = this.itemArray;
       this.loadedItemList = this.itemArray;
-      loadingPopup.dismiss()
     })
     setTimeout(() => {
       this.count_temp = 0;
@@ -118,7 +109,6 @@ export class StockManagePage {
   }
 
   ionViewWillEnter() {
-    console.log('ionViewEnteredStockMangePage')
     this.global.changeMessage(false);
   }
 

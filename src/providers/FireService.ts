@@ -1,135 +1,133 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { AngularFirestore } from 'angularfire2/firestore'
-import {AngularFireAuth} from 'angularfire2/auth'
+import { AngularFireAuth } from 'angularfire2/auth'
 import { timestamp } from 'rxjs/operator/timestamp';
 
 
 @Injectable()
-export class FireService{
-  
-  id_temp : string;
-  constructor(public afs : AngularFirestore, public toast : ToastController, public afAuth : AngularFireAuth){
+export class FireService {
+
+  id_temp: string;
+  constructor(public afs: AngularFirestore, public toast: ToastController, public afAuth: AngularFireAuth) {
     //this.id_temp=this.afAuth.auth.currentUser.uid;
-    
+
   }
 
 
-finAdd(RepairItem){
+  finAdd(RepairItem) {
     this.afs.collection('RepairItem').doc(`${RepairItem.id}`).update({
-      finDate : RepairItem.finDate,
-      isToggled : RepairItem.isToggled
+      finDate: RepairItem.finDate,
+      isToggled: RepairItem.isToggled
 
-  })
+    })
 
   }
-
- 
-
-  fire_update(itemList){
-    // this.afs.collection('item').add({
-    //   item: itemList
-    // })
-
-    //console.log(itemList.quantity);
-  }
-
-  LogAdd(RepairLog){
+  
+  LogAdd(RepairLog) {
     console.log(RepairLog.id)
     this.afs.collection('RepairItem').doc(`${RepairLog.id}`).collection('repair').add({
-        title : RepairLog.title,
-        writer: RepairLog.writer,
-        description: RepairLog.description,
-        timestamp: new Date()
+      title: RepairLog.title,
+      writer: RepairLog.writer,
+      description: RepairLog.description,
+      timestamp: new Date()
     })
 
     let toast = this.toast.create({
-            message: "succesfully added",
-            duration: 2000,
-            position: "bottom"
+      message: "succesfully added",
+      duration: 2000,
+      position: "bottom"
     });
     toast.present();
   }
 
 
   //repair log 남기기
-  Add_User_Log(RepairLog){
+  Add_User_Log(RepairLog) {
+
     this.id_temp = this.afAuth.auth.currentUser.uid
-    var timestamp_temp=new Date()
+    var timestamp_temp = new Date()
+
     //console.log('testing', this.id_temp, model_temp, serialNum_temp, timestamp)
     this.afs.collection('users').doc(this.id_temp).collection('Repair_Log').add({
-      timestamp : timestamp_temp,
-      title : RepairLog.title, 
-      writer : RepairLog.writer, 
-      description : RepairLog.description, 
-      model : RepairLog.model,
-      serialNum:RepairLog.serialNum 
+      timestamp: timestamp_temp,
+      title: RepairLog.title,
+      writer: RepairLog.writer,
+      description: RepairLog.description,
+      model: RepairLog.model,
+      serialNum: RepairLog.serialNum
+
+    })
+
+
+
+  }
+
+  RepairAdd(RepairItem) {
+    this.afs.collection('RepairItem').doc(`${RepairItem.id}`).set({
+      id: RepairItem.id,
+      model: RepairItem.model,
+      repairman: RepairItem.repairman,
+      serialNum: RepairItem.serialNum,
+      startDate: new Date(),
+      thumbnail: RepairItem.thumbnail,
+      isToggled: false
+    }).then(() => {
+
+      let toast = this.toast.create({
+        message: "succesfully added",
+        duration: 2000,
+        position: "bottom"
+      });
+      toast.present();
+
     })
   }
 
-  RepairAdd(RepairItem){
-    this.afs.collection('RepairItem').doc(`${RepairItem.id}`).set({
-        id : RepairItem.id,
-        model : RepairItem.model,
-        repairman : RepairItem.repairman,
-        serialNum : RepairItem.serialNum,
-        startDate : new Date(),
-        Image: "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/login.jpg?alt=media&token=86151782-4372-4ec3-84e7-c2ef76b4a663",
-        isToggled: false
-        })
-
-    let toast = this.toast.create({
-            message: "succesfully added",
-            duration: 2000,
-            position: "bottom"
-    });
-    toast.present();
-  }
-
-  itemAdd(item){
+  itemAdd(item) {
 
     const doc_id = this.afs.createId();
 
     this.afs.collection('item').doc(doc_id).set({
-        model : item.model,
-        quantity : item.quantity,
-        location1 : item.location1,
-        location2 : item.location2, 
-        id : doc_id
+      model: item.model,
+      quantity: item.quantity,
+      location1: item.location1,
+      location2: item.location2,
+      id: doc_id
     })
 
     this.afs.collection("log").add({
-        model : item.model,
-        type : "add",
-        quantity : item.quantity,
-        location1 : item.location1, 
-        location2 : item.location2,
-        timestamp : new Date()
-      })
-    
+      model: item.model,
+      type: "add",
+      quantity: item.quantity,
+      location1: item.location1,
+      location2: item.location2,
+      timestamp: new Date()
+    })
+
     let toast = this.toast.create({
-            message: "succesfully added",
-            duration: 2000,
-            position: "bottom"
+      message: "succesfully added",
+      duration: 2000,
+      position: "bottom"
     });
     toast.present();
   }
 
-  modifyItems(new_item){
+  modifyItems(new_item) {
     this.afs.collection('item').doc(new_item.id).update({
-      model : new_item.model,
-      location1 : new_item.location1,
-      location2 : new_item.location2,
-      quantity : new_item.quantity
+      model: new_item.model,
+      location1: new_item.location1,
+      location2: new_item.location2,
+      quantity: new_item.quantity
     })
 
   }
 
-  getItems(){
+  getItems() {
     return this.afs.collection('item').valueChanges();
   }
 
-  getLogs(){
+  getLogs() {
     return this.afs.collection('repair_log').valueChanges();
   }
 

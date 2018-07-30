@@ -30,8 +30,6 @@ export class MainPage {
     public auth: AuthService, public global : GlobalVars) {
 
 
-      this.global.changeMessage(true);
-
     
       
       this.afAuth.authState.subscribe((user)=>{
@@ -62,8 +60,10 @@ export class MainPage {
     //       })
     //     }
     //   })
-
     // });
+  }
+  ionViewWillEnter(){
+    this.global.changeMessage(true);
   }
 
   openLoginPage() {

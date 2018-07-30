@@ -42,6 +42,7 @@ export class ItemDetailPage {
 
   downloadURL
   uploadPercent
+  percent
   imgGallery = [];
 
   constructor(private camera: Camera, public navCtrl: NavController, public navParams: NavParams,
@@ -231,7 +232,18 @@ export class ItemDetailPage {
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
 
-    this.uploadPercent = task.percentageChanges();
+    this.uploadPercent = task.percentageChanges()
+      .subscribe((percent)=>{
+        this.percent = percent 
+        if(percent >= 100){
+          let toast = this.toast.create({
+            message: "Succesfully uploaded!",
+            duration: 1000,
+            position: "bottom"
+          });
+          toast.present();
+        }
+      });
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
       finalize(() => this.downloadURL = fileRef.getDownloadURL())
@@ -251,10 +263,9 @@ export class ItemDetailPage {
 
   async uploadFileMobile() {
     try {
+
       const options: CameraOptions = {
-        quality: 50,
-        targetHeight: 600,
-        targetWidth: 600,
+        quality: 70,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE
@@ -263,18 +274,16 @@ export class ItemDetailPage {
 
       const image = `data:image/jpeg;base64,${result}`;
 
-      const pictures = this.storage.ref(`item_images/${this.model}`)
-      pictures.putString(image, 'data_url');
+      const task = this.storage.ref(`item_images/${this.model}`).putString(image, 'data_url');
+      this.uploadPercent = task.percentageChanges();
 
-      pictures.getDownloadURL()
-        .subscribe((url) => {
-          const doc_id = this.afs.createId();
+      task.downloadURL().subscribe((url)=>{
+        const doc_id = this.afs.createId();
           this.afs.collection('item').doc(this.id).collection('images').doc(doc_id).set({
             image_url: url,
             id: doc_id
           })
-
-        })
+      })
     }
     catch (e) {
       console.error(e);

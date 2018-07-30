@@ -54,6 +54,7 @@ export class ChangeLogPage {
     public fireService : FireService, private modalCtrl : ModalController,
     public global : GlobalVars) {
       
+    
     this.itemsCollection = this.afs.collection<Log>('log', ref=>ref.orderBy("timestamp", "desc"));
     this.items= this.itemsCollection.valueChanges();
     this.items.subscribe((item)=>{
@@ -107,9 +108,9 @@ export class ChangeLogPage {
         }
 
   }  
-ionViewDidLoad() {
-    console.log('ionViewDidLoad ChangeLogPage');
-  }
+ionViewWillEnter() {
+  this.global.changeMessage(false);
+}
 
   openDetail(item){
     this.navCtrl.push('ItemDetailPage',{

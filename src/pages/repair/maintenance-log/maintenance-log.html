@@ -1,39 +1,46 @@
 <ion-header>
-    <ion-navbar  color="grey-blue" >
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Maintenance Log</ion-title>
-    </ion-navbar>
-    <ion-toolbar color="grey-blue">
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
-    </ion-toolbar>
-  </ion-header>
+  <ion-navbar color="grey-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Maintenance Log</ion-title>
+  </ion-navbar>
+  <ion-toolbar color="grey-blue">
+    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
 
 
 <ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   <ion-row>
-    <ion-col col-12 col-md-4 col-xl-3  *ngFor="let item of itemList" >
-          <ion-card class="card" (click)="openDetail(item)">
-            <img src="{{item.thumbnail}}" height="200">
-            <ion-card-content>
-             
-              <ion-card-title color="white">
-                {{item.model}} 
-                <button style="float:right" ion-button icon-start clear small (click)="delete(item)" color="white">
-                    <ion-icon name="trash"></ion-icon>
-                    <div>DELETE</div>
-                </button>
-                  </ion-card-title>
-               <h5><font color="white">설비번호: {{item.serialNum}}</font></h5>
-               <h6><font color="white">정비담당: {{item.repairman}}</font></h6>
-               
-            </ion-card-content>
-          </ion-card>
+    <ion-col col-12 col-md-4 col-xl-3 *ngFor="let item of itemList">
+      <ion-card class="card" (click)="openDetail(item)">
+        <img [src]="item.thumbnail" height="200">
+        <ion-card-content>
+
+          <ion-card-title color="white">
+            {{item.model}}
+
+          </ion-card-title>
+          <button style="float:right" ion-button icon-start clear small (click)="delete(item)" color="white">
+            <ion-icon name="trash"></ion-icon>
+            <div>DELETE</div>
+          </button>
+          <h5>
+            <font color="white">설비번호: {{item.serialNum}}</font>
+          </h5>
+          <h6>
+            <font color="white">정비담당: {{item.repairman}}</font>
+          </h6>
+
+        </ion-card-content>
+      </ion-card>
     </ion-col>
   </ion-row>
 
   <ion-fab right bottom>
-    <button color="grey-blue" (click)="manage()" ion-fab><ion-icon name="add"></ion-icon></button>
-</ion-fab>
+    <button color="grey-blue" (click)="manage()" ion-fab>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

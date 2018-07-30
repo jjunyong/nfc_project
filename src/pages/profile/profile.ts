@@ -76,9 +76,7 @@ export class ProfilePage {
   async uploadFileMobile() {
     try {
       const options: CameraOptions = {
-        quality: 50,
-        targetHeight: 600,
-        targetWidth: 600,
+        quality: 70,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE
@@ -87,15 +85,15 @@ export class ProfilePage {
 
       const image = `data:image/jpeg;base64,${result}`;
 
-      const pictures = this.storage.ref(`profiles/${this.uid}`)
-      pictures.putString(image, 'data_url');
+      const task = this.storage.ref(`profiles/${this.name}`).putString(image, 'data_url');
+      this.uploadPercent = task.percentageChanges();
 
-      pictures.getDownloadURL()
-        .subscribe((url) => {
-          this.thumbnail = url;
-        })
+      task.downloadURL().subscribe((url)=>{
+        this.thumbnail = url;
+      })
+
     }
-    catch (e) {
+    catch (e){
       console.error(e);
     }
   }
