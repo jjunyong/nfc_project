@@ -2,7 +2,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Record of Items I Managed
+      내가 정비한 아이템
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -11,7 +11,7 @@
     <ion-row>
         <ion-col col-12 col-md-4 col-xl-3  *ngFor="let item of itemList" >
             <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}" (click)="openDetail(item)">            
-                <img src="{{item.Image}}" height="200">
+                <img src="{{item.thumbnail}}" height="200">
                 <ion-card-content>
                   <ion-card-title color="white">
                     {{item.model}}

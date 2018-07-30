@@ -27,6 +27,8 @@ interface userStockLog {
 })
 export class UserLogPage {
 
+  viewType: string = "Repair";
+
   private usersRepairCollection: AngularFirestoreCollection<userRepairLog>;
   private usersStockCollection: AngularFirestoreCollection<userStockLog>;
 

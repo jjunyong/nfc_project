@@ -37,14 +37,6 @@ export class OnMaintenancePage {
   public global : GlobalVars,
 public afAuth: AngularFireAuth) {
 
-    
-    let loadingPopup = this.loadingCtrl.create({
-      spinner: 'crescent', // icon style //
-      content: '',
-      duration: 1000
-    });
-    loadingPopup.present();
-
     this.itemsCollection = afs.collection('RepairItem')
     this.items= this.itemsCollection.valueChanges()
 
@@ -60,7 +52,6 @@ public afAuth: AngularFireAuth) {
         })
 
         this.loadedItemList = this.itemArray;
-        loadingPopup.dismiss();
       });
 
 

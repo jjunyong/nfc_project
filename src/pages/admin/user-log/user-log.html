@@ -20,9 +20,21 @@
 
 
 <ion-header>
-  <ion-navbar color="dark">
-    <ion-title text-center>Timeline</ion-title>
+  <ion-navbar color="primary">
+    <ion-title text-center>User Log</ion-title>
   </ion-navbar>
+  <div class="mobile">
+    <ion-toolbar no-border-top color="grey-blue">
+      <ion-segment [(ngModel)]="viewType" color="light">
+        <ion-segment-button value="Repair">
+          재고 관리 이력
+        </ion-segment-button>
+        <ion-segment-button value="Stock">
+          입출고 관리 이력
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </div>
 </ion-header>
 
 
@@ -31,6 +43,7 @@
 
     <div id="repair">
       <div class="container">
+          <div style="color:white"><h3>정비 이력</h3>
         <ul>
           <li *ngFor="let repairlog of repairlogList">
             <span></span>
@@ -44,9 +57,53 @@
           </li>
         </ul>
       </div>
+      </div>
     </div>
 
     <div id="stock">
+      <div class="container">
+        <div style="color:white;"><h3>재고 관리 이력</h3>
+          <ul>
+            <li *ngFor="let stocklog of stocklogList">
+              <span></span>
+              <div>
+                <div class="title">{{stocklog.model}}</div>
+                <div class="info">{{stocklog.type}}</div>
+                <div class="type">{{stocklog.changed_quantity}}</div>
+              </div>
+              <span class="number">
+                <span>{{stocklog.timestamp | date}}</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="mobile">
+    <div *ngIf="viewType==='Repair'">
+    
+        <div class="container">
+          <ul>
+            <li *ngFor="let repairlog of repairlogList">
+              <span></span>
+              <div>
+                <div class="title">{{repairlog.title}}</div>
+                <div class="info">{{repairlog.description}}</div>
+              </div>
+              <span class="number">
+                <span>{{repairlog.timestamp | date}}</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+    </div>
+
+    <div *ngIf="viewType==='Stock'">
       <div class="container">
         <ul>
           <li *ngFor="let stocklog of stocklogList">
@@ -63,26 +120,7 @@
         </ul>
       </div>
     </div>
-
   </div>
 
 
-
-  <div class="mobile">
-    <div class="container">
-      <ul>
-        <li *ngFor="let stocklog of stocklogList">
-          <span></span>
-          <div>
-            <div class="title">{{stocklog.model}}</div>
-            <div class="info">{{stocklog.type}}</div>
-            <div class="type">{{stocklog.changed_quantity}}</div>
-          </div>
-          <span class="number">
-            <span>{{stocklog.timestamp | date}}</span>
-          </span>
-        </li>
-      </ul>
-    </div>
-  </div>
 </ion-content>
