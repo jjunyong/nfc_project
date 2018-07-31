@@ -56,7 +56,8 @@ export class FireService {
       writer: RepairLog.writer,
       description: RepairLog.description,
       model: RepairLog.model,
-      serialNum: RepairLog.serialNum
+      serialNum: RepairLog.serialNum,
+      id: RepairLog.id
 
     })
 
