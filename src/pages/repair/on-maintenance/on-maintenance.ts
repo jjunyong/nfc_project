@@ -13,6 +13,7 @@ interface userRepairLog {
   writer: string,
   description: string;
   timestamp: Date;
+  id;
 }
 
 interface RepairItem {
@@ -49,6 +50,9 @@ export class OnMaintenancePage {
   items: any = [];
 
 
+  idList = new Set();
+  uniqueIdList: any = []
+
   id: string;
   backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
 
@@ -60,23 +64,43 @@ export class OnMaintenancePage {
 
     this.usersRepairCollection = afs.collection('users').doc(this.id).collection<userRepairLog>('Repair_Log')
     this.repairlogs = this.usersRepairCollection.valueChanges()
+      .subscribe((docs)=>{
+
+        this.repairlogList = docs;
+        
+
+        for(var doc of docs){
+          this.idList.add(doc.id);
+        }
+
+        let list = Array.from(this.idList)
+        console.log(list);
+
+        for(var id of list){
+          this.afs.collection('RepairItem').doc(id).valueChanges()
+            .subscribe((doc)=>{
+              this.itemList.push(doc);
+            })
+        }
+      })
+
+    console.log(this.idList);
 
 
-    this.repairlogs.subscribe((userRepairLog) => {
-      this.repairlogArray = userRepairLog;
-      this.repairlogList = this.repairlogArray;
-    });
+  
+    // this.itemsCollection = afs.collection<RepairItem>('RepairItem');
+    // this.items = this.itemsCollection.valueChanges();
 
-
-    this.itemsCollection = afs.collection<RepairItem>('RepairItem');
-    this.items = this.itemsCollection.valueChanges();
-
-    this.items.subscribe((RepairItem) => {
-      this.itemArray = RepairItem;
-      this.itemList = this.itemArray;
-      this.loadedItemList = this.itemArray;
-    });
+    // this.items.subscribe((RepairItem) => {
+    //   this.itemArray = RepairItem;
+    //   this.itemList = this.itemArray;
+    //   this.loadedItemList = this.itemArray;
+    // });
   }
+
+
+
+
 
   openDetail(item){
     this.navCtrl.push('RepairitemdetailPage',{

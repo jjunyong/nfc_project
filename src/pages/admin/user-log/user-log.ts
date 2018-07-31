@@ -33,6 +33,9 @@ export class UserLogPage {
   private usersStockCollection: AngularFirestoreCollection<userStockLog>;
 
 
+  stockdata: boolean;
+  repairdata: boolean;
+
   repairlogList: any = [];
   repairlogArray: any = [];
   repairlogs: any = [];
@@ -48,24 +51,32 @@ export class UserLogPage {
 
 
     this.id = this.navParams.get('uid');
-
+    this.stockdata = true;
+    this.repairdata = true;
 
     this.usersRepairCollection = afs.collection('users').doc(`${this.id}`).collection<userRepairLog>('Repair_Log')
     this.repairlogs = this.usersRepairCollection.valueChanges()
 
 
     this.repairlogs.subscribe((userRepairLog) => {
-      this.repairlogArray = userRepairLog;
+      if(userRepairLog.length==0){
+        this.repairdata = false;
+      }
+       this.repairlogArray = userRepairLog;
       this.repairlogList = this.repairlogArray;
     });
 
-
+ 
+ 
 
     this.usersStockCollection = afs.collection('users').doc(`${this.id}`).collection<userStockLog>('Stock_Log')
     this.stocklogs = this.usersStockCollection.valueChanges()
 
 
     this.stocklogs.subscribe((userStockLog) => {
+      if(userStockLog.length==0){
+        this.stockdata = false;
+      }
       this.stocklogArray = userStockLog;
       this.stocklogList = this.stocklogArray;
     });
