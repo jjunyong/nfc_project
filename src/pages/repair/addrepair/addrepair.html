@@ -49,9 +49,6 @@
       <p><font color="white">Successfully uploaded!</font></p>
     </ng-template>
   </div>
-  <!-- <div *ngIf="(snapshot | async) as snap">
-    {{snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
-  </div> -->
   
   <input class="desktop" type="file" accept="image" (change)="uploadFileDesktop($event)" id="fileInput"/>
   <label class="desktop" for="fileInput" icon-only ion-button clear>
@@ -67,6 +64,6 @@
 </ion-item>
 </ion-list>
 
-  <button color="grey-blue" ion-button (click)="update()">확인</button>
+  <button color="white" outline ion-button (click)="update()">확인</button>
 
 </ion-content>

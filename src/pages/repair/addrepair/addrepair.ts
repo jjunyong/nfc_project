@@ -43,6 +43,11 @@ export class AddrepairPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddrepairPage');
   }
+  
+  
+
+
+
 
   uploadFileDesktop(event) {
     const file = event.target.files[0];

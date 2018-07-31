@@ -1,51 +1,16 @@
-<!--
-  Generated template for the AddlogPage page.
+<style>
+  @media screen and (max-width: 600px) {
+    .desktop {
+      display: none;
+    }
+  }
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<!--
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Addlog</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-        <ion-list>
-            <ion-item>
-                <ion-label color="primary" fixed>제목</ion-label>
-                <ion-input type="text" [(ngModel)]="title"></ion-input>
-            </ion-item>
-    
-              <ion-item>
-                  <ion-label color="primary" fixed>작성자</ion-label>
-                  <ion-input type="text" [(ngModel)]="writer"></ion-input>
-              </ion-item>
-
-              <ion-item>
-                  <ion-label color="primary" fixed>정비 내역</ion-label>
-                  <ion-input type="text" [(ngModel)]="description"></ion-input>
-              </ion-item>
-    
-    
-              <ion-grid>
-                <ion-row>
-                  <ion-col>
-                    <button ion-button full color='secondary' (click)="cancel()">취소</button>
-                  </ion-col>
-                  <ion-col>
-                  <button ion-button full color='primary' (click)="save()">저장</button>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-        </ion-list>
- 
-</ion-content>-->
-
+  @media screen and (min-width: 600px) {
+    .mobile {
+      display: none;
+    }
+  }
+</style>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -57,30 +22,65 @@
 
 </ion-header>
 
-<ion-content padding  [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
-<div class="container">
-      <div  class="form-group">
-        <label class="col-md-2 control-label"><font color="white">Title</font></label>
-        <div class="col-md-10">
-          <input margin-top margin-bottom class="form-control" type="text" [(ngModel)]="title" placeholder="Enter the title">
-        </div>
+<ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+  <div class="container">
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        <font color="white">Title</font>
+      </label>
+      <div class="col-md-10">
+        <input margin-top margin-bottom class="form-control" type="text" [(ngModel)]="title" placeholder="Enter the title">
       </div>
-     <div class="form-group">
-        <label class="col-md-2 control-label"><font color="white">작성자</font></label>
-        <div class="col-md-10">
-          <input margin-top margin-bottom class="form-control" type="text" [(ngModel)]="writer" placeholder="Enter your name.">
-        </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        <font color="white">작성자</font>
+      </label>
+      <div class="col-md-10">
+        <input margin-top margin-bottom class="form-control" type="text" [(ngModel)]="writer" placeholder="Enter your name.">
       </div>
-      <div class="form-group">
-        <label class="col-md-2 control-label"><font color="white">정비 내용</font></label>
-        <div class="col-md-10">
-          <textarea margin-top margin-bottom class="form-control"  [(ngModel)]="description" rows="10" placeholder="Enter the content"></textarea>
-        </div>
+    </div>
+   
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        <font color="white">사진 업로드</font>
+      </label>
+      <div class="col-md-10">
+        <input class="desktop" type="file" accept="image" (change)="uploadFileDesktop($event)" id="fileInput" />
+        <label class="desktop" for="fileInput" icon-only ion-button clear>
+          <ion-icon color="white" name="add"></ion-icon>
+          <ion-icon color="white" name="images"></ion-icon>
+        </label>
+
+        <button class="mobile" id="fileInput2" ion-button (click)="uploadFileMobile()"></button>
+        <label class="mobile" for="fileInput2" icon-only ion-button clear>
+          <ion-icon color="white" name="add"></ion-icon>
+          <ion-icon color="white" name="images"></ion-icon>
+        </label>
       </div>
-      <div class="form-group">
-        <div class="col-md-offset-2 col-md-10" text-left>
-          <button ion-button type="button" mode="ios" outline (click)="save()" color="white">Save</button>
+    </div>
+    <div margin-top *ngIf = "uploadPercent | async as pct">
+        <div *ngIf = "pct < 100; else other">
+        <progress [value]="pct" max="100"></progress>
+        {{pct}}%
         </div>
+        <ng-template #other>
+          <p><font color="white">Successfully uploaded!</font></p>
+        </ng-template>
       </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        <font color="white">정비 내용</font>
+      </label>
+      <div class="col-md-10">
+        <textarea margin-top margin-bottom class="form-control" [(ngModel)]="description" rows="10" placeholder="Enter the content"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-offset-2 col-md-10" text-left>
+        <button ion-button type="button" mode="ios" outline (click)="save()" color="white">Save</button>
+      </div>
+    </div>
   </div>
 </ion-content>

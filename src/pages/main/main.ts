@@ -41,7 +41,7 @@ export class MainPage {
         }
       })
 
-    // this.nfc.addMimeTypeListener('jjun/read', () => {
+    // this.nfc.addMimeTypeListener('palm/nfc', () => {
     //   console.log('nfc attached')
     // }, (err) => {
     //   console.log('error attaching ndef listener', err);

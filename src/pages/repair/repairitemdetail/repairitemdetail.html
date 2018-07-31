@@ -17,12 +17,7 @@
     </p>
   </div>
 
-  <!--***********  Description ***********-->
-  <!--*********** Contact  ***********-->
   <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
-    <!-- <ion-card-header padding>
-
-    </ion-card-header> -->
 
     <ion-card-content no-padding>
 
@@ -30,40 +25,9 @@
         <ion-icon name="person" item-left color="white"></ion-icon>
         <font color="white">정비담당 : {{repairman}}</font>
       </ion-item>
-
-      <ion-item class="item1" *ngIf="startDate">
-        <ion-label color="white">정비 종료</ion-label>
-        <ion-toggle (ionChange)="repairfin()" checked="{{isToggled}}" [(ngModel)]="isToggled">
-        </ion-toggle>
-      </ion-item>
-      <ion-item class="item2">
-        <ion-label color="white">정비 시작일: {{startDate | date}}</ion-label>
-        <ion-datetime color="white" [(ngModel)]="startDate"></ion-datetime>
-      </ion-item>
-      <ion-item class="item3" *ngIf="isToggled">
-        <ion-label color="white">정비 종료일: {{finDate | date}} </ion-label>
-        <ion-datetime [(ngModel)]="finDate"></ion-datetime>
-      </ion-item>
     </ion-card-content>
   </ion-card>
 
-  <ion-card [ngStyle]="{'background-image': 'url(' + cardImage +')'}">
-    <ion-card-header color="vague-blue">
-      Images
-    </ion-card-header>
-    <ion-grid>
-      <ion-row wrap color="dark">
-        <ion-col (click)="openFullImage()" tappable col-4 col-md-2 *ngFor="let image of imgGallery, let i = index">
-          <img class="expanded-image" [src]="image.image_url" />
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <input type="file" accept="image/*" (change)="uploadFile($event)" id="fileInput" />
-    <label for="fileInput" icon-only ion-button clear>
-      <ion-icon color="white" name="add"></ion-icon>
-      <ion-icon color="white" name="images"></ion-icon>
-    </label>
-  </ion-card>
 
   <ion-card-content>
 
@@ -86,29 +50,27 @@
               <p>
                 <font color="white">{{item.timestamp}}</font>
               </p>
+              <img *ngIf="item.image" [src]="item.image" height="80">
             </div>
           </li>
+          <ion-fab margin-bottom right>
+            <button color="grey-blue" (click)="addlog()" ion-fab>
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-fab>
         </ul>
-        <ion-col>
-          <div *ngIf="close;then content else other_content"></div>
-          <ng-template #content>
-            <button ion-button icon-center clear small>
-              <ion-icon name="arrow-down" (click)="more()">더보기</ion-icon>
-            </button>
-          </ng-template>
-          <ng-template #other_content>
-            <button ion-button icon-center clear small>
-              <ion-icon name="arrow-up" (click)="closed()">접기</ion-icon>
-            </button>
-          </ng-template>
-        </ion-col>
+
       </ion-item-group>
     </ion-list>
 
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles" loadingText="Loading more data...">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
   </ion-card-content>
-  <ion-fab right bottom>
+  <!-- <ion-fab right bottom>
     <button color="grey-blue" (click)="addlog()" ion-fab>
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>

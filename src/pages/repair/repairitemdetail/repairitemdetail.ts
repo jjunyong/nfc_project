@@ -5,6 +5,7 @@ import { RepairitemdetailPageModule } from './repairitemdetail.module';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import {AngularFireAuth} from 'angularfire2/auth'
+import firebase from 'firebase';
 
 class RepairItem {
   finDate: Date;
@@ -35,7 +36,6 @@ export class RepairitemdetailPage {
 
   itemList: any = [];
   itemArray: any = [];
-  loadedItemList: any = [];
   items: any = [];
 
   showToolbar: boolean = false;
@@ -54,7 +54,11 @@ export class RepairitemdetailPage {
   close: boolean;
 
   backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
-  cardImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%852.png?alt=media&token=78826653-cbd4-442d-9607-0b03983167b5"
+
+  item_length: number;
+  lastVisible: any;
+  db = firebase.firestore();
+  length_cnt: number = 0;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toast: ToastController,
@@ -69,29 +73,22 @@ export class RepairitemdetailPage {
       this.finDate = this.navParams.get('finDate');
       this.startDate = this.navParams.get('startDate')
 
-    
+      this.loadItems();
+      this.afs.collection('RepairItem').doc(`${this.id}`).collection('repair').valueChanges().subscribe((snap)=>{
+        this.item_length = snap.length;
+        console.log(this.item_length);
+      })
 
-      let loadingPopup = this.loadingCtrl.create({
-        spinner: 'crescent', // icon style //
-        content: '',
-      });
-      loadingPopup.present();
-  
-
-      this.itemsCollection = afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref=>ref.orderBy('timestamp','desc').limit(2))
-      this.items= this.itemsCollection.valueChanges()
+      // this.itemsCollection = afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref=>ref.orderBy('timestamp','desc').limit(2))
+    //   this.items= this.itemsCollection.valueChanges()
   
   
-     this.items.subscribe((RepairItemLog)=>{
-          this.itemArray = RepairItemLog;
-          this.itemList = this.itemArray;
-          this.loadedItemList = this.itemArray;
-          loadingPopup.dismiss();
-        });
+    //  this.items.subscribe((RepairItemLog)=>{
+    //       this.itemArray = RepairItemLog;
+    //       this.itemList = this.itemArray;
+    //       this.loadedItemList = this.itemArray;
+    //     });
   
-
-
-         
        this.close = true;
   }
 
@@ -99,17 +96,54 @@ export class RepairitemdetailPage {
     console.log('ionViewDidLoad ItemDetailPage');
   }
 
-  onScroll($event: any) {
-    let scrollTop = $event.scrollTop;
-    this.showToolbar = scrollTop >= 100;
-    if (scrollTop < 0) {
-      this.transition = false;
-      //this.headerImgSize = `${ Math.abs(scrollTop)/2 + 100}%`;
-    } else {
-      this.transition = true;
-      // this.headerImgSize = '100%'
+  loadItems(infiniteScroll?) {
+
+    if (this.lastVisible == null) {
+ 
+      this.db.collection('RepairItem').doc(`${this.id}`).collection('repair')
+        .orderBy('timestamp','desc')
+        .limit(3)
+        .get()
+        .then((querySnapshot) => {
+          this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+          this.length_cnt = this.length_cnt + querySnapshot.docs.length;
+          console.log(this.length_cnt)
+          querySnapshot.forEach((doc) => {
+            this.itemList.push(doc.data())
+          })
+        })
     }
-    this.ref.detectChanges();
+    else {
+
+      this.db.collection('RepairItem').doc(`${this.id}`).collection('repair')
+        .orderBy('timestamp','desc')
+        .startAfter(this.lastVisible)
+        .limit(2)
+        .get()
+        .then((querySnapshot) => {
+
+          this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+          this.length_cnt = this.length_cnt + querySnapshot.docs.length;
+          console.log(this.length_cnt)
+          querySnapshot.forEach((doc) => {
+            this.itemList.push(doc.data())
+          })
+
+          if (infiniteScroll) {
+            infiniteScroll.complete();
+          }
+        })
+    }
+  }
+
+  loadMore(infiniteScroll) {
+
+    if (this.length_cnt < this.item_length)
+      this.loadItems(infiniteScroll);
+
+    console.log(this.item_length)
+    if (this.length_cnt >= this.item_length)
+      infiniteScroll.enable(false);
   }
 
   addlog(){
@@ -194,13 +228,5 @@ export class RepairitemdetailPage {
     this.close = false;
 
   }
-
-  closed(){
-
-    this.itemList = this.loadedItemList;
-    this.close = true;
-  }
-
-
 
 }
