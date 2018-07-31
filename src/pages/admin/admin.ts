@@ -57,15 +57,7 @@ export class AdminPage {
   loadUsers(infiniteScroll?) {
 
     if (this.lastVisible == null) {
-      // this.afs.collection('users', ref=>ref.orderBy('name').limit(9)).valueChanges().subscribe((snapshot)=>{
-      //   this.lastVisible = snapshot[snapshot.length-1];
-      //   console.log(this.lastVisible);
-      //   this.length_cnt = this.length_cnt + snapshot.length;
-
-      //   snapshot.forEach((e)=>{
-      //     this.users.push(e);
-      //   })
-      // })
+ 
       this.db.collection('users')
         .orderBy('name')
         .limit(10)
@@ -81,19 +73,6 @@ export class AdminPage {
     }
     else {
 
-      // this.afs.collection('users', ref=>ref.orderBy('name').startAfter(this.lastVisible).limit(5)).valueChanges().subscribe((snapshot)=>{
-      //   this.lastVisible = snapshot[snapshot.length-1];
-      //     console.log(this.lastVisible);
-      //   this.length_cnt = this.length_cnt + snapshot.length;
-
-      //   snapshot.forEach((e)=>{
-      //     this.users.push(e);
-      //   })
-
-      //   if(infiniteScroll){
-      //     infiniteScroll.complete();
-      //   }
-      // })
       this.db.collection('users')
         .orderBy('name')
         .startAfter(this.lastVisible)
