@@ -22,7 +22,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { AuthService } from '../providers/auth.service';
 import { Camera } from '@ionic-native/camera'
-import { NgxPaginationModule } from 'ngx-pagination';
+
  
 
 
@@ -55,7 +55,6 @@ export const config = {
     AngularFirestoreModule,
     IonicPageModule, 
     NgxQRCodeModule,
-    NgxPaginationModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

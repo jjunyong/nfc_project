@@ -1,5 +1,4 @@
 
-import firebase from 'firebase';
 import { IonicPage } from 'ionic-angular';
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
@@ -7,9 +6,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { GlobalVars } from '../../../providers/global';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner'
 import { AngularFireAuth } from 'angularfire2/auth'
-import { FirebaseAuth } from '@firebase/auth-types';
 
 class Item {
   location1: any;
@@ -298,7 +295,7 @@ export class LocationManagePage {
   openDetail(item) {
     this.navCtrl.push('ItemDetailPage', {
       id: item.id,
-      name: item.name,
+      model : item.model,
       location1: item.location1,
       location2: item.location2, 
       quantity: item.quantity
