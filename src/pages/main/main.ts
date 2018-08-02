@@ -29,9 +29,6 @@ export class MainPage {
   constructor(public afAuth: AngularFireAuth, public navCtrl: NavController, public navParams: NavParams, private nfc: NFC,
     public auth: AuthService, public global : GlobalVars) {
 
-
-    
-      
       this.afAuth.authState.subscribe((user)=>{
         if(user){
           this.login = true;
@@ -41,26 +38,26 @@ export class MainPage {
         }
       })
 
-    this.nfc.addMimeTypeListener('palm/nfc', () => {
-      console.log('nfc attached')
-    }, (err) => {
-      console.log('error attaching ndef listener', err);
-    }).subscribe((event) => {
+    // this.nfc.addMimeTypeListener('palm/nfc', () => {
+    //   console.log('nfc attached')
+    // }, (err) => {
+    //   console.log('error attaching ndef listener', err);
+    // }).subscribe((event) => {
 
-      this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
+    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
 
-      this.afAuth.authState.subscribe((user)=>{
-        if(user==null){
-          alert("로그인이 필요합니다.");
-        }
-        else{
-          // alert("로그인 되었습니다")
-          this.navCtrl.push('LocationManagePage', {
-            payload: this.payload
-          })
-        }
-      })
-    });
+    //   this.afAuth.authState.subscribe((user)=>{
+    //     if(user==null){
+    //       alert("로그인이 필요합니다.");
+    //     }
+    //     else{
+    //       // alert("로그인 되었습니다")
+    //       this.navCtrl.push('LocationManagePage', {
+    //         payload: this.payload
+    //       })
+    //     }
+    //   })
+    // });
   }
   ionViewWillEnter(){
     this.global.changeMessage(true);

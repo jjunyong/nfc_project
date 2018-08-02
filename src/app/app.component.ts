@@ -58,9 +58,6 @@ export class MyApp {
     //     this.masterSwitch = true;
     //   }
     // })
-
-
-    
     //   this.afs.collection('users').doc(auth.uid).valueChanges()
     //     .subscribe((user: any)=>{
     //       console.log(user)

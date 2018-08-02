@@ -94,6 +94,9 @@ export class LocationManagePage {
       loadingPopup.dismiss();
     })
 
+   
+    
+    
     setTimeout(() => {
       this.count_temp = 0;
       for (var i = 0; i < this.itemArray.length; i++) {
@@ -128,6 +131,16 @@ export class LocationManagePage {
         })
     }
   }
+
+  ionViewWillUnload(){
+    if(this.modify){
+    this.set();
+    }
+    this.modify=false;
+  }
+
+
+
 
   remove(item) {
     this.modify=true;

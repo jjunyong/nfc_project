@@ -59,8 +59,8 @@
 
         <ion-row>
             <ion-col col-6>
-                <ion-item class="option">
-                    <ion-label color="white">시작일:</ion-label>
+                <ion-item no-lines class="option">
+                    <ion-label*ngIf="!startDate" color="white">시작일:</ion-label>
                     <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="startDate"></ion-datetime>
                 </ion-item>
             </ion-col>
