@@ -28,7 +28,7 @@ export class MyApp {
   createdCode = null;
   scannedCode = null;
 
-  private masterEmail: string = "admin@palmCLOUD.co.kr";
+  private masterEmail: string = "admin@palmcloud.co.kr";
   public masterSwitch: boolean = false;
 
 

@@ -79,7 +79,7 @@ export class LoginPage {
   // }
   serviceRequest() {
     let alert = this.alertCtrl.create({
-      subTitle: 'ZadPark@palmCLOUD.co.kr로 문의하세요',
+      subTitle: 'ZadPark@palmcloud.co.kr로 문의하세요',
       buttons: ['OK']
     });
     alert.present();
