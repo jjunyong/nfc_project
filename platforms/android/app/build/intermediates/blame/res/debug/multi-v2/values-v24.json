@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\aszx6\\nfc_project\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "C:\\nfc_project\\platforms\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
                     "source": "C:\\Users\\aszx6\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-27.1.1.aar\\7250a9046a26ac539a1e990712aa8029\\res\\values-v24\\values-v24.xml",

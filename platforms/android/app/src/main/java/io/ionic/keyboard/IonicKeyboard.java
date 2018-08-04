@@ -30,7 +30,7 @@ public class IonicKeyboard extends CordovaPlugin {
     }
 
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-        if ("hide".equals(action)) {
+        if ("close".equals(action)) {
             cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
                     //http://stackoverflow.com/a/7696791/1091751

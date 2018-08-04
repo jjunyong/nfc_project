@@ -1,4 +1,4 @@
-#Wed Aug 01 18:17:17 KST 2018
-base.0=C\:\\Users\\aszx6\\nfc_project\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Sat Aug 04 22:34:26 KST 2018
+base.0=C\:\\nfc_project\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 renamed.0=classes.dex
-file.0=C\:\\Users\\aszx6\\nfc_project\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
+file.0=C\:\\nfc_project\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
