@@ -18,15 +18,16 @@
   }
 </style>
 
-<ion-header>
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="https://use.fontawesome.com/1e803d693b.js"></script>
-  <ion-navbar>
-    <ion-title>admin</ion-title>
-  </ion-navbar>
 
+
+<ion-header>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://use.fontawesome.com/1e803d693b.js"></script>
+  <ion-navbar color="grey-blue">
+    <ion-title>Admin</ion-title>
+  </ion-navbar>
 </ion-header>
 
 
@@ -84,9 +85,9 @@
         </div>
       </div>
     </div>
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles" loadingText="Loading more data...">
+    <!-- <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles" loadingText="Loading more data...">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    </ion-infinite-scroll> -->
   </div>
 
   <div class="mobile" margin-top>
@@ -129,17 +130,17 @@
       </div> -->
 
 
-<ion-searchbar padding (ionInput)="getItems($event)"></ion-searchbar>
+<ion-searchbar margin-bottom (ionInput)="getItems($event)"></ion-searchbar>
       <ion-list *ngFor="let user of users">
           <ion-item class="back" tappable (click)="profile(user)">
               <ion-thumbnail item-left>
                   <img [src]="user.thumbnail">
               </ion-thumbnail>
-              <h2><font color="white" size="4px">{{user.name}}</font></h2>
+              <h2><font color="white" size="3px">{{user.name}}</font></h2>
               <p><font color="white">{{user.employee_number}}</font></p>
           </ion-item>
           <ion-item class="back">
-              <ion-select style="min-width:50px; " (ionChange)="updateRole(user, user.role)" [(ngModel)]="user.role">
+              <ion-select (ionChange)="updateRole(user, user.role)" [(ngModel)]="user.role">
                 <ion-option value="admin">admin</ion-option>
                 <ion-option value="editor">editor</ion-option>
                 <ion-option value="subscriber">subscriber</ion-option>
@@ -148,8 +149,8 @@
             <button color="white" ion-button outline (click)="delete(user)">삭제</button>
       </ion-list>
 
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles" loadingText="Loading more data...">
+    <!-- <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles" loadingText="Loading more data...">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    </ion-infinite-scroll> -->
   </div>
 </ion-content>

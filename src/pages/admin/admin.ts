@@ -6,6 +6,7 @@ import { FireService } from '../../providers/FireService';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
 // import { PaginationService } from './pagination.service';
 import firebase from 'firebase'
+import { GlobalVars } from '../../providers/global';
 // interface User {
 //   email: string
 //   employee_number: string
@@ -40,69 +41,78 @@ export class AdminPage {
 
   constructor(public afs: AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
     public fireService: FireService, public loadingCtrl: LoadingController, private alertCtrl: AlertController,
-    public afAuth: AngularFireAuth, public viewCtrl: ViewController, public toast: ToastController,
+    public afAuth: AngularFireAuth, public viewCtrl: ViewController, public toast: ToastController, public global : GlobalVars
   ) {
 
-    this.loadUsers();
-    this.afs.collection('users').valueChanges().subscribe((snap)=>{
-      this.user_length = snap.length;
-      this.loadedItemList = snap;
+    this.afs.collection('users').valueChanges().subscribe((users)=>{
+      this.users = users;
+      console.log(this.users);
     })
+
+    // this.loadUsers();
+    // this.afs.collection('users').valueChanges().subscribe((snap)=>{
+    //   this.user_length = snap.length;
+    //   this.loadedItemList = snap;
+    // })
     // this.db.collection('users').get().then((snap) => {
     //   this.user_length = snap.docs.length;
     //   console.log(this.user_length)
     // })
   }
 
-  loadUsers(infiniteScroll?) {
+  ionViewWillEnter(){
+    this.global.changeMessage(false);
+  }
 
-    if (this.lastVisible == null) {
+  // loadUsers(infiniteScroll?) {
+
+  //   if (this.lastVisible == null) {
  
-      this.db.collection('users')
-        .orderBy('name')
-        .limit(10)
-        .get()
-        .then((querySnapshot) => {
-          this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-          this.length_cnt = this.length_cnt + querySnapshot.docs.length;
-          console.log(this.length_cnt)
-          querySnapshot.forEach((doc) => {
-            this.users.push(doc.data())
-          })
-        })
-    }
-    else {
+  //     this.db.collection('users')
+  //       .orderBy('name')
+  //       .limit(10)
+  //       .get()
+  //       .then((querySnapshot) => {
+  //         this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+  //         this.length_cnt = this.length_cnt + querySnapshot.docs.length;
+  //         console.log(this.length_cnt)
+  //         querySnapshot.forEach((doc) => {
+  //           this.users.push(doc.data())
+  //         })
+  //       })
+  //   }
+  //   else {
 
-      this.db.collection('users')
-        .orderBy('name')
-        .startAfter(this.lastVisible)
-        .limit(5)
-        .get()
-        .then((querySnapshot) => {
+  //     this.db.collection('users')
+  //       .orderBy('name')
+  //       .startAfter(this.lastVisible)
+  //       .limit(5)
+  //       .get()
+  //       .then((querySnapshot) => {
 
-          this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-          this.length_cnt = this.length_cnt + querySnapshot.docs.length;
-          console.log(this.length_cnt)
-          querySnapshot.forEach((doc) => {
-            this.users.push(doc.data())
-          })
+  //         this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+  //         this.length_cnt = this.length_cnt + querySnapshot.docs.length;
+  //         console.log(this.length_cnt)
+  //         querySnapshot.forEach((doc) => {
+  //           this.users.push(doc.data())
+  //         })
 
-          if (infiniteScroll) {
-            infiniteScroll.complete();
-          }
-        })
-    }
-  }
+  //         if (infiniteScroll) {
+  //           infiniteScroll.complete();
+  //         }
+  //       })
+  //   }
+  // }
 
-  loadMore(infiniteScroll) {
+  // loadMore(infiniteScroll) {
 
-    if (this.length_cnt < this.user_length)
-      this.loadUsers(infiniteScroll);
+  //   if (this.length_cnt < this.user_length)
+  //     this.loadUsers(infiniteScroll);
 
-    console.log(this.user_length)
-    if (this.length_cnt >= this.user_length)
-      infiniteScroll.enable(false);
-  }
+  //   console.log(this.user_length)
+  //   if (this.length_cnt >= this.user_length)
+  //     infiniteScroll.enable(false);
+  // }
 
   delete(user) {
 

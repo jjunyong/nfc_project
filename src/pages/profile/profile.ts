@@ -7,6 +7,7 @@ import { finalize } from 'rxjs/operators';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AuthService } from '../../providers/auth.service';
 import { CameraOptions, Camera } from '@ionic-native/camera';
+import { GlobalVars } from '../../providers/global';
 
 /**
  * Generated class for the ProfilePage page.
@@ -35,7 +36,7 @@ export class ProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afs: AngularFirestore,
     public storage : AngularFireStorage, public alertCtrl : AlertController, public camera : Camera,
-  public auth: AuthService) {
+  public auth: AuthService, public global : GlobalVars) {
 
     this.auth.user.subscribe((user)=>{
       this.uid = user.uid
@@ -50,8 +51,8 @@ export class ProfilePage {
     })
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  ionViewWillEnter() {
+    this.global.changeMessage(false);
   }
 
   uploadFileDesktop(event) {

@@ -91,7 +91,12 @@ export class MyApp {
 
   openPage(page) {
     if (this.loggedIn) {
+      if(page.component === "ProfilePage"){
+        this.nav.push(page.component)
+      }
+      else{
       this.nav.setRoot(page.component);
+      }
     }
     else {
       this.showAlert();
@@ -189,7 +194,7 @@ export class MyApp {
   }
   openAdmin() {
     if (this.loggedIn) {
-      this.nav.setRoot('AdminPage');
+      this.nav.push('AdminPage');
     }
     else {
       this.showAlert();
@@ -226,7 +231,7 @@ export class MyApp {
   }
   openProfile() {
     if (this.loggedIn) {
-      this.nav.setRoot('ProfilePage');
+      this.nav.push('ProfilePage');
     }
     else {
       this.showAlert();

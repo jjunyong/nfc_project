@@ -1,9 +1,4 @@
-<!--
-  Generated template for the ProfilePage page.
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
    @media screen and (max-width: 600px) {
@@ -169,8 +164,17 @@
   .labels {}
 </style>
 
+<ion-header>
+  <ion-navbar color="grey-blue">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Stock Manage</ion-title>
+  </ion-navbar>
+</ion-header>
 
-<ion-content style="margin-top:55px" padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+
+<ion-content padding [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
   <div class="row" style="margin-bottom:50px">
     <div class="col-75">
       <div class="container">
