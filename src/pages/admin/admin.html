@@ -16,7 +16,6 @@
       display: none;
     }
   }
-
 </style>
 
 <ion-header>
@@ -44,7 +43,7 @@
 
           <div class="panel-body">
 
-            <div class="table-container" *ngFor="let user of users" (click)="profile(user)" >
+            <div class="table-container" *ngFor="let user of users" (click)="profile(user)">
               <table class="table-users table" border="0">
                 <tbody>
                   <tr>
@@ -93,7 +92,7 @@
   <div class="mobile" margin-top>
     <!-- <div class="container"> -->
 
-<!-- 
+    <!-- 
       <div class="row">
         <div class="panel panel-default user_panel">
           <div class="panel-heading">
@@ -129,23 +128,26 @@
         </div>
       </div> -->
 
-      <ion-list>
-          <ion-searchbar padding (ionInput)="getItems($event)"></ion-searchbar>
-          <ion-item *ngFor="let user of users" (click)="profile(user)">
-       <ion-label text-left> {{user.name}}</ion-label>
-       <br><ion-label text-center>{{user.employee_number}}</ion-label>
-                    <ion-select style="min-width:50px" (ionChange)="updateRole(user, user.role)" [(ngModel)]="user.role">
-                      <ion-option value="admin">admin</ion-option>
-                      <ion-option value="editor">editor</ion-option>
-                      <ion-option value="subscriber">subscriber</ion-option>
-                    </ion-select>
-         <button ion-button (click)="delete(user)">삭제</button>
-          </ion-item>  
-      
-        </ion-list>
 
-<!-- 
-    </div> -->
+<ion-searchbar padding (ionInput)="getItems($event)"></ion-searchbar>
+      <ion-list *ngFor="let user of users">
+          <ion-item class="back" tappable (click)="profile(user)">
+              <ion-thumbnail item-left>
+                  <img [src]="user.thumbnail">
+              </ion-thumbnail>
+              <h2><font color="white" size="4px">{{user.name}}</font></h2>
+              <p><font color="white">{{user.employee_number}}</font></p>
+          </ion-item>
+          <ion-item class="back">
+              <ion-select style="min-width:50px; " (ionChange)="updateRole(user, user.role)" [(ngModel)]="user.role">
+                <ion-option value="admin">admin</ion-option>
+                <ion-option value="editor">editor</ion-option>
+                <ion-option value="subscriber">subscriber</ion-option>
+              </ion-select>
+            </ion-item>
+            <button color="white" ion-button outline (click)="delete(user)">삭제</button>
+      </ion-list>
+
     <ion-infinite-scroll (ionInfinite)="loadMore($event)" loadingSpinner="bubbles" loadingText="Loading more data...">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>

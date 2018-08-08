@@ -15,7 +15,6 @@ export class RepairPage {
   repair_card: any[] = [];
   items: any[] = [];
   backgroundImage="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
-  cardImage="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/card_img.jpg?alt=media&token=147f4fde-5a8a-45ee-bcf3-8b8ddeee4a2e"
 
   constructor(public navCtrl: NavController, public DB: AngularFirestore, public navParams: NavParams,
     public loadingCtrl: LoadingController, public global : GlobalVars, 
