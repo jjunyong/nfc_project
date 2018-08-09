@@ -12,6 +12,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
+app-release-unsigned.apk
 .idea/
 .sourcemaps/
 .sass-cache/

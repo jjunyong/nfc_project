@@ -48,71 +48,11 @@ export class AdminPage {
       this.users = users;
       console.log(this.users);
     })
-
-    // this.loadUsers();
-    // this.afs.collection('users').valueChanges().subscribe((snap)=>{
-    //   this.user_length = snap.length;
-    //   this.loadedItemList = snap;
-    // })
-    // this.db.collection('users').get().then((snap) => {
-    //   this.user_length = snap.docs.length;
-    //   console.log(this.user_length)
-    // })
   }
 
   ionViewWillEnter(){
     this.global.changeMessage(false);
   }
-
-  // loadUsers(infiniteScroll?) {
-
-  //   if (this.lastVisible == null) {
- 
-  //     this.db.collection('users')
-  //       .orderBy('name')
-  //       .limit(10)
-  //       .get()
-  //       .then((querySnapshot) => {
-  //         this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-  //         this.length_cnt = this.length_cnt + querySnapshot.docs.length;
-  //         console.log(this.length_cnt)
-  //         querySnapshot.forEach((doc) => {
-  //           this.users.push(doc.data())
-  //         })
-  //       })
-  //   }
-  //   else {
-
-  //     this.db.collection('users')
-  //       .orderBy('name')
-  //       .startAfter(this.lastVisible)
-  //       .limit(5)
-  //       .get()
-  //       .then((querySnapshot) => {
-
-  //         this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-  //         this.length_cnt = this.length_cnt + querySnapshot.docs.length;
-  //         console.log(this.length_cnt)
-  //         querySnapshot.forEach((doc) => {
-  //           this.users.push(doc.data())
-  //         })
-
-  //         if (infiniteScroll) {
-  //           infiniteScroll.complete();
-  //         }
-  //       })
-  //   }
-  // }
-
-  // loadMore(infiniteScroll) {
-
-  //   if (this.length_cnt < this.user_length)
-  //     this.loadUsers(infiniteScroll);
-
-  //   console.log(this.user_length)
-  //   if (this.length_cnt >= this.user_length)
-  //     infiniteScroll.enable(false);
-  // }
 
   delete(user) {
 
