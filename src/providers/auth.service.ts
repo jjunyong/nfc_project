@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore'
+import { AngularFirestore } from 'angularfire2/firestore'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/switchMap'
 import { User } from "../form/user";
@@ -71,12 +70,8 @@ export class AuthService {
     // }
 
     private checkAuthorization(user: User, allowedRoles: string[]): boolean {
-        if (!user) return false
-        // for (const role of allowedRoles) {
-        //     if (user.roles[role]) {
-        //         return true;
-        //     }
-        // }
+        if (!user) return false;
+
         for (var i = 0; i < allowedRoles.length; i++) {
             if (user.role === allowedRoles[i]) {
                 return true;
@@ -101,9 +96,7 @@ export class AuthService {
     }
 
 
-    logout() {
+    logout(){
         return this.afAuth.auth.signOut();
     }
-
-
 }
