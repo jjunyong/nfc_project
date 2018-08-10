@@ -42,13 +42,13 @@
   <ion-grid>
     <ion-row>
       <ion-col no-padding col-12 col-md-6 *ngFor="let item of itemList">
-        <ion-card padding class="back">
-          <h2 (click)="openDetail(item)">
+        <ion-card (click)="openDetail(item)" padding class="back">
+          <h2>
             <font color="white">
               <b>{{ item.model }}</b>
             </font>
           </h2>
-          <h3 (click)="openDetail(item)">
+          <h3>
             <font color="white">
               Location : {{ item.location1 }}-{{ item.location2 }}
             </font>

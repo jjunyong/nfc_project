@@ -218,12 +218,13 @@ export class LocationManagePage {
           text: 'Cancel',
           handler: () => {
             //page reload함수 
-            this.reload();
+            // this.reload();
 
           }
         }
       ]
     });
+    this.modify = false;
     confirm.present();
   }
   

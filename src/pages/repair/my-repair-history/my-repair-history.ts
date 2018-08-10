@@ -86,16 +86,6 @@ export class MyRepairHistoryPage {
 
     console.log(this.idList);
 
-
-  
-    // this.itemsCollection = afs.collection<RepairItem>('RepairItem');
-    // this.items = this.itemsCollection.valueChanges();
-
-    // this.items.subscribe((RepairItem) => {
-    //   this.itemArray = RepairItem;
-    //   this.itemList = this.itemArray;
-    //   this.loadedItemList = this.itemArray;
-    // });
   }
 
 
