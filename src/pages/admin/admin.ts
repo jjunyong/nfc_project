@@ -36,7 +36,8 @@ export class AdminPage {
   user_length: number;
   length_cnt: number = 0;
 
-  loadedItemList;
+  loadedItemList: any[];
+  itemList: any[];
 
 
   constructor(public afs: AngularFirestore, public navCtrl: NavController, public navParams: NavParams,
@@ -46,6 +47,8 @@ export class AdminPage {
 
     this.afs.collection('users').valueChanges().subscribe((users)=>{
       this.users = users;
+      this.itemList = this.users;
+      this.loadedItemList = this.itemList;
       console.log(this.users);
     })
   }

@@ -34,8 +34,8 @@ export class RepairPage {
     this.navCtrl.push('MaintenanceLogPage');
   }
 
-  openOnMaintenance() {
-    this.navCtrl.push('OnMaintenancePage')
+  openMyRepairHistory() {
+    this.navCtrl.push('MyRepairHistoryPage')
   }
 
   manage() {

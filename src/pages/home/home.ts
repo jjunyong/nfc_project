@@ -44,7 +44,7 @@ export class HomePage {
   }
 
   openLog() {
-    this.navCtrl.push('ChangeLogPage');
+    this.navCtrl.push('StockHistoryPage');
   }
 
   openManage() {

@@ -1,9 +1,0 @@
-{
-    "ImageIO.framework": 1,
-    "CoreLocation.framework": 1,
-    "AVFoundation.framework": 1,
-    "AudioToolbox.framework": 1,
-    "WebKit.framework": 1,
-    "libz.tbd": 1,
-    "CoreNFC.framework": 1
-}

@@ -16,7 +16,7 @@ import { FireService } from '../providers/FireService';
 import { AuthorizationPage } from './authorization/authorization';
 // import { LoginSelectPage } from './app.component'
 import { GlobalVars } from '../providers/global';
-import { FillPage } from '../pages/home/change-log/change-log';
+import { FillPage } from '../pages/home/stock-history/stock-history';
 import { IonicPageModule } from 'ionic-angular/module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
