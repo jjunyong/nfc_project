@@ -59,7 +59,7 @@ export class MainPage {
           this.payload = this.payload.substring(1,this.payload.length);
           //앞글자 자르는 로직
 
-          
+
           if(this.type=='s'){
             
           this.navCtrl.push('LocationManagePage', {

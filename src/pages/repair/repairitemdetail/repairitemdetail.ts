@@ -73,7 +73,10 @@ export class RepairitemdetailPage {
 
       if(this.payload != null){
 
-        this.id = this.payload;
+        this.afs.collection('maintenance_map').doc(this.payload).valueChanges()
+          .subscribe((doc:any)=>{
+            this.id = doc.doc_id
+          })
       }
       else{
     
