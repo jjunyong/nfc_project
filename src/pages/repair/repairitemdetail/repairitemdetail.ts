@@ -28,8 +28,8 @@ interface RepairItemLog {
 
 
 export class RepairitemdetailPage {
-
-  private itemsCollection: AngularFirestoreCollection<RepairItemLog>;
+  private itemsCollection: AngularFirestoreCollection<RepairItem>;
+  private itemsCollectionlog: AngularFirestoreCollection<RepairItemLog>;
 
   id_temp : string ;
   RepairItem = new RepairItem();
@@ -52,6 +52,7 @@ export class RepairitemdetailPage {
 
 
   close: boolean;
+  payload: string;
 
   backgroundImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
 
@@ -65,13 +66,20 @@ export class RepairitemdetailPage {
     public ref: ChangeDetectorRef,  public fireService : FireService, public afs: AngularFirestore, public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,public afAuth : AngularFireAuth) {
 
-      this.id = this.navParams.get('id');
-      this.serialNum = this.navParams.get('serialNum');
-      this.model = this.navParams.get('model');
-      this.repairman = this.navParams.get('repairman');
-      this.isToggled = this.navParams.get('isToggled');
-      this.finDate = this.navParams.get('finDate');
-      this.startDate = this.navParams.get('startDate')
+
+      this.payload = null;
+
+      this.payload =  this.navParams.get('payload');
+
+      if(this.payload != null){
+
+        this.id = this.payload;
+      }
+      else{
+    
+        this.id = this.navParams.get('id');
+     
+      }
 
       this.loadItems();
       this.afs.collection('RepairItem').doc(`${this.id}`).collection('repair').valueChanges().subscribe((snap)=>{
@@ -79,15 +87,22 @@ export class RepairitemdetailPage {
         console.log(this.item_length);
       })
 
-      // this.itemsCollection = afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref=>ref.orderBy('timestamp','desc').limit(2))
-    //   this.items= this.itemsCollection.valueChanges()
-  
-  
-    //  this.items.subscribe((RepairItemLog)=>{
-    //       this.itemArray = RepairItemLog;
-    //       this.itemList = this.itemArray;
-    //       this.loadedItemList = this.itemArray;
-    //     });
+
+
+
+
+      this.afs.collection('RepairItem').doc(`${this.id}`).valueChanges()
+        .subscribe((RepairItem: any) => {
+          this.serialNum = RepairItem.serialNum;
+          this.model = RepairItem.model;
+          this.repairman = RepairItem.repairman;
+          this.repairfin = RepairItem.repairfin;
+          this.startDate = RepairItem.startDate;
+          this.finDate = RepairItem.finDate;
+          this.isToggled = RepairItem.isToggled;
+        })
+    
+
   
        this.close = true;
   }
@@ -216,8 +231,8 @@ export class RepairitemdetailPage {
 
   more() {
 
-    this.itemsCollection = this.afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref => ref.orderBy('timestamp', 'desc'))
-    this.items = this.itemsCollection.valueChanges()
+    this.itemsCollectionlog = this.afs.collection('RepairItem').doc(`${this.id}`).collection<RepairItemLog>('repair', ref => ref.orderBy('timestamp', 'desc'))
+    this.items = this.itemsCollectionlog.valueChanges()
 
 
     this.items.subscribe((RepairItemLog) => {

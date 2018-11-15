@@ -23,6 +23,8 @@ export class MainPage {
 
   payload: string;
   login: boolean;
+  type: string;
+
 
   
 
@@ -38,26 +40,43 @@ export class MainPage {
         }
       })
 
-    // this.nfc.addMimeTypeListener('palm/nfc', () => {
-    //   console.log('nfc attached')
-    // }, (err) => {
-    //   console.log('error attaching ndef listener', err);
-    // }).subscribe((event) => {
+    this.nfc.addMimeTypeListener('palm/nfc', () => {
+      console.log('nfc attached')
+    }, (err) => {
+      console.log('error attaching ndef listener', err);
+    }).subscribe((event) => {
 
-    //   this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
+      this.payload = this.nfc.bytesToString(event.tag.ndefMessage[0].payload);
 
-    //   this.afAuth.authState.subscribe((user)=>{
-    //     if(user==null){
-    //       alert("로그인이 필요합니다.");
-    //     }
-    //     else{
-    //       // alert("로그인 되었습니다")
-    //       this.navCtrl.push('LocationManagePage', {
-    //         payload: this.payload
-    //       })
-    //     }
-    //   })
-    // });
+      this.afAuth.authState.subscribe((user)=>{
+        if(user==null){
+          alert("로그인이 필요합니다.");
+        }
+        else{
+          // alert("로그인 되었습니다")
+
+          this.type = this.payload.charAt(0); // 재고 & 정비 태그 구분
+          this.payload = this.payload.substring(1,this.payload.length);
+          //앞글자 자르는 로직
+
+          
+          if(this.type=='s'){
+            
+          this.navCtrl.push('LocationManagePage', {
+            payload: this.payload
+          })
+          }
+          else if(this.type=='m'){
+            this.navCtrl.push('MaintenanceLogPage',{
+            payload: this.payload
+            })
+          }else{
+            alert('this is error payload');
+          }
+
+        }
+      })
+    });
   }
   ionViewWillEnter(){
     this.global.changeMessage(true);

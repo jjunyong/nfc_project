@@ -3,6 +3,7 @@ import { IonicPage, NavController, LoadingController, ToastController } from 'io
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { GlobalVars } from '../../../providers/global';
+import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 
 
@@ -33,14 +34,17 @@ export class MaintenanceLogPage {
   backgroundImage ="https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%85.png?alt=media&token=b4bb27d8-9ce6-44b5-b979-a5d24c2401b2";
   cardImage = "https://firebasestorage.googleapis.com/v0/b/prototype-d68e4.appspot.com/o/%EB%A9%94%EC%9D%B8%ED%8E%98%EC%9D%B4%EC%A7%802_%ED%88%AC%EB%AA%852.png?alt=media&token=78826653-cbd4-442d-9607-0b03983167b5"
 
+
   constructor(public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public afs: AngularFirestore,
     public alertCtrl: AlertController,
     public global: GlobalVars,
-    public toast: ToastController
+    public toast: ToastController,
+    public navParams: NavParams
   ) {
 
+    
     let loadingPopup = this.loadingCtrl.create({
       spinner: 'crescent', // icon style //
       content: '',
@@ -161,13 +165,7 @@ export class MaintenanceLogPage {
 
   openDetail(item) {
     this.navCtrl.push('RepairitemdetailPage', {
-      model: item.model,
-      id: item.id,
-      serialNum: item.serialNum,
-      repairman: item.repairman,
-      isToggled: item.isToggled,
-      startDate: item.startDate,
-      finDate: item.finDate
+      id: item.id //id만 넘겨주고 거기서 
     })
   }
 }
